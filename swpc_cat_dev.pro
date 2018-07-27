@@ -9263,8 +9263,10 @@ l = where(array_of_julians gt this_julian)
 info.anim_start_frame = l[0]
 info.anim_start_julian = this_julian
 
-goto, jumphere
 
+print, 'Before jumphere '
+goto, jumphere
+print, 'After jumphere' 
           endif
           if name eq 'animation_end_time_marker' then begin
 
