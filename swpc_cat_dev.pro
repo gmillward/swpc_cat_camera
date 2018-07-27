@@ -10202,7 +10202,7 @@ endif else begin
   
 endelse
 
-
+;COULD THIS BE THE PROBLEM WITH THE ENLIL WINDOW? ####
 enlil_info_View = OBJ_NEW('IDLgrView', Color=background_color, Viewplane_Rect=[0.0,0.0,1.0,1.05])
 enlil_info_Model = OBJ_NEW('IDLgrModel') 
 enlil_info_View -> Add, enlil_info_Model
