@@ -9273,6 +9273,11 @@ info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_
 
 info.images_timeline_window->Draw, info.images_timeline_view
 
+print, 'info.which_window_to_animate ',info.which_window_to_animate
+print, 'info.BC2_list_of_datetime_Julian ',info.BC2_list_of_datetime_Julian
+print, 'info.C_list_of_datetime_Julian ',info.C_list_of_datetime_Julian
+print, 'info.AC2_list_of_datetime_Julian ',info.AC2_list_of_datetime_Julian
+
 CASE info.which_window_to_animate OF
 
    0 : BEGIN
