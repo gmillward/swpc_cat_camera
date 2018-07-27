@@ -6532,7 +6532,9 @@ swpc_cat_REDRAW_THE_IMAGE, $
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+if info.C_number_of_images gt 0 then begin ;MY ADDITION ####
+	swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, 		info.color_C3, info.cme_outline_color
+endif
 
 if info.show_image_line_plot eq 1 then begin
 
@@ -6557,7 +6559,9 @@ swpc_cat_REDRAW_THE_IMAGE, $
     info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
     info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+if info.C2_number_of_images gt 0 then begin ;	MY ADDITION ####
+	swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, 		info.color_C2, info.cme_outline_color
+endif
 
      C_xp = 255 - (255*sin(info.C_clock_angle_degrees * !dtor))  
      C_yp = 255 + (255*cos(info.C_clock_angle_degrees * !dtor))
