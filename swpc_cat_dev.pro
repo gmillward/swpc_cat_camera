@@ -8755,7 +8755,7 @@ pro swpc_cat_images_timeline_window_button_click_events, event
 ;THIS RUNS WHENEVER THE MOUSE PASSES OVER OR CLICKS ON THE TIMELINE ####
 compile_opt idl2
 
-print, 'Entered images_timeline_window_button_click_events' 
+
 
 
 Widget_Control, event.top, Get_UValue=info, /No_Copy
@@ -9048,9 +9048,9 @@ endelse ; not right-click context menu
        
        
    'MOTION': BEGIN ; Trackball events
-   print, 'Start of motion case '
+   
    if info.timeline_left_mouse_button_being_pressed eq 1 then begin
-   print, 'event.x ',event.x, ' event.y ',event.y ;THIS COMES UP IF I CLICK AND DRAG. ####
+   ;THIS COMES UP IF I CLICK AND DRAG. ####
 	;THIS WOULD MOVE THE TIMELINE BAR OR MAYBE THE BOOKMARKS AS WELL. DEPENDS ON WHERE YOU CLICK  
 if event.y gt 10 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
    
@@ -9219,17 +9219,17 @@ print, 'Entered case where event.y <= 10 '
 ; determine whether we are moving the start or end markers
  
        myLoc = [event.x, event.y]    
-	print, 'myLoc ',myloc 
+	 
        oObjArr = info.images_timeline_window->Select(info.images_timeline_view, myLoc, dimensions=[100,20])
        nSel = N_ELEMENTS(oObjArr)
-	print, 'nsel ',nSel
+	
        if nsel gt 1 then begin
        iobject = intarr(nSel)
        
        FOR i=0, nSel-1 DO BEGIN
           oObjArr[i]->GetProperty, NAME=name
           if name eq 'animation_start_time_marker' then begin
-		print, 'name eq animation_start_time_marker' 
+		 
 	;THIS SECTION REPRESENTS THE FIRST BOOKMARK, THE GREEN ONE ####
 animation_start_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 line_data=fltarr(2,2)
@@ -9271,7 +9271,7 @@ goto, jumphere
 print, 'After jumphere' 
           endif
           if name eq 'animation_end_time_marker' then begin
-	print, 'name eq animation_end_time_marker' 
+	
 	;THIS SECTION REPRESENTS THE END BOOKMARK, THE RED ONE ####
 animation_end_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 line_data=fltarr(2,2)
@@ -9288,9 +9288,9 @@ info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_
 info.images_timeline_window->Draw, info.images_timeline_view
 
 ;print, 'info.which_window_to_animate ',info.which_window_to_animate ;THIS IS UNDEFINED. I BET IT RELATES TO STEREO B ####
-print, 'info.BC2_list_of_datetime_Julian ',info.BC2_list_of_datetime_Julian
-print, 'info.C_list_of_datetime_Julian ',info.C_list_of_datetime_Julian
-print, 'info.AC2_list_of_datetime_Julian ',info.AC2_list_of_datetime_Julian
+;print, 'info.BC2_list_of_datetime_Julian ',info.BC2_list_of_datetime_Julian
+;print, 'info.C_list_of_datetime_Julian ',info.C_list_of_datetime_Julian
+;print, 'info.AC2_list_of_datetime_Julian ',info.AC2_list_of_datetime_Julian
 
 ;CASE info.which_window_to_animate OF
 
