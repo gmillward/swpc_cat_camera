@@ -4961,7 +4961,7 @@ END
 
 
 pro swpc_cat_sort_out_the_line_plot_and_widgets, info
-
+#ONLY USED IN SORT_CME_OUTLINE(?) ####
 
 dataX = (info.CME_matches_image_Julian).toarray()
 dataY = (info.CME_matches_image_Rs_leading_edge).toarray()
@@ -6316,11 +6316,14 @@ print, 'vel_string ',vel_string
 ; once we've done the calculation we can un-grey the export Enlil data button....
 Widget_Control,info.widget_export_cone,sensitive = 1
 
+
+;THIS BIT IS FOR CALCULATING VELOCITIES INDIVIDUALLY FOR EACH TELESCOPE? SHOULDN'T RUN... 
+
 if info.calculate_individual_velocities_for_each_telescope eq 1 then begin
 ; 
 ; calculate velocity for each coronagraph independently......
 ;
-
+print, 'I am not expecting to see this...' 
 sc3_indexes = (info.CME_matches_image_telescope).FindValue('SC3')
 sc2_indexes = (info.CME_matches_image_telescope).FindValue('SC2')
 ac2_indexes = (info.CME_matches_image_telescope).FindValue('AC2')
