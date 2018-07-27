@@ -4961,7 +4961,7 @@ END
 
 
 pro swpc_cat_sort_out_the_line_plot_and_widgets, info
-#ONLY USED IN SORT_CME_OUTLINE(?) ####
+;ONLY USED IN SORT_CME_OUTLINE(?) ####
 
 dataX = (info.CME_matches_image_Julian).toarray()
 dataY = (info.CME_matches_image_Rs_leading_edge).toarray()
@@ -6706,7 +6706,8 @@ compile_opt idl2
 Widget_Control, event.top, Get_UValue=info, /No_Copy
 
 ;pre-defined time range (for testing)
-info.date_array = [2018,7,23,0,0,2018,7,23,12,0]
+;info.date_array = [2018,7,23,0,0,2018,7,23,12,0]
+info.date_array = [2011,11,26,0,0,2011,11,26,23,59]
 ;info.date_array = [2010,2,7,0,0,2010,2,7,12,59]
 ;info.date_array = [2008,12,12,0,0,2008,12,14,23,59]
 
