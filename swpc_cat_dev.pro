@@ -6509,6 +6509,12 @@ case info.currently_showing_STEREO_B of
                   end  
 end
 
+print, 'info.L_plot ', info.L_plot
+print, 'info.BC2_number_of_images ',info.BC2_number_of_images
+print, 'info.BC2_current_image_number ',info.BC2_current_image_number
+print, 'info.color_stereo_B ',info.color_stereo_B
+print, 'info.cme_outline_color ',info.cme_outline_color
+
 swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
 
           END
