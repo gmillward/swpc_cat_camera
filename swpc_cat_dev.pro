@@ -1789,34 +1789,34 @@ end
 
 
 
-pro swpc_cat_remove_this_image, event
 
-WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
-CASE event.id OF
 
-   info.L_widget_remove_this_image : BEGIN
 
-the_index_to_be_removed = info.BC2_current_image_number
-   
-(info.BC2_list_of_image_names).remove, the_index_to_be_removed
-(info.BC2_list_of_image_data).remove, the_index_to_be_removed
-(info.BC2_list_of_datetime_strings).remove, the_index_to_be_removed
-(info.BC2_list_of_datetime_Julian).remove, the_index_to_be_removed
-(info.BC2_list_of_full_time_strings).remove, the_index_to_be_removed
-(info.BC2_list_of_image_exposure_times).remove, the_index_to_be_removed
-(info.BC2_list_of_image_offsets).remove, the_index_to_be_removed
-(info.BC2_list_of_image_scaling_factors).remove, the_index_to_be_removed
-(info.L_list_of_HEEQ_coords).remove, the_index_to_be_removed
-(info.BC2_list_of_pixel_scales).remove, the_index_to_be_removed
-(info.BC2_list_of_rsuns).remove, the_index_to_be_removed
-(info.L_list_of_Sun_satellite_distances).remove, the_index_to_be_removed
-info.BC2_number_of_images = info.BC2_number_of_images - 1
-info.BC2_current_image_number = info.BC2_current_image_number - 1
-widget_control, info.L_widget_image_sequence_slider,set_slider_max = info.BC2_number_of_images
-widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
+pro swpc_cat_L_remove_this_image, event
 
-swpc_cat_REDRAW_THE_IMAGE, $
+  WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+  
+  the_index_to_be_removed = info.BC2_current_image_number
+  
+  (info.BC2_list_of_image_names).remove, the_index_to_be_removed
+  (info.BC2_list_of_image_data).remove, the_index_to_be_removed
+  (info.BC2_list_of_datetime_strings).remove, the_index_to_be_removed
+  (info.BC2_list_of_datetime_Julian).remove, the_index_to_be_removed
+  (info.BC2_list_of_full_time_strings).remove, the_index_to_be_removed
+  (info.BC2_list_of_image_exposure_times).remove, the_index_to_be_removed
+  (info.BC2_list_of_image_offsets).remove, the_index_to_be_removed
+  (info.BC2_list_of_image_scaling_factors).remove, the_index_to_be_removed
+  (info.L_list_of_HEEQ_coords).remove, the_index_to_be_removed
+  (info.BC2_list_of_pixel_scales).remove, the_index_to_be_removed
+  (info.BC2_list_of_rsuns).remove, the_index_to_be_removed
+  (info.L_list_of_Sun_satellite_distances).remove, the_index_to_be_removed
+  info.BC2_number_of_images = info.BC2_number_of_images - 1
+  info.BC2_current_image_number = info.BC2_current_image_number - 1
+  widget_control, info.L_widget_image_sequence_slider,set_slider_max = info.BC2_number_of_images
+  widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
+  
+  swpc_cat_REDRAW_THE_IMAGE, $
     info.BC2_current_image_number,info.BC2_background_image_number,info.BC2_difference_imaging, $
     info.BC2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
     info.CME_matches_image_BC2_Image_number,info.L_current_background_color, $
@@ -1824,140 +1824,154 @@ swpc_cat_REDRAW_THE_IMAGE, $
     info.L_widget_outline_matches_image,info.CME_matches_image_BC2_CME_outline, $
     info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
     
-L_yvals = fltarr(n_elements(info.BC2_list_of_datetime_Julian)) + 0.2
-info.L_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
-info.L_plot->SetProperty, dataX = (info.BC2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = L_yvals
-info.L_plot->SetProperty, color=[100,100,255]
-info.L_plot->GetProperty, symbol=L_thisSymbol
+  L_yvals = fltarr(n_elements(info.BC2_list_of_datetime_Julian)) + 0.2
+  info.L_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+  info.L_plot->SetProperty, dataX = (info.BC2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = L_yvals
+  info.L_plot->SetProperty, color=[100,100,255]
+  info.L_plot->GetProperty, symbol=L_thisSymbol
+  
+  swpc_cat_sort_out_the_timeline_symbols, info.BC2_number_of_images, info.CME_matches_image_BC2_Image_number, $
+    info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
     
-swpc_cat_sort_out_the_timeline_symbols, info.BC2_number_of_images, info.CME_matches_image_BC2_Image_number, $
-                                  info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-
-swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
-
-info.images_timeline_window -> draw, info.images_timeline_view
-   
-   ENDCASE
-   
-   info.C_widget_remove_this_image : BEGIN
-   
-CASE info.currently_showing_LASCO OF
-
-   'SC3' : BEGIN
-
-the_index_to_be_removed = info.C_current_image_number
-   
-(info.C_list_of_image_names).remove, the_index_to_be_removed
-(info.C_list_of_image_data).remove, the_index_to_be_removed
-(info.C_list_of_datetime_strings).remove, the_index_to_be_removed
-(info.C_list_of_datetime_Julian).remove, the_index_to_be_removed
-(info.C_list_of_full_time_strings).remove, the_index_to_be_removed
-(info.C_list_of_image_exposure_times).remove, the_index_to_be_removed
-(info.C_list_of_image_offsets).remove, the_index_to_be_removed
-(info.C_list_of_image_scaling_factors).remove, the_index_to_be_removed
-(info.C_list_of_HEEQ_coords).remove, the_index_to_be_removed
-(info.C_list_of_pixel_scales).remove, the_index_to_be_removed
-(info.C_list_of_rsuns).remove, the_index_to_be_removed
-(info.C_list_of_Sun_satellite_distances).remove, the_index_to_be_removed
-info.C_number_of_images = info.C_number_of_images - 1
-info.C_current_image_number = info.C_current_image_number - 1
-widget_control, info.C_widget_image_sequence_slider,set_slider_max = info.C_number_of_images
-widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
-
-swpc_cat_REDRAW_THE_IMAGE, $
-    info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
-    info.C_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
-    info.CME_matches_image_C_Image_number,info.C_current_background_color, $
-    info.background_color,info.C_current_text_color,info.color_c3,info.C_cme_outline,info.C_cme_MATCH_outline, $
-    info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
-    info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+  swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
+  
+  info.images_timeline_window -> draw, info.images_timeline_view
     
-C_yvals = fltarr(n_elements(info.C_list_of_datetime_Julian)) + 0.65
-info.C_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
-info.C_plot->SetProperty, dataX = (info.C_list_of_datetime_Julian).toarray() - info.start_julian, dataY = C_yvals
-info.C_plot->SetProperty, color=[100,255,100]
-info.C_plot->GetProperty, symbol=C_thisSymbol
+  
+  WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+  
+end
+
+pro swpc_cat_C_remove_this_image, event
+
+  WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+  
+
+  
+  CASE info.currently_showing_LASCO OF
+  
+    'SC3' : BEGIN
     
-swpc_cat_sort_out_the_timeline_symbols, info.C_number_of_images, info.CME_matches_image_C_Image_number, $
-                                  info.C_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-
-swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
-
-info.images_timeline_window -> draw, info.images_timeline_view
-
-ENDCASE
-
-   'SC2' : BEGIN
-   
-the_index_to_be_removed = info.C2_current_image_number
-   
-(info.C2_list_of_image_names).remove, the_index_to_be_removed
-(info.C2_list_of_image_data).remove, the_index_to_be_removed
-(info.C2_list_of_datetime_strings).remove, the_index_to_be_removed
-(info.C2_list_of_datetime_Julian).remove, the_index_to_be_removed
-(info.C2_list_of_full_time_strings).remove, the_index_to_be_removed
-(info.C2_list_of_image_exposure_times).remove, the_index_to_be_removed
-(info.C2_list_of_image_offsets).remove, the_index_to_be_removed
-(info.C2_list_of_image_scaling_factors).remove, the_index_to_be_removed
-(info.C2_list_of_HEEQ_coords).remove, the_index_to_be_removed
-(info.C2_list_of_pixel_scales).remove, the_index_to_be_removed
-(info.C2_list_of_rsuns).remove, the_index_to_be_removed
-(info.C2_list_of_Sun_satellite_distances).remove, the_index_to_be_removed
-info.C2_number_of_images = info.C2_number_of_images - 1
-info.C2_current_image_number = info.C2_current_image_number - 1
-widget_control, info.C_widget_image_sequence_slider,set_slider_max = info.C2_number_of_images
-widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
-
-swpc_cat_REDRAW_THE_IMAGE, $
-    info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
-    info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
-    info.CME_matches_image_C2_Image_number,info.C_current_background_color, $
-    info.background_color,info.C_current_text_color,info.color_c2,info.C_cme_outline,info.C2_cme_MATCH_outline, $
-    info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
-    info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+      the_index_to_be_removed = info.C_current_image_number
+      
+      (info.C_list_of_image_names).remove, the_index_to_be_removed
+      (info.C_list_of_image_data).remove, the_index_to_be_removed
+      (info.C_list_of_datetime_strings).remove, the_index_to_be_removed
+      (info.C_list_of_datetime_Julian).remove, the_index_to_be_removed
+      (info.C_list_of_full_time_strings).remove, the_index_to_be_removed
+      (info.C_list_of_image_exposure_times).remove, the_index_to_be_removed
+      (info.C_list_of_image_offsets).remove, the_index_to_be_removed
+      (info.C_list_of_image_scaling_factors).remove, the_index_to_be_removed
+      (info.C_list_of_HEEQ_coords).remove, the_index_to_be_removed
+      (info.C_list_of_pixel_scales).remove, the_index_to_be_removed
+      (info.C_list_of_rsuns).remove, the_index_to_be_removed
+      (info.C_list_of_Sun_satellite_distances).remove, the_index_to_be_removed
+      info.C_number_of_images = info.C_number_of_images - 1
+      info.C_current_image_number = info.C_current_image_number - 1
+      widget_control, info.C_widget_image_sequence_slider,set_slider_max = info.C_number_of_images
+      widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
+      
+      swpc_cat_REDRAW_THE_IMAGE, $
+        info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
+        info.C_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
+        info.CME_matches_image_C_Image_number,info.C_current_background_color, $
+        info.background_color,info.C_current_text_color,info.color_c3,info.C_cme_outline,info.C_cme_MATCH_outline, $
+        info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
+        info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+        
+      C_yvals = fltarr(n_elements(info.C_list_of_datetime_Julian)) + 0.65
+      info.C_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+      info.C_plot->SetProperty, dataX = (info.C_list_of_datetime_Julian).toarray() - info.start_julian, dataY = C_yvals
+      info.C_plot->SetProperty, color=[100,255,100]
+      info.C_plot->GetProperty, symbol=C_thisSymbol
+      
+      swpc_cat_sort_out_the_timeline_symbols, info.C_number_of_images, info.CME_matches_image_C_Image_number, $
+        info.C_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+      swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+      
+      info.images_timeline_window -> draw, info.images_timeline_view
+      
+    ENDCASE
     
-C2_yvals = fltarr(n_elements(info.C2_list_of_datetime_Julian)) + 0.4
-info.C2_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
-info.C2_plot->SetProperty, dataX = (info.C2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = C2_yvals
-info.C2_plot->SetProperty, color=[0,100,0]
-info.C2_plot->GetProperty, symbol=C2_thisSymbol
+    'SC2' : BEGIN
     
-swpc_cat_sort_out_the_timeline_symbols, info.C2_number_of_images, info.CME_matches_image_C2_Image_number, $
-                                  info.C2_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+      the_index_to_be_removed = info.C2_current_image_number
+      
+      (info.C2_list_of_image_names).remove, the_index_to_be_removed
+      (info.C2_list_of_image_data).remove, the_index_to_be_removed
+      (info.C2_list_of_datetime_strings).remove, the_index_to_be_removed
+      (info.C2_list_of_datetime_Julian).remove, the_index_to_be_removed
+      (info.C2_list_of_full_time_strings).remove, the_index_to_be_removed
+      (info.C2_list_of_image_exposure_times).remove, the_index_to_be_removed
+      (info.C2_list_of_image_offsets).remove, the_index_to_be_removed
+      (info.C2_list_of_image_scaling_factors).remove, the_index_to_be_removed
+      (info.C2_list_of_HEEQ_coords).remove, the_index_to_be_removed
+      (info.C2_list_of_pixel_scales).remove, the_index_to_be_removed
+      (info.C2_list_of_rsuns).remove, the_index_to_be_removed
+      (info.C2_list_of_Sun_satellite_distances).remove, the_index_to_be_removed
+      info.C2_number_of_images = info.C2_number_of_images - 1
+      info.C2_current_image_number = info.C2_current_image_number - 1
+      widget_control, info.C_widget_image_sequence_slider,set_slider_max = info.C2_number_of_images
+      widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
+      
+      swpc_cat_REDRAW_THE_IMAGE, $
+        info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
+        info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
+        info.CME_matches_image_C2_Image_number,info.C_current_background_color, $
+        info.background_color,info.C_current_text_color,info.color_c2,info.C_cme_outline,info.C2_cme_MATCH_outline, $
+        info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
+        info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+        
+      C2_yvals = fltarr(n_elements(info.C2_list_of_datetime_Julian)) + 0.4
+      info.C2_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+      info.C2_plot->SetProperty, dataX = (info.C2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = C2_yvals
+      info.C2_plot->SetProperty, color=[0,100,0]
+      info.C2_plot->GetProperty, symbol=C2_thisSymbol
+      
+      swpc_cat_sort_out_the_timeline_symbols, info.C2_number_of_images, info.CME_matches_image_C2_Image_number, $
+        info.C2_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+      swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+      
+      info.images_timeline_window -> draw, info.images_timeline_view
+      
+    ENDCASE
+    
+  ENDCASE
+  
+  
 
-swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+  WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+  
+end
 
-info.images_timeline_window -> draw, info.images_timeline_view
-   
-ENDCASE
 
-ENDCASE  
 
-   
-   ENDCASE
-   
-   info.R_widget_remove_this_image : BEGIN
-   
-the_index_to_be_removed = info.AC2_current_image_number
-   
-(info.AC2_list_of_image_names).remove, the_index_to_be_removed
-(info.AC2_list_of_image_data).remove, the_index_to_be_removed
-(info.AC2_list_of_datetime_strings).remove, the_index_to_be_removed
-(info.AC2_list_of_datetime_Julian).remove, the_index_to_be_removed
-(info.AC2_list_of_full_time_strings).remove, the_index_to_be_removed
-(info.AC2_list_of_image_exposure_times).remove, the_index_to_be_removed
-(info.AC2_list_of_image_offsets).remove, the_index_to_be_removed
-(info.AC2_list_of_image_scaling_factors).remove, the_index_to_be_removed
-(info.R_list_of_HEEQ_coords).remove, the_index_to_be_removed
-(info.AC2_list_of_pixel_scales).remove, the_index_to_be_removed
-(info.AC2_list_of_rsuns).remove, the_index_to_be_removed
-(info.R_list_of_Sun_satellite_distances).remove, the_index_to_be_removed
-info.AC2_number_of_images = info.AC2_number_of_images - 1
-info.AC2_current_image_number = info.AC2_current_image_number - 1
-widget_control, info.R_widget_image_sequence_slider,set_slider_max = info.AC2_number_of_images
-widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
+pro swpc_cat_R_remove_this_image, event
 
-swpc_cat_REDRAW_THE_IMAGE, $
+  WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+  
+  the_index_to_be_removed = info.AC2_current_image_number
+  
+  (info.AC2_list_of_image_names).remove, the_index_to_be_removed
+  (info.AC2_list_of_image_data).remove, the_index_to_be_removed
+  (info.AC2_list_of_datetime_strings).remove, the_index_to_be_removed
+  (info.AC2_list_of_datetime_Julian).remove, the_index_to_be_removed
+  (info.AC2_list_of_full_time_strings).remove, the_index_to_be_removed
+  (info.AC2_list_of_image_exposure_times).remove, the_index_to_be_removed
+  (info.AC2_list_of_image_offsets).remove, the_index_to_be_removed
+  (info.AC2_list_of_image_scaling_factors).remove, the_index_to_be_removed
+  (info.R_list_of_HEEQ_coords).remove, the_index_to_be_removed
+  (info.AC2_list_of_pixel_scales).remove, the_index_to_be_removed
+  (info.AC2_list_of_rsuns).remove, the_index_to_be_removed
+  (info.R_list_of_Sun_satellite_distances).remove, the_index_to_be_removed
+  info.AC2_number_of_images = info.AC2_number_of_images - 1
+  info.AC2_current_image_number = info.AC2_current_image_number - 1
+  widget_control, info.R_widget_image_sequence_slider,set_slider_max = info.AC2_number_of_images
+  widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
+  
+  swpc_cat_REDRAW_THE_IMAGE, $
     info.AC2_current_image_number,info.AC2_background_image_number,info.AC2_difference_imaging, $
     info.AC2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
     info.CME_matches_image_AC2_Image_number,info.R_current_background_color, $
@@ -1965,35 +1979,24 @@ swpc_cat_REDRAW_THE_IMAGE, $
     info.R_widget_outline_matches_image,info.CME_matches_image_AC2_CME_outline, $
     info.R_ut_string_object,info.AC2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
     
-R_yvals = fltarr(n_elements(info.AC2_list_of_datetime_Julian)) + 0.9
-info.R_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
-info.R_plot->SetProperty, dataX = (info.AC2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = R_yvals
-info.R_plot->SetProperty, color=[255,100,100]
-info.R_plot->GetProperty, symbol=R_thisSymbol
+  R_yvals = fltarr(n_elements(info.AC2_list_of_datetime_Julian)) + 0.9
+  info.R_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+  info.R_plot->SetProperty, dataX = (info.AC2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = R_yvals
+  info.R_plot->SetProperty, color=[255,100,100]
+  info.R_plot->GetProperty, symbol=R_thisSymbol
+  
+  swpc_cat_sort_out_the_timeline_symbols, info.AC2_number_of_images, info.CME_matches_image_AC2_Image_number, $
+    info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
     
-swpc_cat_sort_out_the_timeline_symbols, info.AC2_number_of_images, info.CME_matches_image_AC2_Image_number, $
-                                  info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-
-swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
-
-info.images_timeline_window -> draw, info.images_timeline_view
-
-    
-   
-   ENDCASE
-
-
-ENDCASE
-
-
-WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-
+  swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
+  
+  info.images_timeline_window -> draw, info.images_timeline_view
+  
+  
+  
+  WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+  
 end
-
-
-
-
-
 
 
 
@@ -9901,12 +9904,20 @@ tlb = Widget_Base(Title='CAT (CME Analysis Tool)', row=1, xoffset = x_pos , yoff
 
 horizontal_base=widget_base(tlb,row=1)
 vertical_base=widget_base(horizontal_base,column=1)
-swpc_cat_base = widget_base(vertical_base,row=1)
 if n_sat eq 3 then begin
+  swpc_cat_base = widget_base(vertical_base,row=1,/align_center)
 L_view_base = widget_base(swpc_cat_base,column=1)
-endif
 C_view_base = widget_base(swpc_cat_base,column=1)
 R_view_base = widget_base(swpc_cat_base,column=1)
+endif
+if n_sat eq 2 then begin
+  swpc_cat_base = widget_base(vertical_base,column=2,/align_center)
+ swpc_cat_base_C = widget_base(swpc_cat_base,column=1,/align_center) 
+ swpc_cat_base_R = widget_base(swpc_cat_base,column=1,/align_center)
+ C_view_base = widget_base(swpc_cat_base_C,column=1,/align_center)
+ R_view_base = widget_base(swpc_cat_base_R,column=1,/align_center)
+endif
+
 swpc_cat_base2 = widget_base(vertical_base,row=1)
 horizontal_base2 = widget_base(vertical_base,row=1,/align_left)
 vertical_base2 = widget_base(horizontal_base2,column=1)
@@ -9946,7 +9957,7 @@ widget_show_BHI1 = Widget_Button(widget_show_L, Value='STEREO B HI1',Event_Pro='
 widget_show_BHI2 = Widget_Button(widget_show_L, Value='STEREO B HI2',Event_Pro='swpc_cat_show_B_hi2')
 
 L_widget_representative_image = Widget_Button(L_contextBase, Value='Set As Representative Image',Event_Pro='swpc_cat_define_representative_image')
-L_widget_remove_this_image = Widget_Button(L_contextBase, Value='Remove This Image',Event_Pro='swpc_cat_remove_this_image',sensitive=0)
+L_widget_remove_this_image = Widget_Button(L_contextBase, Value='Remove This Image',Event_Pro='swpc_cat_L_remove_this_image',sensitive=0)
 ;L_widget_show_line_plot = Widget_Button(L_contextBase, Value='Show line plot',Event_Pro='swpc_cat_show_line_plot')
 
 endif ; if n_sat eq 3 then begin
@@ -9959,7 +9970,7 @@ difference_image = Widget_Button(widget_image_C, Value='Running Difference',Uval
 difference_image = Widget_Button(widget_image_C, Value='Set Current Image as Background',Uvalue='C Diff: Set Current Image as Background',Event_Pro='swpc_cat_diff_format')
 widget_show_C2_or_C3 = Widget_Button(C_contextBase, Value='Show LASCO C2',Event_Pro='swpc_cat_Show_C2_or_C3')
 C_widget_representative_image = Widget_Button(C_contextBase, Value='Set As Representative Image',Event_Pro='swpc_cat_define_representative_image')
-C_widget_remove_this_image = Widget_Button(C_contextBase, Value='Remove This Image',Event_Pro='swpc_cat_remove_this_image',sensitive=0)
+C_widget_remove_this_image = Widget_Button(C_contextBase, Value='Remove This Image',Event_Pro='swpc_cat_C_remove_this_image',sensitive=0)
 ;C_widget_show_line_plot = Widget_Button(C_contextBase, Value='Show line plot',Event_Pro='swpc_cat_show_line_plot')
 
 
@@ -9976,7 +9987,7 @@ widget_show_AHI1 = Widget_Button(widget_show_R, Value='STEREO A HI1',Event_Pro='
 widget_show_AHI2 = Widget_Button(widget_show_R, Value='STEREO A HI2',Event_Pro='swpc_cat_show_A_hi2')
 
 R_widget_representative_image = Widget_Button(R_contextBase, Value='Set As Representative Image',Event_Pro='swpc_cat_define_representative_image')
-R_widget_remove_this_image = Widget_Button(R_contextBase, Value='Remove This Image',Event_Pro='swpc_cat_remove_this_image',sensitive=0)
+R_widget_remove_this_image = Widget_Button(R_contextBase, Value='Remove This Image',Event_Pro='swpc_cat_R_remove_this_image',sensitive=0)
 ;R_widget_show_line_plot = Widget_Button(R_contextBase, Value='Show line plot',Event_Pro='swpc_cat_show_line_plot')
 
 ; Plot A is the 'available images timeline'.....
