@@ -9245,24 +9245,24 @@ info.animation_start_time_marker_handle->setproperty,data=info.animation_start_t
 
 info.images_timeline_window->Draw, info.images_timeline_view
 
-print, 'L9240 info.which_window_to_animate ', info.which_window_to_animate
+;print, 'L9240 info.which_window_to_animate ', info.which_window_to_animate
 
-CASE info.which_window_to_animate OF
-   0 : BEGIN
-array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
-   ENDCASE
-   1 : BEGIN
-array_of_julians = info.C_list_of_datetime_Julian->toarray()
-   ENDCASE
-   2 : BEGIN
-array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
-   ENDCASE
+;CASE info.which_window_to_animate OF
+;   0 : BEGIN
+;array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
+;   ENDCASE
+;   1 : BEGIN
+;array_of_julians = info.C_list_of_datetime_Julian->toarray()
+;   ENDCASE
+;   2 : BEGIN
+;array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
+;   ENDCASE
    
-ENDCASE
+;ENDCASE
 
-l = where(array_of_julians gt this_julian)
-info.anim_start_frame = l[0]
-info.anim_start_julian = this_julian
+;l = where(array_of_julians gt this_julian)
+;info.anim_start_frame = l[0]
+;info.anim_start_julian = this_julian
 
 ;CODE WILL NOT GET TO HERE IF GREEN BOOKMARK IS BREAKING. THIS SHOULD NOT BE NEEDED IF STATEMENTS ARE WRITTEN PROPERLY ####
 ;SHOULD THIS NOT BE A BREAK STATEMENT? IF THEY EXIST IN IDL!
