@@ -6239,7 +6239,7 @@ swpc_cat_update_the_line_plot,info.position_B,this_xmin,info.xmax,info.ymin,info
                                  thisPlot_B2 = info.thisPlot_B2,dataX2 = Jul_times2 , dataY2 = yvals, $
                                  xs, ys
                                 
-if info.debug_mode eq 1 then print, 'info.xmin 2 ',this_xmin
+;if info.debug_mode eq 1 then print, 'info.xmin 2 ',this_xmin
 
 
 
@@ -6247,7 +6247,7 @@ if info.debug_mode eq 1 then print, 'info.xmin 2 ',this_xmin
 
 
 
-;print, ' Radial velocity (km/s) ',  radial_velocity
+print, ' Radial velocity (km/s) ',  radial_velocity
 ;print, t_zero, format = '(f20.10)'
 CALDAT, t_zero, t_zero_Month , t_zero_Day , t_zero_Year , t_zero_Hour , t_zero_Minute , t_zero_Second
 ;print, 'Time at Sun',t_zero_Year,t_zero_Month,t_zero_Day,t_zero_Hour,t_zero_Minute,t_zero_Second
@@ -6263,7 +6263,7 @@ info.radial_velocity = radial_velocity
 info.time_at_Enlil_boundary_Julian = Time_at_Enlil_boundary
 info.time_at_Enlil_boundary = [t_enlil_Year,t_enlil_Month,t_enlil_Day,t_enlil_Hour,t_enlil_Minute,t_enlil_Second]
 
-
+print, 'Done all the calculation required:' 
 
 ; ********** write the results in the format needed for input to Enlil *************
 
@@ -6307,7 +6307,9 @@ info.T21_5_text -> SetProperty, strings =    'T ' + info.T21_5_string
 info.T21_5_text -> SetProperty, hide = 0
 
 info.enlil_info_window->Draw, info.enlil_info_View
-
+print, 'Write strings into the enlil window.' 
+print, 'vel_string ',vel_string
+;I THINK IT IS HERE WHERE IT SHOULD WRITE TO THE ENLIL WINDOW. ####
 
 ; **************write the Enlil cone input file stuff *******************
 
