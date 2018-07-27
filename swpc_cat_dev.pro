@@ -6634,7 +6634,7 @@ pro swpc_cat_image_difference_and_scaling, background_color, current_image_numbe
                  list_of_image_data, image_saturation_value, coronagraph_image_object, border_image_object, i_log_scale
 
 ;print, ' current_image_number ',current_image_number
-if n_elements(list_of_image_data) ge 0 then begin ;I HAVE PUT THIS HERE TO STOP IT RUNNING IF THERE ARE NO IMAGES ####
+if n_elements(list_of_image_data) gt 0 then begin ;I HAVE PUT THIS HERE TO STOP IT RUNNING IF THERE ARE NO IMAGES ####
        CASE difference_imaging  OF
           'none' : BEGIN
 
