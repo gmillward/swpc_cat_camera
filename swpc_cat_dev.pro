@@ -6509,20 +6509,11 @@ case info.currently_showing_STEREO_B of
                   end  
 end
 
-print, 'info.L_plot ', info.L_plot ;THIS IS THE ARGUMENT THAT IS BREAKING IT. ####
-print, 'info.BC2_number_of_images ',info.BC2_number_of_images
-print, 'info.BC2_current_image_number ',info.BC2_current_image_number
-print, 'info.color_stereo_B ',info.color_stereo_B
-print, 'info.cme_outline_color ',info.cme_outline_color
 
 if info.BC2_number_of_images gt 0 then begin ;MY ADDITION ####
-
-swpc_cat_set_timeline_highlight_block, info.L_plot, $
-info.BC2_number_of_images, $
-info.BC2_current_image_number, $
-info.color_stereo_B, $
-info.cme_outline_color
-	endif 
+	swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, $
+	info.color_stereo_B, info.cme_outline_color
+endif 
           END
           
           info.C_widget_image_sequence_slider : BEGIN
@@ -6625,15 +6616,11 @@ case info.currently_showing_STEREO_A of
                   end  
 end
 
-print, 'info.R_plot ', info.R_plot
-print, 'info.AC2_number_of_images ',info.AC2_number_of_images
-print, 'info.AC2_current_image_number ',info.AC2_current_image_number
-print, 'info.color_stereo_A ',info.color_stereo_A
-print, 'info.cme_outline_color ',info.cme_outline_color
+if info.AC2_number_of_images gt 0 then begin ;MY ADDITION ####
 
-swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_a, info.cme_outline_color
+	swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, 	info.color_stereo_a, info.cme_outline_color
 
-
+endif 
          END
          
 ENDCASE
