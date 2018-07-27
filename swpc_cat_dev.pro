@@ -8752,8 +8752,11 @@ END
 
 
 pro swpc_cat_images_timeline_window_button_click_events, event
-
+;THIS RUNS WHENEVER THE MOUSE PASSES OVER OR CLICKS ON THE TIMELINE ####
 compile_opt idl2
+
+print, 'Entered images_timeline_window_button_click_events' 
+
 
 Widget_Control, event.top, Get_UValue=info, /No_Copy
 
@@ -8786,9 +8789,9 @@ if this_minute lt 10 then this_minute_str = '0' + this_minute_str
 this_time_string = strcompress(this_year_str + '-' + this_month_str + '-' + this_day_str,/remove_all) + ' ' + $
                    strcompress(this_hour_str + ':' + this_minute_str,/remove_all) + ' UT'
 
-;print, this_time_string
-
-
+print, 'this_time_string ',this_time_string ;TIME ON THE TIME AXIS ####
+print, 'thisEvent ',thisEvent
+;thisEVENT CAN EITHER BE MOTION, PRESS OR RELEASE AND THIS STATEMENT DETERMINES WHAT TO DO. ####
 
 CASE thisEvent OF
 
@@ -9046,10 +9049,11 @@ endelse ; not right-click context menu
        
        
    'MOTION': BEGIN ; Trackball events
-   
+   print, 'Start of motion case '
    if info.timeline_left_mouse_button_being_pressed eq 1 then begin
-   
-if event.y gt 10 then begin
+   print, 'event.x ',event.x, ' event.y ',event.y ;THIS COMES UP IF I CLICK AND DRAG. ####
+	;THIS WOULD MOVE THE TIMELINE BAR OR MAYBE THE BOOKMARKS AS WELL. DEPENDS ON WHERE YOU CLICK  
+if event.y gt 10 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
    
 time_line_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 line_data=fltarr(2,2)
@@ -9211,13 +9215,15 @@ endif
 
 
 
-endif else begin  ; if event.y lt 10
+endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOKMARK, THOUGH NOT ALWAYS. ####
 
 ; determine whether we are moving the start or end markers
  
        myLoc = [event.x, event.y]    
+	print, 'myLoc ',myloc 
        oObjArr = info.images_timeline_window->Select(info.images_timeline_view, myLoc, dimensions=[100,20])
        nSel = N_ELEMENTS(oObjArr)
+	print, nSel
        if nsel gt 1 then begin
        iobject = intarr(nSel)
        
@@ -9239,7 +9245,7 @@ info.animation_start_time_marker_handle->setproperty,data=info.animation_start_t
 
 info.images_timeline_window->Draw, info.images_timeline_view
 
-print 'L9240 info.which_window_to_animate ', info.which_window_to_animate
+print, 'L9240 info.which_window_to_animate ', info.which_window_to_animate
 
 CASE info.which_window_to_animate OF
    0 : BEGIN
@@ -9321,9 +9327,9 @@ endif   ; if left mouse button currently clicked
    
 
 
-END
+END ;THIS IS THE END OF THE MOTION BLOCK (I THINK) ####
 
-   ELSE:
+   ELSE: ;I GUESS THIS MEANS DO NOTHING IF NONE OF THE ACTIONS ABOVE ARE PERFORMED ####
 
 
 ENDCASE
