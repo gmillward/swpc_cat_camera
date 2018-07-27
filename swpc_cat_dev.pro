@@ -7469,13 +7469,13 @@ info.C2_list_of_rsuns = list_of_rsuns
 info.C2_list_of_Sun_satellite_distances = list_of_Sun_satellite_distances
 info.C2_list_of_XYCEN = list_of_XYCEN
 
-if info.debug_mode eq 1 then print, '******************'
-if info.debug_mode eq 1 then print, 'C2 lists rsuns ',list_of_rsuns
-if info.debug_mode eq 1 then print, '******************'
-if info.debug_mode eq 1 then print, 'C2 lists pixel scales ',list_of_pixel_scales
-if info.debug_mode eq 1 then print, '******************'
-if info.debug_mode eq 1 then print, 'C2 lists scaling ',list_of_image_scaling_factors
-if info.debug_mode eq 1 then print, '******************'
+;if info.debug_mode eq 1 then print, '******************'
+;if info.debug_mode eq 1 then print, 'C2 lists rsuns ',list_of_rsuns
+;if info.debug_mode eq 1 then print, '******************'
+;if info.debug_mode eq 1 then print, 'C2 lists pixel scales ',list_of_pixel_scales
+;if info.debug_mode eq 1 then print, '******************'
+;if info.debug_mode eq 1 then print, 'C2 lists scaling ',list_of_image_scaling_factors
+;if info.debug_mode eq 1 then print, '******************'
 
 ; special case for where we just have 1 image:
 if info.C2_number_of_images eq 1 then begin
@@ -7502,13 +7502,13 @@ endif
      info.AH1_list_of_Sun_satellite_distances = list_of_Sun_satellite_distances
      info.AH1_list_of_XYCEN = list_of_XYCEN
      
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'AH1 lists rsuns ',list_of_rsuns
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'AH1 lists pixel scales ',list_of_pixel_scales
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'AH1 lists scaling ',list_of_image_scaling_factors
-     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'AH1 lists rsuns ',list_of_rsuns
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'AH1 lists pixel scales ',list_of_pixel_scales
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'AH1 lists scaling ',list_of_image_scaling_factors
+;     if info.debug_mode eq 1 then print, '******************'
      
      ; special case for where we just have 1 image:
      if info.AH1_number_of_images eq 1 then begin
@@ -7535,13 +7535,13 @@ endif
      info.BH1_list_of_Sun_satellite_distances = list_of_Sun_satellite_distances
      info.BH1_list_of_XYCEN = list_of_XYCEN
      
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'BH1 lists rsuns ',list_of_rsuns
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'BH1 lists pixel scales ',list_of_pixel_scales
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'BH1 lists scaling ',list_of_image_scaling_factors
-     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'BH1 lists rsuns ',list_of_rsuns
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'BH1 lists pixel scales ',list_of_pixel_scales
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'BH1 lists scaling ',list_of_image_scaling_factors
+;     if info.debug_mode eq 1 then print, '******************'
      
      ; special case for where we just have 1 image:
      if info.BH1_number_of_images eq 1 then begin
@@ -7568,13 +7568,13 @@ endif
      info.AH2_list_of_Sun_satellite_distances = list_of_Sun_satellite_distances
      info.AH2_list_of_XYCEN = list_of_XYCEN
      
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'AH2 lists rsuns ',list_of_rsuns
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'AH2 lists pixel scales ',list_of_pixel_scales
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'AH2 lists scaling ',list_of_image_scaling_factors
-     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'AH2 lists rsuns ',list_of_rsuns
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'AH2 lists pixel scales ',list_of_pixel_scales
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'AH2 lists scaling ',list_of_image_scaling_factors
+;     if info.debug_mode eq 1 then print, '******************'
      
      ; special case for where we just have 1 image:
      if info.AH2_number_of_images eq 1 then begin
@@ -7601,13 +7601,13 @@ endif
      info.BH2_list_of_Sun_satellite_distances = list_of_Sun_satellite_distances
      info.BH2_list_of_XYCEN = list_of_XYCEN
      
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'BH2 lists rsuns ',list_of_rsuns
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'BH2 lists pixel scales ',list_of_pixel_scales
-     if info.debug_mode eq 1 then print, '******************'
-     if info.debug_mode eq 1 then print, 'BH2 lists scaling ',list_of_image_scaling_factors
-     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'BH2 lists rsuns ',list_of_rsuns
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'BH2 lists pixel scales ',list_of_pixel_scales
+;     if info.debug_mode eq 1 then print, '******************'
+;     if info.debug_mode eq 1 then print, 'BH2 lists scaling ',list_of_image_scaling_factors
+;     if info.debug_mode eq 1 then print, '******************'
      
      ; special case for where we just have 1 image:
      if info.BH2_number_of_images eq 1 then begin
@@ -8073,13 +8073,13 @@ endif else if (STRMID(which_telescope,0,6) eq 'STEREO') then begin
 
    if HI_val eq 'HI' then pixel_scale = pixel_scale * 3600.
    
-   print, ' WHICH : ','**',which_telescope,'**', xcen, ycen
+   ;print, ' WHICH : ','**',which_telescope,'**', xcen, ycen
    binning = fix(swpc_cat_sxpar(fits_header, 'SUMMED')); dimension = original/(2^(SUMMED-1)); 1 signifies no binning
    ; NOTE: binning isn't needed since CDELT1 is updated properly
    sun_x = float(swpc_cat_sxpar(fits_header, 'CRPIX1'))
    sun_y = float(swpc_cat_sxpar(fits_header, 'CRPIX2'))
    rsun = float(swpc_cat_sxpar(fits_header, 'RSUN')); The fits files contain the solar radius in arcsec
-   print, which_telescope, ' ',pixel_scale, sun_x , sun_y , rsun
+   ;print, which_telescope, ' ',pixel_scale, sun_x , sun_y , rsun
    exposure_time = float(swpc_cat_fxpar(fits_header,'EXPTIME'))
    offset = float(swpc_cat_fxpar(fits_header,'OFFSET'))
    HEEQ_X = float(swpc_cat_fxpar(fits_header,'HEQX_OBS'))
