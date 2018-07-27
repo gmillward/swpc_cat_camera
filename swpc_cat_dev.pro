@@ -2246,21 +2246,23 @@ info.CME_matches_image_telescope = list()
 info.CME_matches_image_Rs_leading_edge = list()
 info.CME_matches_image_Image_number = list()
 info.CME_matches_image_CME_outline = list()
-info.CME_matches_image_BC2_Image_number = list()
+if info.n_sat eq 3 then info.CME_matches_image_BC2_Image_number = list()
 info.CME_matches_image_C_Image_number = list()
 info.CME_matches_image_C2_Image_number = list()
 info.CME_matches_image_AC2_Image_number = list()
-info.CME_matches_image_BC2_CME_outline = list()
+if info.n_sat eq 3 then info.CME_matches_image_BC2_CME_outline = list()
 info.CME_matches_image_C_CME_outline = list()
 info.CME_matches_image_C2_CME_outline = list()
 info.CME_matches_image_AC2_CME_outline = list()
 
+if info.n_sat eq 3 then begin
 info.L_current_background_color = info.background_color
 info.L_current_text_color = info.color_stereo_B
 info.L_cme_outline -> setProperty, hide = 0
 info.BC2_cme_MATCH_outline->SetProperty, hide = 1
 
 swpc_cat_set_image_border, info.background_color, info.L_border_image_object
+endif
 
 info.C_current_background_color = info.background_color
 
@@ -2283,8 +2285,10 @@ endelse
 
 swpc_cat_set_image_border, info.background_color, info.C_border_image_object
 
+if info.n_sat eq 3 then begin
 info.L_ut_string_object->setProperty, color = info.L_current_text_color
 info.L_title_object->setProperty, color = info.L_current_text_color
+endif
 info.C_ut_string_object->setProperty, color = info.C_current_text_color
 info.C_title_object->setProperty, color = info.C_current_text_color
 info.R_ut_string_object->setProperty, color = info.R_current_text_color
@@ -2307,7 +2311,7 @@ info.thisPlot_B2->SetProperty, hide = 1
 info.thisPlot2_c3->SetProperty, hide = 1
 info.thisPlot2_c2->SetProperty, hide = 1
 info.thisPlot2_stereo_a->SetProperty, hide = 1
-info.thisPlot2_stereo_b->SetProperty, hide = 1
+if info.n_sat eq 3 then info.thisPlot2_stereo_b->SetProperty, hide = 1
 info.latitude_text->SetProperty, hide = 1
 info.longitude_text->SetProperty, hide = 1
 info.cone_angle_text->SetProperty, hide = 1
@@ -2319,11 +2323,13 @@ info.angular_width_lemniscate = 90.
 
 swpc_cat_define_cme_lemniscate, info.radial_distance_lemniscate, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
 
+if info.n_sat eq 3 then begin
 info.L_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
 info.L_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
 info.L_Window_copy->Draw, info.L_camera_copy
 swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
 info.L_Window->Draw, info.L_both_views
+endif
 
 info.C_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
 info.C_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
@@ -2340,8 +2346,10 @@ info.R_Window->Draw, info.R_both_views
 info.latitude_degrees = 0.
 info.longitude_degrees = 0.
 
+if info.n_sat eq 3 then begin
 info.L_cme_model->SetProperty, transform = info.initial_transform
 info.L_cme_model_copy->SetProperty, transform = info.initial_transform
+endif
 
 info.C_cme_model->SetProperty, transform = info.initial_transform
 info.C_cme_model_copy->SetProperty, transform = info.initial_transform
@@ -2349,8 +2357,10 @@ info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 info.R_cme_model->SetProperty, transform = info.initial_transform
 info.R_cme_model_copy->SetProperty, transform = info.initial_transform
 
+if info.n_sat eq 3 then begin
 swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
 info.L_Window->Draw, info.L_both_views
+endif
 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
@@ -2358,12 +2368,12 @@ info.C_Window->Draw, info.C_both_views
 swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
 info.R_Window->Draw, info.R_both_views
 
-info.BC2_cme_MATCH_outline->SetProperty, hide = 1
+if info.n_sat eq 3 then info.BC2_cme_MATCH_outline->SetProperty, hide = 1
 info.C_cme_MATCH_outline->SetProperty, hide = 1
 info.C2_cme_MATCH_outline->SetProperty, hide = 1
 info.AC2_cme_MATCH_outline->SetProperty, hide = 1
 
-widget_control,info.L_widget_outline_matches_image,set_value='CME Matches Image'
+if info.n_sat eq 3 then widget_control,info.L_widget_outline_matches_image,set_value='CME Matches Image'
 widget_control,info.C_widget_outline_matches_image,set_value='CME Matches Image'
 widget_control,info.R_widget_outline_matches_image,set_value='CME Matches Image'
 
@@ -2393,9 +2403,11 @@ info.enlil_info_window->erase, color=info.background_color
 
 info.cme_info_Window->Draw, info.cme_info_view
 
+if info.n_sat eq 3 then begin
 if info.BC2_number_of_images gt 0 then begin
 swpc_cat_sort_out_the_timeline_symbols, info.BC2_number_of_images, info.CME_matches_image_BC2_Image_number, $
                                   info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+endif
 endif
 
 if info.C_number_of_images gt 0 then begin
@@ -2419,6 +2431,7 @@ info.images_timeline_window->Draw, info.images_timeline_view
 
 if reset_for_new_images_as_well_as_the_cme_analysis eq 1 then begin
 
+if info.n_sat eq 3 then begin
 info.BC2_list_of_image_names = list()
 info.BC2_list_of_image_data = list()
 info.BC2_list_of_datetime_strings = list()
@@ -2427,6 +2440,7 @@ info.BC2_list_of_full_time_strings = list()
 info.BC2_list_of_image_exposure_times = list()
 info.BC2_list_of_image_offsets = list()
 info.BC2_list_of_image_scaling_factors = list()
+endif
 info.C_list_of_image_names = list()
 info.C_list_of_image_data = list()
 info.C_list_of_datetime_strings = list()
@@ -2451,37 +2465,37 @@ info.AC2_list_of_full_time_strings = list()
 info.AC2_list_of_image_exposure_times = list()
 info.AC2_list_of_image_offsets = list()
 info.AC2_list_of_image_scaling_factors = list()
-info.L_list_of_HEEQ_coords = list()
+if info.n_sat eq 3 then info.L_list_of_HEEQ_coords = list()
 info.C_list_of_HEEQ_coords = list()
 info.C2_list_of_HEEQ_coords = list()
 info.R_list_of_HEEQ_coords = list()
-info.L_HEEQ_coords = [0.,0.,0.]
+if info.n_sat eq 3 then info.L_HEEQ_coords = [0.,0.,0.]
 info.C_HEEQ_coords = [0.,0.,0.]
 info.C2_HEEQ_coords = [0.,0.,0.]
 info.R_HEEQ_coords = [0.,0.,0.]
 info.master_list = list()
-info.L_indexes = list()
+if info.n_sat eq 3 then info.L_indexes = list()
 info.C_indexes = list()
 info.C2_indexes = list()
 info.R_indexes = list()
 info.master_list_size = 0
-info.BC2_current_image_number = 1  ; start with the second image in the sequence
+if info.n_sat eq 3 then info.BC2_current_image_number = 1  ; start with the second image in the sequence
 info.C_current_image_number = 1  ; (ie, the 1st one that shows anything with
 info.C2_current_image_number = 1 ; difference imaging)....
 info.AC2_current_image_number = 1
-info.BC2_list_of_pixel_scales = list()
+if info.n_sat eq 3 then info.BC2_list_of_pixel_scales = list()
 info.C_list_of_pixel_scales = list()
 info.C2_list_of_pixel_scales = list()
 info.AC2_list_of_pixel_scales = list()
-info.BC2_list_of_rsuns = list()
+if info.n_sat eq 3 then info.BC2_list_of_rsuns = list()
 info.C_list_of_rsuns = list()
 info.C2_list_of_rsuns = list()
 info.AC2_list_of_rsuns = list()
-info.L_list_of_Sun_satellite_distances = list()
+if info.n_sat eq 3 then info.L_list_of_Sun_satellite_distances = list()
 info.C_list_of_Sun_satellite_distances = list()
 info.C2_list_of_Sun_satellite_distances = list()
 info.R_list_of_Sun_satellite_distances = list()
-info.L_telescope_code = ''
+if info.n_sat eq 3 then info.L_telescope_code = ''
 info.C_telescope_code = ''
 info.C2_telescope_code = ''
 info.R_telescope_code = ''
@@ -2491,12 +2505,12 @@ info.end_date = intarr(5)
 info.start_julian = -1.0D
 info.end_julian = -1.0D
 
-info.L_window->erase, color=info.background_color
+if info.n_sat eq 3 then info.L_window->erase, color=info.background_color
 info.C_window->erase, color=info.background_color
 info.R_window->erase, color=info.background_color
 info.images_timeline_window->erase, color=info.background_color
 
-info.BC2_difference_imaging = 'running'
+if info.n_sat eq 3 then info.BC2_difference_imaging = 'running'
 info.C_difference_imaging = 'running'
 info.C2_difference_imaging = 'running'
 info.AC2_difference_imaging = 'running'
@@ -4167,7 +4181,7 @@ pro swpc_cat_actually_change_lemniscate_radial_distance,info,radial_distance_lem
 
   cone_axis_data = fltarr(3,2)
   cone_axis_data[2,1] = radial_distance_lemniscate *3.
-  info.L_cone_Z_axis-> SetProperty, data = cone_axis_data
+if info.n_sat eq 3 then info.L_cone_Z_axis-> SetProperty, data = cone_axis_data
   info.C_cone_Z_axis-> SetProperty, data = cone_axis_data
   info.R_cone_Z_axis-> SetProperty, data = cone_axis_data
   if info.debug_mode eq 1 then print,' cone_axis_data ',cone_axis_data
@@ -4180,7 +4194,8 @@ pro swpc_cat_actually_change_lemniscate_radial_distance,info,radial_distance_lem
   info.radial_distance_lemniscate = radial_distance_lemniscate
   
   swpc_cat_define_cme_lemniscate, info.radial_distance_lemniscate, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
-  
+
+if info.n_sat eq 3 then begin  
   info.L_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
   info.L_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
   info.L_Window_copy->Draw, info.L_camera_copy
@@ -4192,7 +4207,7 @@ pro swpc_cat_actually_change_lemniscate_radial_distance,info,radial_distance_lem
       info.position_image_lineplot, info.L_cme_outline
   endif
   info.L_Window->Draw, info.L_both_views
-  
+endif 
   
   info.C_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
   info.C_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
@@ -4339,622 +4354,661 @@ end
 
 
 
+pro swpc_cat_L_CME_match_or_unmatch, event
 
-
-
-
-
-pro swpc_cat_CME_match_or_unmatch, event
-
-Widget_Control, event.top, Get_UValue=info, /No_Copy
-
-CASE event.id OF
-
-   info.L_widget_outline_matches_image : BEGIN
-   
-   case info.currently_showing_STEREO_B of
-     'BC2' : begin
-      
-       widget_control,info.L_widget_outline_matches_image,get_value=the_text
-       
-       if the_text eq 'CME Matches Image' then begin
-       
-         (info.CME_matches_image_Julian).add, (info.BC2_list_of_datetime_Julian)[info.BC2_current_image_number]
-         (info.CME_matches_image_DateTime_string).add, (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]
-         (info.CME_matches_image_telescope).add, info.L_telescope_code
-         (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
-         (info.CME_matches_image_Image_number).add, info.BC2_current_image_number
-         (info.CME_matches_image_BC2_Image_number).add, info.BC2_current_image_number
-         
-         swpc_cat_image_difference_and_scaling, info.color_stereo_B,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
-           info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
-         info.L_title_object->setProperty, color = info.background_color
-         info.L_ut_string_object->setProperty, color = info.background_color
-         
-         info.L_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).add,data
-         (info.CME_matches_image_BC2_CME_outline).add,data
-         info.L_cme_outline -> setProperty, hide = 1
-         info.BC2_cme_MATCH_outline->SetProperty, data = data
-         info.BC2_cme_MATCH_outline->SetProperty, hide = 0
-         info.L_Window->Draw, info.L_both_views
-         
-         widget_control,info.L_widget_outline_matches_image,set_value='Unmatch'
-         
-       endif else begin
-       
-         if float(!version.release) gt 8.05 then begin
-           the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.BC2_current_image_number)
-           ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
-           the_index_to_be_removed_L = (info.CME_matches_image_BC2_Image_number).FindValue(info.BC2_current_image_number)
-           ;   print, ' the_index_to_be_removed_L ', the_index_to_be_removed_L
-         endif else begin
-           the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.BC2_current_image_number)
-           the_index_to_be_removed_L = where(info.CME_matches_image_BC2_Image_number eq info.BC2_current_image_number)
-         endelse
-         
-         
-         (info.CME_matches_image_Julian).remove, the_index_to_be_removed
-         (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
-         (info.CME_matches_image_telescope).remove, the_index_to_be_removed
-         (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
-         (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
-         (info.CME_matches_image_BC2_Image_number).remove, the_index_to_be_removed_L
-         
-         swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
-           info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
-         info.L_title_object->setProperty, color = info.color_stereo_B
-         info.L_ut_string_object->setProperty, color = info.color_stereo_B
-         
-         ;   info.L_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
-         (info.CME_matches_image_BC2_CME_outline).remove, the_index_to_be_removed_L
-         info.L_cme_outline -> setProperty, hide = 0
-         ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
-         info.BC2_cme_MATCH_outline->SetProperty, hide = 1
-         info.L_Window->Draw, info.L_both_views
-         
-         widget_control,info.L_widget_outline_matches_image,set_value='CME Matches Image'
-         
-       endelse
-       
-       ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
-       swpc_cat_sort_out_the_timeline_symbols, info.BC2_number_of_images, info.CME_matches_image_BC2_Image_number, $
-         info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-     
-     end
-     'BH1' : begin
-      
-       widget_control,info.L_widget_outline_matches_image,get_value=the_text
-       
-       if the_text eq 'CME Matches Image' then begin
-       
-         (info.CME_matches_image_Julian).add, (info.BH1_list_of_datetime_Julian)[info.BH1_current_image_number]
-         (info.CME_matches_image_DateTime_string).add, (info.BH1_list_of_full_time_strings)[info.BH1_current_image_number]
-         (info.CME_matches_image_telescope).add, info.L_telescope_code
-         (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
-         (info.CME_matches_image_Image_number).add, info.BH1_current_image_number
-         (info.CME_matches_image_BH1_Image_number).add, info.BH1_current_image_number
-         
-         swpc_cat_image_difference_and_scaling, info.color_stereo_B,  info.BH1_current_image_number, info.BH1_background_image_number, info.BH1_difference_imaging, $
-           info.BH1_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
-         info.L_title_object->setProperty, color = info.background_color
-         info.L_ut_string_object->setProperty, color = info.background_color
-         
-         info.L_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).add,data
-         (info.CME_matches_image_BH1_CME_outline).add,data
-         info.L_cme_outline -> setProperty, hide = 1
-         info.BH1_cme_MATCH_outline->SetProperty, data = data
-         info.BH1_cme_MATCH_outline->SetProperty, hide = 0
-         info.L_Window->Draw, info.L_both_views
-         
-         widget_control,info.L_widget_outline_matches_image,set_value='Unmatch'
-         
-       endif else begin
-       
-         if float(!version.release) gt 8.05 then begin
-           the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.BH1_current_image_number)
-           ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
-           the_index_to_be_removed_L = (info.CME_matches_image_BH1_Image_number).FindValue(info.BH1_current_image_number)
-           ;   print, ' the_index_to_be_removed_L ', the_index_to_be_removed_L
-         endif else begin
-           the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.BH1_current_image_number)
-           the_index_to_be_removed_L = where(info.CME_matches_image_BH1_Image_number eq info.BH1_current_image_number)
-         endelse
-         
-         
-         (info.CME_matches_image_Julian).remove, the_index_to_be_removed
-         (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
-         (info.CME_matches_image_telescope).remove, the_index_to_be_removed
-         (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
-         (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
-         (info.CME_matches_image_BH1_Image_number).remove, the_index_to_be_removed_L
-         
-         swpc_cat_image_difference_and_scaling, info.background_color,  info.BH1_current_image_number, info.BH1_background_image_number, info.BH1_difference_imaging, $
-           info.BH1_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
-         info.L_title_object->setProperty, color = info.color_stereo_B
-         info.L_ut_string_object->setProperty, color = info.color_stereo_B
-         
-         ;   info.L_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
-         (info.CME_matches_image_BH1_CME_outline).remove, the_index_to_be_removed_L
-         info.L_cme_outline -> setProperty, hide = 0
-         ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
-         info.BH1_cme_MATCH_outline->SetProperty, hide = 1
-         info.L_Window->Draw, info.L_both_views
-         
-         widget_control,info.L_widget_outline_matches_image,set_value='CME Matches Image'
-         
-       endelse
-       
-       ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
-       swpc_cat_sort_out_the_timeline_symbols, info.BH1_number_of_images, info.CME_matches_image_BH1_Image_number, $
-         info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-     
-     end
-     'BH2' :  begin
-      
-       widget_control,info.L_widget_outline_matches_image,get_value=the_text
-       
-       if the_text eq 'CME Matches Image' then begin
-       
-         (info.CME_matches_image_Julian).add, (info.BH2_list_of_datetime_Julian)[info.BH2_current_image_number]
-         (info.CME_matches_image_DateTime_string).add, (info.BH2_list_of_full_time_strings)[info.BH2_current_image_number]
-         (info.CME_matches_image_telescope).add, info.L_telescope_code
-         (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
-         (info.CME_matches_image_Image_number).add, info.BH2_current_image_number
-         (info.CME_matches_image_BH2_Image_number).add, info.BH2_current_image_number
-         
-         swpc_cat_image_difference_and_scaling, info.color_stereo_B,  info.BH2_current_image_number, info.BH2_background_image_number, info.BH2_difference_imaging, $
-           info.BH2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
-         info.L_title_object->setProperty, color = info.background_color
-         info.L_ut_string_object->setProperty, color = info.background_color
-         
-         info.L_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).add,data
-         (info.CME_matches_image_BH2_CME_outline).add,data
-         info.L_cme_outline -> setProperty, hide = 1
-         info.BH2_cme_MATCH_outline->SetProperty, data = data
-         info.BH2_cme_MATCH_outline->SetProperty, hide = 0
-         info.L_Window->Draw, info.L_both_views
-         
-         widget_control,info.L_widget_outline_matches_image,set_value='Unmatch'
-         
-       endif else begin
-       
-         if float(!version.release) gt 8.05 then begin
-           the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.BH2_current_image_number)
-           ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
-           the_index_to_be_removed_L = (info.CME_matches_image_BH2_Image_number).FindValue(info.BH2_current_image_number)
-           ;   print, ' the_index_to_be_removed_L ', the_index_to_be_removed_L
-         endif else begin
-           the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.BH2_current_image_number)
-           the_index_to_be_removed_L = where(info.CME_matches_image_BH2_Image_number eq info.BH2_current_image_number)
-         endelse
-         
-         
-         (info.CME_matches_image_Julian).remove, the_index_to_be_removed
-         (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
-         (info.CME_matches_image_telescope).remove, the_index_to_be_removed
-         (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
-         (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
-         (info.CME_matches_image_BH2_Image_number).remove, the_index_to_be_removed_L
-         
-         swpc_cat_image_difference_and_scaling, info.background_color,  info.BH2_current_image_number, info.BH2_background_image_number, info.BH2_difference_imaging, $
-           info.BH2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
-         info.L_title_object->setProperty, color = info.color_stereo_B
-         info.L_ut_string_object->setProperty, color = info.color_stereo_B
-         
-         ;   info.L_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
-         (info.CME_matches_image_BH2_CME_outline).remove, the_index_to_be_removed_L
-         info.L_cme_outline -> setProperty, hide = 0
-         ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
-         info.BH2_cme_MATCH_outline->SetProperty, hide = 1
-         info.L_Window->Draw, info.L_both_views
-         
-         widget_control,info.L_widget_outline_matches_image,set_value='CME Matches Image'
-         
-       endelse
-       
-       ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
-       swpc_cat_sort_out_the_timeline_symbols, info.BH2_number_of_images, info.CME_matches_image_BH2_Image_number, $
-         info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-     
-     end
-   end   
-
+  Widget_Control, event.top, Get_UValue=info, /No_Copy
+  
+  
+  
+  case info.currently_showing_STEREO_B of
+    'BC2' : begin
     
-   ENDCASE
+      widget_control,info.L_widget_outline_matches_image,get_value=the_text
       
-   info.C_widget_outline_matches_image : BEGIN
-   
-   case info.currently_showing_LASCO of
-   
-   'SC3' : begin
-   
-   widget_control,info.C_widget_outline_matches_image,get_value=the_text
-   
-   if the_text eq 'CME Matches Image' then begin 
-   
-   (info.CME_matches_image_Julian).add, (info.C_list_of_datetime_Julian)[info.C_current_image_number]
-   (info.CME_matches_image_DateTime_string).add, (info.C_list_of_full_time_strings)[info.C_current_image_number]
-   (info.CME_matches_image_telescope).add, info.C_telescope_code
-   (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
-   (info.CME_matches_image_Image_number).add, info.C_current_image_number
-   (info.CME_matches_image_C_Image_number).add, info.C_current_image_number
-
-    swpc_cat_image_difference_and_scaling, info.color_c3,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
-                 info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-    info.C_title_object->setProperty, color = info.background_color
-    info.C_ut_string_object->setProperty, color = info.background_color
-
-   info.C_cme_outline->GetProperty, data = data
-   (info.CME_matches_image_CME_outline).add,data
-   (info.CME_matches_image_C_CME_outline).add,data
-   info.C_cme_outline -> setProperty, hide = 1
-   info.C_cme_MATCH_outline->SetProperty, data = data
-   info.C_cme_MATCH_outline->SetProperty, hide = 0
-   info.C_Window->Draw, info.C_both_views
-   
-   widget_control,info.C_widget_outline_matches_image,set_value='Unmatch'
-   
-   endif else begin
-   
-   if float(!version.release) gt 8.05 then begin
-      the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.C_current_image_number)
-;   print, ' the_index_to_be_removed ', the_index_to_be_removed
-      the_index_to_be_removed_C = (info.CME_matches_image_C_Image_number).FindValue(info.C_current_image_number)
-;   print, ' the_index_to_be_removed_C ', the_index_to_be_removed_C
-   endif else begin
-      the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.C_current_image_number)
-      the_index_to_be_removed_C = where(info.CME_matches_image_C_Image_number eq info.C_current_image_number)
-   endelse
-   
-   
-   (info.CME_matches_image_Julian).remove, the_index_to_be_removed
-   (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
-   (info.CME_matches_image_telescope).remove, the_index_to_be_removed
-   (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
-   (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
-   (info.CME_matches_image_C_Image_number).remove, the_index_to_be_removed_C
-
-    swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
-                 info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-    info.C_title_object->setProperty, color = info.color_c3
-    info.C_ut_string_object->setProperty, color = info.color_c3
-
-   (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
-   (info.CME_matches_image_C_CME_outline).remove, the_index_to_be_removed_C
-   info.C_cme_outline -> setProperty, hide = 0
-   info.C_cme_MATCH_outline->SetProperty, hide = 1
-   info.C_Window->Draw, info.C_both_views
-   
-   widget_control,info.C_widget_outline_matches_image,set_value='CME Matches Image'
-   
-   endelse
-   
-   
-; whether we are matching or unmatching we need to sort out the timeline symbols appropriately                                   
-swpc_cat_sort_out_the_timeline_symbols, info.C_number_of_images, info.CME_matches_image_C_Image_number, $
-                                  info.C_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+      if the_text eq 'CME Matches Image' then begin
+      
+        (info.CME_matches_image_Julian).add, (info.BC2_list_of_datetime_Julian)[info.BC2_current_image_number]
+        (info.CME_matches_image_DateTime_string).add, (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]
+        (info.CME_matches_image_telescope).add, info.L_telescope_code
+        (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
+        (info.CME_matches_image_Image_number).add, info.BC2_current_image_number
+        (info.CME_matches_image_BC2_Image_number).add, info.BC2_current_image_number
+        
+        swpc_cat_image_difference_and_scaling, info.color_stereo_B,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
+          info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
+        info.L_title_object->setProperty, color = info.background_color
+        info.L_ut_string_object->setProperty, color = info.background_color
+        
+        info.L_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).add,data
+        (info.CME_matches_image_BC2_CME_outline).add,data
+        info.L_cme_outline -> setProperty, hide = 1
+        info.BC2_cme_MATCH_outline->SetProperty, data = data
+        info.BC2_cme_MATCH_outline->SetProperty, hide = 0
+        info.L_Window->Draw, info.L_both_views
+        
+        widget_control,info.L_widget_outline_matches_image,set_value='Unmatch'
+        
+      endif else begin
+      
+        if float(!version.release) gt 8.05 then begin
+          the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.BC2_current_image_number)
+          ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
+          the_index_to_be_removed_L = (info.CME_matches_image_BC2_Image_number).FindValue(info.BC2_current_image_number)
+          ;   print, ' the_index_to_be_removed_L ', the_index_to_be_removed_L
+        endif else begin
+          the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.BC2_current_image_number)
+          the_index_to_be_removed_L = where(info.CME_matches_image_BC2_Image_number eq info.BC2_current_image_number)
+        endelse
+        
+        
+        (info.CME_matches_image_Julian).remove, the_index_to_be_removed
+        (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
+        (info.CME_matches_image_telescope).remove, the_index_to_be_removed
+        (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
+        (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
+        (info.CME_matches_image_BC2_Image_number).remove, the_index_to_be_removed_L
+        
+        swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
+          info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
+        info.L_title_object->setProperty, color = info.color_stereo_B
+        info.L_ut_string_object->setProperty, color = info.color_stereo_B
+        
+        ;   info.L_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
+        (info.CME_matches_image_BC2_CME_outline).remove, the_index_to_be_removed_L
+        info.L_cme_outline -> setProperty, hide = 0
+        ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
+        info.BC2_cme_MATCH_outline->SetProperty, hide = 1
+        info.L_Window->Draw, info.L_both_views
+        
+        widget_control,info.L_widget_outline_matches_image,set_value='CME Matches Image'
+        
+      endelse
+      
+      ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
+      swpc_cat_sort_out_the_timeline_symbols, info.BC2_number_of_images, info.CME_matches_image_BC2_Image_number, $
+        info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+    end
+    'BH1' : begin
     
-   endcase
-   
-   'SC2' : begin
-
-   widget_control,info.C_widget_outline_matches_image,get_value=the_text
-   
-   if the_text eq 'CME Matches Image' then begin 
-   
-   (info.CME_matches_image_Julian).add, (info.C2_list_of_datetime_Julian)[info.C2_current_image_number]
-   (info.CME_matches_image_DateTime_string).add, (info.C2_list_of_full_time_strings)[info.C2_current_image_number]
-   (info.CME_matches_image_telescope).add, info.C2_telescope_code
-   (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
-   (info.CME_matches_image_Image_number).add, info.C2_current_image_number
-   (info.CME_matches_image_C2_Image_number).add, info.C2_current_image_number
-
-    swpc_cat_image_difference_and_scaling, info.color_c2,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
-                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-    info.C_title_object->setProperty, color = info.background_color
-    info.C_ut_string_object->setProperty, color = info.background_color
-
-   info.C_cme_outline->GetProperty, data = data
-   (info.CME_matches_image_CME_outline).add,data
-   (info.CME_matches_image_C2_CME_outline).add,data
-   info.C_cme_outline -> setProperty, hide = 1
-   info.C2_cme_MATCH_outline->SetProperty, data = data
-   info.C2_cme_MATCH_outline->SetProperty, hide = 0
-   info.C_Window->Draw, info.C_both_views
-   
-   widget_control,info.C_widget_outline_matches_image,set_value='Unmatch'
-   
-   endif else begin
-   
-   if float(!version.release) gt 8.05 then begin
-      the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.C2_current_image_number)
-;   print, ' the_index_to_be_removed ', the_index_to_be_removed
-      the_index_to_be_removed_C2 = (info.CME_matches_image_C2_Image_number).FindValue(info.C2_current_image_number)
-;   print, ' the_index_to_be_removed_C ', the_index_to_be_removed_C2
-   endif else begin
-      the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.C2_current_image_number)
-      the_index_to_be_removed_C2 = where(info.CME_matches_image_C2_Image_number eq info.C2_current_image_number)
-   endelse
-   
-   
-   (info.CME_matches_image_Julian).remove, the_index_to_be_removed
-   (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
-   (info.CME_matches_image_telescope).remove, the_index_to_be_removed
-   (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
-   (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
-   (info.CME_matches_image_C2_Image_number).remove, the_index_to_be_removed_C2
-
-    swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
-                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-    info.C_title_object->setProperty, color = info.color_c2
-    info.C_ut_string_object->setProperty, color = info.color_c2
-
-   (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
-   (info.CME_matches_image_C2_CME_outline).remove, the_index_to_be_removed_C2
-   info.C_cme_outline -> setProperty, hide = 0
-   info.C2_cme_MATCH_outline->SetProperty, hide = 1
-   info.C_Window->Draw, info.C_both_views
-   
-   widget_control,info.C_widget_outline_matches_image,set_value='CME Matches Image'
-   
-   endelse
-                                  
-; whether we are matching or unmatching we need to sort out the timeline symbols appropriately                                   
-swpc_cat_sort_out_the_timeline_symbols, info.C2_number_of_images, info.CME_matches_image_C2_Image_number, $
-                                  info.C2_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-
-
-   
-   endcase
-   endcase
-   
-   info.C_Window->Draw, info.C_both_views
-
-   ENDCASE
-   
-   
+      widget_control,info.L_widget_outline_matches_image,get_value=the_text
       
-   info.R_widget_outline_matches_image : BEGIN
+      if the_text eq 'CME Matches Image' then begin
+      
+        (info.CME_matches_image_Julian).add, (info.BH1_list_of_datetime_Julian)[info.BH1_current_image_number]
+        (info.CME_matches_image_DateTime_string).add, (info.BH1_list_of_full_time_strings)[info.BH1_current_image_number]
+        (info.CME_matches_image_telescope).add, info.L_telescope_code
+        (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
+        (info.CME_matches_image_Image_number).add, info.BH1_current_image_number
+        (info.CME_matches_image_BH1_Image_number).add, info.BH1_current_image_number
+        
+        swpc_cat_image_difference_and_scaling, info.color_stereo_B,  info.BH1_current_image_number, info.BH1_background_image_number, info.BH1_difference_imaging, $
+          info.BH1_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
+        info.L_title_object->setProperty, color = info.background_color
+        info.L_ut_string_object->setProperty, color = info.background_color
+        
+        info.L_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).add,data
+        (info.CME_matches_image_BH1_CME_outline).add,data
+        info.L_cme_outline -> setProperty, hide = 1
+        info.BH1_cme_MATCH_outline->SetProperty, data = data
+        info.BH1_cme_MATCH_outline->SetProperty, hide = 0
+        info.L_Window->Draw, info.L_both_views
+        
+        widget_control,info.L_widget_outline_matches_image,set_value='Unmatch'
+        
+      endif else begin
+      
+        if float(!version.release) gt 8.05 then begin
+          the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.BH1_current_image_number)
+          ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
+          the_index_to_be_removed_L = (info.CME_matches_image_BH1_Image_number).FindValue(info.BH1_current_image_number)
+          ;   print, ' the_index_to_be_removed_L ', the_index_to_be_removed_L
+        endif else begin
+          the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.BH1_current_image_number)
+          the_index_to_be_removed_L = where(info.CME_matches_image_BH1_Image_number eq info.BH1_current_image_number)
+        endelse
+        
+        
+        (info.CME_matches_image_Julian).remove, the_index_to_be_removed
+        (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
+        (info.CME_matches_image_telescope).remove, the_index_to_be_removed
+        (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
+        (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
+        (info.CME_matches_image_BH1_Image_number).remove, the_index_to_be_removed_L
+        
+        swpc_cat_image_difference_and_scaling, info.background_color,  info.BH1_current_image_number, info.BH1_background_image_number, info.BH1_difference_imaging, $
+          info.BH1_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
+        info.L_title_object->setProperty, color = info.color_stereo_B
+        info.L_ut_string_object->setProperty, color = info.color_stereo_B
+        
+        ;   info.L_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
+        (info.CME_matches_image_BH1_CME_outline).remove, the_index_to_be_removed_L
+        info.L_cme_outline -> setProperty, hide = 0
+        ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
+        info.BH1_cme_MATCH_outline->SetProperty, hide = 1
+        info.L_Window->Draw, info.L_both_views
+        
+        widget_control,info.L_widget_outline_matches_image,set_value='CME Matches Image'
+        
+      endelse
+      
+      ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
+      swpc_cat_sort_out_the_timeline_symbols, info.BH1_number_of_images, info.CME_matches_image_BH1_Image_number, $
+        info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+    end
+    'BH2' :  begin
     
-   case info.currently_showing_STEREO_A of
-     'AC2' : begin
+      widget_control,info.L_widget_outline_matches_image,get_value=the_text
       
-       widget_control,info.R_widget_outline_matches_image,get_value=the_text
-       
-       if the_text eq 'CME Matches Image' then begin
-       
-         (info.CME_matches_image_Julian).add, (info.AC2_list_of_datetime_Julian)[info.AC2_current_image_number]
-         (info.CME_matches_image_DateTime_string).add, (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]
-         (info.CME_matches_image_telescope).add, info.R_telescope_code
-         (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
-         (info.CME_matches_image_Image_number).add, info.AC2_current_image_number
-         (info.CME_matches_image_AC2_Image_number).add, info.AC2_current_image_number
-         
-         swpc_cat_image_difference_and_scaling, info.color_stereo_A,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
-           info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-         info.R_title_object->setProperty, color = info.background_color
-         info.R_ut_string_object->setProperty, color = info.background_color
-         
-         info.R_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).add,data
-         (info.CME_matches_image_AC2_CME_outline).add,data
-         info.R_cme_outline -> setProperty, hide = 1
-         info.AC2_cme_MATCH_outline->SetProperty, data = data
-         info.AC2_cme_MATCH_outline->SetProperty, hide = 0
-         info.R_Window->Draw, info.R_both_views
-         
-         widget_control,info.R_widget_outline_matches_image,set_value='Unmatch'
-         
-       endif else begin
-       
-         if float(!version.release) gt 8.05 then begin
-           the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.AC2_current_image_number)
-           ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
-           the_index_to_be_removed_R = (info.CME_matches_image_AC2_Image_number).FindValue(info.AC2_current_image_number)
-           ;   print, ' the_index_to_be_removed_R ', the_index_to_be_removed_R
-         endif else begin
-           the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.AC2_current_image_number)
-           the_index_to_be_removed_R = where(info.CME_matches_image_AC2_Image_number eq info.AC2_current_image_number)
-         endelse
-         
-         
-         (info.CME_matches_image_Julian).remove, the_index_to_be_removed
-         (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
-         (info.CME_matches_image_telescope).remove, the_index_to_be_removed
-         (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
-         (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
-         (info.CME_matches_image_AC2_Image_number).remove, the_index_to_be_removed_R
-         
-         swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
-           info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-         info.R_title_object->setProperty, color = info.color_stereo_A
-         info.R_ut_string_object->setProperty, color = info.color_stereo_A
-         
-         ;   info.L_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
-         (info.CME_matches_image_AC2_CME_outline).remove, the_index_to_be_removed_R
-         info.R_cme_outline -> setProperty, hide = 0
-         ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
-         info.AC2_cme_MATCH_outline->SetProperty, hide = 1
-         info.R_Window->Draw, info.R_both_views
-         
-         widget_control,info.R_widget_outline_matches_image,set_value='CME Matches Image'
-         
-       endelse
-       
-       ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
-       swpc_cat_sort_out_the_timeline_symbols, info.AC2_number_of_images, info.CME_matches_image_AC2_Image_number, $
-         info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-     
-     end
-     'AH1' : begin
+      if the_text eq 'CME Matches Image' then begin
       
-       widget_control,info.R_widget_outline_matches_image,get_value=the_text
-       
-       if the_text eq 'CME Matches Image' then begin
-       
-         (info.CME_matches_image_Julian).add, (info.AH1_list_of_datetime_Julian)[info.AH1_current_image_number]
-         (info.CME_matches_image_DateTime_string).add, (info.AH1_list_of_full_time_strings)[info.AH1_current_image_number]
-         (info.CME_matches_image_telescope).add, info.R_telescope_code
-         (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
-         (info.CME_matches_image_Image_number).add, info.AH1_current_image_number
-         (info.CME_matches_image_AH1_Image_number).add, info.AH1_current_image_number
-         
-         swpc_cat_image_difference_and_scaling, info.color_stereo_A,  info.AH1_current_image_number, info.AH1_background_image_number, info.AH1_difference_imaging, $
-           info.AH1_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-         info.R_title_object->setProperty, color = info.background_color
-         info.R_ut_string_object->setProperty, color = info.background_color
-         
-         info.R_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).add,data
-         (info.CME_matches_image_AH1_CME_outline).add,data
-         info.R_cme_outline -> setProperty, hide = 1
-         info.AH1_cme_MATCH_outline->SetProperty, data = data
-         info.AH1_cme_MATCH_outline->SetProperty, hide = 0
-         info.R_Window->Draw, info.R_both_views
-         
-         widget_control,info.R_widget_outline_matches_image,set_value='Unmatch'
-         
-       endif else begin
-       
-         if float(!version.release) gt 8.05 then begin
-           the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.AH1_current_image_number)
-           ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
-           the_index_to_be_removed_R = (info.CME_matches_image_AH1_Image_number).FindValue(info.AH1_current_image_number)
-           ;   print, ' the_index_to_be_removed_R ', the_index_to_be_removed_R
-         endif else begin
-           the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.AH1_current_image_number)
-           the_index_to_be_removed_R = where(info.CME_matches_image_AH1_Image_number eq info.AH1_current_image_number)
-         endelse
-         
-         
-         (info.CME_matches_image_Julian).remove, the_index_to_be_removed
-         (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
-         (info.CME_matches_image_telescope).remove, the_index_to_be_removed
-         (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
-         (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
-         (info.CME_matches_image_AH1_Image_number).remove, the_index_to_be_removed_R
-         
-         swpc_cat_image_difference_and_scaling, info.background_color,  info.AH1_current_image_number, info.AH1_background_image_number, info.AH1_difference_imaging, $
-           info.AH1_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-         info.R_title_object->setProperty, color = info.color_stereo_A
-         info.R_ut_string_object->setProperty, color = info.color_stereo_A
-         
-         ;   info.L_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
-         (info.CME_matches_image_AH1_CME_outline).remove, the_index_to_be_removed_R
-         info.R_cme_outline -> setProperty, hide = 0
-         ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
-         info.AH1_cme_MATCH_outline->SetProperty, hide = 1
-         info.R_Window->Draw, info.R_both_views
-         
-         widget_control,info.R_widget_outline_matches_image,set_value='CME Matches Image'
-         
-       endelse
-       
-       ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
-       swpc_cat_sort_out_the_timeline_symbols, info.AH1_number_of_images, info.CME_matches_image_AH1_Image_number, $
-         info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-     
-     end
-     'AH2' :  begin
+        (info.CME_matches_image_Julian).add, (info.BH2_list_of_datetime_Julian)[info.BH2_current_image_number]
+        (info.CME_matches_image_DateTime_string).add, (info.BH2_list_of_full_time_strings)[info.BH2_current_image_number]
+        (info.CME_matches_image_telescope).add, info.L_telescope_code
+        (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
+        (info.CME_matches_image_Image_number).add, info.BH2_current_image_number
+        (info.CME_matches_image_BH2_Image_number).add, info.BH2_current_image_number
+        
+        swpc_cat_image_difference_and_scaling, info.color_stereo_B,  info.BH2_current_image_number, info.BH2_background_image_number, info.BH2_difference_imaging, $
+          info.BH2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
+        info.L_title_object->setProperty, color = info.background_color
+        info.L_ut_string_object->setProperty, color = info.background_color
+        
+        info.L_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).add,data
+        (info.CME_matches_image_BH2_CME_outline).add,data
+        info.L_cme_outline -> setProperty, hide = 1
+        info.BH2_cme_MATCH_outline->SetProperty, data = data
+        info.BH2_cme_MATCH_outline->SetProperty, hide = 0
+        info.L_Window->Draw, info.L_both_views
+        
+        widget_control,info.L_widget_outline_matches_image,set_value='Unmatch'
+        
+      endif else begin
       
-       widget_control,info.R_widget_outline_matches_image,get_value=the_text
-       
-       if the_text eq 'CME Matches Image' then begin
-       
-         (info.CME_matches_image_Julian).add, (info.AH2_list_of_datetime_Julian)[info.AH2_current_image_number]
-         (info.CME_matches_image_DateTime_string).add, (info.AH2_list_of_full_time_strings)[info.AH2_current_image_number]
-         (info.CME_matches_image_telescope).add, info.R_telescope_code
-         (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
-         (info.CME_matches_image_Image_number).add, info.AH2_current_image_number
-         (info.CME_matches_image_AH2_Image_number).add, info.AH2_current_image_number
-         
-         swpc_cat_image_difference_and_scaling, info.color_stereo_A,  info.AH2_current_image_number, info.AH2_background_image_number, info.AH2_difference_imaging, $
-           info.AH2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-         info.R_title_object->setProperty, color = info.background_color
-         info.R_ut_string_object->setProperty, color = info.background_color
-         
-         info.R_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).add,data
-         (info.CME_matches_image_AH2_CME_outline).add,data
-         info.R_cme_outline -> setProperty, hide = 1
-         info.AH2_cme_MATCH_outline->SetProperty, data = data
-         info.AH2_cme_MATCH_outline->SetProperty, hide = 0
-         info.R_Window->Draw, info.R_both_views
-         
-         widget_control,info.R_widget_outline_matches_image,set_value='Unmatch'
-         
-       endif else begin
-       
-         if float(!version.release) gt 8.05 then begin
-           the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.AH2_current_image_number)
-           ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
-           the_index_to_be_removed_R = (info.CME_matches_image_AH2_Image_number).FindValue(info.AH2_current_image_number)
-           ;   print, ' the_index_to_be_removed_R ', the_index_to_be_removed_R
-         endif else begin
-           the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.AH2_current_image_number)
-           the_index_to_be_removed_R = where(info.CME_matches_image_AH2_Image_number eq info.AH2_current_image_number)
-         endelse
-         
-         
-         (info.CME_matches_image_Julian).remove, the_index_to_be_removed
-         (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
-         (info.CME_matches_image_telescope).remove, the_index_to_be_removed
-         (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
-         (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
-         (info.CME_matches_image_AH2_Image_number).remove, the_index_to_be_removed_R
-         
-         swpc_cat_image_difference_and_scaling, info.background_color,  info.AH2_current_image_number, info.AH2_background_image_number, info.AH2_difference_imaging, $
-           info.AH2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-         info.R_title_object->setProperty, color = info.color_stereo_A
-         info.R_ut_string_object->setProperty, color = info.color_stereo_A
-         
-         ;   info.L_cme_outline->GetProperty, data = data
-         (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
-         (info.CME_matches_image_AH2_CME_outline).remove, the_index_to_be_removed_R
-         info.R_cme_outline -> setProperty, hide = 0
-         ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
-         info.AH2_cme_MATCH_outline->SetProperty, hide = 1
-         info.R_Window->Draw, info.R_both_views
-         
-         widget_control,info.R_widget_outline_matches_image,set_value='CME Matches Image'
-         
-       endelse
-       
-       ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
-       swpc_cat_sort_out_the_timeline_symbols, info.AH2_number_of_images, info.CME_matches_image_AH2_Image_number, $
-         info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
-     
-     end
-   end   
-   
-
-
-   ENDCASE
-     
-ENDCASE  
-
-                                  
-info.images_timeline_window->Draw, info.images_timeline_view
-
-
-
-
-swpc_cat_sort_out_the_line_plot_and_widgets, info
-
-
-
-
-
-Widget_Control, event.top, Set_UValue=info, /No_Copy
+        if float(!version.release) gt 8.05 then begin
+          the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.BH2_current_image_number)
+          ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
+          the_index_to_be_removed_L = (info.CME_matches_image_BH2_Image_number).FindValue(info.BH2_current_image_number)
+          ;   print, ' the_index_to_be_removed_L ', the_index_to_be_removed_L
+        endif else begin
+          the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.BH2_current_image_number)
+          the_index_to_be_removed_L = where(info.CME_matches_image_BH2_Image_number eq info.BH2_current_image_number)
+        endelse
+        
+        
+        (info.CME_matches_image_Julian).remove, the_index_to_be_removed
+        (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
+        (info.CME_matches_image_telescope).remove, the_index_to_be_removed
+        (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
+        (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
+        (info.CME_matches_image_BH2_Image_number).remove, the_index_to_be_removed_L
+        
+        swpc_cat_image_difference_and_scaling, info.background_color,  info.BH2_current_image_number, info.BH2_background_image_number, info.BH2_difference_imaging, $
+          info.BH2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
+        info.L_title_object->setProperty, color = info.color_stereo_B
+        info.L_ut_string_object->setProperty, color = info.color_stereo_B
+        
+        ;   info.L_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
+        (info.CME_matches_image_BH2_CME_outline).remove, the_index_to_be_removed_L
+        info.L_cme_outline -> setProperty, hide = 0
+        ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
+        info.BH2_cme_MATCH_outline->SetProperty, hide = 1
+        info.L_Window->Draw, info.L_both_views
+        
+        widget_control,info.L_widget_outline_matches_image,set_value='CME Matches Image'
+        
+      endelse
+      
+      ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
+      swpc_cat_sort_out_the_timeline_symbols, info.BH2_number_of_images, info.CME_matches_image_BH2_Image_number, $
+        info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+    end
+  end
+  
+  
+  
+  
+  
+  info.images_timeline_window->Draw, info.images_timeline_view
+  
+  
+  
+  
+  swpc_cat_sort_out_the_line_plot_and_widgets, info
+  
+  
+  
+  
+  
+  Widget_Control, event.top, Set_UValue=info, /No_Copy
 END
+
+
+
+pro swpc_cat_C_CME_match_or_unmatch, event
+
+  Widget_Control, event.top, Get_UValue=info, /No_Copy
+  
+  
+  
+  
+  
+  case info.currently_showing_LASCO of
+  
+    'SC3' : begin
+    
+      widget_control,info.C_widget_outline_matches_image,get_value=the_text
+      
+      if the_text eq 'CME Matches Image' then begin
+      
+        (info.CME_matches_image_Julian).add, (info.C_list_of_datetime_Julian)[info.C_current_image_number]
+        (info.CME_matches_image_DateTime_string).add, (info.C_list_of_full_time_strings)[info.C_current_image_number]
+        (info.CME_matches_image_telescope).add, info.C_telescope_code
+        (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
+        (info.CME_matches_image_Image_number).add, info.C_current_image_number
+        (info.CME_matches_image_C_Image_number).add, info.C_current_image_number
+        
+        swpc_cat_image_difference_and_scaling, info.color_c3,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
+          info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+        info.C_title_object->setProperty, color = info.background_color
+        info.C_ut_string_object->setProperty, color = info.background_color
+        
+        info.C_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).add,data
+        (info.CME_matches_image_C_CME_outline).add,data
+        info.C_cme_outline -> setProperty, hide = 1
+        info.C_cme_MATCH_outline->SetProperty, data = data
+        info.C_cme_MATCH_outline->SetProperty, hide = 0
+        info.C_Window->Draw, info.C_both_views
+        
+        widget_control,info.C_widget_outline_matches_image,set_value='Unmatch'
+        
+      endif else begin
+      
+        if float(!version.release) gt 8.05 then begin
+          the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.C_current_image_number)
+          ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
+          the_index_to_be_removed_C = (info.CME_matches_image_C_Image_number).FindValue(info.C_current_image_number)
+          ;   print, ' the_index_to_be_removed_C ', the_index_to_be_removed_C
+        endif else begin
+          the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.C_current_image_number)
+          the_index_to_be_removed_C = where(info.CME_matches_image_C_Image_number eq info.C_current_image_number)
+        endelse
+        
+        
+        (info.CME_matches_image_Julian).remove, the_index_to_be_removed
+        (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
+        (info.CME_matches_image_telescope).remove, the_index_to_be_removed
+        (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
+        (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
+        (info.CME_matches_image_C_Image_number).remove, the_index_to_be_removed_C
+        
+        swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
+          info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+        info.C_title_object->setProperty, color = info.color_c3
+        info.C_ut_string_object->setProperty, color = info.color_c3
+        
+        (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
+        (info.CME_matches_image_C_CME_outline).remove, the_index_to_be_removed_C
+        info.C_cme_outline -> setProperty, hide = 0
+        info.C_cme_MATCH_outline->SetProperty, hide = 1
+        info.C_Window->Draw, info.C_both_views
+        
+        widget_control,info.C_widget_outline_matches_image,set_value='CME Matches Image'
+        
+      endelse
+      
+      
+      ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
+      swpc_cat_sort_out_the_timeline_symbols, info.C_number_of_images, info.CME_matches_image_C_Image_number, $
+        info.C_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+    endcase
+    
+    'SC2' : begin
+    
+      widget_control,info.C_widget_outline_matches_image,get_value=the_text
+      
+      if the_text eq 'CME Matches Image' then begin
+      
+        (info.CME_matches_image_Julian).add, (info.C2_list_of_datetime_Julian)[info.C2_current_image_number]
+        (info.CME_matches_image_DateTime_string).add, (info.C2_list_of_full_time_strings)[info.C2_current_image_number]
+        (info.CME_matches_image_telescope).add, info.C2_telescope_code
+        (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
+        (info.CME_matches_image_Image_number).add, info.C2_current_image_number
+        (info.CME_matches_image_C2_Image_number).add, info.C2_current_image_number
+        
+        swpc_cat_image_difference_and_scaling, info.color_c2,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
+          info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+        info.C_title_object->setProperty, color = info.background_color
+        info.C_ut_string_object->setProperty, color = info.background_color
+        
+        info.C_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).add,data
+        (info.CME_matches_image_C2_CME_outline).add,data
+        info.C_cme_outline -> setProperty, hide = 1
+        info.C2_cme_MATCH_outline->SetProperty, data = data
+        info.C2_cme_MATCH_outline->SetProperty, hide = 0
+        info.C_Window->Draw, info.C_both_views
+        
+        widget_control,info.C_widget_outline_matches_image,set_value='Unmatch'
+        
+      endif else begin
+      
+        if float(!version.release) gt 8.05 then begin
+          the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.C2_current_image_number)
+          ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
+          the_index_to_be_removed_C2 = (info.CME_matches_image_C2_Image_number).FindValue(info.C2_current_image_number)
+          ;   print, ' the_index_to_be_removed_C ', the_index_to_be_removed_C2
+        endif else begin
+          the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.C2_current_image_number)
+          the_index_to_be_removed_C2 = where(info.CME_matches_image_C2_Image_number eq info.C2_current_image_number)
+        endelse
+        
+        
+        (info.CME_matches_image_Julian).remove, the_index_to_be_removed
+        (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
+        (info.CME_matches_image_telescope).remove, the_index_to_be_removed
+        (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
+        (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
+        (info.CME_matches_image_C2_Image_number).remove, the_index_to_be_removed_C2
+        
+        swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
+          info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+        info.C_title_object->setProperty, color = info.color_c2
+        info.C_ut_string_object->setProperty, color = info.color_c2
+        
+        (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
+        (info.CME_matches_image_C2_CME_outline).remove, the_index_to_be_removed_C2
+        info.C_cme_outline -> setProperty, hide = 0
+        info.C2_cme_MATCH_outline->SetProperty, hide = 1
+        info.C_Window->Draw, info.C_both_views
+        
+        widget_control,info.C_widget_outline_matches_image,set_value='CME Matches Image'
+        
+      endelse
+      
+      ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
+      swpc_cat_sort_out_the_timeline_symbols, info.C2_number_of_images, info.CME_matches_image_C2_Image_number, $
+        info.C2_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+        
+        
+    endcase
+  endcase
+  
+  info.C_Window->Draw, info.C_both_views
+  
+  
+  
+  info.images_timeline_window->Draw, info.images_timeline_view
+  
+  
+  
+  
+  swpc_cat_sort_out_the_line_plot_and_widgets, info
+  
+  
+  
+  
+  
+  Widget_Control, event.top, Set_UValue=info, /No_Copy
+END
+
+
+
+
+pro swpc_cat_R_CME_match_or_unmatch, event
+
+  Widget_Control, event.top, Get_UValue=info, /No_Copy
+  
+  
+  
+  
+  case info.currently_showing_STEREO_A of
+    'AC2' : begin
+    
+      widget_control,info.R_widget_outline_matches_image,get_value=the_text
+      
+      if the_text eq 'CME Matches Image' then begin
+      
+        (info.CME_matches_image_Julian).add, (info.AC2_list_of_datetime_Julian)[info.AC2_current_image_number]
+        (info.CME_matches_image_DateTime_string).add, (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]
+        (info.CME_matches_image_telescope).add, info.R_telescope_code
+        (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
+        (info.CME_matches_image_Image_number).add, info.AC2_current_image_number
+        (info.CME_matches_image_AC2_Image_number).add, info.AC2_current_image_number
+        
+        swpc_cat_image_difference_and_scaling, info.color_stereo_A,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
+          info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+        info.R_title_object->setProperty, color = info.background_color
+        info.R_ut_string_object->setProperty, color = info.background_color
+        
+        info.R_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).add,data
+        (info.CME_matches_image_AC2_CME_outline).add,data
+        info.R_cme_outline -> setProperty, hide = 1
+        info.AC2_cme_MATCH_outline->SetProperty, data = data
+        info.AC2_cme_MATCH_outline->SetProperty, hide = 0
+        info.R_Window->Draw, info.R_both_views
+        
+        widget_control,info.R_widget_outline_matches_image,set_value='Unmatch'
+        
+      endif else begin
+      
+        if float(!version.release) gt 8.05 then begin
+          the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.AC2_current_image_number)
+          ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
+          the_index_to_be_removed_R = (info.CME_matches_image_AC2_Image_number).FindValue(info.AC2_current_image_number)
+          ;   print, ' the_index_to_be_removed_R ', the_index_to_be_removed_R
+        endif else begin
+          the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.AC2_current_image_number)
+          the_index_to_be_removed_R = where(info.CME_matches_image_AC2_Image_number eq info.AC2_current_image_number)
+        endelse
+        
+        
+        (info.CME_matches_image_Julian).remove, the_index_to_be_removed
+        (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
+        (info.CME_matches_image_telescope).remove, the_index_to_be_removed
+        (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
+        (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
+        (info.CME_matches_image_AC2_Image_number).remove, the_index_to_be_removed_R
+        
+        swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
+          info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+        info.R_title_object->setProperty, color = info.color_stereo_A
+        info.R_ut_string_object->setProperty, color = info.color_stereo_A
+        
+        ;   info.L_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
+        (info.CME_matches_image_AC2_CME_outline).remove, the_index_to_be_removed_R
+        info.R_cme_outline -> setProperty, hide = 0
+        ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
+        info.AC2_cme_MATCH_outline->SetProperty, hide = 1
+        info.R_Window->Draw, info.R_both_views
+        
+        widget_control,info.R_widget_outline_matches_image,set_value='CME Matches Image'
+        
+      endelse
+      
+      ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
+      swpc_cat_sort_out_the_timeline_symbols, info.AC2_number_of_images, info.CME_matches_image_AC2_Image_number, $
+        info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+    end
+    'AH1' : begin
+    
+      widget_control,info.R_widget_outline_matches_image,get_value=the_text
+      
+      if the_text eq 'CME Matches Image' then begin
+      
+        (info.CME_matches_image_Julian).add, (info.AH1_list_of_datetime_Julian)[info.AH1_current_image_number]
+        (info.CME_matches_image_DateTime_string).add, (info.AH1_list_of_full_time_strings)[info.AH1_current_image_number]
+        (info.CME_matches_image_telescope).add, info.R_telescope_code
+        (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
+        (info.CME_matches_image_Image_number).add, info.AH1_current_image_number
+        (info.CME_matches_image_AH1_Image_number).add, info.AH1_current_image_number
+        
+        swpc_cat_image_difference_and_scaling, info.color_stereo_A,  info.AH1_current_image_number, info.AH1_background_image_number, info.AH1_difference_imaging, $
+          info.AH1_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+        info.R_title_object->setProperty, color = info.background_color
+        info.R_ut_string_object->setProperty, color = info.background_color
+        
+        info.R_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).add,data
+        (info.CME_matches_image_AH1_CME_outline).add,data
+        info.R_cme_outline -> setProperty, hide = 1
+        info.AH1_cme_MATCH_outline->SetProperty, data = data
+        info.AH1_cme_MATCH_outline->SetProperty, hide = 0
+        info.R_Window->Draw, info.R_both_views
+        
+        widget_control,info.R_widget_outline_matches_image,set_value='Unmatch'
+        
+      endif else begin
+      
+        if float(!version.release) gt 8.05 then begin
+          the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.AH1_current_image_number)
+          ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
+          the_index_to_be_removed_R = (info.CME_matches_image_AH1_Image_number).FindValue(info.AH1_current_image_number)
+          ;   print, ' the_index_to_be_removed_R ', the_index_to_be_removed_R
+        endif else begin
+          the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.AH1_current_image_number)
+          the_index_to_be_removed_R = where(info.CME_matches_image_AH1_Image_number eq info.AH1_current_image_number)
+        endelse
+        
+        
+        (info.CME_matches_image_Julian).remove, the_index_to_be_removed
+        (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
+        (info.CME_matches_image_telescope).remove, the_index_to_be_removed
+        (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
+        (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
+        (info.CME_matches_image_AH1_Image_number).remove, the_index_to_be_removed_R
+        
+        swpc_cat_image_difference_and_scaling, info.background_color,  info.AH1_current_image_number, info.AH1_background_image_number, info.AH1_difference_imaging, $
+          info.AH1_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+        info.R_title_object->setProperty, color = info.color_stereo_A
+        info.R_ut_string_object->setProperty, color = info.color_stereo_A
+        
+        ;   info.L_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
+        (info.CME_matches_image_AH1_CME_outline).remove, the_index_to_be_removed_R
+        info.R_cme_outline -> setProperty, hide = 0
+        ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
+        info.AH1_cme_MATCH_outline->SetProperty, hide = 1
+        info.R_Window->Draw, info.R_both_views
+        
+        widget_control,info.R_widget_outline_matches_image,set_value='CME Matches Image'
+        
+      endelse
+      
+      ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
+      swpc_cat_sort_out_the_timeline_symbols, info.AH1_number_of_images, info.CME_matches_image_AH1_Image_number, $
+        info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+    end
+    'AH2' :  begin
+    
+      widget_control,info.R_widget_outline_matches_image,get_value=the_text
+      
+      if the_text eq 'CME Matches Image' then begin
+      
+        (info.CME_matches_image_Julian).add, (info.AH2_list_of_datetime_Julian)[info.AH2_current_image_number]
+        (info.CME_matches_image_DateTime_string).add, (info.AH2_list_of_full_time_strings)[info.AH2_current_image_number]
+        (info.CME_matches_image_telescope).add, info.R_telescope_code
+        (info.CME_matches_image_Rs_leading_edge).add, info.radial_distance_lemniscate
+        (info.CME_matches_image_Image_number).add, info.AH2_current_image_number
+        (info.CME_matches_image_AH2_Image_number).add, info.AH2_current_image_number
+        
+        swpc_cat_image_difference_and_scaling, info.color_stereo_A,  info.AH2_current_image_number, info.AH2_background_image_number, info.AH2_difference_imaging, $
+          info.AH2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+        info.R_title_object->setProperty, color = info.background_color
+        info.R_ut_string_object->setProperty, color = info.background_color
+        
+        info.R_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).add,data
+        (info.CME_matches_image_AH2_CME_outline).add,data
+        info.R_cme_outline -> setProperty, hide = 1
+        info.AH2_cme_MATCH_outline->SetProperty, data = data
+        info.AH2_cme_MATCH_outline->SetProperty, hide = 0
+        info.R_Window->Draw, info.R_both_views
+        
+        widget_control,info.R_widget_outline_matches_image,set_value='Unmatch'
+        
+      endif else begin
+      
+        if float(!version.release) gt 8.05 then begin
+          the_index_to_be_removed = (info.CME_matches_image_Image_number).FindValue(info.AH2_current_image_number)
+          ;   print, ' the_index_to_be_removed ', the_index_to_be_removed
+          the_index_to_be_removed_R = (info.CME_matches_image_AH2_Image_number).FindValue(info.AH2_current_image_number)
+          ;   print, ' the_index_to_be_removed_R ', the_index_to_be_removed_R
+        endif else begin
+          the_index_to_be_removed = where(info.CME_matches_image_Image_number eq info.AH2_current_image_number)
+          the_index_to_be_removed_R = where(info.CME_matches_image_AH2_Image_number eq info.AH2_current_image_number)
+        endelse
+        
+        
+        (info.CME_matches_image_Julian).remove, the_index_to_be_removed
+        (info.CME_matches_image_DateTime_string).remove, the_index_to_be_removed
+        (info.CME_matches_image_telescope).remove, the_index_to_be_removed
+        (info.CME_matches_image_Rs_leading_edge).remove, the_index_to_be_removed
+        (info.CME_matches_image_Image_number).remove, the_index_to_be_removed
+        (info.CME_matches_image_AH2_Image_number).remove, the_index_to_be_removed_R
+        
+        swpc_cat_image_difference_and_scaling, info.background_color,  info.AH2_current_image_number, info.AH2_background_image_number, info.AH2_difference_imaging, $
+          info.AH2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+        info.R_title_object->setProperty, color = info.color_stereo_A
+        info.R_ut_string_object->setProperty, color = info.color_stereo_A
+        
+        ;   info.L_cme_outline->GetProperty, data = data
+        (info.CME_matches_image_CME_outline).remove, the_index_to_be_removed
+        (info.CME_matches_image_AH2_CME_outline).remove, the_index_to_be_removed_R
+        info.R_cme_outline -> setProperty, hide = 0
+        ;   info.BC2_cme_MATCH_outline->SetProperty, data = data
+        info.AH2_cme_MATCH_outline->SetProperty, hide = 1
+        info.R_Window->Draw, info.R_both_views
+        
+        widget_control,info.R_widget_outline_matches_image,set_value='CME Matches Image'
+        
+      endelse
+      
+      end
+      
+      end
+      
+      ; whether we are matching or unmatching we need to sort out the timeline symbols appropriately
+      swpc_cat_sort_out_the_timeline_symbols, info.AH2_number_of_images, info.CME_matches_image_AH2_Image_number, $
+        info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+        
+    
+    
+    
+    
+    
+    
+    info.images_timeline_window->Draw, info.images_timeline_view
+    
+    
+    
+    
+    swpc_cat_sort_out_the_line_plot_and_widgets, info
+    
+    
+    
+    
+    
+    Widget_Control, event.top, Set_UValue=info, /No_Copy
+  END
+
+
+
 
 
 
@@ -5101,7 +5155,7 @@ if number_of_image_matches ge 1 then begin
 widget_control,info.widget_angular_width_slider, sensitive=0
 widget_control,info.widget_latitude_slider, sensitive=0
 widget_control,info.widget_longitude_slider, sensitive=0
-widget_control,info.L_widget_remove_this_image,sensitive=0
+if info.n_sat eq 3 then widget_control,info.L_widget_remove_this_image,sensitive=0
 widget_control,info.C_widget_remove_this_image,sensitive=0
 widget_control,info.R_widget_remove_this_image,sensitive=0
 endif else begin
@@ -5732,10 +5786,14 @@ CASE L_C_or_R OF
 
    'L': BEGIN
 
+if info.n_sat eq 3 then begin
+  
 swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
                  info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
                                 
 info.L_Window->Draw, info.L_image_view
+
+endif
 
         ENDCASE
 
@@ -5765,7 +5823,7 @@ info.R_Window->Draw, info.R_image_view
         
 ENDCASE                          
 
-info.L_Window->Draw, info.L_image_view
+;info.L_Window->Draw, info.L_image_view
 
 
 Widget_Control, event.top, Set_UValue=info, /No_Copy
@@ -6468,7 +6526,7 @@ END
 
 
 
-pro swpc_cat_change_L_C_or_R_image_with_slider, event
+pro swpc_cat_change_L_image_with_slider, event
 
 compile_opt idl2
 
@@ -6476,12 +6534,6 @@ Widget_Control, event.top, Get_UValue=info, /No_Copy
 
 which_image = event.value - 1
 
-;print, ' current_selection is ',info.current_selection,' : ',which_image
-
-
-
-       CASE event.id  OF
-          info.L_widget_image_sequence_slider : BEGIN
 	
 case info.currently_showing_STEREO_B of
                 'BC2' : begin
@@ -6521,120 +6573,7 @@ if info.BC2_number_of_images gt 0 then begin ;MY ADDITION ####
 	swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, $
 	info.color_stereo_B, info.cme_outline_color
 endif 
-          END
-          
-          info.C_widget_image_sequence_slider : BEGIN
-          
-case info.currently_showing_LASCO of
 
-'SC3' : begin
-
-info.C_current_image_number = which_image
-
-swpc_cat_REDRAW_THE_IMAGE, $
-    info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
-    info.C_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
-    info.CME_matches_image_C_Image_number,info.C_current_background_color, $
-    info.background_color,info.C_current_text_color,info.color_c3,info.C_cme_outline,info.C_cme_MATCH_outline, $
-    info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
-    info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
-
-if info.C_number_of_images gt 0 then begin ;MY ADDITION ####
-	swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, 		info.color_C3, info.cme_outline_color
-endif
-
-if info.show_image_line_plot eq 1 then begin
-
-swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
-                            info.position_image_lineplot, info.C_cme_outline
-                            
-endif
-
-
-endcase
-
-
-'SC2' : begin
-
-info.C2_current_image_number = which_image
-
-swpc_cat_REDRAW_THE_IMAGE, $
-    info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
-    info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
-    info.CME_matches_image_C2_Image_number,info.C_current_background_color, $
-    info.background_color,info.C_current_text_color,info.color_c2,info.C_cme_outline,info.C2_cme_MATCH_outline, $
-    info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
-    info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
-
-if info.C2_number_of_images gt 0 then begin ;	MY ADDITION ####
-	swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, 		info.color_C2, info.cme_outline_color
-endif
-
-     C_xp = 255 - (255*sin(info.C_clock_angle_degrees * !dtor))  
-     C_yp = 255 + (255*cos(info.C_clock_angle_degrees * !dtor))
-     info.C_coronagraph_image_object -> getproperty, data = image_data
-     xvals = round(((findgen(255)/254.) * (C_xp - 255.)) + 255.)
-     yvals = round(((findgen(255)/254.) * (C_yp - 255.)) + 255.)
-     line_Y = image_data[xvals,yvals]
-     info.C_image_lineplot->SetProperty, datax = findgen(255) , datay = line_Y
-     maxy = max(line_Y,min=minY)
-     yrange = [minY,maxY]
-     C_image_xs = swpc_cat_FSC_Normalize([0.,254.], Position=[info.position_image_lineplot[0], info.position_image_lineplot[2]])
-     C_image_ys = swpc_cat_FSC_Normalize(yrange, Position=[info.position_image_lineplot[1], info.position_image_lineplot[3]])
-     info.C_image_lineplot->SetProperty, XCoord_Conv=C_image_xs, YCoord_Conv=C_image_ys
-
-endcase
-
-endcase
-
-         END
-         
-          info.R_widget_image_sequence_slider : BEGIN
-
-
-
-
-case info.currently_showing_STEREO_A of
-                'AC2' : begin
-                  info.AC2_current_image_number = which_image
-                  swpc_cat_REDRAW_THE_IMAGE, $
-                    info.AC2_current_image_number,info.AC2_background_image_number,info.AC2_difference_imaging, $
-                    info.AC2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
-                    info.CME_matches_image_AC2_Image_number,info.R_current_background_color, $
-                    info.background_color,info.R_current_text_color,info.color_stereo_B,info.R_cme_outline,info.AC2_cme_MATCH_outline, $
-                    info.R_widget_outline_matches_image,info.CME_matches_image_AC2_CME_outline, $
-                    info.R_ut_string_object,info.AC2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-                 end   
-                'AH1' : begin
-                  info.AH1_current_image_number = which_image
-                  swpc_cat_REDRAW_THE_IMAGE, $
-                    info.AH1_current_image_number,info.AH1_background_image_number,info.AH1_difference_imaging, $
-                    info.AH1_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
-                    info.CME_matches_image_AH1_Image_number,info.R_current_background_color, $
-                    info.background_color,info.R_current_text_color,info.color_AH1,info.R_cme_outline,info.AH1_cme_MATCH_outline, $
-                    info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
-                    info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-                 end   
-                'AH2' :  begin
-                  info.AH2_current_image_number = which_image
-                  swpc_cat_REDRAW_THE_IMAGE, $
-                    info.AH2_current_image_number,info.AH2_background_image_number,info.AH2_difference_imaging, $
-                    info.AH2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
-                    info.CME_matches_image_AH2_Image_number,info.R_current_background_color, $
-                    info.background_color,info.R_current_text_color,info.color_AH2,info.R_cme_outline,info.AH2_cme_MATCH_outline, $
-                    info.R_widget_outline_matches_image,info.CME_matches_image_AH2_CME_outline, $
-                    info.R_ut_string_object,info.AH2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-                  end  
-end
-
-if info.AC2_number_of_images gt 0 then begin ;MY ADDITION ####
-
-	swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, 	info.color_stereo_a, info.cme_outline_color
-
-endif 
-         END
-         
-ENDCASE
 
 info.images_timeline_window->Draw, info.images_timeline_view
 
@@ -6642,6 +6581,146 @@ info.images_timeline_window->Draw, info.images_timeline_view
 Widget_Control, event.top, Set_UValue=info, /No_Copy
 
 
+END
+
+
+
+pro swpc_cat_change_C_image_with_slider, event
+
+  compile_opt idl2
+  
+  Widget_Control, event.top, Get_UValue=info, /No_Copy
+  
+  which_image = event.value - 1
+  
+        
+      case info.currently_showing_LASCO of
+      
+        'SC3' : begin
+        
+          info.C_current_image_number = which_image
+          
+          swpc_cat_REDRAW_THE_IMAGE, $
+            info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
+            info.C_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
+            info.CME_matches_image_C_Image_number,info.C_current_background_color, $
+            info.background_color,info.C_current_text_color,info.color_c3,info.C_cme_outline,info.C_cme_MATCH_outline, $
+            info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
+            info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+            
+          if info.C_number_of_images gt 0 then begin ;MY ADDITION ####
+            swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number,     info.color_C3, info.cme_outline_color
+          endif
+          
+          if info.show_image_line_plot eq 1 then begin
+          
+            swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
+              info.position_image_lineplot, info.C_cme_outline
+              
+          endif
+          
+          
+        endcase
+        
+        
+        'SC2' : begin
+        
+          info.C2_current_image_number = which_image
+          
+          swpc_cat_REDRAW_THE_IMAGE, $
+            info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
+            info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
+            info.CME_matches_image_C2_Image_number,info.C_current_background_color, $
+            info.background_color,info.C_current_text_color,info.color_c2,info.C_cme_outline,info.C2_cme_MATCH_outline, $
+            info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
+            info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+            
+          if info.C2_number_of_images gt 0 then begin ; MY ADDITION ####
+            swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number,    info.color_C2, info.cme_outline_color
+          endif
+          
+          C_xp = 255 - (255*sin(info.C_clock_angle_degrees * !dtor))
+          C_yp = 255 + (255*cos(info.C_clock_angle_degrees * !dtor))
+          info.C_coronagraph_image_object -> getproperty, data = image_data
+          xvals = round(((findgen(255)/254.) * (C_xp - 255.)) + 255.)
+          yvals = round(((findgen(255)/254.) * (C_yp - 255.)) + 255.)
+          line_Y = image_data[xvals,yvals]
+          info.C_image_lineplot->SetProperty, datax = findgen(255) , datay = line_Y
+          maxy = max(line_Y,min=minY)
+          yrange = [minY,maxY]
+          C_image_xs = swpc_cat_FSC_Normalize([0.,254.], Position=[info.position_image_lineplot[0], info.position_image_lineplot[2]])
+          C_image_ys = swpc_cat_FSC_Normalize(yrange, Position=[info.position_image_lineplot[1], info.position_image_lineplot[3]])
+          info.C_image_lineplot->SetProperty, XCoord_Conv=C_image_xs, YCoord_Conv=C_image_ys
+          
+        endcase
+        
+      endcase
+    
+  
+  info.images_timeline_window->Draw, info.images_timeline_view
+  
+  
+  Widget_Control, event.top, Set_UValue=info, /No_Copy
+  
+  
+END
+
+
+
+pro swpc_cat_change_R_image_with_slider, event
+
+  compile_opt idl2
+  
+  Widget_Control, event.top, Get_UValue=info, /No_Copy
+  
+  which_image = event.value - 1
+  
+
+      case info.currently_showing_STEREO_A of
+        'AC2' : begin
+          info.AC2_current_image_number = which_image
+          swpc_cat_REDRAW_THE_IMAGE, $
+            info.AC2_current_image_number,info.AC2_background_image_number,info.AC2_difference_imaging, $
+            info.AC2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
+            info.CME_matches_image_AC2_Image_number,info.R_current_background_color, $
+            info.background_color,info.R_current_text_color,info.color_stereo_A,info.R_cme_outline,info.AC2_cme_MATCH_outline, $
+            info.R_widget_outline_matches_image,info.CME_matches_image_AC2_CME_outline, $
+            info.R_ut_string_object,info.AC2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
+        end
+        'AH1' : begin
+          info.AH1_current_image_number = which_image
+          swpc_cat_REDRAW_THE_IMAGE, $
+            info.AH1_current_image_number,info.AH1_background_image_number,info.AH1_difference_imaging, $
+            info.AH1_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
+            info.CME_matches_image_AH1_Image_number,info.R_current_background_color, $
+            info.background_color,info.R_current_text_color,info.color_AH1,info.R_cme_outline,info.AH1_cme_MATCH_outline, $
+            info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
+            info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
+        end
+        'AH2' :  begin
+          info.AH2_current_image_number = which_image
+          swpc_cat_REDRAW_THE_IMAGE, $
+            info.AH2_current_image_number,info.AH2_background_image_number,info.AH2_difference_imaging, $
+            info.AH2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
+            info.CME_matches_image_AH2_Image_number,info.R_current_background_color, $
+            info.background_color,info.R_current_text_color,info.color_AH2,info.R_cme_outline,info.AH2_cme_MATCH_outline, $
+            info.R_widget_outline_matches_image,info.CME_matches_image_AH2_CME_outline, $
+            info.R_ut_string_object,info.AH2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
+        end
+      end
+      
+      if info.AC2_number_of_images gt 0 then begin ;MY ADDITION ####
+      
+        swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number,   info.color_stereo_a, info.cme_outline_color
+        
+      endif
+  
+  info.images_timeline_window->Draw, info.images_timeline_view
+  
+  
+  Widget_Control, event.top, Set_UValue=info, /No_Copy
+  
+  
 END
 
 
@@ -6762,42 +6841,49 @@ info.date_array = [2011,11,26,0,0,2011,11,26,23,59]
           info.R_telescope_code = 'AC2'
           info.AC2_telescope_FOV = 15.
           swpc_cat_get_images,info, 2
-
+          
+if info.n_sat eq 3 then begin
           info.which_telescope = 'STEREO B COR2'
           info.L_telescope_code = 'BC2'
           info.BC2_telescope_FOV = 15.
           swpc_cat_get_images,info, 0
+endif
           
           info.which_telescope = 'STEREO A HI1'
           info.R_telescope_code = 'AH1'
           info.AC2_telescope_FOV = 15.
           swpc_cat_get_images,info, 4
-          
+
+if info.n_sat eq 3 then begin          
           info.which_telescope = 'STEREO B HI1'
           info.L_telescope_code = 'BH1'
           info.BC2_telescope_FOV = 15.
           swpc_cat_get_images,info, 5
+endif
           
           info.which_telescope = 'STEREO A HI2'
           info.R_telescope_code = 'AH2'
           info.AC2_telescope_FOV = 15.
           swpc_cat_get_images,info, 6
           
+if info.n_sat eq 3 then begin
           info.which_telescope = 'STEREO B HI2'
           info.L_telescope_code = 'BH2'
           info.BC2_telescope_FOV = 15.
           swpc_cat_get_images,info, 7
+endif
           
-          print, 'BC2_number_of_images ',info.BC2_number_of_images,n_elements(info.BC2_list_of_datetime_Julian)
+if info.n_sat eq 3 then           print, 'BC2_number_of_images ',info.BC2_number_of_images,n_elements(info.BC2_list_of_datetime_Julian)
           print, 'C_number_of_images ',info.C_number_of_images,n_elements(info.C_list_of_datetime_Julian)
           print, 'C2_number_of_images ',info.C2_number_of_images,n_elements(info.C2_list_of_datetime_Julian)
           print, 'AC2_number_of_images ',info.AC2_number_of_images,n_elements(info.AC2_list_of_datetime_Julian)
           print, 'AH1_number_of_images ',info.AH1_number_of_images,n_elements(info.AH1_list_of_datetime_Julian)
-          print, 'BH1_number_of_images ',info.BH1_number_of_images,n_elements(info.BH1_list_of_datetime_Julian)
+if info.n_sat eq 3 then           print, 'BH1_number_of_images ',info.BH1_number_of_images,n_elements(info.BH1_list_of_datetime_Julian)
           print, 'AH2_number_of_images ',info.AH2_number_of_images,n_elements(info.AH2_list_of_datetime_Julian)
-          print, 'BH2_number_of_images ',info.BH2_number_of_images,n_elements(info.BH2_list_of_datetime_Julian)
-          
-master_list = info.BC2_list_of_datetime_strings + info.C_list_of_datetime_strings + info.AC2_list_of_datetime_strings
+if info.n_sat eq 3 then          print, 'BH2_number_of_images ',info.BH2_number_of_images,n_elements(info.BH2_list_of_datetime_Julian)
+
+if info.n_sat eq 3 then master_list = info.BC2_list_of_datetime_strings + info.C_list_of_datetime_strings + info.AC2_list_of_datetime_strings
+if info.n_sat eq 2 then master_list = info.C_list_of_datetime_strings + info.AC2_list_of_datetime_strings
 
 if n_elements(master_list) eq 0 then begin
   
@@ -6819,17 +6905,21 @@ master_array = master_array2[uniq(master_array2)]
 (info.master_list).add, master_array,/extract
 
 info.master_list_size = n_elements(master_array)
-count_L = 0
+if info.n_sat eq 3 then count_L = 0
 count_C = 0
 count_R = 0
 for i = 0 , info.master_list_size - 1 do begin
+if info.n_sat eq 3 then begin
 Result_L = (info.BC2_list_of_datetime_strings).Count(master_array[i])
 count_L = count_L + Result_L
+endif
 Result_C = (info.C_list_of_datetime_strings).Count(master_array[i])
 count_C = count_C + Result_C
 Result_R = (info.AC2_list_of_datetime_strings).Count(master_array[i])
 count_R = count_R + Result_R
-if result_L gt 0 then (info.L_indexes).add, count_L else (info.L_indexes).add, result_L
+if info.n_sat eq 3 then begin
+  if result_L gt 0 then (info.L_indexes).add, count_L else (info.L_indexes).add, result_L
+endif
 if result_C gt 0 then (info.C_indexes).add, count_C else (info.C_indexes).add, result_C
 if result_R gt 0 then (info.R_indexes).add, count_R else (info.R_indexes).add, result_R
 endfor
@@ -6876,6 +6966,8 @@ plot_position_scaling_factor = (info.position_timeline[2] - info.position_timeli
 info.xSymbolSize_timeline = (info.end_julian - info.start_julian) * 0.015 * symSize / 4.
 info.ySymbolSize_timeline = (1.0 - 0.0) * 0.015 * plot_position_scaling_factor * symSize * 4.
 
+if info.n_sat eq 3 then begin
+  
 if info.BC2_number_of_images gt 0 then begin
 
 L_yvals = fltarr(n_elements(info.BC2_list_of_datetime_Julian)) + 0.2
@@ -6904,6 +6996,8 @@ info.L_cme_outline -> setProperty, hide = 1
 widget_control, info.L_widget_image_sequence_slider,sensitive=0
 endelse
 info.L_Window->Draw, info.L_both_views
+
+endif
 
 if info.C_number_of_images gt 0 then begin
 
@@ -7051,7 +7145,7 @@ widget_control, info.cme_controls_base, sensitive=1
 widget_control, info.plot_window_base, sensitive=1
 widget_control, info.enlil_info_base, sensitive=1
 
-widget_control, info.L_widget_image_sequence_slider, sensitive=1
+if info.n_sat eq 3 then widget_control, info.L_widget_image_sequence_slider, sensitive=1
 widget_control, info.C_widget_image_sequence_slider, sensitive=1
 widget_control, info.R_widget_image_sequence_slider, sensitive=1
   
@@ -7645,10 +7739,12 @@ info.cme_info_Window->Draw, info.cme_info_view
 
 endelse
 
+if info.n_sat eq 3 then begin
 widget_control, info.L_widget_botSlider, sensitive=1
 widget_control, info.L_widget_topSlider, sensitive=1
 widget_control, info.L_widget_gammaSlider, sensitive=1
 widget_control, info.L_widget_saturationSlider, sensitive=1
+endif
 widget_control, info.C_widget_botSlider, sensitive=1
 widget_control, info.C_widget_topSlider, sensitive=1
 widget_control, info.C_widget_gammaSlider, sensitive=1
@@ -8520,6 +8616,7 @@ endelse
        
 if event.release eq 4 then begin
        
+if info.n_sat eq 3 then begin       
 case event.id of 
     info.draw_L : Begin
     contextBase = WIDGET_INFO(event.TOP, FIND_BY_UNAME = 'L_drawContext')
@@ -8534,6 +8631,19 @@ case event.id of
     WIDGET_DISPLAYCONTEXTMENU, event.ID, event.X, event.Y, contextBase
     END
 endcase
+endif
+if info.n_sat eq 2 then begin
+  case event.id of
+    info.draw_C : Begin
+      contextBase = WIDGET_INFO(event.TOP, FIND_BY_UNAME = 'C_drawContext')
+      WIDGET_DISPLAYCONTEXTMENU, event.ID, event.X, event.Y, contextBase
+    END
+    info.draw_R : Begin
+      contextBase = WIDGET_INFO(event.TOP, FIND_BY_UNAME = 'R_drawContext')
+      WIDGET_DISPLAYCONTEXTMENU, event.ID, event.X, event.Y, contextBase
+    END
+  endcase
+endif
        
 endif
        
@@ -8652,12 +8762,19 @@ endelse ; event.motion
 ENDCASE
 
 
-
+if info.n_sat eq 3 then begin
 case event.id of 
     info.draw_L : info.L_Window->Draw, info.L_both_views
     info.draw_C : info.C_Window->Draw, info.C_both_views
     info.draw_R : info.R_Window->Draw, info.R_both_views
 endcase
+endif
+if info.n_sat eq 2 then begin
+case event.id of
+  info.draw_C : info.C_Window->Draw, info.C_both_views
+  info.draw_R : info.R_Window->Draw, info.R_both_views
+endcase
+endif
 
 Widget_Control, event.top, Set_UValue=info, /No_Copy
 END
@@ -9507,6 +9624,8 @@ PRO SWPC_CAT_DEV
 
 compile_opt idl2
 
+; set n_sat to either 2 or 3
+n_sat = 2
 
 show_cme_surface = 0
 
@@ -9614,12 +9733,15 @@ BH2_number_of_images = 0
 Xsize = 512
 Ysize = 512
 
+if n_sat eq 3 then begin
+  
 L_both_views = OBJ_NEW('IDLgrViewGroup')
 L_image_view = OBJ_NEW('IDLgrView', Color=background_color, Viewplane_Rect=[0.0,0.0,Xsize,Ysize])
 L_both_views -> add, L_image_view
 L_image_model = OBJ_NEW('IDLgrModel') 
 L_image_view -> Add, L_image_model
 L_image_model->SetProperty, hide = 0
+
 
 L_clock_angle_model = OBJ_NEW('IDLgrModel') 
 L_clock_angle_model_location = [0.,0.]
@@ -9670,6 +9792,8 @@ if show_image_line_plot eq 0 then begin
 L_image_lineplot_model -> SetProperty, hide = 1
 L_clock_angle_model -> SetProperty, hide = 1
 endif
+
+endif ; if n_sat eq 3 then begin
 
 
 
@@ -9778,15 +9902,19 @@ tlb = Widget_Base(Title='CAT (CME Analysis Tool)', row=1, xoffset = x_pos , yoff
 horizontal_base=widget_base(tlb,row=1)
 vertical_base=widget_base(horizontal_base,column=1)
 swpc_cat_base = widget_base(vertical_base,row=1)
+if n_sat eq 3 then begin
 L_view_base = widget_base(swpc_cat_base,column=1)
+endif
 C_view_base = widget_base(swpc_cat_base,column=1)
 R_view_base = widget_base(swpc_cat_base,column=1)
 swpc_cat_base2 = widget_base(vertical_base,row=1)
 horizontal_base2 = widget_base(vertical_base,row=1,/align_left)
 vertical_base2 = widget_base(horizontal_base2,column=1)
 
+if n_sat eq 3 then begin
 draw_L = Widget_Draw(L_view_base, XSize=Xsize, YSize=Ysize, Graphics_Level=2, retain=retain, $
    Expose_Events=1, Event_Pro='swpc_cat_Window_button_click_events', Button_Events=1,/motion_events,render = 0) 
+endif
 
 draw_C = Widget_Draw(C_view_base, XSize=Xsize, YSize=Ysize, Graphics_Level=2, retain=retain, $
    Expose_Events=1, Event_Pro='swpc_cat_Window_button_click_events', Button_Events=1,/motion_events,render = 0)
@@ -9796,14 +9924,17 @@ draw_R = Widget_Draw(R_view_base, XSize=Xsize, YSize=Ysize, Graphics_Level=2, re
    
 if show_copy_windows eq 1 then begin
 
+if n_sat eq 3 then begin
 draw_L_copy = Widget_Draw(swpc_cat_base2, XSize=Xsize, YSize=Ysize, Graphics_Level=2, retain=retain, render = 0)  
+endif
 draw_C_copy = Widget_Draw(swpc_cat_base2, XSize=Xsize, YSize=Ysize, Graphics_Level=2, retain=retain, render = 0)
 draw_R_copy = Widget_Draw(swpc_cat_base2, XSize=Xsize, YSize=Ysize, Graphics_Level=2, retain=retain, render = 0)
 
 endif
 
+if n_sat eq 3 then begin
 L_contextBase = WIDGET_BASE(draw_L, /CONTEXT_MENU, UNAME = 'L_drawContext',sensitive=0)
-L_widget_outline_matches_image = Widget_Button(L_contextBase, Value='CME Matches Image',Event_Pro='swpc_cat_cme_match_or_unmatch')
+L_widget_outline_matches_image = Widget_Button(L_contextBase, Value='CME Matches Image',Event_Pro='swpc_cat_L_cme_match_or_unmatch')
 widget_image_L = Widget_button(L_contextBase,Value='Image Differencing',/Menu)
 difference_image = Widget_Button(widget_image_L, Value='None',Uvalue='L Normal',Event_Pro='swpc_cat_diff_format')
 difference_image = Widget_Button(widget_image_L, Value='Running Difference',Uvalue='L Diff: Running',Event_Pro='swpc_cat_diff_format')
@@ -9818,8 +9949,10 @@ L_widget_representative_image = Widget_Button(L_contextBase, Value='Set As Repre
 L_widget_remove_this_image = Widget_Button(L_contextBase, Value='Remove This Image',Event_Pro='swpc_cat_remove_this_image',sensitive=0)
 ;L_widget_show_line_plot = Widget_Button(L_contextBase, Value='Show line plot',Event_Pro='swpc_cat_show_line_plot')
 
+endif ; if n_sat eq 3 then begin
+
 C_contextBase = WIDGET_BASE(draw_C, /CONTEXT_MENU, UNAME = 'C_drawContext',sensitive=0)
-C_widget_outline_matches_image = Widget_Button(C_contextBase, Value='CME Matches Image',Event_Pro='swpc_cat_cme_match_or_unmatch')
+C_widget_outline_matches_image = Widget_Button(C_contextBase, Value='CME Matches Image',Event_Pro='swpc_cat_C_cme_match_or_unmatch')
 widget_image_C = Widget_button(C_contextBase,Value='Image Differencing',/Menu)
 difference_image = Widget_Button(widget_image_C, Value='None',Uvalue='C Normal',Event_Pro='swpc_cat_diff_format')
 difference_image = Widget_Button(widget_image_C, Value='Running Difference',Uvalue='C Diff: Running',Event_Pro='swpc_cat_diff_format')
@@ -9831,7 +9964,7 @@ C_widget_remove_this_image = Widget_Button(C_contextBase, Value='Remove This Ima
 
 
 R_contextBase = WIDGET_BASE(draw_R, /CONTEXT_MENU, UNAME = 'R_drawContext',sensitive=0)
-R_widget_outline_matches_image = Widget_Button(R_contextBase, Value='CME Matches Image',Event_Pro='swpc_cat_cme_match_or_unmatch')
+R_widget_outline_matches_image = Widget_Button(R_contextBase, Value='CME Matches Image',Event_Pro='swpc_cat_R_cme_match_or_unmatch')
 widget_image_R = Widget_button(R_contextBase,Value='Image Differencing',/Menu)
 difference_image = Widget_Button(widget_image_R, Value='None',Uvalue='R Normal',Event_Pro='swpc_cat_diff_format')
 difference_image = Widget_Button(widget_image_R, Value='Running Difference',Uvalue='R Diff: Running',Event_Pro='swpc_cat_diff_format')
@@ -9874,12 +10007,16 @@ courier12pt = obj_new('IDLgrFont','Courier', Size=12)
 courier14pt = obj_new('IDLgrFont','Courier', Size=14)
 monospace_symbol14pt = obj_new('IDLgrFont','Monospace Symbol', Size=14)
 
+if n_sat eq 3 then begin
 thisSymbol_L = obj_new("IDLgrsymbol",data=6)
+endif
 thisSymbol_C = obj_new("IDLgrsymbol",data=6)
 thisSymbol_C2 = obj_new("IDLgrsymbol",data=6)
 thisSymbol_R = obj_new("IDLgrsymbol",data=6)
 
+if n_sat eq 3 then begin
 L_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_L, Thick=1 , linestyle = 6)
+endif
 C_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_C, Thick=1, linestyle = 6)
 R_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_R, Thick=1, linestyle = 6)
 C2_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_C2, Thick=1, linestyle = 6)
@@ -9906,7 +10043,7 @@ images_timeline_model->Add, animation_start_time_marker_handle
 images_timeline_model->Add, animation_end_time_marker_handle
 images_timeline_model->Add, animation_current_time_marker
 
-images_timeline_model->Add, L_plot
+if n_sat eq 3 then images_timeline_model->Add, L_plot
 images_timeline_model->Add, C_plot
 images_timeline_model->Add, C2_plot
 images_timeline_model->Add, R_plot
@@ -10004,6 +10141,7 @@ image_controls_base = widget_base(horizontal_base2,/column,frame=compact_frame,s
 if compact eq 0 then Result = WIDGET_LABEL(image_controls_base, /ALIGN_CENTER, value = ' IMAGE ADJUST ',frame=2)
 image_controls_tab = widget_tab(image_controls_base,/align_center, event_pro = 'swpc_cat_change_image_tab')
 
+if n_sat eq 3 then begin
 L_controls = widget_base(image_controls_tab,column=1,title='     L     ',/align_left)
 
    L_widget_botSlider = Widget_Slider(L_controls, Value=0, Min=0, $
@@ -10026,6 +10164,7 @@ L_reset = Widget_Button(L_reset_controls, Value='Reset', Event_Pro='swpc_cat_Res
 L_copy_controls = widget_base(L_controls,row=1,/align_center)      
 copy_L_to_C = Widget_Button(L_copy_controls, Value='Copy to C ->', Event_Pro='swpc_cat_copy_L_to_C', font='Helvetica*ITALIC*12')
 copy_L_to_R = Widget_Button(L_copy_controls, Value='Copy to R ->', Event_Pro='swpc_cat_copy_L_to_R', font='Helvetica*ITALIC*12')
+endif
 
 C_controls = widget_base(image_controls_tab,column=1,title='     C     ',/align_center)
 
@@ -10046,8 +10185,10 @@ C_controls = widget_base(image_controls_tab,column=1,title='     C     ',/align_
 C_reset_controls = widget_base(C_controls,row=1,/align_center)      
 C_reset = Widget_Button(C_reset_controls, Value='Reset', Event_Pro='swpc_cat_Reset_C', font='Helvetica*ITALIC*12')
 
-C_copy_controls = widget_base(C_controls,row=1,/align_center)      
+C_copy_controls = widget_base(C_controls,row=1,/align_center)
+if n_sat eq 3 then begin      
 copy_C_to_L = Widget_Button(C_copy_controls, Value='<- Copy to L',Event_Pro='swpc_cat_copy_C_to_L', font='Helvetica*ITALIC*12')
+endif
 copy_C_to_R = Widget_Button(C_copy_controls, Value='Copy to R ->',Event_Pro='swpc_cat_copy_C_to_R', font='Helvetica*ITALIC*12')
 
 
@@ -10070,8 +10211,10 @@ R_controls = widget_base(image_controls_tab,column=1,title='     R     ',/align_
 R_reset_controls = widget_base(R_controls,row=1,/align_center)      
 R_reset = Widget_Button(R_reset_controls, Value='Reset', Event_Pro='swpc_cat_Reset_R', font='Helvetica*ITALIC*12')
 
-R_copy_controls = widget_base(R_controls,row=1,/align_center)       
+R_copy_controls = widget_base(R_controls,row=1,/align_center)
+if n_sat eq 3 then begin      
 copy_R_to_L = Widget_Button(R_copy_controls, Value='<- Copy to L',Event_Pro='swpc_cat_copy_R_to_L', font='Helvetica*ITALIC*12')
+endif
 copy_R_to_C = Widget_Button(R_copy_controls, Value='<- Copy to C',Event_Pro='swpc_cat_copy_R_to_C', font='Helvetica*ITALIC*12')
 
 if allow_show_3D_view eq 1 then begin
@@ -10208,21 +10351,22 @@ enlil_info_View = OBJ_NEW('IDLgrView', Color=background_color, Viewplane_Rect=[0
 enlil_info_Model = OBJ_NEW('IDLgrModel') 
 enlil_info_View -> Add, enlil_info_Model
 
-
+if n_sat eq 3 then begin
 L_widget_image_sequence_slider = widget_slider(L_view_base, Value=1, $
-                            event_pro='swpc_cat_change_L_C_or_R_image_with_slider',  $
+                            event_pro='swpc_cat_change_L_image_with_slider',  $
                             minimum = 1, maximum = 2, scroll = 1, drag = 1, $
                             sensitive=0, $
                             suppress_value=1) ;,Title='Scroll STEREO B')
+endif
                             
 C_widget_image_sequence_slider = widget_slider(C_view_base, Value=1, $
-                            event_pro='swpc_cat_change_L_C_or_R_image_with_slider',  $
+                            event_pro='swpc_cat_change_C_image_with_slider',  $
                             minimum = 1, maximum = 2, scroll = 1, drag = 1, $
                             sensitive=0, $
                             suppress_value=1) ; ,Title='Scroll LASCO')
                             
 R_widget_image_sequence_slider = widget_slider(R_view_base, Value=1, $
-                            event_pro='swpc_cat_change_L_C_or_R_image_with_slider',  $
+                            event_pro='swpc_cat_change_R_image_with_slider',  $
                             minimum = 1, maximum = 2, scroll = 1, drag = 1, $
                             sensitive=0, $
                             suppress_value=1) ; ,Title='Scroll STEREO A')
@@ -10230,16 +10374,22 @@ R_widget_image_sequence_slider = widget_slider(R_view_base, Value=1, $
 
 
 Widget_Control, tlb, /Realize
+if n_sat eq 3 then begin
 Widget_Control, draw_L, Get_Value=L_Window
+endif
 Widget_Control, draw_C, Get_Value=C_Window
 Widget_Control, draw_R, Get_Value=R_Window
 if show_copy_windows eq 1 then begin
+  if n_sat eq 3 then begin
 Widget_Control, draw_L_copy, Get_Value=L_Window_copy
+  endif
 Widget_Control, draw_C_copy, Get_Value=C_Window_copy
 Widget_Control, draw_R_copy, Get_Value=R_Window_copy
 endif else begin
+  if n_sat eq 3 then begin
 L_Window_copy = OBJ_NEW( 'IDLgrBuffer' )
 L_Window_copy -> SetProperty, DIMENSIONS = [512,512]
+  endif
 C_Window_copy = OBJ_NEW( 'IDLgrBuffer' )
 C_Window_copy -> SetProperty, DIMENSIONS = [512,512]
 R_Window_copy = OBJ_NEW( 'IDLgrBuffer' )
@@ -10254,8 +10404,10 @@ Widget_Control, draw_info_ID2, Get_Value=cme_info_Window
 ;
 ;  End of defining all of the GUI widget stuff.........
 ;
+if n_sat eq 3 then begin
 L_image_color_palette = OBJ_NEW('IDLgrPalette')
 L_image_color_palette -> loadct,0
+endif
 C_image_color_palette = OBJ_NEW('IDLgrPalette')
 C_image_color_palette -> loadct,0
 R_image_color_palette = OBJ_NEW('IDLgrPalette')
@@ -10269,11 +10421,13 @@ R_image_color_palette -> loadct,0
 files_directory = ''
 filename = ''
 
+if n_sat eq 3 then begin
 L_coronagraph_image_object = OBJ_NEW('IDLgrImage')
 L_coronagraph_image_object -> SetProperty, location = [0 , 0]
 L_coronagraph_image_object -> setproperty, palette = L_image_color_palette
 L_coronagraph_image_object -> setproperty, alpha_channel = 1.0
 L_coronagraph_image_object -> setproperty, blend_function = [3,4]
+endif
 
 C_coronagraph_image_object = OBJ_NEW('IDLgrImage')
 C_coronagraph_image_object -> SetProperty, location = [0 , 0]
@@ -10287,10 +10441,12 @@ R_coronagraph_image_object -> setproperty, palette = R_image_color_palette
 R_coronagraph_image_object -> setproperty, alpha_channel = 1.0
 R_coronagraph_image_object -> setproperty, blend_function = [3,4]
 
+if n_sat eq 3 then begin
 L_border_image_object = OBJ_NEW('IDLgrImage')
 L_border_image_object -> SetProperty, location = [0 , 0]
 ;L_border_image_object -> setproperty, alpha_channel = 0.3
 L_border_image_object -> setproperty, blend_function = [3,4]
+endif
 border_data = bytarr(4,512,512)
 border_data[0,*,0:18] = background_color[0]
 border_data[1,*,0:18] = background_color[1]
@@ -10308,7 +10464,9 @@ border_data[0,493:511,*] = background_color[0]
 border_data[1,493:511,*] = background_color[1]
 border_data[2,493:511,*] = background_color[2]
 border_data[3,493:511,*] = 160
+if n_sat eq 3 then begin
 L_border_image_object -> setproperty, data = border_data
+endif
 
 C_border_image_object = OBJ_NEW('IDLgrImage')
 C_border_image_object -> SetProperty, location = [0 , 0]
@@ -10320,14 +10478,18 @@ R_border_image_object -> SetProperty, location = [0 , 0]
 R_border_image_object -> setproperty, blend_function = [3,4]
 R_border_image_object -> setproperty, data = border_data
 
+if n_sat eq 3 then begin
 L_image_model -> Add, L_coronagraph_image_object
 L_image_model -> Add, L_border_image_object
+endif
 C_image_model -> Add, C_coronagraph_image_object
 C_image_model -> Add, C_border_image_object
 R_image_model -> Add, R_coronagraph_image_object
 R_image_model -> Add, R_border_image_object
 
+if n_sat eq 3 then begin
 L_coronagraph_image_object->SetProperty, hide = 0
+endif
 C_coronagraph_image_object->SetProperty, hide = 0
 R_coronagraph_image_object->SetProperty, hide = 0
 
@@ -10457,12 +10619,14 @@ palette_top_diff = 100.
 palette_bottom_diff = 0.
 palette_gamma_diff = 10.
 
+if n_sat eq 3 then begin
 L_ut_string_object = OBJ_NEW('IDLgrText','')
 L_ut_string_object -> setproperty, location = [255, 3]
 L_ut_string_object -> setproperty, alignment = 0.5
 L_ut_string_object -> setproperty, color = [100,100,255]
 L_ut_string_object -> setproperty, font = courier12pt
 L_image_model -> Add, L_ut_string_object
+endif
 
 C_ut_string_object = OBJ_NEW('IDLgrText','')
 C_ut_string_object -> setproperty, location = [255, 3]
@@ -10478,12 +10642,14 @@ R_ut_string_object -> setproperty, color = [255,100,100]
 R_ut_string_object -> setproperty, font = courier12pt
 R_image_model -> Add, R_ut_string_object
 
+if n_sat eq 3 then begin
 L_title_object = OBJ_NEW('IDLgrText','STEREO B COR2')
 L_title_object -> setproperty, location = [255, 497]
 L_title_object -> setproperty, alignment = 0.5
 L_title_object -> setproperty, color = [100,100,255]
 L_title_object -> setproperty, font = courier12pt
 L_image_model -> Add, L_title_object
+endif
 
 C_title_object = OBJ_NEW('IDLgrText','SOHO LASCO C3')
 C_title_object -> setproperty, location = [255, 497]
@@ -10516,6 +10682,7 @@ zclip_near = 200.
 zclip_far = - zclip_near 
 zclip = [zclip_near , zclip_far]
 
+if n_sat eq 3 then begin
 L_camera = OBJ_NEW('Camera', Color=[100,0,0], $
                       Viewplane_Rect=[0.-BC2_telescope_FOV,0.-BC2_telescope_FOV,2.0*BC2_telescope_FOV,2.0*BC2_telescope_FOV])
 L_camera -> setproperty, transparent = 1
@@ -10528,6 +10695,7 @@ L_camera -> setproperty, eye = Sun_earth_distance
 L_camera -> setproperty, zclip = zclip
 L_camera_copy -> setproperty, eye = Sun_earth_distance
 L_camera_copy -> setproperty, zclip = zclip
+endif
 
 
 C_camera = OBJ_NEW('Camera', Color=[100,0,0], $
@@ -10629,6 +10797,7 @@ swpc_cat_define_cme_lemniscate, initial_radial_distance_lemniscate, initial_angu
 
 sun_radius = 1.
 
+if n_sat eq 3 then begin
 L_cme_model = obj_new("idlgrmodel")
 
 L_cme_model->GetProperty, transform = L_camera_transform
@@ -10643,6 +10812,7 @@ L_cme_fitted_surf_copy = obj_new("idlgrpolygon",sun_radius*fitted_cme_info.verti
                          ,color=[255,255,255],alpha_channel=1.0)
 L_cme_model->add,L_cme_fitted_surf
 L_cme_model_copy->add,L_cme_fitted_surf_copy
+endif
 
 C_cme_model = obj_new("idlgrmodel")
 C_cme_model_copy = obj_new("idlgrmodel")
@@ -10666,9 +10836,10 @@ R_cme_fitted_surf_copy = obj_new("idlgrpolygon",sun_radius*fitted_cme_info.verti
 R_cme_model->add,R_cme_fitted_surf
 R_cme_model_copy->add,R_cme_fitted_surf_copy
 
-
+if n_sat eq 3 then begin
 L_camera->add, L_cme_model
 L_camera_copy->add, L_cme_model_copy
+endif
 
 C_camera->add, C_cme_model
 C_camera_copy->add, C_cme_model_copy
@@ -10676,19 +10847,23 @@ C_camera_copy->add, C_cme_model_copy
 R_camera->add, R_cme_model
 R_camera_copy->add, R_cme_model_copy
 
+if n_sat eq 3 then begin
 L_camera->SetProperty, camera_location = [-200,0,0]
-R_camera->SetProperty, camera_location = [+200,0,0]
 L_camera->Lookat,[0,0,0]
-R_camera->Lookat,[0,0,0]
 L_cme_model->GetProperty, transform = L_camera_transform
+endif
+
+R_camera->SetProperty, camera_location = [+200,0,0]
+R_camera->Lookat,[0,0,0]
 R_cme_model->GetProperty, transform = R_camera_transform
 
-
+if n_sat eq 3 then begin
 L_lights_fixed_model = obj_new('idlgrmodel')
 L_ambient_light = obj_new( 'idlgrlight')
 L_lights_fixed_model -> add, L_ambient_light
 L_fixed_light = obj_new( 'idlgrlight', type=1, location=[-300,100,200])
 L_lights_fixed_model -> add, L_fixed_light
+endif
 
 C_lights_fixed_model = obj_new('idlgrmodel')
 C_ambient_light = obj_new( 'idlgrlight')
@@ -10702,50 +10877,58 @@ R_lights_fixed_model -> add, R_ambient_light
 R_fixed_light = obj_new( 'idlgrlight', type=1, location=[-300,100,200])
 R_lights_fixed_model -> add, R_fixed_light
 
+if n_sat eq 3 then begin
 L_camera -> add, L_lights_fixed_model
+endif
 C_camera -> add, C_lights_fixed_model
 R_camera -> add, R_lights_fixed_model
 
 
 cone_X_axis_data = fltarr(3,2)
 cone_X_axis_data[0,1] = radial_distance_lemniscate
+if n_sat eq 3 then begin
 L_cone_X_axis = OBJ_NEW('IDLgrpolyline',data = cone_X_axis_data,color=[255,100,100])
-C_cone_X_axis = OBJ_NEW('IDLgrpolyline',data = cone_X_axis_data,color=[255,100,100])
-R_cone_X_axis = OBJ_NEW('IDLgrpolyline',data = cone_X_axis_data,color=[255,100,100])
 L_CME_model-> Add, L_cone_X_axis
+endif
+C_cone_X_axis = OBJ_NEW('IDLgrpolyline',data = cone_X_axis_data,color=[255,100,100])
 C_CME_model-> Add, C_cone_X_axis
+R_cone_X_axis = OBJ_NEW('IDLgrpolyline',data = cone_X_axis_data,color=[255,100,100])
 R_CME_model-> Add, R_cone_X_axis
 
 cone_Y_axis_data = fltarr(3,2)
 cone_Y_axis_data[1,1] = radial_distance_lemniscate
+if n_sat eq 3 then begin
 L_cone_Y_axis = OBJ_NEW('IDLgrpolyline',data = cone_Y_axis_data,color=[100,255,100])
-C_cone_Y_axis = OBJ_NEW('IDLgrpolyline',data = cone_Y_axis_data,color=[100,255,100])
-R_cone_Y_axis = OBJ_NEW('IDLgrpolyline',data = cone_Y_axis_data,color=[100,255,100])
 L_CME_model-> Add, L_cone_Y_axis
+endif
+C_cone_Y_axis = OBJ_NEW('IDLgrpolyline',data = cone_Y_axis_data,color=[100,255,100])
 C_CME_model-> Add, C_cone_Y_axis
+R_cone_Y_axis = OBJ_NEW('IDLgrpolyline',data = cone_Y_axis_data,color=[100,255,100])
 R_CME_model-> Add, R_cone_Y_axis
 
 cone_Z_axis_data = fltarr(3,2)
 cone_Z_axis_data[2,1] = radial_distance_lemniscate * 3.
+if n_sat eq 3 then begin
 L_cone_Z_axis = OBJ_NEW('IDLgrpolyline',data = cone_Z_axis_data,color=[100,100,255])
-C_cone_Z_axis = OBJ_NEW('IDLgrpolyline',data = cone_Z_axis_data,color=[100,100,255])
-R_cone_Z_axis = OBJ_NEW('IDLgrpolyline',data = cone_Z_axis_data,color=[100,100,255])
 L_CME_model-> Add, L_cone_Z_axis
+endif
+C_cone_Z_axis = OBJ_NEW('IDLgrpolyline',data = cone_Z_axis_data,color=[100,100,255])
 C_CME_model-> Add, C_cone_Z_axis
+R_cone_Z_axis = OBJ_NEW('IDLgrpolyline',data = cone_Z_axis_data,color=[100,100,255])
 R_CME_model-> Add, R_cone_Z_axis
 
-L_cone_X_axis-> SetProperty, hide = 1
+if n_sat eq 3 then L_cone_X_axis-> SetProperty, hide = 1
 C_cone_X_axis-> SetProperty, hide = 1
 R_cone_X_axis-> SetProperty, hide = 1
-L_cone_Y_axis-> SetProperty, hide = 1
+if n_sat eq 3 then L_cone_Y_axis-> SetProperty, hide = 1
 C_cone_Y_axis-> SetProperty, hide = 1
 R_cone_Y_axis-> SetProperty, hide = 1
 if show_cone_Z_axis eq 1 then begin
-L_cone_Z_axis-> SetProperty, hide = 0
+if n_sat eq 3 then L_cone_Z_axis-> SetProperty, hide = 0
 C_cone_Z_axis-> SetProperty, hide = 0
 R_cone_Z_axis-> SetProperty, hide = 0
 endif else begin
-L_cone_Z_axis-> SetProperty, hide = 1
+if n_sat eq 3 then L_cone_Z_axis-> SetProperty, hide = 1
 C_cone_Z_axis-> SetProperty, hide = 1
 R_cone_Z_axis-> SetProperty, hide = 1
 endelse
@@ -10757,8 +10940,10 @@ lem_data[0,2] = 275
 lem_data[1,0] = 200
 lem_data[1,1] = 250
 lem_data[1,2] = 300
+if n_sat eq 3 then begin
 L_cme_outline = obj_new("idlgrroi",data=lem_data, color = cme_outline_color,style=2,hide = 1)
 L_image_model-> Add, L_cme_outline
+endif
 C_cme_outline = obj_new("idlgrroi",data=lem_data, color = cme_outline_color,style=2,hide = 1)
 C_image_model-> Add, C_cme_outline
 R_cme_outline = obj_new("idlgrroi",data=lem_data, color = cme_outline_color,style=2,hide = 1)
@@ -10766,7 +10951,7 @@ R_image_model-> Add, R_cme_outline
 
 
 BC2_cme_MATCH_outline = obj_new("idlgrroi",data=lem_data, color = color_stereo_B,style=2,hide = 1)
-L_image_model-> Add, BC2_cme_MATCH_outline
+if n_sat eq 3 then L_image_model-> Add, BC2_cme_MATCH_outline
 C_cme_MATCH_outline = obj_new("idlgrroi",data=lem_data, color = color_c3,style=2,hide = 1)
 C_image_model-> Add, C_cme_MATCH_outline
 C2_cme_MATCH_outline = obj_new("idlgrroi",data=lem_data, color = color_c2,style=2,hide = 1)
@@ -10774,11 +10959,11 @@ C_image_model-> Add, C2_cme_MATCH_outline
 AC2_cme_MATCH_outline = obj_new("idlgrroi",data=lem_data, color = color_stereo_A,style=2,hide = 1)
 R_image_model-> Add, AC2_cme_MATCH_outline
 BH1_cme_MATCH_outline = obj_new("idlgrroi",data=lem_data, color = color_bh1,style=2,hide = 1)
-L_image_model-> Add, BH1_cme_MATCH_outline
+if n_sat eq 3 then L_image_model-> Add, BH1_cme_MATCH_outline
 AH1_cme_MATCH_outline = obj_new("idlgrroi",data=lem_data, color = color_ah1,style=2,hide = 1)
 R_image_model-> Add, AH1_cme_MATCH_outline
 BH2_cme_MATCH_outline = obj_new("idlgrroi",data=lem_data, color = color_bh2,style=2,hide = 1)
-L_image_model-> Add, BH2_cme_MATCH_outline
+if n_sat eq 3 then L_image_model-> Add, BH2_cme_MATCH_outline
 AH2_cme_MATCH_outline = obj_new("idlgrroi",data=lem_data, color = color_ah2,style=2,hide = 1)
 R_image_model-> Add, AH2_cme_MATCH_outline
 
@@ -10801,7 +10986,7 @@ cone_radius = 0.
 rotation = 0.
 pixel_scale = 0.
 
-L_telescope_code = ''
+if n_sat eq 3 then L_telescope_code = ''
 C_telescope_code = ''
 C2_telescope_code = ''
 R_telescope_code = ''
@@ -10817,7 +11002,7 @@ rotation = 0.
 rsun = 950.   ;set initial value, solar radius from L1 in arcseconds
 pixel_scale = 1.
 
-
+if n_sat eq 3 then begin
 BC2_list_of_image_names = list()
 BC2_list_of_image_data = list()
 BC2_list_of_datetime_strings = list()
@@ -10827,6 +11012,7 @@ BC2_list_of_image_exposure_times = list()
 BC2_list_of_image_offsets = list()
 BC2_list_of_image_scaling_factors = list()
 BC2_list_of_XYCEN = list()
+endif
 
 C_list_of_image_names = list()
 C_list_of_image_data = list()
@@ -10872,6 +11058,7 @@ AH1_list_of_rsuns = list()
 AH1_list_of_Sun_satellite_distances = list()
 AH1_list_of_XYCEN = list()
 
+if n_sat eq 3 then begin
 BH1_list_of_image_names = list()
 BH1_list_of_image_data = list()
 BH1_list_of_datetime_strings = list()
@@ -10885,6 +11072,7 @@ BH1_list_of_pixel_scales = list()
 BH1_list_of_rsuns = list()
 BH1_list_of_Sun_satellite_distances = list()
 BH1_list_of_XYCEN = list()
+endif
 
 AH2_list_of_image_names = list()
 AH2_list_of_image_data = list()
@@ -10900,6 +11088,7 @@ AH2_list_of_rsuns = list()
 AH2_list_of_Sun_satellite_distances = list()
 AH2_list_of_XYCEN = list()
 
+if n_sat eq 3 then begin
 BH2_list_of_image_names = list()
 BH2_list_of_image_data = list()
 BH2_list_of_datetime_strings = list()
@@ -10913,24 +11102,25 @@ BH2_list_of_pixel_scales = list()
 BH2_list_of_rsuns = list()
 BH2_list_of_Sun_satellite_distances = list()
 BH2_list_of_XYCEN = list()
+endif
 
-L_list_of_HEEQ_coords = list()
+if n_sat eq 3 then L_list_of_HEEQ_coords = list()
 C_list_of_HEEQ_coords = list()
 C2_list_of_HEEQ_coords = list()
 R_list_of_HEEQ_coords = list()
 
-L_HEEQ_coords = [0.,0.,0.]
+if n_sat eq 3 then L_HEEQ_coords = [0.,0.,0.]
 C_HEEQ_coords = [0.,0.,0.]
 C2_HEEQ_coords = [0.,0.,0.]
 R_HEEQ_coords = [0.,0.,0.]
 
-L_IDL_coords = [0.,0.,0.]
+if n_sat eq 3 then L_IDL_coords = [0.,0.,0.]
 C_IDL_coords = [0.,0.,0.]
 C2_IDL_coords = [0.,0.,0.]
 R_IDL_coords = [0.,0.,0.]
 
 master_list = list()
-L_indexes = list()
+if n_sat eq 3 then L_indexes = list()
 C_indexes = list()
 C2_indexes = list()
 R_indexes = list()
@@ -10978,17 +11168,17 @@ CME_matches_image_AH1_CME_outline = list()
 CME_matches_image_BH2_CME_outline = list()
 CME_matches_image_AH2_CME_outline = list()
 
-BC2_list_of_pixel_scales = list()
+if n_sat eq 3 then BC2_list_of_pixel_scales = list()
 C_list_of_pixel_scales = list()
 C2_list_of_pixel_scales = list()
 AC2_list_of_pixel_scales = list()
 
-BC2_list_of_rsuns = list()
+if n_sat eq 3 then BC2_list_of_rsuns = list()
 C_list_of_rsuns = list()
 C2_list_of_rsuns = list()
 AC2_list_of_rsuns = list()
 
-L_list_of_Sun_satellite_distances = list()
+if n_sat eq 3 then L_list_of_Sun_satellite_distances = list()
 C_list_of_Sun_satellite_distances = list()
 C2_list_of_Sun_satellite_distances = list()
 R_list_of_Sun_satellite_distances = list()
@@ -11002,13 +11192,13 @@ i_move = 1
 
 which_window_to_animate = 1
 
-clicked_L = 0
+if n_sat eq 3 then clicked_L = 0
 clicked_C = 0
 clicked_R = 0
 clicked_C2 = 0
 
 currently_showing_LASCO = 'SC3'
-currently_showing_STEREO_B = 'BC2'
+if n_sat eq 3 then currently_showing_STEREO_B = 'BC2'
 currently_showing_STEREO_A = 'AC2'
 
 xSymbolSize_timeline = 0.
@@ -11041,6 +11231,7 @@ i_log_scale = 0
 
 ; all to do with the red line....
 
+if n_sat eq 3 then begin
 L_the_action = 0
 L_latest_click_X = 0
 L_latest_click_Y = 0
@@ -11050,6 +11241,7 @@ L_click_and_drag  = 0
 L_clock_angle_degrees = 0
 L_rotate_x = 0
 L_rotate_y = 0
+endif
 
 C_the_action = 0
 C_latest_click_X = 0
@@ -11077,9 +11269,10 @@ position_image_lineplot = [29, 29, 482, 100]
 
 current_selection = 'nowt_yet'
 
-L_current_xycen = [0.,0.]
+if n_sat eq 3 then L_current_xycen = [0.,0.]
 R_current_xycen = [0.,0.]
 
+if n_sat eq 3 then begin
 info = $
        { L_Window:L_Window, $ 
          L_Window_copy:L_Window_copy, $ 
@@ -11611,7 +11804,416 @@ info = $
          C_list_of_XYCEN:C_list_of_XYCEN, $
          C2_list_of_XYCEN:C2_list_of_XYCEN, $
          L_current_xycen:L_current_xycen, $
-         R_current_xycen:R_current_xycen}
+         R_current_xycen:R_current_xycen, $
+         n_sat:n_sat}
+         
+endif ; if n_sat eq 3 then begin
+if n_sat eq 2 then begin
+    info = $
+     {C_Window:C_Window, $
+      C_Window_copy:C_Window_copy, $
+      C_both_views:C_both_views, $
+      C_image_view:C_image_view, $
+      C_camera:C_camera, $
+      C_camera_copy:C_camera_copy, $
+      R_Window:R_Window, $
+      R_Window_copy:R_Window_copy, $
+      R_both_views:R_both_views, $
+      R_image_view:R_image_view, $
+      R_camera:R_camera, $
+      R_camera_copy:R_camera_copy, $
+      draw_C:draw_C, $
+      draw_R:draw_R, $
+      cme_info_Window:cme_info_Window, $
+      cme_info_view:cme_info_view, $
+      cone_radius:cone_radius, $
+      widget_angular_width_slider:widget_angular_width_slider, $
+      widget_radial_distance_slider:widget_radial_distance_slider, $
+      C_cone_Z_axis:C_cone_Z_axis, $
+      R_cone_Z_axis:R_cone_Z_axis, $
+      lat_string:lat_string, $
+      lon_string:lon_string, $
+      lat_string_object:lat_string_object,$
+      lon_string_object:lon_string_object, $
+      angular_width_string:angular_width_string, $
+      angular_width_string_object:angular_width_string_object, $
+      radial_distance_string:radial_distance_string, $
+      radial_distance_string_object:radial_distance_string_object, $
+      images_timeline_window:images_timeline_window, $
+      images_timeline_view:images_timeline_view, $
+      images_timeline_model:images_timeline_model, $
+      draw_available_images_timeline:draw_available_images_timeline, $
+      position_timeline: position_timeline, $
+      C_plot: C_plot, $
+      C2_plot: C2_plot, $
+      R_plot: R_plot, $
+      xaxis_images_timeline  : xaxis_images_timeline, $
+      position_B: position_B, $
+      LE_plot_matched_CMEs:LE_plot_matched_CMEs, $
+      thisPlot_B2:thisPlot_B2, $
+      thisPlot2_c3:thisPlot2_c3, $
+      thisPlot2_c2:thisPlot2_c2, $
+      thisPlot2_stereo_a:thisPlot2_stereo_a, $
+      xAxis1_B  : xAxis1_B, $
+      xAxis2_B  : xAxis2_B, $
+      yAxis1_B  : yAxis1_B, $
+      yAxis2_B  : yAxis2_B, $
+      xmin:xmin, $
+      xmax:xmax, $
+      ymin:ymin, $
+      ymax:ymax, $
+      xtickinterval:xtickinterval, $
+      latitude_text:latitude_text, $
+      longitude_text:longitude_text, $
+      cone_angle_text:cone_angle_text, $
+      velocity_text:velocity_text, $
+      T21_5_text:T21_5_text, $
+      T21_5_string:T21_5_string, $
+      cone_tool_version:cone_tool_version, $
+      tlb_position:tlb_position, $
+      files_directory:files_directory, $
+      C_number_of_images:C_number_of_images, $
+      C2_number_of_images:C2_number_of_images, $
+      AC2_number_of_images:AC2_number_of_images, $
+      C_image_saturation_value:C_image_saturation_value, $
+      R_image_saturation_value:R_image_saturation_value, $
+      palette_top_normal:palette_top_normal, $
+      palette_bottom_normal:palette_bottom_normal, $
+      palette_gamma_normal:palette_gamma_normal, $
+      palette_top_diff:palette_top_diff, $
+      palette_bottom_diff:palette_bottom_diff, $
+      palette_gamma_diff:palette_gamma_diff, $
+      C_coronagraph_image_object:C_coronagraph_image_object, $
+      R_coronagraph_image_object:R_coronagraph_image_object, $
+      C_border_image_object:C_border_image_object, $
+      R_border_image_object:R_border_image_object, $
+      C_image_color_palette:C_image_color_palette, $
+      R_image_color_palette:R_image_color_palette, $
+      widget_calculate_velocity:widget_calculate_velocity, $
+      widget_export_cone:widget_export_cone, $
+      C_widget_botSlider:C_widget_botSlider, $
+      C_widget_topSlider:C_widget_topSlider, $
+      C_widget_gammaSlider:C_widget_gammaSlider, $
+      C_widget_saturationSlider:C_widget_saturationSlider, $
+      R_widget_botSlider:R_widget_botSlider, $
+      R_widget_topSlider:R_widget_topSlider, $
+      R_widget_gammaSlider:R_widget_gammaSlider, $
+      R_widget_saturationSlider:R_widget_saturationSlider, $
+      center_of_sunX:center_of_sunX, $
+      center_of_sunY:center_of_sunY, $
+      current_R_in_Solar_radii:current_R_in_Solar_radii, $
+      radial_velocity:radial_velocity, $
+      time_at_Enlil_boundary_Julian:time_at_Enlil_boundary_Julian, $
+      time_at_Enlil_boundary:time_at_Enlil_boundary, $
+      initial_cme_outline_associated_with_image_number:initial_cme_outline_associated_with_image_number, $
+      C_difference_imaging:C_difference_imaging, $
+      C2_difference_imaging:C2_difference_imaging, $
+      AC2_difference_imaging:AC2_difference_imaging, $
+      C_background_image_number:C_background_image_number, $
+      C2_background_image_number:C2_background_image_number, $
+      AC2_background_image_number:AC2_background_image_number, $
+      diff_red_levels:diff_red_levels, $
+      diff_green_levels:diff_green_levels, $
+      diff_blue_levels:diff_blue_levels, $
+      wcolors:wcolors, $
+      palette_0:palette_0, $
+      which_telescope:which_telescope, $
+      C_telescope_FOV:C_telescope_FOV, $
+      C2_telescope_FOV:C2_telescope_FOV, $
+      AC2_telescope_FOV:AC2_telescope_FOV, $
+      image_size_pixels:image_size_pixels, $
+      Solar_radius_km:Solar_radius_km, $
+      B_angle_degrees:B_angle_degrees, $
+      C_cme_fitted_surf:C_cme_fitted_surf, $
+      C_cme_fitted_surf_copy:C_cme_fitted_surf_copy, $
+      R_cme_fitted_surf:R_cme_fitted_surf, $
+      R_cme_fitted_surf_copy:R_cme_fitted_surf_copy, $
+      angular_width_lemniscate:angular_width_lemniscate, $
+      radial_distance_lemniscate:radial_distance_lemniscate, $
+      C_cme_outline:C_cme_outline, $
+      R_cme_outline:R_cme_outline, $
+      C_cme_MATCH_outline:C_cme_MATCH_outline, $
+      C2_cme_MATCH_outline:C2_cme_MATCH_outline, $
+      AC2_cme_MATCH_outline:AC2_cme_MATCH_outline, $
+      ;         lem_region:lem_region, $
+      C_telescope_code:C_telescope_code, $
+      C2_telescope_code:C2_telescope_code, $
+      R_telescope_code:R_telescope_code, $
+      date_array_int:date_array_int, $
+      start_date:start_date, $
+    end_date:end_date, $
+    start_julian:start_julian, $
+  end_julian:end_julian, $
+  telescope_array:telescope_array, $
+  image_in_folder_array:image_in_folder_array, $
+  image_in_root:image_in_root, $
+  export_location_root:export_location_root, $
+  max_interval_in_days:max_interval_in_days, $
+  sep:sep, $
+  rotation:rotation, $
+  rsun:rsun, $
+  pixel_scale:pixel_scale, $
+  C_list_of_image_names:C_list_of_image_names, $
+  C_list_of_image_data:C_list_of_image_data, $
+  C_list_of_datetime_strings:C_list_of_datetime_strings, $
+  C_list_of_datetime_Julian:C_list_of_datetime_Julian, $
+  C_list_of_full_time_strings:C_list_of_full_time_strings, $
+  C_list_of_image_exposure_times:C_list_of_image_exposure_times, $
+  C_list_of_image_offsets:C_list_of_image_offsets, $
+  C_list_of_image_scaling_factors:C_list_of_image_scaling_factors, $
+  C2_list_of_image_names:C2_list_of_image_names, $
+  C2_list_of_image_data:C2_list_of_image_data, $
+  C2_list_of_datetime_strings:C2_list_of_datetime_strings, $
+  C2_list_of_datetime_Julian:C2_list_of_datetime_Julian, $
+  C2_list_of_full_time_strings:C2_list_of_full_time_strings, $
+  C2_list_of_image_exposure_times:C2_list_of_image_exposure_times, $
+  C2_list_of_image_offsets:C2_list_of_image_offsets, $
+  C2_list_of_image_scaling_factors:C2_list_of_image_scaling_factors, $
+  AC2_list_of_image_names:AC2_list_of_image_names, $
+  AC2_list_of_image_data:AC2_list_of_image_data, $
+  AC2_list_of_datetime_strings:AC2_list_of_datetime_strings, $
+  AC2_list_of_datetime_Julian:AC2_list_of_datetime_Julian, $
+  AC2_list_of_full_time_strings:AC2_list_of_full_time_strings, $
+  AC2_list_of_image_exposure_times:AC2_list_of_image_exposure_times, $
+  AC2_list_of_image_offsets:AC2_list_of_image_offsets, $
+  AC2_list_of_image_scaling_factors:AC2_list_of_image_scaling_factors, $
+  cme_info_model:cme_info_model, $
+  ;         widget_set_start_and_end_time:widget_set_start_and_end_time, $
+  master_list:master_list, $
+  C_indexes:C_indexes, $
+  C2_indexes:C2_indexes, $
+  R_indexes:R_indexes, $
+  master_list_size:master_list_size, $
+  C_current_image_number:C_current_image_number, $
+  C2_current_image_number:C2_current_image_number, $
+  AC2_current_image_number:AC2_current_image_number, $
+  C_list_of_HEEQ_coords:C_list_of_HEEQ_coords, $
+  C2_list_of_HEEQ_coords:C2_list_of_HEEQ_coords, $
+  R_list_of_HEEQ_coords:R_list_of_HEEQ_coords, $
+  C_list_of_pixel_scales:C_list_of_pixel_scales, $
+  C2_list_of_pixel_scales:C2_list_of_pixel_scales, $
+  AC2_list_of_pixel_scales:AC2_list_of_pixel_scales, $
+  C_list_of_rsuns:C_list_of_rsuns, $
+  C2_list_of_rsuns:C2_list_of_rsuns, $
+  AC2_list_of_rsuns:AC2_list_of_rsuns, $
+  C_list_of_Sun_satellite_distances:C_list_of_Sun_satellite_distances, $
+  C2_list_of_Sun_satellite_distances:C2_list_of_Sun_satellite_distances, $
+  R_list_of_Sun_satellite_distances:R_list_of_Sun_satellite_distances, $
+  C_HEEQ_coords:C_HEEQ_coords, $
+  C2_HEEQ_coords:C2_HEEQ_coords, $
+  R_HEEQ_coords:R_HEEQ_coords, $
+  C_IDL_coords:C_IDL_coords, $
+  C2_IDL_coords:C2_IDL_coords, $
+  R_IDL_coords:R_IDL_coords, $
+  initial_transform:initial_transform, $
+  latitude_degrees:latitude_degrees, $
+  longitude_degrees:longitude_degrees, $
+  C_cme_model:C_cme_model, $
+  R_cme_model:R_cme_model, $
+  C_cme_model_copy:C_cme_model_copy, $
+  R_cme_model_copy:R_cme_model_copy, $
+  C_ut_string_object:C_ut_string_object, $
+  R_ut_string_object:R_ut_string_object, $
+  xsize:xsize, $
+  ysize:ysize, $
+  C_widget_image_sequence_slider:C_widget_image_sequence_slider, $
+  R_widget_image_sequence_slider:R_widget_image_sequence_slider, $
+  C_widget_outline_matches_image:C_widget_outline_matches_image, $
+  R_widget_outline_matches_image:R_widget_outline_matches_image, $
+  widget_latitude_slider:widget_latitude_slider, $
+  widget_longitude_slider:widget_longitude_slider, $
+  CME_matches_image_Julian:CME_matches_image_Julian, $
+  CME_matches_image_DateTime_string:CME_matches_image_DateTime_string, $
+  CME_matches_image_telescope:CME_matches_image_telescope, $
+  CME_matches_image_Rs_leading_edge:CME_matches_image_Rs_leading_edge, $
+  CME_matches_image_Image_number:CME_matches_image_Image_number, $
+  CME_matches_image_CME_outline:CME_matches_image_CME_outline, $
+  plot_window:plot_window, $
+  plot_view:plot_view, $
+  Julian_day_for_Earth_pos:Julian_day_for_Earth_pos, $
+  Earth_pos_AU:Earth_pos_AU, $
+  Earth_pos_HG_LAT_deg:Earth_pos_HG_LAT_deg, $
+  source_path:source_path, $
+  enlil_info_View:enlil_info_View, $
+  enlil_info_window:enlil_info_window, $
+  start_yearID:start_yearID, $
+  start_monthID:start_monthID, $
+  start_dayID:start_dayID, $
+  start_hourID:start_hourID, $
+  start_minuteID:start_minuteID, $
+end_yearID:end_yearID, $
+end_monthID:end_monthID, $
+end_dayID:end_dayID, $
+end_hourID:end_hourID, $
+end_minuteID:end_minuteID, $
+acceptID:acceptID, $
+date_array:date_array, $
+clicked_C:clicked_C, $
+clicked_C2:clicked_C2, $
+clicked_R:clicked_R, $
+currently_showing_LASCO:currently_showing_LASCO, $
+C_title_object:C_title_object, $
+R_title_object:R_title_object, $
+color_stereo_A:color_stereo_A, $
+color_c3:color_c3, $
+color_c2:color_c2, $
+cme_outline_color:cme_outline_color, $
+background_color:background_color, $
+xsize_timeline:xsize_timeline, $
+ysize_timeline:ysize_timeline, $
+CME_matches_image_C_Image_number:CME_matches_image_C_Image_number, $
+CME_matches_image_C2_Image_number:CME_matches_image_C2_Image_number, $
+CME_matches_image_AC2_Image_number:CME_matches_image_AC2_Image_number, $
+CME_matches_image_C_CME_outline:CME_matches_image_C_CME_outline, $
+CME_matches_image_C2_CME_outline:CME_matches_image_C2_CME_outline, $
+CME_matches_image_AC2_CME_outline:CME_matches_image_AC2_CME_outline, $
+C_current_background_color:C_current_background_color, $
+C_current_text_color:C_current_text_color, $
+R_current_background_color:R_current_background_color, $
+R_current_text_color:R_current_text_color, $
+widget_show_C2_or_C3:widget_show_C2_or_C3, $
+xSymbolSize_timeline:xSymbolSize_timeline, $
+ySymbolSize_timeline:ySymbolSize_timeline, $
+widget_reset_cme_analysis:widget_reset_cme_analysis, $
+C_widget_representative_image:C_widget_representative_image, $
+R_widget_representative_image:R_widget_representative_image, $
+representative_image_data:representative_image_data, $
+representative_image_has_been_defined:representative_image_has_been_defined, $
+OPS_or_VnV:OPS_or_VnV, $
+images_are_loaded:images_are_loaded, $
+;         animation_controls_outer_base:animation_controls_outer_base, $
+image_controls_base:image_controls_base, $
+cme_controls_base:cme_controls_base, $
+plot_window_base:plot_window_base, $
+enlil_info_base:enlil_info_base, $
+timeline_left_mouse_button_being_pressed:timeline_left_mouse_button_being_pressed, $
+background_color_lasco:background_color_lasco, $
+background_color_stereo_A:background_color_stereo_A, $
+animation_frames:animation_frames, $
+animate_C:animate_C, $
+animate_R:animate_R, $
+animation_start_time_marker:animation_start_time_marker, $
+animation_end_time_marker:animation_end_time_marker, $
+animation_start_time_marker_handle:animation_start_time_marker_handle, $
+animation_end_time_marker_handle:animation_end_time_marker_handle, $
+animation_start_time_marker_handle_data:animation_start_time_marker_handle_data, $
+animation_end_time_marker_handle_data:animation_end_time_marker_handle_data, $
+animation_current_time_marker:animation_current_time_marker, $
+animation_start_julian:animation_start_julian, $
+animation_end_julian:animation_end_julian, $
+timeline_normalized_x:timeline_normalized_x, $
+;         anim_start_julian:anim_start_julian, $
+;         anim_end_julian:anim_end_julian, $
+;         widget_animation_delay:widget_animation_delay, $
+;         widget_which_window_to_animate:widget_which_window_to_animate, $
+;         widget_anim_back_and_forth:widget_anim_back_and_forth, $
+C_widget_remove_this_image:C_widget_remove_this_image, $
+R_widget_remove_this_image:R_widget_remove_this_image, $
+widget_plus_12h_button:widget_plus_12h_button, $
+widget_plus_24h_button:widget_plus_24h_button, $
+lemniscate_style:lemniscate_style, $
+manual_point:manual_point, $
+use_manual_point:use_manual_point, $
+plot_window_manually_add_point:plot_window_manually_add_point, $
+allow_manual_data_point:allow_manual_data_point, $
+i_log_scale:i_log_scale, $
+C_the_action:C_the_action, $
+C_latest_click_X:C_latest_click_X, $
+C_latest_click_Y:C_latest_click_Y, $
+C_previous_click_X:C_previous_click_X, $
+C_previous_click_Y:C_previous_click_X, $
+C_click_and_drag:C_click_and_drag, $
+C_clock_angle_degrees:C_clock_angle_degrees, $
+C_clock_angle_model:C_clock_angle_model, $
+C_rotate_x:C_rotate_x, $
+C_rotate_y:C_rotate_y, $
+C_clock_angle_marker_line:C_clock_angle_marker_line, $
+C_image_lineplot:C_image_lineplot, $
+R_the_action:R_the_action, $
+R_latest_click_X:R_latest_click_X, $
+R_latest_click_Y:R_latest_click_Y, $
+R_previous_click_X:R_previous_click_X, $
+R_previous_click_Y:R_previous_click_X, $
+R_click_and_drag:R_click_and_drag, $
+R_clock_angle_degrees:R_clock_angle_degrees, $
+R_clock_angle_model:R_clock_angle_model, $
+R_rotate_x:R_rotate_x, $
+R_rotate_y:R_rotate_y, $
+R_image_lineplot:R_image_lineplot, $
+pressed_the_right_button:pressed_the_right_button, $
+position_image_lineplot:position_image_lineplot, $
+show_image_line_plot:show_image_line_plot, $
+Three_D_view_tlb_ID:Three_D_view_tlb_ID, $
+allow_show_3D_view:allow_show_3D_view, $
+Three_D_view_event_widget:Three_D_view_event_widget, $
+;         L_widget_show_line_plot:L_widget_show_line_plot, $
+;         C_widget_show_line_plot:C_widget_show_line_plot, $
+;         R_widget_show_line_plot:R_widget_show_line_plot, $
+;         L_image_lineplot_model:L_image_lineplot_model, $
+;         C_image_lineplot_model:C_image_lineplot_model, $
+;         R_image_lineplot_model:R_image_lineplot_model, $
+velocity_text_c3:velocity_text_c3, $
+velocity_text_c2:velocity_text_c2, $
+velocity_text_stereo_a:velocity_text_stereo_a, $
+calculate_individual_velocities_for_each_telescope:calculate_individual_velocities_for_each_telescope, $
+debug_mode:debug_mode, $
+swpc_cat_preferences_file:swpc_cat_preferences_file, $
+output_matched_line_data_in_txt_file:output_matched_line_data_in_txt_file, $
+C_camera_transform:C_camera_transform, $
+R_camera_transform:R_camera_transform, $
+AH1_list_of_image_names:AH1_list_of_image_names, $
+AH1_list_of_image_data:AH1_list_of_image_data, $
+AH1_list_of_datetime_strings:AH1_list_of_datetime_strings, $
+AH1_list_of_datetime_Julian:AH1_list_of_datetime_Julian, $
+AH1_list_of_full_time_strings:AH1_list_of_full_time_strings, $
+AH1_list_of_image_exposure_times:AH1_list_of_image_exposure_times, $
+AH1_list_of_image_offsets:AH1_list_of_image_offsets, $
+AH1_list_of_image_scaling_factors:AH1_list_of_image_scaling_factors, $
+AH1_list_of_HEEQ_coords:AH1_list_of_HEEQ_coords, $
+AH1_list_of_pixel_scales:AH1_list_of_pixel_scales, $
+AH1_list_of_rsuns:AH1_list_of_rsuns, $
+AH1_list_of_Sun_satellite_distances:AH1_list_of_Sun_satellite_distances, $
+AH2_list_of_image_names:AH2_list_of_image_names, $
+AH2_list_of_image_data:AH2_list_of_image_data, $
+AH2_list_of_datetime_strings:AH2_list_of_datetime_strings, $
+AH2_list_of_datetime_Julian:AH2_list_of_datetime_Julian, $
+AH2_list_of_full_time_strings:AH2_list_of_full_time_strings, $
+AH2_list_of_image_exposure_times:AH2_list_of_image_exposure_times, $
+AH2_list_of_image_offsets:AH2_list_of_image_offsets, $
+AH2_list_of_image_scaling_factors:AH2_list_of_image_scaling_factors, $
+AH2_list_of_HEEQ_coords:AH2_list_of_HEEQ_coords, $
+AH2_list_of_pixel_scales:AH2_list_of_pixel_scales, $
+AH2_list_of_rsuns:AH2_list_of_rsuns, $
+AH2_list_of_Sun_satellite_distances:AH2_list_of_Sun_satellite_distances, $
+AH1_number_of_images:AH1_number_of_images, $
+AH2_number_of_images:AH2_number_of_images, $
+currently_showing_STEREO_A:currently_showing_STEREO_A, $
+AH1_current_image_number:AH1_current_image_number, $
+AH2_current_image_number:AH2_current_image_number, $
+AH1_background_image_number:AH1_background_image_number, $
+AH2_background_image_number:AH2_background_image_number, $
+AH1_difference_imaging:AH1_difference_imaging, $
+AH2_difference_imaging:AH2_difference_imaging, $
+CME_matches_image_AH1_Image_number:CME_matches_image_AH1_Image_number, $
+CME_matches_image_AH2_Image_number:CME_matches_image_AH2_Image_number, $
+color_AH1:color_AH1, $
+color_AH2:color_AH2, $
+AH1_cme_MATCH_outline:AH1_cme_MATCH_outline, $
+AH2_cme_MATCH_outline:AH2_cme_MATCH_outline, $
+CME_matches_image_AH1_CME_outline:CME_matches_image_AH1_CME_outline, $
+CME_matches_image_AH2_CME_outline:CME_matches_image_AH2_CME_outline, $
+AH1_telescope_FOV:AH1_telescope_FOV, $
+AH2_telescope_FOV:AH2_telescope_FOV, $
+current_selection:current_selection, $
+color_AC2:color_AC2, $
+AC2_list_of_XYCEN:AC2_list_of_XYCEN, $
+AH1_list_of_XYCEN:AH1_list_of_XYCEN, $
+AH2_list_of_XYCEN:AH2_list_of_XYCEN, $
+C_list_of_XYCEN:C_list_of_XYCEN, $
+C2_list_of_XYCEN:C2_list_of_XYCEN, $
+R_current_xycen:R_current_xycen, $
+n_sat:n_sat}
+endif
  
          
 Widget_Control, tlb, Set_UValue=info, /No_Copy
