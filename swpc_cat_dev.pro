@@ -6475,7 +6475,7 @@ print, ' current_selection is ',info.current_selection,' : ',which_image
 
        CASE event.id  OF
           info.L_widget_image_sequence_slider : BEGIN
-
+	if n_elements(info.list_of_image_data) ge 0 then begin ;MY ADDITION ####
 case info.currently_showing_STEREO_B of
                 'BC2' : begin
                   info.BC2_current_image_number = which_image
@@ -6509,7 +6509,7 @@ case info.currently_showing_STEREO_B of
                   end  
 end
 
-print, 'info.L_plot ', info.L_plot
+print, 'info.L_plot ', info.L_plot ;THIS IS THE ARGUMENT THAT IS BREAKING IT. ####
 print, 'info.BC2_number_of_images ',info.BC2_number_of_images
 print, 'info.BC2_current_image_number ',info.BC2_current_image_number
 print, 'info.color_stereo_B ',info.color_stereo_B
@@ -6520,7 +6520,7 @@ info.BC2_number_of_images, $
 info.BC2_current_image_number, $
 info.color_stereo_B, $
 info.cme_outline_color
-
+	endif ;MY ADDITION ####
           END
           
           info.C_widget_image_sequence_slider : BEGIN
