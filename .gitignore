@@ -1,4 +1,5 @@
 build_swpc_cat.pro
+build_swpc_cat.pro~
 swpc_cat.in
 swpc_cat.pro
 swpc_cat.pro~~~
@@ -11,3 +12,6 @@ swpc_cat_prefs
 rename_lasco_images.pro
 swpc_cat.in~~~~
 swpc_cat.pro~~
+camera__define.pro
+quaternion__define.pro 
+.gitignore~
