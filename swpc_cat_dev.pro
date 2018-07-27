@@ -6469,7 +6469,7 @@ Widget_Control, event.top, Get_UValue=info, /No_Copy
 
 which_image = event.value - 1
 
-print, ' current_selection is ',info.current_selection,' : ',which_image
+;print, ' current_selection is ',info.current_selection,' : ',which_image
 
 
 
