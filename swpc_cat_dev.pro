@@ -6619,6 +6619,12 @@ case info.currently_showing_STEREO_A of
                   end  
 end
 
+print, 'info.R_plot ', info.R_plot
+print, 'info.AC2_number_of_images ',info.AC2_number_of_images
+print, 'info.AC2_current_image_number ',info.AC2_current_image_number
+print, 'info.color_stereo_A ',info.color_stereo_A
+print, 'info.cme_outline_color ',info.cme_outline_color
+
 swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_a, info.cme_outline_color
 
 
