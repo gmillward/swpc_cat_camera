@@ -3157,6 +3157,8 @@ function swpc_cat_which_window_to_animate, event
 
 WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
+print, 'L3160 event.value ',event.value 
+
 CASE event.value OF
 
    0 : BEGIN
@@ -9237,6 +9239,8 @@ info.animation_start_time_marker_handle->setproperty,data=info.animation_start_t
 
 info.images_timeline_window->Draw, info.images_timeline_view
 
+print 'L9240 info.which_window_to_animate ', info.which_window_to_animate
+
 CASE info.which_window_to_animate OF
    0 : BEGIN
 array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
@@ -9273,7 +9277,7 @@ info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_
 
 info.images_timeline_window->Draw, info.images_timeline_view
 
-print, 'info.which_window_to_animate ',info.which_window_to_animate
+print, 'info.which_window_to_animate ',info.which_window_to_animate ;THIS IS UNDEFINED. I BET IT RELATES TO STEREO B ####
 print, 'info.BC2_list_of_datetime_Julian ',info.BC2_list_of_datetime_Julian
 print, 'info.C_list_of_datetime_Julian ',info.C_list_of_datetime_Julian
 print, 'info.AC2_list_of_datetime_Julian ',info.AC2_list_of_datetime_Julian
