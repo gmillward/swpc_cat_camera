@@ -6197,7 +6197,7 @@ pro swpc_cat_calculate_velocity, event
 ;*****************************************************************
 
 compile_opt idl2
-
+print, 'Calculating velocity...' 
 Widget_Control, event.top, Get_UValue=info, /No_Copy
 
 number_of_matches = n_elements(info.CME_matches_image_Julian)
