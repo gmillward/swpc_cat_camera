@@ -8227,7 +8227,7 @@ PRO swpc_cat_Cleanup, tlb
 ;****************************************************************
 compile_opt idl2
 
-Widget_Control, tlb, Get_UValue=info2
+Widget_Control, tlb, Get_UValue=info
 IF N_Elements(info) NE 0 THEN begin
 help,/mem
 heap_free,info
