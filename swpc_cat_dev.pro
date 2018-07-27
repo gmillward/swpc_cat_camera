@@ -6686,7 +6686,7 @@ compile_opt idl2
 Widget_Control, event.top, Get_UValue=info, /No_Copy
 
 ;pre-defined time range (for testing)
-;info.date_array = [2011,11,26,0,0,2011,11,27,23,59]
+info.date_array = [2018,7,23,0,0,2018,7,23,12,0]
 ;info.date_array = [2010,2,7,0,0,2010,2,7,12,59]
 ;info.date_array = [2008,12,12,0,0,2008,12,14,23,59]
 
