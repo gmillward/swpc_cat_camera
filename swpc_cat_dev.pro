@@ -8789,8 +8789,7 @@ if this_minute lt 10 then this_minute_str = '0' + this_minute_str
 this_time_string = strcompress(this_year_str + '-' + this_month_str + '-' + this_day_str,/remove_all) + ' ' + $
                    strcompress(this_hour_str + ':' + this_minute_str,/remove_all) + ' UT'
 
-print, 'this_time_string ',this_time_string ;TIME ON THE TIME AXIS ####
-print, 'thisEvent ',thisEvent
+
 ;thisEVENT CAN EITHER BE MOTION, PRESS OR RELEASE AND THIS STATEMENT DETERMINES WHAT TO DO. ####
 
 CASE thisEvent OF
@@ -9223,7 +9222,7 @@ endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOK
 	print, 'myLoc ',myloc 
        oObjArr = info.images_timeline_window->Select(info.images_timeline_view, myLoc, dimensions=[100,20])
        nSel = N_ELEMENTS(oObjArr)
-	print, nSel
+	print, 'nsel ',nSel
        if nsel gt 1 then begin
        iobject = intarr(nSel)
        
