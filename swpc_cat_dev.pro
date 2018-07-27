@@ -9215,7 +9215,7 @@ endif
 
 
 endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOKMARK, THOUGH NOT ALWAYS. ####
-
+print, 'Entered case where event.y <= 10 '
 ; determine whether we are moving the start or end markers
  
        myLoc = [event.x, event.y]    
@@ -9229,7 +9229,7 @@ endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOK
        FOR i=0, nSel-1 DO BEGIN
           oObjArr[i]->GetProperty, NAME=name
           if name eq 'animation_start_time_marker' then begin
-
+		print, 'name eq animation_start_time_marker' 
 animation_start_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 line_data=fltarr(2,2)
 line_data[0,0] = animation_start_position
@@ -9269,7 +9269,7 @@ goto, jumphere
 print, 'After jumphere' 
           endif
           if name eq 'animation_end_time_marker' then begin
-
+	print 'name eq animation_end_time_marker' 
 animation_end_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 line_data=fltarr(2,2)
 line_data[0,0] = animation_end_position
