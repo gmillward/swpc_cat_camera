@@ -9230,6 +9230,7 @@ print, 'Entered case where event.y <= 10 '
           oObjArr[i]->GetProperty, NAME=name
           if name eq 'animation_start_time_marker' then begin
 		print, 'name eq animation_start_time_marker' 
+	;THIS SECTION REPRESENTS THE FIRST BOOKMARK, THE GREEN ONE ####
 animation_start_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 line_data=fltarr(2,2)
 line_data[0,0] = animation_start_position
@@ -9263,13 +9264,15 @@ l = where(array_of_julians gt this_julian)
 info.anim_start_frame = l[0]
 info.anim_start_julian = this_julian
 
-
+;CODE WILL NOT GET TO HERE IF GREEN BOOKMARK IS BREAKING. THIS SHOULD NOT BE NEEDED IF STATEMENTS ARE WRITTEN PROPERLY ####
+;SHOULD THIS NOT BE A BREAK STATEMENT? IF THEY EXIST IN IDL!
 print, 'Before jumphere '
 goto, jumphere
 print, 'After jumphere' 
           endif
           if name eq 'animation_end_time_marker' then begin
-	print 'name eq animation_end_time_marker' 
+	print, 'name eq animation_end_time_marker' 
+	;THIS SECTION REPRESENTS THE END BOOKMARK, THE RED ONE ####
 animation_end_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 line_data=fltarr(2,2)
 line_data[0,0] = animation_end_position
@@ -9284,28 +9287,28 @@ info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_
 
 info.images_timeline_window->Draw, info.images_timeline_view
 
-print, 'info.which_window_to_animate ',info.which_window_to_animate ;THIS IS UNDEFINED. I BET IT RELATES TO STEREO B ####
+;print, 'info.which_window_to_animate ',info.which_window_to_animate ;THIS IS UNDEFINED. I BET IT RELATES TO STEREO B ####
 print, 'info.BC2_list_of_datetime_Julian ',info.BC2_list_of_datetime_Julian
 print, 'info.C_list_of_datetime_Julian ',info.C_list_of_datetime_Julian
 print, 'info.AC2_list_of_datetime_Julian ',info.AC2_list_of_datetime_Julian
 
-CASE info.which_window_to_animate OF
+;CASE info.which_window_to_animate OF
 
-   0 : BEGIN
-array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
-   ENDCASE
-   1 : BEGIN
-array_of_julians = info.C_list_of_datetime_Julian->toarray()
-   ENDCASE
-   2 : BEGIN
-array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
-   ENDCASE
+;   0 : BEGIN
+;array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
+;   ENDCASE
+;   1 : BEGIN
+;array_of_julians = info.C_list_of_datetime_Julian->toarray()
+;   ENDCASE
+;   2 : BEGIN
+;array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
+;   ENDCASE
    
-ENDCASE
+;ENDCASE
 
-l = where(array_of_julians lt this_julian)
-info.anim_end_frame = l[-1]
-info.anim_end_julian = this_julian
+;l = where(array_of_julians lt this_julian)
+;info.anim_end_frame = l[-1]
+;info.anim_end_julian = this_julian
 
 goto, jumphere
 
