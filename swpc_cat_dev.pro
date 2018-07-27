@@ -2086,7 +2086,7 @@ endif
 
 swpc_cat_image_difference_and_scaling, current_background_color,  current_image_number, background_image_number, difference_imaging, $
                  list_of_image_data, image_saturation_value, coronagraph_image_object, border_image_object, i_log_scale                               
-if n_elements(list_of_full_time_strings) ge 0 then begin 
+if n_elements(list_of_full_time_strings) gt 0 then begin 
 	ut_string_object->SetProperty, strings = list_of_full_time_strings[current_image_number]
 endif else begin 
 	ut_string_object->SetProperty, strings = ''
