@@ -9215,7 +9215,7 @@ endif
 
 
 endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOKMARK, THOUGH NOT ALWAYS. ####
-print, 'Entered case where event.y <= 10 '
+;print, 'Entered case where event.y <= 10 '
 ; determine whether we are moving the start or end markers
  
        myLoc = [event.x, event.y]    
@@ -9266,9 +9266,9 @@ info.images_timeline_window->Draw, info.images_timeline_view
 
 ;CODE WILL NOT GET TO HERE IF GREEN BOOKMARK IS BREAKING. THIS SHOULD NOT BE NEEDED IF STATEMENTS ARE WRITTEN PROPERLY ####
 ;SHOULD THIS NOT BE A BREAK STATEMENT? IF THEY EXIST IN IDL!
-print, 'Before jumphere '
+;print, 'Before jumphere '
 goto, jumphere
-print, 'After jumphere' 
+;print, 'After jumphere' 
           endif
           if name eq 'animation_end_time_marker' then begin
 	
