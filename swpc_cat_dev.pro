@@ -9886,9 +9886,9 @@ images_timeline_model = OBJ_NEW('IDLgrModel')
 images_timeline_view -> Add, images_timeline_model
 
 ;app_data_path = getenv('APPDATA')
-app_data_path = 'C:\Users\george.millward.SWPC\IDL_projects\swpc_cat_camera'
+;app_data_path = 'C:\Users\george.millward.SWPC\IDL_projects\swpc_cat_camera'
 ;app_data_path = '/Users/georgemillward/IDL_projects/swpc_cat_camera'
-;app_data_path = '/home/h01/swharton/swpc_cat_camera'
+app_data_path = '/home/h01/swharton/swpc_cat_camera'
 swpc_cat_preferences_file = app_data_path + sep + 'swpc_cat_prefs'
 
 openr,lun,swpc_cat_preferences_file, error = err, /get_lun
