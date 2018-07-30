@@ -8925,7 +8925,7 @@ CASE thisEvent OF
    'PRESS': BEGIN
    
    info.timeline_left_mouse_button_being_pressed = 1
-
+	print, 'Button has been pressed'
 ;       print,'Plot Window X and Y : ',event.x , event.y
 
        END
@@ -8944,8 +8944,9 @@ info.timeline_left_mouse_button_being_pressed = 0
    
     info.timeline_left_mouse_button_being_pressed = 0
    
-   info.clicked_L = 0 ;I CHANGED THIS TO 1 ####
    info.clicked_C = 0
+   info.clicked_L = 0 ;I CHANGED THIS TO 1 ####
+   ;info.clicked_C = 0
    info.clicked_C2 = 0
    info.clicked_R = 0
    
