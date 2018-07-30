@@ -8944,9 +8944,8 @@ info.timeline_left_mouse_button_being_pressed = 0
    
     info.timeline_left_mouse_button_being_pressed = 0
    
-   info.clicked_C = 0
    info.clicked_L = 0 ;I CHANGED THIS TO 1 ####
-   ;info.clicked_C = 0
+   info.clicked_C = 0
    info.clicked_C2 = 0
    info.clicked_R = 0
    
@@ -9630,7 +9629,7 @@ PRO SWPC_CAT_DEV
 compile_opt idl2
 
 ; set n_sat to either 2 or 3
-n_sat = 2
+n_sat = 3
 
 show_cme_surface = 0
 
