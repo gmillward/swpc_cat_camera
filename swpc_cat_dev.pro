@@ -5328,8 +5328,10 @@ compile_opt idl2
 
 Widget_Control, event.top, Get_UValue=info, /No_Copy
 
+if info.n_sat eq 3 then begin 
 CASE event.id OF
 
+ 
    info.L_widget_saturationSlider : BEGIN
    info.L_image_saturation_value = event.value
 swpc_cat_image_difference_and_scaling, info.L_current_background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
@@ -5338,12 +5340,14 @@ info.L_ut_string_object->setProperty, color = info.L_current_text_color
 info.L_title_object->setProperty, color = info.L_current_text_color
    info.L_Window->Draw, info.L_both_views
    ENDCASE
-      
+
    info.C_widget_saturationSlider : BEGIN
    
    info.C_image_saturation_value = event.value
    
 case info.currently_showing_LASCO of 
+ 
+
 
 'SC2' : begin 
 swpc_cat_image_difference_and_scaling, info.C_current_background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
@@ -5374,6 +5378,49 @@ info.R_title_object->setProperty, color = info.R_current_text_color
    ENDCASE
    
 ENDCASE
+
+endif else begin 
+CASE event.id OF
+
+   info.C_widget_saturationSlider : BEGIN
+   
+   info.C_image_saturation_value = event.value
+   
+case info.currently_showing_LASCO of 
+ 
+
+
+'SC2' : begin 
+swpc_cat_image_difference_and_scaling, info.C_current_background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
+                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+info.C_ut_string_object->setProperty, color = info.C_current_text_color
+info.C_title_object->setProperty, color = info.C_current_text_color
+endcase
+'SC3' : begin 
+swpc_cat_image_difference_and_scaling, info.C_current_background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
+                 info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+info.C_ut_string_object->setProperty, color = info.C_current_text_color
+info.C_title_object->setProperty, color = info.C_current_text_color
+endcase
+endcase
+                                
+                                
+   info.C_Window->Draw, info.C_both_views
+   
+   ENDCASE
+      
+   info.R_widget_saturationSlider : BEGIN
+   info.R_image_saturation_value = event.value
+swpc_cat_image_difference_and_scaling, info.R_current_background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
+                 info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+info.R_ut_string_object->setProperty, color = info.R_current_text_color
+info.R_title_object->setProperty, color = info.R_current_text_color 
+   info.R_Window->Draw, info.R_both_views
+   ENDCASE
+   
+ENDCASE
+
+endelse
 
 Widget_Control, event.top, Set_UValue=info, /No_Copy
 
