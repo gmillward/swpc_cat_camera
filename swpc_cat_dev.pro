@@ -4265,15 +4265,17 @@ info.angular_width_lemniscate = angular_width
 
 swpc_cat_define_cme_lemniscate, info.radial_distance_lemniscate, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
 
-info.L_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
-info.L_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
-info.L_Window_copy->Draw, info.L_camera_copy
-swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
-if info.show_image_line_plot eq 1 then begin
-swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
+if info.n_sat eq 3 then begin 
+	info.L_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
+	info.L_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
+	info.L_Window_copy->Draw, info.L_camera_copy
+	swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
+	if info.show_image_line_plot eq 1 then begin
+		swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
                             info.position_image_lineplot, info.L_cme_outline                           
+	endif
+	info.L_Window->Draw, info.L_both_views
 endif
-info.L_Window->Draw, info.L_both_views
 
 info.C_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
 info.C_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
