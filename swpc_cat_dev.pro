@@ -2005,6 +2005,7 @@ pro swpc_cat_define_representative_image, event
 
 WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
+if info.n_sat eq 3 then begin 
 CASE event.id OF
 
    info.L_widget_representative_image : BEGIN
@@ -2027,6 +2028,27 @@ CASE event.id OF
 
 
 ENDCASE
+
+endif else begin 
+
+CASE event.id OF
+   
+   info.C_widget_representative_image : BEGIN
+   
+   info.C_Window -> getproperty, image_data = image_data
+   
+   ENDCASE
+   
+   info.R_widget_representative_image : BEGIN
+   
+   info.R_Window -> getproperty, image_data = image_data
+   
+   ENDCASE
+
+
+ENDCASE
+
+endelse
 
 ;for ix = 0, 511 do begin
 ;for iy = 0, 511 do begin
