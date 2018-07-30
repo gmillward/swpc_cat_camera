@@ -9177,8 +9177,8 @@ endelse ; not right-click context menu
    
    if info.timeline_left_mouse_button_being_pressed eq 1 then begin
    ;THIS COMES UP IF I CLICK AND DRAG. ####
-	;THIS WOULD MOVE THE TIMELINE BAR OR MAYBE THE BOOKMARKS AS WELL. DEPENDS ON WHERE YOU CLICK  
-if event.y gt 10 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
+	;THIS WOULD MOVE THE TIMELINE BAR. DEPENDS ON WHERE YOU CLICK  
+;if event.y gt 10 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
    
 time_line_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 line_data=fltarr(2,2)
@@ -9340,36 +9340,36 @@ endif
 
 
 
-endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOKMARK, THOUGH NOT ALWAYS. ####
+;endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOKMARK, THOUGH NOT ALWAYS. ####
 ;print, 'Entered case where event.y <= 10 '
 ; determine whether we are moving the start or end markers
  
-       myLoc = [event.x, event.y]    
+;       myLoc = [event.x, event.y]    
 	 
-       oObjArr = info.images_timeline_window->Select(info.images_timeline_view, myLoc, dimensions=[100,20])
-       nSel = N_ELEMENTS(oObjArr)
+;       oObjArr = info.images_timeline_window->Select(info.images_timeline_view, myLoc, dimensions=[100,20])
+;       nSel = N_ELEMENTS(oObjArr)
 	
-       if nsel gt 1 then begin
-       iobject = intarr(nSel)
+;       if nsel gt 1 then begin
+;       iobject = intarr(nSel)
        
-       FOR i=0, nSel-1 DO BEGIN
-          oObjArr[i]->GetProperty, NAME=name
-          if name eq 'animation_start_time_marker' then begin
+;       FOR i=0, nSel-1 DO BEGIN
+;          oObjArr[i]->GetProperty, NAME=name
+;          if name eq 'animation_start_time_marker' then begin
 		 
 	;THIS SECTION REPRESENTS THE FIRST BOOKMARK, THE GREEN ONE ####
-animation_start_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
-line_data=fltarr(2,2)
-line_data[0,0] = animation_start_position
-line_data[1,0] = 0.
-line_data[0,1] = animation_start_position
-line_data[1,1] = 1.
-info.animation_start_time_marker->setproperty,data=line_data
+;animation_start_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
+;line_data=fltarr(2,2)
+;line_data[0,0] = animation_start_position
+;line_data[1,0] = 0.
+;line_data[0,1] = animation_start_position
+;line_data[1,1] = 1.
+;info.animation_start_time_marker->setproperty,data=line_data
 
-xpos = animation_start_position
-info.animation_start_time_marker_handle_data=[[xpos,0.],[xpos+0.005,0.],[xpos+0.005,0.08],[xpos,0.08]]
-info.animation_start_time_marker_handle->setproperty,data=info.animation_start_time_marker_handle_data
+;xpos = animation_start_position
+;info.animation_start_time_marker_handle_data=[[xpos,0.],[xpos+0.005,0.],[xpos+0.005,0.08],[xpos,0.08]]
+;info.animation_start_time_marker_handle->setproperty,data=info.animation_start_time_marker_handle_data
 
-info.images_timeline_window->Draw, info.images_timeline_view
+;info.images_timeline_window->Draw, info.images_timeline_view
 
 ;print, 'L9240 info.which_window_to_animate ', info.which_window_to_animate
 
@@ -9393,25 +9393,25 @@ info.images_timeline_window->Draw, info.images_timeline_view
 ;CODE WILL NOT GET TO HERE IF GREEN BOOKMARK IS BREAKING. THIS SHOULD NOT BE NEEDED IF STATEMENTS ARE WRITTEN PROPERLY ####
 ;SHOULD THIS NOT BE A BREAK STATEMENT? IF THEY EXIST IN IDL!
 ;print, 'Before jumphere '
-goto, jumphere
+;goto, jumphere
 ;print, 'After jumphere' 
-          endif
-          if name eq 'animation_end_time_marker' then begin
+;          endif
+;          if name eq 'animation_end_time_marker' then begin
 	
 	;THIS SECTION REPRESENTS THE END BOOKMARK, THE RED ONE ####
-animation_end_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
-line_data=fltarr(2,2)
-line_data[0,0] = animation_end_position
-line_data[1,0] = 0.
-line_data[0,1] = animation_end_position
-line_data[1,1] = 1.
-info.animation_end_time_marker->setproperty,data=line_data
+;animation_end_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
+;line_data=fltarr(2,2)
+;line_data[0,0] = animation_end_position
+;line_data[1,0] = 0.
+;line_data[0,1] = animation_end_position
+;line_data[1,1] = 1.
+;info.animation_end_time_marker->setproperty,data=line_data
 
-xpos = animation_end_position
-info.animation_end_time_marker_handle_data=[[xpos,0.],[xpos-0.005,0.],[xpos-0.005,0.08],[xpos,0.08]]
-info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_marker_handle_data
+;xpos = animation_end_position
+;info.animation_end_time_marker_handle_data=[[xpos,0.],[xpos-0.005,0.],[xpos-0.005,0.08],[xpos,0.08]]
+;info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_marker_handle_data
 
-info.images_timeline_window->Draw, info.images_timeline_view
+;info.images_timeline_window->Draw, info.images_timeline_view
 
 ;print, 'info.which_window_to_animate ',info.which_window_to_animate ;THIS IS UNDEFINED. I BET IT RELATES TO STEREO B ####
 ;print, 'info.BC2_list_of_datetime_Julian ',info.BC2_list_of_datetime_Julian
@@ -9436,14 +9436,14 @@ info.images_timeline_window->Draw, info.images_timeline_view
 ;info.anim_end_frame = l[-1]
 ;info.anim_end_julian = this_julian
 
-goto, jumphere
+;goto, jumphere
 
-          endif
-       ENDFOR
+;          endif
+;       ENDFOR
        
-jumphere :
+;jumphere :
 
-       endif
+;       endif
 
 
 
@@ -9453,7 +9453,7 @@ endelse
    
 ;   print, ' MOTION ', info.timeline_left_mouse_button_being_pressed ;event.x, event.y
 
-endif   ; if left mouse button currently clicked
+;endif   ; if left mouse button currently clicked
    
 
 
