@@ -8943,26 +8943,28 @@ info.timeline_left_mouse_button_being_pressed = 0
        endif else begin
    
     info.timeline_left_mouse_button_being_pressed = 0
-   
-   info.clicked_L = 0 ;I CHANGED THIS TO 1 ####
+   print, 'info.n_sat ', info.n_sat
+   if info.n_sat eq 3 then info.clicked_L = 0 ;I CHANGED THIS TO 1 ####
    info.clicked_C = 0
    info.clicked_C2 = 0
    info.clicked_R = 0
    
    if shift_click eq 1 then begin
-   info.clicked_L = 1
+   if info.n_sat eq 3 then info.clicked_L = 1
    info.clicked_C = 1
    info.clicked_C2 = 0
    info.clicked_R = 1
    endif else begin
    fraction_y = float(event.y)/float(info.ysize_timeline)
-   if fraction_y ge 0.34375 and fraction_y le 0.4375 then info.clicked_L = 1
+   if info.n_sat eq 3 then begin    
+	if fraction_y ge 0.34375 and fraction_y le 0.4375 then info.clicked_L = 1
+   endif   
    if fraction_y ge 0.453125 and fraction_y le 0.5625 then info.clicked_C2 = 1
    if fraction_y ge 0.559375 and fraction_y le 0.703125 then info.clicked_C = 1
    if fraction_y ge 0.734375 and fraction_y le 0.84375 then info.clicked_R = 1      
    endelse
    
-
+if info.n_sat eq 3 then begin 
 if info.BC2_number_of_images gt 0 and info.clicked_L eq 1 then begin
 
 L_julian = (info.BC2_list_of_datetime_Julian).toarray()
@@ -8999,7 +9001,7 @@ info.L_plot->SetProperty, color=info.color_stereo_B
 endelse
 
 endif
-
+endif
 
 if info.C_number_of_images gt 0 and info.clicked_C eq 1 then begin
 
@@ -9192,11 +9194,12 @@ if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOK
 
 
    
-	info.clicked_L = 1
+	if info.n_sat eq 3 then info.clicked_L = 1
 	info.clicked_C = 1
 	info.clicked_C2 = 0
 	info.clicked_R = 1
    
+	if info.n_sat eq 3 then begin 
 	if info.BC2_number_of_images gt 0 and info.clicked_L eq 1 then begin
 
 		L_julian = (info.BC2_list_of_datetime_Julian).toarray()
@@ -9218,7 +9221,7 @@ if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOK
     info.CME_matches_image_BC2_Image_number,info.L_current_background_color, $
     info.background_color,info.L_current_text_color,info.color_stereo_B,info.L_cme_outline,info.BC2_cme_MATCH_outline, $
     info.L_widget_outline_matches_image,info.CME_matches_image_BC2_CME_outline, $
-    info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0,$     info.i_log_scale
+    info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0,     info.i_log_scale
 
 			swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
    
@@ -9230,7 +9233,7 @@ if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOK
 		endelse
 
 	endif
-
+	endif
 
 
 
@@ -9629,7 +9632,7 @@ PRO SWPC_CAT_DEV
 compile_opt idl2
 
 ; set n_sat to either 2 or 3
-n_sat = 3
+n_sat = 2
 
 show_cme_surface = 0
 
