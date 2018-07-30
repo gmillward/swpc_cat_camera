@@ -9426,7 +9426,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 			info.C_Window->Draw, info.C_both_views
 
-			;set_timeline_highlight_block, info.C_plot, info.C_number_of_images, C_index, info.color_C3, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, C_index, info.color_C3, info.cme_outline_color
 
 		endif else begin
 
@@ -9493,7 +9493,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 			info.C_Window->Draw, info.C_both_views
 
-			;set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, C_index, info.color_C2, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, C_index, info.color_C2, info.cme_outline_color
 
 		endif else begin
 
