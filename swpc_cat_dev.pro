@@ -10172,7 +10172,7 @@ xAxisText->SetProperty, Recompute_Dimensions=2    ; ensure that when axes are ch
 xAxisText->SetProperty, Font=helvetica10pt
 xAxisText->SetProperty, color=[255,255,255]
 
-;line_data = fltarr(2,2)
+line_data = fltarr(2,2)
 ;animation_start_time_marker = obj_new("idlgrpolyline",line_data,color=[0,255,0],name='animation_start_time_marker')
 ;animation_end_time_marker = obj_new("idlgrpolyline",line_data,color=[255,0,0],name='animation_end_time_marker')
 ;animation_start_time_marker_handle_data = fltarr(2,4)
@@ -10709,7 +10709,7 @@ cone_angle_text = obj_new("idlgrtext", strings = '1/2 Angle :', $
 cone_angle_text -> setproperty, font = courier12pt                
                
 velocity_text = obj_new("idlgrtext", strings = 'Velocity  :', $
-                color=[255,255,255], locations = [0.05,0.46],hide=1)
+                color=[255,255,255], locations = [0.05,0.46],hide=0)
 velocity_text -> setproperty, font = courier12pt                
              
 T21_5_text = obj_new("idlgrtext", strings = 'T21.5 :', $
