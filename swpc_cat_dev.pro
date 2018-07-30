@@ -3170,45 +3170,45 @@ END
 
 
 
-function swpc_cat_which_window_to_animate, event
+;function swpc_cat_which_window_to_animate, event
 
-WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
-print, 'L3160 event.value ',event.value 
+;print, 'L3160 event.value ',event.value 
 
-CASE event.value OF
+;CASE event.value OF
 
-   0 : BEGIN
+;   0 : BEGIN
 
-   info.which_window_to_animate = 0
-   array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
+;   info.which_window_to_animate = 0
+;   array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
 
-   ENDCASE
-   1 : BEGIN
+;   ENDCASE
+;   1 : BEGIN
 
-   info.which_window_to_animate = 1
-   array_of_julians = info.C_list_of_datetime_Julian->toarray()
+;   info.which_window_to_animate = 1
+;   array_of_julians = info.C_list_of_datetime_Julian->toarray()
 
-   ENDCASE
-   2 : BEGIN
+;   ENDCASE
+;   2 : BEGIN
 
-   info.which_window_to_animate = 2
-   array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
+;   info.which_window_to_animate = 2
+;   array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
 
-   ENDCASE
+;   ENDCASE
    
-ENDCASE
+;ENDCASE
 
-l = where(array_of_julians gt info.anim_start_julian)
-info.anim_start_frame = l[0]
-info.thisFrame = info.anim_start_frame
-l = where(array_of_julians lt info.anim_end_julian)
-info.anim_end_frame = l[-1]
+;l = where(array_of_julians gt info.anim_start_julian)
+;info.anim_start_frame = l[0]
+;info.thisFrame = info.anim_start_frame
+;l = where(array_of_julians lt info.anim_end_julian)
+;info.anim_end_frame = l[-1]
 
-WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
 
-Return, 1
-End
+;Return, 1
+;End
 
 
 
