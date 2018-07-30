@@ -11767,12 +11767,12 @@ info = $
          animate_L:animate_L, $
          animate_C:animate_C, $
          animate_R:animate_R, $
-         animation_start_time_marker:animation_start_time_marker, $
-         animation_end_time_marker:animation_end_time_marker, $
-         animation_start_time_marker_handle:animation_start_time_marker_handle, $
-         animation_end_time_marker_handle:animation_end_time_marker_handle, $
-         animation_start_time_marker_handle_data:animation_start_time_marker_handle_data, $
-         animation_end_time_marker_handle_data:animation_end_time_marker_handle_data, $
+;         animation_start_time_marker:animation_start_time_marker, $
+;         animation_end_time_marker:animation_end_time_marker, $
+;         animation_start_time_marker_handle:animation_start_time_marker_handle, $
+;         animation_end_time_marker_handle:animation_end_time_marker_handle, $
+;         animation_start_time_marker_handle_data:animation_start_time_marker_handle_data, $
+;         animation_end_time_marker_handle_data:animation_end_time_marker_handle_data, $
          animation_current_time_marker:animation_current_time_marker, $
          animation_start_julian:animation_start_julian, $
          animation_end_julian:animation_end_julian, $
@@ -12236,12 +12236,12 @@ background_color_stereo_A:background_color_stereo_A, $
 animation_frames:animation_frames, $
 animate_C:animate_C, $
 animate_R:animate_R, $
-animation_start_time_marker:animation_start_time_marker, $
-animation_end_time_marker:animation_end_time_marker, $
-animation_start_time_marker_handle:animation_start_time_marker_handle, $
-animation_end_time_marker_handle:animation_end_time_marker_handle, $
-animation_start_time_marker_handle_data:animation_start_time_marker_handle_data, $
-animation_end_time_marker_handle_data:animation_end_time_marker_handle_data, $
+;animation_start_time_marker:animation_start_time_marker, $
+;animation_end_time_marker:animation_end_time_marker, $
+;animation_start_time_marker_handle:animation_start_time_marker_handle, $
+;animation_end_time_marker_handle:animation_end_time_marker_handle, $
+;animation_start_time_marker_handle_data:animation_start_time_marker_handle_data, $
+;animation_end_time_marker_handle_data:animation_end_time_marker_handle_data, $
 animation_current_time_marker:animation_current_time_marker, $
 animation_start_julian:animation_start_julian, $
 animation_end_julian:animation_end_julian, $
