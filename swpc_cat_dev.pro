@@ -3372,7 +3372,7 @@ END
 ;info.BC2_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, ;info.BC2_background_image_number, info.BC2_difference_imaging, $
-                 info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, ;info.L_border_image_object, info.i_log_scale
+;                 info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, ;info.L_border_image_object, info.i_log_scale
                                 
 ;info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings);[info.BC2_current_image_number]                           
 ;info.L_Window->Draw, info.L_both_views
@@ -3389,7 +3389,7 @@ END
 ;info.C_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
-                 info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+;                 info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
 ;info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
 ;info.C_Window->Draw, info.C_both_views
@@ -3403,7 +3403,7 @@ END
 ;info.C2_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
-                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+;                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
 ;info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
 ;info.C_Window->Draw, info.C_both_views
@@ -3420,7 +3420,7 @@ END
 ;info.AC2_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
-                 info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+ ;                info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
                                 
 ;info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
 ;info.R_Window->Draw, info.R_both_views
@@ -3486,7 +3486,7 @@ END
 ;info.BC2_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
-                 info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
+;                 info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
                                 
 ;info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]                           
 ;info.L_Window->Draw, info.L_both_views
@@ -3501,7 +3501,7 @@ END
 ;info.C_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
-                 info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+ ;                info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
 ;info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
 ;info.C_Window->Draw, info.C_both_views
@@ -3515,10 +3515,10 @@ END
 ;info.C2_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
-                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+ ;                info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
 ;info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
-info.C_Window->Draw, info.C_both_views
+;info.C_Window->Draw, info.C_both_views
 
 ;swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
 
@@ -3532,7 +3532,7 @@ info.C_Window->Draw, info.C_both_views
 ;info.AC2_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
-                 info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+ ;                info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
                                 
 ;info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
 ;info.R_Window->Draw, info.R_both_views
@@ -3574,7 +3574,7 @@ info.C_Window->Draw, info.C_both_views
 ;info.BC2_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
-                 info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
+ ;                info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
                                 
 ;info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]                           
 ;info.L_Window->Draw, info.L_both_views
@@ -3591,7 +3591,7 @@ info.C_Window->Draw, info.C_both_views
 ;info.C_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
-                 info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+ ;                info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
 ;info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
 ;info.C_Window->Draw, info.C_both_views
@@ -3605,7 +3605,7 @@ info.C_Window->Draw, info.C_both_views
 ;info.C2_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
-                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
+;                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
 ;info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
 ;info.C_Window->Draw, info.C_both_views
@@ -3623,8 +3623,8 @@ info.C_Window->Draw, info.C_both_views
 ;info.AC2_current_image_number = p
 
 ;swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
-                 info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-                                
+;                 info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+;                                
 ;info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
 ;info.R_Window->Draw, info.R_both_views
 
