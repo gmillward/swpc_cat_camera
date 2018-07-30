@@ -2567,7 +2567,7 @@ plot->SetProperty, vert_colors=vert_colors
 end
 
 
-
+;I DON'T KNOW WHAT THIS IS DOING ####
 pro swpc_cat_update_cme_outline,Window_copy,camera_copy,cme_outline
 Window_copy->Draw, camera_copy
 Window_copy->GetProperty, Image_Data=snapshot
@@ -2593,7 +2593,7 @@ widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C3'
 
 ; make sure, as we switch from C3 to C2, that any C3 match (green line)
 ; is hidden.... 
-info.C_cme_MATCH_outline->SetProperty, hide = 1
+info.C_cme_MATCH_outline->SetProperty, hide = 1 ;I CHANGED C TO C3 ####
 
 widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C2_list_of_datetime_Julian)
 
@@ -4197,7 +4197,7 @@ pro swpc_cat_change_lemniscate_radial_distance, event
 
 Widget_Control, event.top, Get_UValue=info, /No_Copy
 
-
+;WHY ARE WE DIVIDING BY TEN HERE? WHAT UNITS ARE BEING USED? SOLAR RADII? ####
 radial_distance_lemniscate = float(event.value) / 10.
 
 swpc_cat_actually_change_lemniscate_radial_distance,info,radial_distance_lemniscate
@@ -8584,7 +8584,7 @@ END
 
 
 pro swpc_cat_Window_button_click_events, event
-
+print, 'Window_button_click_events' 
 compile_opt idl2
 
 Widget_Control, event.top, Get_UValue=info, /No_Copy
@@ -8606,11 +8606,11 @@ CASE thisEvent OF
        Widget_Control, event.id, Draw_Motion_Events=1 ; Motion events ON.
 
 if info.debug_mode eq 1 then print, 'event.press ', event.press
-if event.press eq 4 then begin
+if event.press eq 4 then begin ;THIS MEANS I HAVE CLICKED THE RIGHT BUTTON. 
 
 info.pressed_the_right_button = 1 
 
-endif else begin
+endif else begin ;THIS MEANS I HAVE PRESSED THE LEFT BUTTON? 
 
 info.pressed_the_right_button = 0
 
@@ -8784,7 +8784,7 @@ endif
        END
    'MOTION': BEGIN ; motion events
 
-if info.pressed_the_right_button eq 1 then begin
+if info.pressed_the_right_button eq 1 then begin ;IF RIGHT BUTTON IS CLICKED, DO NOTHING... 
 
 endif else begin
 
@@ -9324,8 +9324,13 @@ if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOK
 
    
 	if info.n_sat eq 3 then info.clicked_L = 1
-	info.clicked_C = 1
-	info.clicked_C2 = 0
+	if info.currently_showing_LASCO eq 'SC3' then begin 
+		info.clicked_C = 1
+		info.clicked_C2 = 0
+	endif else begin 
+		info.clicked_C = 0
+		info.clicked_C2 = 1
+	endelse
 	info.clicked_R = 1
    
 	if info.n_sat eq 3 then begin 
@@ -9365,9 +9370,10 @@ if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOK
 	endif
 
 
-
-
+	
 	if info.C_number_of_images gt 0 and info.clicked_C eq 1 then begin
+		
+		print, 'Moving with timeline' 
 
 		info.C_cme_outline -> setProperty, hide = 1
 		info.C_cme_MATCH_outline-> setProperty, hide = 1
@@ -9431,7 +9437,75 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 	endif
 
+	
+	if info.C2_number_of_images gt 0 and info.clicked_C2 eq 1 then begin
+		
+		print, 'Moving with timeline' 
 
+		info.C_cme_outline -> setProperty, hide = 1
+		info.C_cme_MATCH_outline-> setProperty, hide = 1
+		info.C2_cme_MATCH_outline-> setProperty, hide = 1
+
+		info.currently_showing_LASCO = 'SC2'
+		widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C3'
+
+		C_julian = (info.C2_list_of_datetime_Julian).toarray()
+		C_index = (where(this_julian-C_julian lt 0.0))[0]
+		if C_index gt 0 then begin
+			if abs(C_julian[C_index - 1] - this_julian) lt abs(C_julian[C_index] - this_julian) then C_index --
+		endif
+
+		if abs(C_julian[C_index] - this_julian) lt (1./48.) then begin
+
+			if C_index eq -1 then C_index = info.C2_number_of_images - 1
+			info.C2_current_image_number = C_index
+			widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C2_list_of_datetime_Julian)
+			widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
+
+			info.C_title_object -> setproperty, strings = 'SOHO LASCO C2'
+
+			swpc_cat_REDRAW_THE_IMAGE, $
+    info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
+    info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
+    info.CME_matches_image_C_Image_number,info.C_current_background_color, $
+    info.background_color,info.C_current_text_color,info.color_c2,info.C_cme_outline,info.C2_cme_MATCH_outline, $
+    info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
+    info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+
+			swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+
+			swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
+info.C_HEEQ_coords[1] = B_angle_degrees
+
+			info.C2_telescope_FOV = (256. * ((info.C2_list_of_pixel_scales)[0] / (info.C2_list_of_image_scaling_factors)[0])) / (info.C2_list_of_rsuns)[0]
+
+			info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-			info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
+			info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
+
+			the_day = long((info.C2_list_of_datetime_Julian)[0])
+			i_day = where(the_day lt info.Julian_day_for_Earth_pos)
+			i_day = i_day[0]
+
+			info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
+			info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+
+			swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
+
+			info.C_Window->Draw, info.C_both_views
+
+			;set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, C_index, info.color_C2, info.cme_outline_color
+
+		endif else begin
+
+			info.C_window->erase, color=info.background_color_lasco
+			info.C2_plot->SetProperty, color = info.color_C2
+
+		endelse
+
+	endif
+
+
+	
 
 
 
@@ -9761,7 +9835,7 @@ PRO SWPC_CAT_DEV
 compile_opt idl2
 
 ; set n_sat to either 2 or 3
-n_sat = 2
+n_sat = 3
 
 show_cme_surface = 0
 
