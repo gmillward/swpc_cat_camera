@@ -3337,338 +3337,338 @@ END
 ;------------------------------------------------------------------------------
 
 
-pro swpc_cat_XMOVIE_EVENT, event
+;pro swpc_cat_XMOVIE_EVENT, event
 
    ; Get the INFO structure.
 
-WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
    ; What kind of event is this?
 
-eventName = TAG_NAMES(event, /STRUCTURE_NAME)
+;eventName = TAG_NAMES(event, /STRUCTURE_NAME)
 
    ; Code for BUTTON events.
 
-IF eventName EQ 'WIDGET_BUTTON' THEN BEGIN
+;IF eventName EQ 'WIDGET_BUTTON' THEN BEGIN
 
-widget_control,info.play_pause_button,get_value = play_or_pause_text
+;widget_control,info.play_pause_button,get_value = play_or_pause_text
 
-   CASE play_or_pause_text OF
+;   CASE play_or_pause_text OF
 
-      'Play ' : BEGIN
-widget_control,info.play_pause_button,set_value = 'Pause'
+;      'Play ' : BEGIN
+;widget_control,info.play_pause_button,set_value = 'Pause'
 
             ; If stop flag is 0, then display next frame.
 
-         IF info.stopflag EQ 0 THEN BEGIN
+;         IF info.stopflag EQ 0 THEN BEGIN
 
-p = info.thisFrame
+;p = info.thisFrame
 
 
-CASE info.which_window_to_animate OF
+;CASE info.which_window_to_animate OF
 
-   0 : BEGIN
+;   0 : BEGIN
    
-info.BC2_current_image_number = p
+;info.BC2_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
-                 info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, ;info.BC2_background_image_number, info.BC2_difference_imaging, $
+                 info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, ;info.L_border_image_object, info.i_log_scale
                                 
-info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]                           
-info.L_Window->Draw, info.L_both_views
+;info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings);[info.BC2_current_image_number]                           
+;info.L_Window->Draw, info.L_both_views
 
-swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
 
-widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
+;widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
 
-   ENDCASE
-   1 : BEGIN
+;   ENDCASE
+;   1 : BEGIN
    
-if info.currently_showing_LASCO eq 'SC3' then begin
+;if info.currently_showing_LASCO eq 'SC3' then begin
    
-info.C_current_image_number = p
+;info.C_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
                  info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
-info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
-info.C_Window->Draw, info.C_both_views
+;info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
+;info.C_Window->Draw, info.C_both_views
 
-swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
 
-widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
+;widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
 
-endif else begin
+;endif else begin
 
-info.C2_current_image_number = p
+;info.C2_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
                  info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
-info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
-info.C_Window->Draw, info.C_both_views
+;info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
+;info.C_Window->Draw, info.C_both_views
 
-swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
 
-widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
+;widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
 
-endelse
+;endelse
 
-   ENDCASE
-   2 : BEGIN
+;   ENDCASE
+;   2 : BEGIN
    
-info.AC2_current_image_number = p
+;info.AC2_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
                  info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
                                 
-info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
-info.R_Window->Draw, info.R_both_views
+;info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
+;info.R_Window->Draw, info.R_both_views
 
-swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
 
-widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
+;widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
 
-   ENDCASE
+;   ENDCASE
    
-ENDCASE
+;ENDCASE
 
 
-info.images_timeline_window -> draw, info.images_timeline_view
+;info.images_timeline_window -> draw, info.images_timeline_view
 
-         ENDIF
+;         ENDIF
 
             ; Update frame number.
-         if info.i_anim_back_and_forth eq 0 then begin
+;         if info.i_anim_back_and_forth eq 0 then begin
          
-         info.thisFrame = info.thisFrame + 1
+;         info.thisFrame = info.thisFrame + 1
 
-         IF info.thisFrame GT (info.anim_end_frame) THEN info.thisFrame = info.anim_start_frame
+;         IF info.thisFrame GT (info.anim_end_frame) THEN info.thisFrame = info.anim_start_frame
          
-         endif else begin
+;         endif else begin
          
-         info.thisFrame = info.thisFrame + info.i_move
+;         info.thisFrame = info.thisFrame + info.i_move
          
-         IF info.thisFrame GT (info.anim_end_frame) THEN begin
-         info.thisFrame = info.thisFrame -1
-         info.i_move = -1        
-         endif
-         IF info.thisFrame LT (info.anim_start_frame) THEN begin
-         info.thisFrame = info.thisFrame +1
-         info.i_move = 1
-         endif
+;         IF info.thisFrame GT (info.anim_end_frame) THEN begin
+;         info.thisFrame = info.thisFrame -1
+;         info.i_move = -1        
+;         endif
+;         IF info.thisFrame LT (info.anim_start_frame) THEN begin
+;         info.thisFrame = info.thisFrame +1
+;         info.i_move = 1
+;         endif
          
-         endelse
+;         endelse
 
-            ; Set a timer event to get back into this event handler.
+;            ; Set a timer event to get back into this event handler.
 
-         WIDGET_CONTROL, event.ID, TIMER=0
+;         WIDGET_CONTROL, event.ID, TIMER=0
 
             ; Update stop flag.
 
-         info.stopflag = 0
-      END ; of Play button CASE.
+;         info.stopflag = 0
+;      END ; of Play button CASE.
 
-      'Pause' : BEGIN
+;      'Pause' : BEGIN
       
-widget_control,info.play_pause_button,set_value = 'Play '
+;widget_control,info.play_pause_button,set_value = 'Play '
 
-         info.stopflag = 1
+;         info.stopflag = 1
 ;         info.thisFrame = info.thisFrame - 1  ; Subtract a frame.
 ; make sure that when we stop the animation the current image number
 ; matches the image shown....
-p = info.thisFrame
+;p = info.thisFrame
 
-CASE info.which_window_to_animate OF
+;CASE info.which_window_to_animate OF
 
-   0 : BEGIN
+;   0 : BEGIN
    
-info.BC2_current_image_number = p
+;info.BC2_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
                  info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
                                 
-info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]                           
-info.L_Window->Draw, info.L_both_views
+;info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]                           
+;info.L_Window->Draw, info.L_both_views
 
-swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
 
-   ENDCASE
-   1 : BEGIN
+;   ENDCASE
+;   1 : BEGIN
    
-if info.currently_showing_LASCO eq 'SC3' then begin
+;if info.currently_showing_LASCO eq 'SC3' then begin
    
-info.C_current_image_number = p
+;info.C_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
                  info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
-info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
-info.C_Window->Draw, info.C_both_views
+;info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
+;info.C_Window->Draw, info.C_both_views
 
-swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
 
-widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
+;widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
 
-endif else begin
+;endif else begin
 
-info.C2_current_image_number = p
+;info.C2_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
                  info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
-info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
+;info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
 info.C_Window->Draw, info.C_both_views
 
-swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
 
-widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
+;widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
 
-endelse
+;endelse
 
-   ENDCASE
-   2 : BEGIN
+;   ENDCASE
+;   2 : BEGIN
    
-info.AC2_current_image_number = p
+;info.AC2_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
                  info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
                                 
-info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
-info.R_Window->Draw, info.R_both_views
+;info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
+;info.R_Window->Draw, info.R_both_views
 
-swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
 
-   ENDCASE
+;   ENDCASE
    
-ENDCASE
-info.images_timeline_window -> draw, info.images_timeline_view
+;ENDCASE
+;info.images_timeline_window -> draw, info.images_timeline_view
 
-         END
+;         END
 
-   ENDCASE
+;   ENDCASE
 
       ; Put INFO structure back.
 
-   IF WIDGET_INFO(event.top, /VALID_ID) THEN $
-      WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-   RETURN
-ENDIF ; of BUTTON code
+;   IF WIDGET_INFO(event.top, /VALID_ID) THEN $
+;      WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+;   RETURN
+;ENDIF ; of BUTTON code
 
    ; Code for TIMER events.
 
-IF eventName EQ 'WIDGET_TIMER' THEN BEGIN
+;IF eventName EQ 'WIDGET_TIMER' THEN BEGIN
 
-   IF info.stopflag EQ 0 THEN BEGIN
+;   IF info.stopflag EQ 0 THEN BEGIN
 
          ; Delay for a moment.
 
-      Wait, info.delay
+;      Wait, info.delay
 
-p = info.thisFrame
+;p = info.thisFrame
 
-CASE info.which_window_to_animate OF
+;CASE info.which_window_to_animate OF
 
-   0 : BEGIN
+;   0 : BEGIN
    
-info.BC2_current_image_number = p
+;info.BC2_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
                  info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
                                 
-info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]                           
-info.L_Window->Draw, info.L_both_views
+;info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]                           
+;info.L_Window->Draw, info.L_both_views
 
-swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
 
-widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
+;widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
 
-   ENDCASE
-   1 : BEGIN
+;   ENDCASE
+;   1 : BEGIN
    
-if info.currently_showing_LASCO eq 'SC3' then begin
+;if info.currently_showing_LASCO eq 'SC3' then begin
    
-info.C_current_image_number = p
+;info.C_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
                  info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
-info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
-info.C_Window->Draw, info.C_both_views
+;info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
+;info.C_Window->Draw, info.C_both_views
 
-swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
 
-widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
+;widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
 
-endif else begin
+;endif else begin
 
-info.C2_current_image_number = p
+;info.C2_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
                  info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
                                 
-info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
-info.C_Window->Draw, info.C_both_views
+;info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
+;info.C_Window->Draw, info.C_both_views
 
-swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
 
-widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
+;widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
 
-endelse
+;endelse
 
 
-   ENDCASE
-   2 : BEGIN
+;   ENDCASE
+;   2 : BEGIN
    
-info.AC2_current_image_number = p
+;info.AC2_current_image_number = p
 
-swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
+;swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
                  info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
                                 
-info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
-info.R_Window->Draw, info.R_both_views
+;info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
+;info.R_Window->Draw, info.R_both_views
 
-swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
+;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
 
-widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
+;widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
 
-   ENDCASE
+;   ENDCASE
    
-ENDCASE
-info.images_timeline_window -> draw, info.images_timeline_view
+;ENDCASE
+;info.images_timeline_window -> draw, info.images_timeline_view
 
             ; Update frame number.
-         if info.i_anim_back_and_forth eq 0 then begin
+;         if info.i_anim_back_and_forth eq 0 then begin
          
-         info.thisFrame = info.thisFrame + 1
-         IF info.thisFrame GT (info.anim_end_frame) THEN info.thisFrame = info.anim_start_frame
+;         info.thisFrame = info.thisFrame + 1
+;         IF info.thisFrame GT (info.anim_end_frame) THEN info.thisFrame = info.anim_start_frame
          
-         endif else begin
+;         endif else begin
          
-         info.thisFrame = info.thisFrame + info.i_move
+;         info.thisFrame = info.thisFrame + info.i_move
          
-         IF info.thisFrame GT (info.anim_end_frame) THEN begin
-         info.thisFrame = info.thisFrame -2
-         info.i_move = -1        
-         endif
-         IF info.thisFrame LT (info.anim_start_frame) THEN begin
-         info.thisFrame = info.thisFrame +2
-         info.i_move = 1
-         endif
+;         IF info.thisFrame GT (info.anim_end_frame) THEN begin
+;         info.thisFrame = info.thisFrame -2
+;         info.i_move = -1        
+;         endif
+;         IF info.thisFrame LT (info.anim_start_frame) THEN begin
+;         info.thisFrame = info.thisFrame +2
+;         info.i_move = 1
+;         endif
          
-         endelse
+;         endelse
 
          ; Set a timer event to get back into this event handler.
 
-      IF info.stopflag EQ 0 THEN WIDGET_CONTROL, event.ID, TIMER=0
-   ENDIF
+;      IF info.stopflag EQ 0 THEN WIDGET_CONTROL, event.ID, TIMER=0
+;   ENDIF
 
       ; Put INFO structure back.
 
-   WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-ENDIF ; of TIMER code
+;   WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+;ENDIF ; of TIMER code
 
-END ; ******************************** of XMOVIE_EVENT ***********************
+;END ; ******************************** of XMOVIE_EVENT ***********************
 
 
 
