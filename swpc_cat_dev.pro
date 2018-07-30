@@ -3214,95 +3214,95 @@ End
 
 
 
-pro swpc_cat_set_animation_start, event
-WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+;pro swpc_cat_set_animation_start, event
+;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
-this_julian = (((info.timeline_normalized_x - info.position_timeline[0]) / (info.position_timeline[2] - info.position_timeline[0])) * (info.end_julian - info.start_julian)) + info.start_julian
+;this_julian = (((info.timeline_normalized_x - info.position_timeline[0]) / (info.position_timeline[2] - ;info.position_timeline[0])) * (info.end_julian - info.start_julian)) + info.start_julian
 
-animation_start_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
-line_data=fltarr(2,2)
-line_data[0,0] = animation_start_position
-line_data[1,0] = 0.
-line_data[0,1] = animation_start_position
-line_data[1,1] = 1.
-info.animation_start_time_marker->setproperty,data=line_data
+;animation_start_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
+;line_data=fltarr(2,2)
+;line_data[0,0] = animation_start_position
+;line_data[1,0] = 0.
+;line_data[0,1] = animation_start_position
+;line_data[1,1] = 1.
+;info.animation_start_time_marker->setproperty,data=line_data
 
-xpos = animation_start_position
-info.animation_start_time_marker_handle_data=[[xpos,0.],[xpos+0.005,0.],[xpos+0.005,0.08],[xpos,0.08]]
-info.animation_start_time_marker_handle->setproperty,data=info.animation_start_time_marker_handle_data
+;xpos = animation_start_position
+;info.animation_start_time_marker_handle_data=[[xpos,0.],[xpos+0.005,0.],[xpos+0.005,0.08],[xpos,0.08]]
+;info.animation_start_time_marker_handle->setproperty,data=info.animation_start_time_marker_handle_data
 
-info.images_timeline_window->Draw, info.images_timeline_view
+;info.images_timeline_window->Draw, info.images_timeline_view
 
-CASE info.which_window_to_animate OF
-   0 : BEGIN
-array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
-   ENDCASE
-   1 : BEGIN
-array_of_julians = info.C_list_of_datetime_Julian->toarray()
-   ENDCASE
-   2 : BEGIN
-array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
-   ENDCASE
+;CASE info.which_window_to_animate OF
+;   0 : BEGIN
+;array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
+;   ENDCASE
+;   1 : BEGIN
+;array_of_julians = info.C_list_of_datetime_Julian->toarray()
+;   ENDCASE
+;   2 : BEGIN
+;array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
+;   ENDCASE
    
-ENDCASE
+;ENDCASE
 
 
 
-l = where(array_of_julians gt this_julian)
-info.anim_start_frame = l[0]
-info.anim_start_julian = this_julian
-info.thisFrame = info.anim_start_frame
+;l = where(array_of_julians gt this_julian)
+;info.anim_start_frame = l[0]
+;info.anim_start_julian = this_julian
+;info.thisFrame = info.anim_start_frame
 
-if info.debug_mode eq 1 then print, this_julian, format='(f20.10)'
-CALDAT, this_julian, Month, Day, Year, Hour, Minute
-if info.debug_mode eq 1 then print, year, month, day, hour, minute
-if info.debug_mode eq 1 then print, array_of_julians, format='(3f20.10)'
-if info.debug_mode eq 1 then print, l[0]
-if info.debug_mode eq 1 then print, array_of_julians[l[0]],format='(f20.10)'
+;if info.debug_mode eq 1 then print, this_julian, format='(f20.10)'
+;CALDAT, this_julian, Month, Day, Year, Hour, Minute
+;if info.debug_mode eq 1 then print, year, month, day, hour, minute
+;if info.debug_mode eq 1 then print, array_of_julians, format='(3f20.10)'
+;if info.debug_mode eq 1 then print, l[0]
+;if info.debug_mode eq 1 then print, array_of_julians[l[0]],format='(f20.10)'
 
-WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-END
+;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+;END
 
 
-pro swpc_cat_set_animation_end, event
-WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+;pro swpc_cat_set_animation_end, event
+;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
-this_julian = (((info.timeline_normalized_x - info.position_timeline[0]) / (info.position_timeline[2] - info.position_timeline[0])) * (info.end_julian - info.start_julian)) + info.start_julian
+;this_julian = (((info.timeline_normalized_x - info.position_timeline[0]) / (info.position_timeline[2] - ;info.position_timeline[0])) * (info.end_julian - info.start_julian)) + info.start_julian
 
-animation_end_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
-line_data=fltarr(2,2)
-line_data[0,0] = animation_end_position
-line_data[1,0] = 0.
-line_data[0,1] = animation_end_position
-line_data[1,1] = 1.
-info.animation_end_time_marker->setproperty,data=line_data
+;animation_end_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
+;line_data=fltarr(2,2)
+;line_data[0,0] = animation_end_position
+;line_data[1,0] = 0.
+;line_data[0,1] = animation_end_position
+;line_data[1,1] = 1.
+;info.animation_end_time_marker->setproperty,data=line_data
 
-xpos = animation_end_position
-info.animation_end_time_marker_handle_data=[[xpos,0.],[xpos-0.005,0.],[xpos-0.005,0.08],[xpos,0.08]]
-info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_marker_handle_data
+;xpos = animation_end_position
+;info.animation_end_time_marker_handle_data=[[xpos,0.],[xpos-0.005,0.],[xpos-0.005,0.08],[xpos,0.08]]
+;info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_marker_handle_data
 
-info.images_timeline_window->Draw, info.images_timeline_view
+;info.images_timeline_window->Draw, info.images_timeline_view
 
-CASE info.which_window_to_animate OF
+;CASE info.which_window_to_animate OF
 
-   0 : BEGIN
-array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
-   ENDCASE
-   1 : BEGIN
-array_of_julians = info.C_list_of_datetime_Julian->toarray()
-   ENDCASE
-   2 : BEGIN
-array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
-   ENDCASE
+;   0 : BEGIN
+;array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
+;   ENDCASE
+;   1 : BEGIN
+;array_of_julians = info.C_list_of_datetime_Julian->toarray()
+;   ENDCASE
+;   2 : BEGIN
+;array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
+;   ENDCASE
    
-ENDCASE
+;ENDCASE
 
-l = where(array_of_julians lt this_julian)
-info.anim_end_frame = l[-1]
-info.anim_end_julian = this_julian
+;l = where(array_of_julians lt this_julian)
+;info.anim_end_frame = l[-1]
+;info.anim_end_julian = this_julian
 
-WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-END
+;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+;END
 
 
 
@@ -8944,7 +8944,7 @@ info.timeline_left_mouse_button_being_pressed = 0
    
     info.timeline_left_mouse_button_being_pressed = 0
    
-   info.clicked_L = 0
+   info.clicked_L = 0 ;I CHANGED THIS TO 1 ####
    info.clicked_C = 0
    info.clicked_C2 = 0
    info.clicked_R = 0
@@ -9178,7 +9178,7 @@ endelse ; not right-click context menu
    if info.timeline_left_mouse_button_being_pressed eq 1 then begin
    ;THIS COMES UP IF I CLICK AND DRAG. ####
 	;THIS WOULD MOVE THE TIMELINE BAR. DEPENDS ON WHERE YOU CLICK  
-;if event.y gt 10 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
+if event.y gt 0 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
    
 time_line_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 line_data=fltarr(2,2)
@@ -9338,7 +9338,7 @@ endelse
 endif
 
 
-
+endif
 
 ;endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOKMARK, THOUGH NOT ALWAYS. ####
 ;print, 'Entered case where event.y <= 10 '
@@ -9447,13 +9447,13 @@ endif
 
 
 
-endelse
+;endelse ;FOR WHEN EVENT.Y < 10 ####
 
 
    
 ;   print, ' MOTION ', info.timeline_left_mouse_button_being_pressed ;event.x, event.y
 
-;endif   ; if left mouse button currently clicked
+endif   ; if left mouse button currently clicked
    
 
 
@@ -10061,8 +10061,8 @@ images_timeline_model->Add, R_plot
 images_timeline_model->Add, xaxis_images_timeline
 
 timeline_contextBase = WIDGET_BASE(draw_available_images_timeline, /CONTEXT_MENU, UNAME = 'timeline_contextBase',sensitive=0)
-timeline_set_animation_start = Widget_Button(timeline_contextBase, Value='Set Start',Event_Pro='swpc_cat_set_animation_start')
-timeline_set_animation_end = Widget_Button(timeline_contextBase, Value='Set End',Event_Pro='swpc_cat_set_animation_end')
+;timeline_set_animation_start = Widget_Button(timeline_contextBase, Value='Set Start',Event_Pro='swpc_cat_set_animation_start')
+;timeline_set_animation_end = Widget_Button(timeline_contextBase, Value='Set End',Event_Pro='swpc_cat_set_animation_end')
 
 ; figure out the current time so we can provide some decent defaults for the coming
 ; date/time text boxes.............
