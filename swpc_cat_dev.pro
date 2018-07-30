@@ -5184,6 +5184,7 @@ pro swpc_cat_xcolors_top_slider, event
 
 Widget_Control, event.top, Get_UValue=info, /No_Copy
 
+if info.n_sat eq 3 then begin 
 CASE event.id OF
 
    info.L_widget_topSlider : BEGIN
@@ -5202,6 +5203,23 @@ CASE event.id OF
    ENDCASE
      
 ENDCASE
+
+endif else begin 
+CASE event.id OF
+  
+   info.C_widget_topSlider : BEGIN
+   info.C_image_color_palette -> setproperty,top_stretch = event.value
+   info.C_Window->Draw, info.C_both_views
+   ENDCASE
+      
+   info.R_widget_topSlider : BEGIN
+   info.R_image_color_palette -> setproperty,top_stretch = event.value
+   info.R_Window->Draw, info.R_both_views
+   ENDCASE
+     
+ENDCASE
+
+endelse
 
 Widget_Control, event.top, Set_UValue=info, /No_Copy
 END
@@ -5258,6 +5276,7 @@ END
 pro swpc_cat_xcolors_gamma_slider, event
 
 Widget_Control, event.top, Get_UValue=info, /No_Copy
+
 
 CASE event.id OF
 
