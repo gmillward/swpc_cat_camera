@@ -3307,16 +3307,16 @@ END
 
 
 ;------------------------------------------------------------------------------
-function swpc_cat_xmovie_back_and_forth, event
-WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
-if info.i_anim_back_and_forth eq 0 then begin
-info.i_anim_back_and_forth = 1
-endif else begin
-info.i_anim_back_and_forth = 0
-endelse
-WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-return,1
-END
+;function swpc_cat_xmovie_back_and_forth, event
+;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+;if info.i_anim_back_and_forth eq 0 then begin
+;info.i_anim_back_and_forth = 1
+;endif else begin
+;info.i_anim_back_and_forth = 0
+;endelse
+;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+;return,1
+;END
 ;------------------------------------------------------------------------------
 pro swpc_cat_XMOVIE_DELAY_EVENTS, event
 
