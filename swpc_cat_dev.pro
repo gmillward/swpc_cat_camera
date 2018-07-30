@@ -10697,15 +10697,15 @@ xtickinterval = 0.25
 
 
 latitude_text = obj_new("idlgrtext", strings = 'Lat :', $
-                color=[255,255,255], locations = [0.05,0.76],hide=1)
+                color=[255,255,255], locations = [0.05,0.76],hide=0)
 latitude_text -> setproperty, font = courier12pt
 
 longitude_text = obj_new("idlgrtext", strings = 'Lon :', $
-                color=[255,255,255], locations = [0.05,0.66],hide=1)
+                color=[255,255,255], locations = [0.05,0.66],hide=0)
 longitude_text -> setproperty, font = courier12pt
                 
 cone_angle_text = obj_new("idlgrtext", strings = '1/2 Angle :', $
-                color=[255,255,255], locations = [0.05,0.56],hide=1)
+                color=[255,255,255], locations = [0.05,0.56],hide=0)
 cone_angle_text -> setproperty, font = courier12pt                
                
 velocity_text = obj_new("idlgrtext", strings = 'Velocity  :', $
@@ -10713,7 +10713,7 @@ velocity_text = obj_new("idlgrtext", strings = 'Velocity  :', $
 velocity_text -> setproperty, font = courier12pt                
              
 T21_5_text = obj_new("idlgrtext", strings = 'T21.5 :', $
-                color=[255,255,255], locations = [0.05,0.86],hide=1)
+                color=[255,255,255], locations = [0.05,0.86],hide=0)
 T21_5_text -> setproperty, font = courier12pt                 
                 
 T21_5_string = ''
