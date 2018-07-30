@@ -1261,54 +1261,54 @@ END
 
 
 
-pro swpc_cat_show_line_plot, event
+;pro swpc_cat_show_line_plot, event
 
-WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
-CASE event.id OF
+;CASE event.id OF
 
-   info.L_widget_show_line_plot : BEGIN
+;   info.L_widget_show_line_plot : BEGIN
    
-   info.L_image_lineplot_model -> SetProperty, hide = 0
-   info.L_clock_angle_model -> SetProperty, hide = 0
-   info.show_image_line_plot = 1
-      swpc_cat_replot_image_line_plot, $
-      info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
-      info.position_image_lineplot, info.L_cme_outline
-   info.L_Window->Draw, info.L_both_views
+;   info.L_image_lineplot_model -> SetProperty, hide = 0
+;   info.L_clock_angle_model -> SetProperty, hide = 0
+;   info.show_image_line_plot = 1
+;      swpc_cat_replot_image_line_plot, $
+;      info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
+;      info.position_image_lineplot, info.L_cme_outline
+;   info.L_Window->Draw, info.L_both_views
 
-   ENDCASE
+;   ENDCASE
       
-   info.C_widget_show_line_plot : BEGIN
+;   info.C_widget_show_line_plot : BEGIN
    
-   info.C_image_lineplot_model -> SetProperty, hide = 0
-   info.C_clock_angle_model -> SetProperty, hide = 0
-   info.show_image_line_plot = 1
-      swpc_cat_replot_image_line_plot, $
-      info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
-      info.position_image_lineplot, info.C_cme_outline
-   info.C_Window->Draw, info.C_both_views
+;   info.C_image_lineplot_model -> SetProperty, hide = 0
+;   info.C_clock_angle_model -> SetProperty, hide = 0
+;   info.show_image_line_plot = 1
+;      swpc_cat_replot_image_line_plot, $
+;      info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
+;      info.position_image_lineplot, info.C_cme_outline
+;   info.C_Window->Draw, info.C_both_views
 
-   ENDCASE
+;   ENDCASE
       
-   info.R_widget_show_line_plot : BEGIN
+;   info.R_widget_show_line_plot : BEGIN
    
-   info.R_image_lineplot_model -> SetProperty, hide = 0
-   info.R_clock_angle_model -> SetProperty, hide = 0
-   info.show_image_line_plot = 1
-      swpc_cat_replot_image_line_plot, $
-      info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
-      info.position_image_lineplot, info.R_cme_outline
-   info.R_Window->Draw, info.R_both_views
+;   info.R_image_lineplot_model -> SetProperty, hide = 0
+;   info.R_clock_angle_model -> SetProperty, hide = 0
+;   info.show_image_line_plot = 1
+;      swpc_cat_replot_image_line_plot, $
+;      info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
+;      info.position_image_lineplot, info.R_cme_outline
+;   info.R_Window->Draw, info.R_both_views
 
-   ENDCASE
+;   ENDCASE
      
-ENDCASE
+;ENDCASE
 
 
-WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
 
-end
+;end
 
 
 
@@ -9054,7 +9054,7 @@ CASE thisEvent OF
    'PRESS': BEGIN
    
    info.timeline_left_mouse_button_being_pressed = 1
-	print, 'Button has been pressed'
+	
 ;       print,'Plot Window X and Y : ',event.x , event.y
 
        END
@@ -10172,19 +10172,19 @@ xAxisText->SetProperty, Recompute_Dimensions=2    ; ensure that when axes are ch
 xAxisText->SetProperty, Font=helvetica10pt
 xAxisText->SetProperty, color=[255,255,255]
 
-line_data = fltarr(2,2)
-animation_start_time_marker = obj_new("idlgrpolyline",line_data,color=[0,255,0],name='animation_start_time_marker')
-animation_end_time_marker = obj_new("idlgrpolyline",line_data,color=[255,0,0],name='animation_end_time_marker')
-animation_start_time_marker_handle_data = fltarr(2,4)
-animation_start_time_marker_handle = obj_new("idlgrpolygon",animation_start_time_marker_handle_data,color=[0,255,0],name='animation_start_time_marker_handle')
-animation_end_time_marker_handle_data = fltarr(2,4)
-animation_end_time_marker_handle = obj_new("idlgrpolygon",animation_end_time_marker_handle_data,color=[255,0,0],name='animation_end_time_marker_handle')
+;line_data = fltarr(2,2)
+;animation_start_time_marker = obj_new("idlgrpolyline",line_data,color=[0,255,0],name='animation_start_time_marker')
+;animation_end_time_marker = obj_new("idlgrpolyline",line_data,color=[255,0,0],name='animation_end_time_marker')
+;animation_start_time_marker_handle_data = fltarr(2,4)
+;animation_start_time_marker_handle = obj_new("idlgrpolygon",animation_start_time_marker_handle_data,color=;[0,255,0],name='animation_start_time_marker_handle');
+;animation_end_time_marker_handle_data = fltarr(2,4)
+;animation_end_time_marker_handle = obj_new("idlgrpolygon",animation_end_time_marker_handle_data,color=[255,0,0],name='animation_end_time_marker_handle')
 animation_current_time_marker = obj_new("idlgrpolyline",line_data,color=[255,255,0],name='animation_current_time_marker')
 
-images_timeline_model->Add, animation_start_time_marker
-images_timeline_model->Add, animation_end_time_marker
-images_timeline_model->Add, animation_start_time_marker_handle
-images_timeline_model->Add, animation_end_time_marker_handle
+;images_timeline_model->Add, animation_start_time_marker
+;images_timeline_model->Add, animation_end_time_marker
+;images_timeline_model->Add, animation_start_time_marker_handle
+;images_timeline_model->Add, animation_end_time_marker_handle
 images_timeline_model->Add, animation_current_time_marker
 
 if n_sat eq 3 then images_timeline_model->Add, L_plot
