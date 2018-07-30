@@ -3318,22 +3318,22 @@ END
 ;return,1
 ;END
 ;------------------------------------------------------------------------------
-pro swpc_cat_XMOVIE_DELAY_EVENTS, event
+;pro swpc_cat_XMOVIE_DELAY_EVENTS, event
 
    ; Get the INFO structure.
 
-WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
+;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
    ; Set the delay.
 
-info.delay = float((100 - event.value)) / 200.0 ; Max delay 0.5 seconds.
+;info.delay = float((100 - event.value)) / 200.0 ; Max delay 0.5 seconds.
 
       ; Put INFO structure back.
 
-WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
+;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
 
 
-END ; ************************ of XMOVIE_DELAY_EVENTS ***********************
+;END ; ************************ of XMOVIE_DELAY_EVENTS ***********************
 ;------------------------------------------------------------------------------
 
 
