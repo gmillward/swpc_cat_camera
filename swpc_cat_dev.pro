@@ -7082,27 +7082,27 @@ widget_control, info.R_widget_image_sequence_slider,sensitive=0
 endelse
 info.R_Window->Draw, info.R_both_views
 
-line_data=fltarr(2,2)
-line_data[0,0] = 0. + 1./24.
-line_data[1,0] = 0.
-line_data[0,1] = 0. + 1./24.
-line_data[1,1] = 1.
-info.animation_start_time_marker->setproperty,data=line_data
+;line_data=fltarr(2,2)
+;line_data[0,0] = 0. + 1./24.
+;line_data[1,0] = 0.
+;line_data[0,1] = 0. + 1./24.
+;line_data[1,1] = 1.
+;info.animation_start_time_marker->setproperty,data=line_data
 
-xpos = 1./24.
-info.animation_start_time_marker_handle_data=[[xpos,0.],[xpos+0.005,0.],[xpos+0.005,0.08],[xpos,0.08]]
-info.animation_start_time_marker_handle->setproperty,data=info.animation_start_time_marker_handle_data
+;xpos = 1./24.
+;info.animation_start_time_marker_handle_data=[[xpos,0.],[xpos+0.005,0.],[xpos+0.005,0.08],[xpos,0.08]]
+;info.animation_start_time_marker_handle->setproperty,data=info.animation_start_time_marker_handle_data
 
-line_data=fltarr(2,2)
-line_data[0,0] = info.end_julian - info.start_julian - 1./24.
-line_data[1,0] = 0.
-line_data[0,1] = info.end_julian - info.start_julian - 1./24.
-line_data[1,1] = 1.
-info.animation_end_time_marker->setproperty,data=line_data
+;line_data=fltarr(2,2)
+;line_data[0,0] = info.end_julian - info.start_julian - 1./24.
+;line_data[1,0] = 0.
+;line_data[0,1] = info.end_julian - info.start_julian - 1./24.
+;line_data[1,1] = 1.
+;info.animation_end_time_marker->setproperty,data=line_data
 
-xpos = info.end_julian - info.start_julian - 1./24.
-info.animation_end_time_marker_handle_data=[[xpos,0.],[xpos-0.005,0.],[xpos-0.005,0.08],[xpos,0.08]]
-info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_marker_handle_data
+;xpos = info.end_julian - info.start_julian - 1./24.
+;info.animation_end_time_marker_handle_data=[[xpos,0.],[xpos-0.005,0.],[xpos-0.005,0.08],[xpos,0.08]]
+;info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_marker_handle_data
 
 
 line_data=fltarr(2,2)
@@ -9178,87 +9178,88 @@ endelse ; not right-click context menu
    if info.timeline_left_mouse_button_being_pressed eq 1 then begin
    ;THIS COMES UP IF I CLICK AND DRAG. ####
 	;THIS WOULD MOVE THE TIMELINE BAR. DEPENDS ON WHERE YOU CLICK  
-if event.y gt 0 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
+
+if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
    
-time_line_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
-line_data=fltarr(2,2)
-line_data[0,0] = time_line_position
-line_data[1,0] = 0.
-line_data[0,1] = time_line_position
-line_data[1,1] = 1.
-info.animation_current_time_marker->setproperty,data=line_data
-info.images_timeline_window->Draw, info.images_timeline_view
+	time_line_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
+	line_data=fltarr(2,2)
+	line_data[0,0] = time_line_position
+	line_data[1,0] = 0.
+	line_data[0,1] = time_line_position
+	line_data[1,1] = 1.
+	info.animation_current_time_marker->setproperty,data=line_data
+	info.images_timeline_window->Draw, info.images_timeline_view
 
 
    
-   info.clicked_L = 1
-   info.clicked_C = 1
-   info.clicked_C2 = 0
-   info.clicked_R = 1
+	info.clicked_L = 1
+	info.clicked_C = 1
+	info.clicked_C2 = 0
+	info.clicked_R = 1
    
-if info.BC2_number_of_images gt 0 and info.clicked_L eq 1 then begin
+	if info.BC2_number_of_images gt 0 and info.clicked_L eq 1 then begin
 
-L_julian = (info.BC2_list_of_datetime_Julian).toarray()
-L_index = (where(this_julian-L_julian lt 0.0))[0]
-if L_index gt 0 then begin
-if abs(L_julian[L_index - 1] - this_julian) lt abs(L_julian[L_index] - this_julian) then L_index --
-endif
+		L_julian = (info.BC2_list_of_datetime_Julian).toarray()
+		L_index = (where(this_julian-L_julian lt 0.0))[0]
+		if L_index gt 0 then begin
+			if abs(L_julian[L_index - 1] - this_julian) lt abs(L_julian[L_index] - this_julian) then L_index --
+		endif
 
-if abs(L_julian[L_index] - this_julian) lt (1./48.) then begin
+		if abs(L_julian[L_index] - this_julian) lt (1./48.) then begin
 
-if L_index eq -1 then L_index = info.BC2_number_of_images - 1
+			if L_index eq -1 then L_index = info.BC2_number_of_images - 1
 
-info.BC2_current_image_number = L_index
-widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
+			info.BC2_current_image_number = L_index
+			widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
 
-swpc_cat_REDRAW_THE_IMAGE, $
+			swpc_cat_REDRAW_THE_IMAGE, $
     info.BC2_current_image_number,info.BC2_background_image_number,info.BC2_difference_imaging, $
     info.BC2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
     info.CME_matches_image_BC2_Image_number,info.L_current_background_color, $
     info.background_color,info.L_current_text_color,info.color_stereo_B,info.L_cme_outline,info.BC2_cme_MATCH_outline, $
     info.L_widget_outline_matches_image,info.CME_matches_image_BC2_CME_outline, $
-    info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
+    info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0,$     info.i_log_scale
 
-swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
    
-endif else begin
+		endif else begin
 
-info.L_window->erase, color=info.background_color_stereo_B
-info.L_plot->SetProperty, color=info.color_stereo_B
+			info.L_window->erase, color=info.background_color_stereo_B
+			info.L_plot->SetProperty, color=info.color_stereo_B
 
-endelse
+		endelse
 
-endif
-
-
+	endif
 
 
 
-if info.C_number_of_images gt 0 and info.clicked_C eq 1 then begin
 
-info.C_cme_outline -> setProperty, hide = 1
-info.C_cme_MATCH_outline-> setProperty, hide = 1
-info.C2_cme_MATCH_outline-> setProperty, hide = 1
 
-info.currently_showing_LASCO = 'SC3'
-widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C2'
+	if info.C_number_of_images gt 0 and info.clicked_C eq 1 then begin
 
-C_julian = (info.C_list_of_datetime_Julian).toarray()
-C_index = (where(this_julian-C_julian lt 0.0))[0]
-if C_index gt 0 then begin
-if abs(C_julian[C_index - 1] - this_julian) lt abs(C_julian[C_index] - this_julian) then C_index --
-endif
+		info.C_cme_outline -> setProperty, hide = 1
+		info.C_cme_MATCH_outline-> setProperty, hide = 1
+		info.C2_cme_MATCH_outline-> setProperty, hide = 1
 
-if abs(C_julian[C_index] - this_julian) lt (1./48.) then begin
+		info.currently_showing_LASCO = 'SC3'
+		widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C2'
 
-if C_index eq -1 then C_index = info.C_number_of_images - 1
-info.C_current_image_number = C_index
-widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C_list_of_datetime_Julian)
-widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
+		C_julian = (info.C_list_of_datetime_Julian).toarray()
+		C_index = (where(this_julian-C_julian lt 0.0))[0]
+		if C_index gt 0 then begin
+			if abs(C_julian[C_index - 1] - this_julian) lt abs(C_julian[C_index] - this_julian) then C_index --
+		endif
 
-info.C_title_object -> setproperty, strings = 'SOHO LASCO C3'
+		if abs(C_julian[C_index] - this_julian) lt (1./48.) then begin
 
-swpc_cat_REDRAW_THE_IMAGE, $
+			if C_index eq -1 then C_index = info.C_number_of_images - 1
+			info.C_current_image_number = C_index
+			widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C_list_of_datetime_Julian)
+			widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
+
+			info.C_title_object -> setproperty, strings = 'SOHO LASCO C3'
+
+			swpc_cat_REDRAW_THE_IMAGE, $
     info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
     info.C_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
     info.CME_matches_image_C_Image_number,info.C_current_background_color, $
@@ -9266,58 +9267,58 @@ swpc_cat_REDRAW_THE_IMAGE, $
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
 
-swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
+			swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
 info.C_HEEQ_coords[1] = B_angle_degrees
 
-info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
+			info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 
-info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
-info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+			info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-			info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+			info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 
-the_day = long((info.C_list_of_datetime_Julian)[0])
-i_day = where(the_day lt info.Julian_day_for_Earth_pos)
-i_day = i_day[0]
+			the_day = long((info.C_list_of_datetime_Julian)[0])
+			i_day = where(the_day lt info.Julian_day_for_Earth_pos)
+			i_day = i_day[0]
 
-info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+			info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
+			info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
-swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
+			swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 
-info.C_Window->Draw, info.C_both_views
+			info.C_Window->Draw, info.C_both_views
 
-;set_timeline_highlight_block, info.C_plot, info.C_number_of_images, C_index, info.color_C3, info.cme_outline_color
+			;set_timeline_highlight_block, info.C_plot, info.C_number_of_images, C_index, info.color_C3, info.cme_outline_color
 
-endif else begin
+		endif else begin
 
-info.C_window->erase, color=info.background_color_lasco
-info.C_plot->SetProperty, color = info.color_C3
+			info.C_window->erase, color=info.background_color_lasco
+			info.C_plot->SetProperty, color = info.color_C3
 
-endelse
+		endelse
 
-endif
-
-
+	endif
 
 
 
 
-if info.AC2_number_of_images gt 0 and info.clicked_R eq 1 then begin
 
-R_julian = (info.AC2_list_of_datetime_Julian).toarray()
-R_index = (where(this_julian-R_julian lt 0.0))[0]
-if R_index gt 0 then begin 
-if abs(R_julian[R_index - 1] - this_julian) lt abs(R_julian[R_index] - this_julian) then R_index --
-endif
 
-if abs(R_julian[R_index] - this_julian) lt (1./48.) then begin
+	if info.AC2_number_of_images gt 0 and info.clicked_R eq 1 then begin
 
-if R_index eq -1 then R_index = info.AC2_number_of_images - 1
-info.AC2_current_image_number = R_index
-widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
+		R_julian = (info.AC2_list_of_datetime_Julian).toarray()
+		R_index = (where(this_julian-R_julian lt 0.0))[0]
+		if R_index gt 0 then begin 
+			if abs(R_julian[R_index - 1] - this_julian) lt abs(R_julian[R_index] - this_julian) then R_index --
+		endif
 
-swpc_cat_REDRAW_THE_IMAGE, $
+		if abs(R_julian[R_index] - this_julian) lt (1./48.) then begin
+
+			if R_index eq -1 then R_index = info.AC2_number_of_images - 1
+			info.AC2_current_image_number = R_index
+			widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
+
+			swpc_cat_REDRAW_THE_IMAGE, $
     info.AC2_current_image_number,info.AC2_background_image_number,info.AC2_difference_imaging, $
     info.AC2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
     info.CME_matches_image_AC2_Image_number,info.R_current_background_color, $
@@ -9325,17 +9326,17 @@ swpc_cat_REDRAW_THE_IMAGE, $
     info.R_widget_outline_matches_image,info.CME_matches_image_AC2_CME_outline, $
     info.R_ut_string_object,info.AC2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
-swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_a, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_a, info.cme_outline_color
 
 
-endif else begin
+		endif else begin
 
-info.R_window->erase, color=info.background_color_stereo_A
-info.R_plot->SetProperty, color=info.color_stereo_A
+			info.R_window->erase, color=info.background_color_stereo_A
+			info.R_plot->SetProperty, color=info.color_stereo_A
+	
+		endelse
 
-endelse
-
-endif
+	endif
 
 
 endif
