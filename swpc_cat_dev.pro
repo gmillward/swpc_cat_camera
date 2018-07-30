@@ -4103,12 +4103,21 @@ info.longitude_degrees = float(event.value) / 10.
 
 ;print,'longitude_degrees ', info.longitude_degrees
 
-info.L_cme_model->SetProperty, transform = info.L_camera_transform
-info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
-info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
-info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
-info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
-info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+if info.n_sat eq 3 then begin 
+	info.L_cme_model->SetProperty, transform = info.L_camera_transform
+	info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
+	info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+	info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+	info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+	info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+
+	swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
+	if info.show_image_line_plot eq 1 then begin
+		swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
+                            info.position_image_lineplot, info.L_cme_outline                           
+	endif
+	info.L_Window->Draw, info.L_both_views
+endif
 
 info.C_cme_model->SetProperty, transform = info.initial_transform
 info.C_cme_model_copy->SetProperty, transform = info.initial_transform
@@ -4117,26 +4126,19 @@ info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 info.C_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
-info.R_cme_model->SetProperty, transform = info.R_camera_transform
-info.R_cme_model_copy->SetProperty, transform = info.R_camera_transform
-info.R_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
-info.R_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
-info.R_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
-info.R_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
-
-swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
-if info.show_image_line_plot eq 1 then begin
-swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
-                            info.position_image_lineplot, info.L_cme_outline                           
-endif
-info.L_Window->Draw, info.L_both_views
-
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 if info.show_image_line_plot eq 1 then begin
 swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
                             info.position_image_lineplot, info.C_cme_outline                           
 endif
 info.C_Window->Draw, info.C_both_views
+
+info.R_cme_model->SetProperty, transform = info.R_camera_transform
+info.R_cme_model_copy->SetProperty, transform = info.R_camera_transform
+info.R_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.R_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.R_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.R_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
 swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
 if info.show_image_line_plot eq 1 then begin
