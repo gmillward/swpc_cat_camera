@@ -9591,7 +9591,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
     info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
     info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
-			;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_a, info.cme_outline_color
+			;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AH1_number_of_images, info.AH1_current_image_number, info.color_stereo_a, info.cme_outline_color
 
 
 		endif else begin
@@ -9603,7 +9603,39 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 	endif
 
+	if info.AH2_number_of_images gt 0 and info.clicked_RH2 eq 1 then begin
 
+		R_julian = (info.AH2_list_of_datetime_Julian).toarray()
+		R_index = (where(this_julian-R_julian lt 0.0))[0]
+		if R_index gt 0 then begin 
+			if abs(R_julian[R_index - 1] - this_julian) lt abs(R_julian[R_index] - this_julian) then R_index --
+		endif
+
+		if abs(R_julian[R_index] - this_julian) lt (1./48.) then begin
+
+			if R_index eq -1 then R_index = info.AH2_number_of_images - 1
+			info.AH2_current_image_number = R_index
+			widget_control,info.R_widget_image_sequence_slider,set_value = info.AH2_current_image_number + 1
+
+			swpc_cat_REDRAW_THE_IMAGE, $
+    info.AH2_current_image_number,info.AH2_background_image_number,info.AH2_difference_imaging, $
+    info.AH2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
+    info.CME_matches_image_AH2_Image_number,info.R_current_background_color, $
+    info.background_color,info.R_current_text_color,info.color_stereo_A,info.R_cme_outline,info.AH2_cme_MATCH_outline, $
+    info.R_widget_outline_matches_image,info.CME_matches_image_AH2_CME_outline, $
+    info.R_ut_string_object,info.AH2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
+
+			;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AH2_number_of_images, info.AH2_current_image_number, info.color_stereo_a, info.cme_outline_color
+
+
+		endif else begin
+
+			info.R_window->erase, color=info.background_color_stereo_A
+			info.R_plot->SetProperty, color=info.color_stereo_A
+	
+		endelse
+
+	endif
 
 
 endif
