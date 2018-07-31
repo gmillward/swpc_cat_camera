@@ -9499,7 +9499,7 @@ endelse ; not right-click context menu
 			B_difference_imaging = info.BH1_difference_imaging
 			B_list_of_image_data = info.BH1_list_of_image_data
 			CME_matches_image_B_Image_number = info.CME_matches_image_BH1_Image_number
-			color_stereo_B = info.color_stereo_B
+			color_stereo_B = info.color_BH1
 			B_cme_MATCH_outline = info.BH1_cme_MATCH_outline
 			CME_matches_image_B_CME_outline = info.CME_matches_image_BH1_CME_outline
 			B_list_of_full_time_strings = info.BH1_list_of_full_time_strings
@@ -9514,7 +9514,7 @@ endelse ; not right-click context menu
 			B_difference_imaging = info.BH2_difference_imaging
 			B_list_of_image_data = info.BH2_list_of_image_data
 			CME_matches_image_B_Image_number = info.CME_matches_image_BH2_Image_number
-			color_stereo_B = info.color_stereo_B
+			color_stereo_B = info.color_BH2
 			B_cme_MATCH_outline = info.BH2_cme_MATCH_outline
 			CME_matches_image_B_CME_outline = info.CME_matches_image_BH2_CME_outline
 			B_list_of_full_time_strings = info.BH2_list_of_full_time_strings
@@ -9554,7 +9554,7 @@ endelse ; not right-click context menu
 			A_difference_imaging = info.AH1_difference_imaging
 			A_list_of_image_data = info.AH1_list_of_image_data
 			CME_matches_image_A_Image_number = info.CME_matches_image_AH1_Image_number
-			color_stereo_A = info.color_stereo_A
+			color_stereo_A = info.color_AH1
 			A_cme_MATCH_outline = info.AH1_cme_MATCH_outline
 			CME_matches_image_A_CME_outline = info.CME_matches_image_AH1_CME_outline
 			A_list_of_full_time_strings = info.AH1_list_of_full_time_strings
@@ -9569,7 +9569,7 @@ endelse ; not right-click context menu
 			A_difference_imaging = info.AH2_difference_imaging
 			A_list_of_image_data = info.AH2_list_of_image_data
 			CME_matches_image_A_Image_number = info.CME_matches_image_AH2_Image_number
-			color_stereo_A = info.color_stereo_A
+			color_stereo_A = info.color_AH2
 			A_cme_MATCH_outline = info.AH2_cme_MATCH_outline
 			CME_matches_image_A_CME_outline = info.CME_matches_image_AH2_CME_outline
 			A_list_of_full_time_strings = info.AH2_list_of_full_time_strings
@@ -9602,7 +9602,7 @@ endelse ; not right-click context menu
     info.L_widget_outline_matches_image,CME_matches_image_B_CME_outline, $
     info.L_ut_string_object,B_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0,     info.i_log_scale
 
-			swpc_cat_set_timeline_highlight_block, L_plot, B_number_of_images, B_current_image_number, info.color_stereo_B, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, L_plot, B_number_of_images, B_current_image_number, color_stereo_B, info.cme_outline_color
    
 		endif else begin
 
