@@ -7248,7 +7248,35 @@ widget_control, info.R_widget_image_sequence_slider,sensitive=0
 endelse
 info.R_Window->Draw, info.R_both_views
 
+if info.AH2_number_of_images gt 0 then begin
 
+;Try and make blocks for hi1. 
+RH2_yvals = fltarr(n_elements(info.AH2_list_of_datetime_Julian)) + 0.85
+info.RH2_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+info.RH2_plot->SetProperty, dataX = (info.AH2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = RH2_yvals
+info.RH2_plot->SetProperty, color=[255,100,100]
+info.RH2_plot->GetProperty, symbol=R_thisSymbol
+
+RH2_points = n_elements(RH2_yvals)
+symarray = objarr(RH2_points)
+for i = 0 , RH2_points - 1 do begin
+num = 6
+filled = 0
+thisSymbol_RH2 = obj_new("IDLgrsymbol",data=num, Size=[info.xSymbolSize_timeline, info.ySymbolSize_timeline],filled = filled)
+symarray[i] = thisSymbol_RH2
+endfor
+info.RH2_plot->SetProperty, symbol=symarray
+
+swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number, info.color_stereo_A, info.cme_outline_color
+widget_control, info.R_widget_image_sequence_slider,set_slider_max = info.AH2_number_of_images
+widget_control,info.R_widget_image_sequence_slider,set_value = info.AH2_current_image_number + 1
+info.R_ut_string_object->SetProperty, strings = (info.AH2_list_of_full_time_strings)[info.AH2_current_image_number]
+endif else begin
+info.R_ut_string_object->SetProperty, strings = 'NO IMAGES'
+info.R_cme_outline -> setProperty, hide = 1
+widget_control, info.R_widget_image_sequence_slider,sensitive=0
+endelse
+info.R_Window->Draw, info.R_both_views
 
 
 
@@ -9450,6 +9478,7 @@ endelse ; not right-click context menu
 			CME_matches_image_A_CME_outline = info.CME_matches_image_AC2_CME_outline
 			A_list_of_full_time_strings = info.AC2_list_of_full_time_strings
 			background_color_stereo_A = info.background_color_stereo_A
+			R_plot = info.R_plot
 		end
 		'AH1':Begin
 			A_list_of_datetime_Julian = info.AH1_list_of_datetime_Julian
@@ -9464,6 +9493,7 @@ endelse ; not right-click context menu
 			CME_matches_image_A_CME_outline = info.CME_matches_image_AH1_CME_outline
 			A_list_of_full_time_strings = info.AH1_list_of_full_time_strings
 			background_color_stereo_A = info.background_color_stereo_A
+			R_plot = info.RH1_plot
 		end
 		'AH2':Begin
 			A_list_of_datetime_Julian = info.AH2_list_of_datetime_Julian
@@ -9478,6 +9508,7 @@ endelse ; not right-click context menu
 			CME_matches_image_A_CME_outline = info.CME_matches_image_AH2_CME_outline
 			A_list_of_full_time_strings = info.AH2_list_of_full_time_strings
 			background_color_stereo_A = info.background_color_stereo_A
+			R_plot = info.RH2_plot 
 		end
 	endcase
 	
@@ -9670,13 +9701,13 @@ info.C_HEEQ_coords[1] = B_angle_degrees
     info.R_widget_outline_matches_image,CME_matches_image_A_CME_outline, $
     info.R_ut_string_object,A_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
-			;swpc_cat_set_timeline_highlight_block, info.R_plot, A_number_of_images, A_current_image_number, color_stereo_a, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, R_plot, A_number_of_images, A_current_image_number, color_stereo_a, info.cme_outline_color
 
 
 		endif else begin
 
 			info.R_window->erase, color=background_color_stereo_A
-			info.R_plot->SetProperty, color=color_stereo_A
+			R_plot->SetProperty, color=color_stereo_A
 	
 		endelse
 
@@ -10371,6 +10402,7 @@ thisSymbol_C = obj_new("IDLgrsymbol",data=6)
 thisSymbol_C2 = obj_new("IDLgrsymbol",data=6)
 thisSymbol_R = obj_new("IDLgrsymbol",data=6)
 thisSymbol_RH1 = obj_new("IDLgrsymbol",data=6)
+thisSymbol_RH2 = obj_new("IDLgrsymbol",data=6)
 
 if n_sat eq 3 then begin
 L_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_L, Thick=1 , linestyle = 6)
@@ -10379,7 +10411,7 @@ C_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_C, Thick=1, linestyle = 6)
 R_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_R, Thick=1, linestyle = 6)
 C2_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_C2, Thick=1, linestyle = 6)
 RH1_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_RH1, Thick=1, linestyle = 6) 
-
+RH2_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_RH2, Thick=1, linestyle = 6) 
 
 xaxis_images_timeline = Obj_New("IDLgrAxis", 0, Color=[35,35,35], Ticklen=0.01, Minor=0, $
                                 Location=[1000, position_timeline[1] ,0], Exact=exact[0],/use_text_color)
@@ -10408,6 +10440,7 @@ images_timeline_model->Add, C_plot
 images_timeline_model->Add, C2_plot
 images_timeline_model->Add, R_plot
 images_timeline_model->Add, RH1_plot
+images_timeline_model->Add, RH2_plot
 images_timeline_model->Add, xaxis_images_timeline
 
 timeline_contextBase = WIDGET_BASE(draw_available_images_timeline, /CONTEXT_MENU, UNAME = 'timeline_contextBase',sensitive=0)
@@ -11688,6 +11721,7 @@ info = $
          C2_plot: C2_plot, $
          R_plot: R_plot, $
 	 RH1_plot: RH1_plot, $
+	 RH2_plot: RH2_plot, $
          xaxis_images_timeline  : xaxis_images_timeline, $
          position_B: position_B, $
          LE_plot_matched_CMEs:LE_plot_matched_CMEs, $
@@ -12220,6 +12254,7 @@ if n_sat eq 2 then begin
       C2_plot: C2_plot, $
       R_plot: R_plot, $
       RH1_plot: RH1_plot, $
+      RH2_plot: RH2_plot, $
       xaxis_images_timeline  : xaxis_images_timeline, $
       position_B: position_B, $
       LE_plot_matched_CMEs:LE_plot_matched_CMEs, $
