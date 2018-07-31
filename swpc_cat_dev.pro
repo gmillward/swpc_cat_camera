@@ -2451,11 +2451,11 @@ swpc_cat_sort_out_the_timeline_symbols, info.AC2_number_of_images, info.CME_matc
 endif
 if info.AH1_number_of_images gt 0 then begin
 swpc_cat_sort_out_the_timeline_symbols, info.AH1_number_of_images, info.CME_matches_image_AH1_Image_number, $
-                                  info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+                                  info.RH1_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
 endif
 if info.AH2_number_of_images gt 0 then begin
 swpc_cat_sort_out_the_timeline_symbols, info.AH2_number_of_images, info.CME_matches_image_AH2_Image_number, $
-                                  info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+                                  info.RH2_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
 endif                 
 info.images_timeline_window->Draw, info.images_timeline_view
 
@@ -7218,16 +7218,35 @@ widget_control, info.R_widget_image_sequence_slider,sensitive=0
 endelse
 info.R_Window->Draw, info.R_both_views
 
+if info.AH1_number_of_images gt 0 then begin
+
 ;Try and make blocks for hi1. 
-;RH1_yvals = fltarr(n_elements(info.AH1_list_of_datetime_Julian)) + 0.9
-;info.RH1_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
-;info.RH1_plot->SetProperty, dataX = (info.AH1_list_of_datetime_Julian).toarray() - info.start_julian, dataY = RH1_yvals
-;info.RH1_plot->SetProperty, color=[255,100,100]
-;info.RH1_plot->GetProperty, symbol=R_thisSymbol
+RH1_yvals = fltarr(n_elements(info.AH1_list_of_datetime_Julian)) + 0.75
+info.RH1_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+info.RH1_plot->SetProperty, dataX = (info.AH1_list_of_datetime_Julian).toarray() - info.start_julian, dataY = RH1_yvals
+info.RH1_plot->SetProperty, color=[255,100,100]
+info.RH1_plot->GetProperty, symbol=R_thisSymbol
 
+RH1_points = n_elements(RH1_yvals)
+symarray = objarr(RH1_points)
+for i = 0 , RH1_points - 1 do begin
+num = 6
+filled = 0
+thisSymbol_RH1 = obj_new("IDLgrsymbol",data=num, Size=[info.xSymbolSize_timeline, info.ySymbolSize_timeline],filled = filled)
+symarray[i] = thisSymbol_RH1
+endfor
+info.RH1_plot->SetProperty, symbol=symarray
 
-
-
+swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number, info.color_stereo_A, info.cme_outline_color
+widget_control, info.R_widget_image_sequence_slider,set_slider_max = info.AH1_number_of_images
+widget_control,info.R_widget_image_sequence_slider,set_value = info.AH1_current_image_number + 1
+info.R_ut_string_object->SetProperty, strings = (info.AH1_list_of_full_time_strings)[info.AH1_current_image_number]
+endif else begin
+info.R_ut_string_object->SetProperty, strings = 'NO IMAGES'
+info.R_cme_outline -> setProperty, hide = 1
+widget_control, info.R_widget_image_sequence_slider,sensitive=0
+endelse
+info.R_Window->Draw, info.R_both_views
 
 
 
@@ -10351,6 +10370,7 @@ endif
 thisSymbol_C = obj_new("IDLgrsymbol",data=6)
 thisSymbol_C2 = obj_new("IDLgrsymbol",data=6)
 thisSymbol_R = obj_new("IDLgrsymbol",data=6)
+thisSymbol_RH1 = obj_new("IDLgrsymbol",data=6)
 
 if n_sat eq 3 then begin
 L_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_L, Thick=1 , linestyle = 6)
@@ -10358,6 +10378,8 @@ endif
 C_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_C, Thick=1, linestyle = 6)
 R_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_R, Thick=1, linestyle = 6)
 C2_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_C2, Thick=1, linestyle = 6)
+RH1_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_RH1, Thick=1, linestyle = 6) 
+
 
 xaxis_images_timeline = Obj_New("IDLgrAxis", 0, Color=[35,35,35], Ticklen=0.01, Minor=0, $
                                 Location=[1000, position_timeline[1] ,0], Exact=exact[0],/use_text_color)
@@ -10385,6 +10407,7 @@ if n_sat eq 3 then images_timeline_model->Add, L_plot
 images_timeline_model->Add, C_plot
 images_timeline_model->Add, C2_plot
 images_timeline_model->Add, R_plot
+images_timeline_model->Add, RH1_plot
 images_timeline_model->Add, xaxis_images_timeline
 
 timeline_contextBase = WIDGET_BASE(draw_available_images_timeline, /CONTEXT_MENU, UNAME = 'timeline_contextBase',sensitive=0)
@@ -11664,6 +11687,7 @@ info = $
          C_plot: C_plot, $
          C2_plot: C2_plot, $
          R_plot: R_plot, $
+	 RH1_plot: RH1_plot, $
          xaxis_images_timeline  : xaxis_images_timeline, $
          position_B: position_B, $
          LE_plot_matched_CMEs:LE_plot_matched_CMEs, $
@@ -12195,6 +12219,7 @@ if n_sat eq 2 then begin
       C_plot: C_plot, $
       C2_plot: C2_plot, $
       R_plot: R_plot, $
+      RH1_plot: RH1_plot, $
       xaxis_images_timeline  : xaxis_images_timeline, $
       position_B: position_B, $
       LE_plot_matched_CMEs:LE_plot_matched_CMEs, $
