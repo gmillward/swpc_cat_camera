@@ -9489,6 +9489,7 @@ endelse ; not right-click context menu
 			CME_matches_image_B_CME_outline = info.CME_matches_image_BC2_CME_outline
 			B_list_of_full_time_strings = info.BC2_list_of_full_time_strings
 			background_color_stereo_B = info.background_color_stereo_B
+			L_plot = info.L_plot
 		end
 		'BH1':Begin
 			B_list_of_datetime_Julian = info.BH1_list_of_datetime_Julian
@@ -9503,6 +9504,7 @@ endelse ; not right-click context menu
 			CME_matches_image_B_CME_outline = info.CME_matches_image_BH1_CME_outline
 			B_list_of_full_time_strings = info.BH1_list_of_full_time_strings
 			background_color_stereo_B = info.background_color_stereo_B
+			L_plot = info.LH1_plot
 		end
 		'BH2':Begin
 			B_list_of_datetime_Julian = info.BH2_list_of_datetime_Julian
@@ -9517,6 +9519,7 @@ endelse ; not right-click context menu
 			CME_matches_image_B_CME_outline = info.CME_matches_image_BH2_CME_outline
 			B_list_of_full_time_strings = info.BH2_list_of_full_time_strings
 			background_color_stereo_B = info.background_color_stereo_B
+			L_plot = info.LH2_plot
 		end
 	endcase
 
@@ -9599,7 +9602,7 @@ endelse ; not right-click context menu
     info.L_widget_outline_matches_image,CME_matches_image_B_CME_outline, $
     info.L_ut_string_object,B_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0,     info.i_log_scale
 
-			;swpc_cat_set_timeline_highlight_block, info.L_plot, B_number_of_images, B_current_image_number, info.color_stereo_B, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, L_plot, B_number_of_images, B_current_image_number, info.color_stereo_B, info.cme_outline_color
    
 		endif else begin
 
