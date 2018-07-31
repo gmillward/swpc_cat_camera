@@ -9258,6 +9258,8 @@ endelse
 if info.n_sat eq 3 then begin 
 if info.BC2_number_of_images gt 0 and info.clicked_L eq 1 then begin
 
+	info.L_title_object -> setproperty, strings = 'STEREO B COR2'
+
 	L_julian = (info.BC2_list_of_datetime_Julian).toarray()
 	L_index = (where(this_julian-L_julian lt 0.0))[0]
 
@@ -9295,6 +9297,8 @@ endif
 
 if info.BH1_number_of_images gt 0 and info.clicked_LH1 eq 1 then begin
 
+	info.L_title_object -> setproperty, strings = 'STEREO B HI1'
+
 	L_julian = (info.BH1_list_of_datetime_Julian).toarray()
 	L_index = (where(this_julian-L_julian lt 0.0))[0]
 
@@ -9331,6 +9335,8 @@ if info.BH1_number_of_images gt 0 and info.clicked_LH1 eq 1 then begin
 endif
 
 if info.BH2_number_of_images gt 0 and info.clicked_LH2 eq 1 then begin
+
+	info.L_title_object -> setproperty, strings = 'STEREO B HI2'
 
 	L_julian = (info.BH2_list_of_datetime_Julian).toarray()
 	L_index = (where(this_julian-L_julian lt 0.0))[0]
@@ -11187,31 +11193,64 @@ R_ut_string_object -> setproperty, font = courier12pt
 R_image_model -> Add, R_ut_string_object
 
 if n_sat eq 3 then begin
+
 L_title_object = OBJ_NEW('IDLgrText','STEREO B COR2')
 L_title_object -> setproperty, location = [255, 497]
 L_title_object -> setproperty, alignment = 0.5
-L_title_object -> setproperty, color = [100,100,255]
+L_title_object -> setproperty, color = color_stereo_B
 L_title_object -> setproperty, font = courier12pt
 L_image_model -> Add, L_title_object
+
+;LH1_title_object = OBJ_NEW('IDLgrText','STEREO B HI1')
+;LH1_title_object -> setproperty, location = [255, 497]
+;LH1_title_object -> setproperty, alignment = 0.5
+;LH1_title_object -> setproperty, color = color_BH1
+;LH1_title_object -> setproperty, font = courier12pt
+;L_image_model -> Add, LH1_title_object
+
+;LH2_title_object = OBJ_NEW('IDLgrText','STEREO B HI2')
+;LH2_title_object -> setproperty, location = [255, 497]
+;LH2_title_object -> setproperty, alignment = 0.5
+;LH2_title_object -> setproperty, color = color_BH2
+;LH2_title_object -> setproperty, font = courier12pt
+;L_image_model -> Add, LH2_title_object
+
 endif
 
 C_title_object = OBJ_NEW('IDLgrText','SOHO LASCO C3')
 C_title_object -> setproperty, location = [255, 497]
 C_title_object -> setproperty, alignment = 0.5
-C_title_object -> setproperty, color = [100,255,100]
+C_title_object -> setproperty, color = color_c3
 C_title_object -> setproperty, font = courier12pt
 C_image_model -> Add, C_title_object
+
+;C2_title_object = OBJ_NEW('IDLgrText','SOHO LASCO C2')
+;C2_title_object -> setproperty, location = [255, 497]
+;C2_title_object -> setproperty, alignment = 0.5
+;C2_title_object -> setproperty, color = color_c2
+;C2_title_object -> setproperty, font = courier12pt
+;C_image_model -> Add, C2_title_object
 
 R_title_object = OBJ_NEW('IDLgrText','STEREO A COR2')
 R_title_object -> setproperty, location = [255, 497]
 R_title_object -> setproperty, alignment = 0.5
-R_title_object -> setproperty, color = [255,100,100]
+R_title_object -> setproperty, color = color_stereo_A
 R_title_object -> setproperty, font = courier12pt
 R_image_model -> Add, R_title_object
 
+;RH1_title_object = OBJ_NEW('IDLgrText','STEREO A HI1')
+;RH1_title_object -> setproperty, location = [255, 497]
+;RH1_title_object -> setproperty, alignment = 0.5
+;RH1_title_object -> setproperty, color = color_AH1
+;RH1_title_object -> setproperty, font = courier12pt
+;R_image_model -> Add, RH1_title_object
 
-
-
+;RH2_title_object = OBJ_NEW('IDLgrText','STEREO A HI2')
+;RH2_title_object -> setproperty, location = [255, 497]
+;RH2_title_object -> setproperty, alignment = 0.5
+;RH2_title_object -> setproperty, color = color_AH2
+;RH2_title_object -> setproperty, font = courier12pt
+;R_image_model -> Add, RH2_title_object
 
 
 
