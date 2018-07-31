@@ -7143,7 +7143,7 @@ if info.BH1_number_of_images gt 0 then begin
 LH1_yvals = fltarr(n_elements(info.BH1_list_of_datetime_Julian)) + 0.25
 info.LH1_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
 info.LH1_plot->SetProperty, dataX = (info.BH1_list_of_datetime_Julian).toarray() - info.start_julian, dataY = LH1_yvals
-info.LH1_plot->SetProperty, color=[100,100,255]
+info.LH1_plot->SetProperty, color=info.color_BH1
 info.LH1_plot->GetProperty, symbol=L_thisSymbol
 
 LH1_points = n_elements(LH1_yvals)
@@ -7156,7 +7156,7 @@ symarray[i] = thisSymbol_LH1
 endfor
 info.LH1_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.LH1_plot, info.BH1_number_of_images, info.BH1_current_image_number, info.color_stereo_B, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.LH1_plot, info.BH1_number_of_images, info.BH1_current_image_number, info.color_BH1, info.cme_outline_color
 widget_control, info.L_widget_image_sequence_slider,set_slider_max = info.BH1_number_of_images
 widget_control,info.L_widget_image_sequence_slider,set_value = info.BH1_current_image_number + 1
 info.L_ut_string_object->SetProperty, strings = (info.BH1_list_of_full_time_strings)[info.BH1_current_image_number]
@@ -7172,7 +7172,7 @@ if info.BH2_number_of_images gt 0 then begin
 LH2_yvals = fltarr(n_elements(info.BH2_list_of_datetime_Julian)) + 0.15
 info.LH2_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
 info.LH2_plot->SetProperty, dataX = (info.BH2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = LH2_yvals
-info.LH2_plot->SetProperty, color=[100,100,255]
+info.LH2_plot->SetProperty, color=info.color_BH2
 info.LH2_plot->GetProperty, symbol=L_thisSymbol
 
 LH2_points = n_elements(LH2_yvals)
@@ -7185,7 +7185,7 @@ symarray[i] = thisSymbol_LH2
 endfor
 info.LH2_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.LH2_plot, info.BH2_number_of_images, info.BH2_current_image_number, info.color_stereo_B, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.LH2_plot, info.BH2_number_of_images, info.BH2_current_image_number, info.color_BH2, info.cme_outline_color
 widget_control, info.L_widget_image_sequence_slider,set_slider_max = info.BH2_number_of_images
 widget_control,info.L_widget_image_sequence_slider,set_value = info.BH2_current_image_number + 1
 info.L_ut_string_object->SetProperty, strings = (info.BH2_list_of_full_time_strings)[info.BH2_current_image_number]
@@ -7287,7 +7287,7 @@ if info.AH1_number_of_images gt 0 then begin
 RH1_yvals = fltarr(n_elements(info.AH1_list_of_datetime_Julian)) + 0.75
 info.RH1_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
 info.RH1_plot->SetProperty, dataX = (info.AH1_list_of_datetime_Julian).toarray() - info.start_julian, dataY = RH1_yvals
-info.RH1_plot->SetProperty, color=[255,100,100]
+info.RH1_plot->SetProperty, color=info.color_AH1
 info.RH1_plot->GetProperty, symbol=R_thisSymbol
 
 RH1_points = n_elements(RH1_yvals)
@@ -7300,7 +7300,7 @@ symarray[i] = thisSymbol_RH1
 endfor
 info.RH1_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number, info.color_stereo_A, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number, info.color_AH1, info.cme_outline_color
 widget_control, info.R_widget_image_sequence_slider,set_slider_max = info.AH1_number_of_images
 widget_control,info.R_widget_image_sequence_slider,set_value = info.AH1_current_image_number + 1
 info.R_ut_string_object->SetProperty, strings = (info.AH1_list_of_full_time_strings)[info.AH1_current_image_number]
@@ -7317,7 +7317,7 @@ if info.AH2_number_of_images gt 0 then begin
 RH2_yvals = fltarr(n_elements(info.AH2_list_of_datetime_Julian)) + 0.85
 info.RH2_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
 info.RH2_plot->SetProperty, dataX = (info.AH2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = RH2_yvals
-info.RH2_plot->SetProperty, color=[255,100,100]
+info.RH2_plot->SetProperty, color=info.color_AH2
 info.RH2_plot->GetProperty, symbol=R_thisSymbol
 
 RH2_points = n_elements(RH2_yvals)
@@ -7330,7 +7330,7 @@ symarray[i] = thisSymbol_RH2
 endfor
 info.RH2_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number, info.color_stereo_A, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number, info.color_AH2, info.cme_outline_color
 widget_control, info.R_widget_image_sequence_slider,set_slider_max = info.AH2_number_of_images
 widget_control,info.R_widget_image_sequence_slider,set_value = info.AH2_current_image_number + 1
 info.R_ut_string_object->SetProperty, strings = (info.AH2_list_of_full_time_strings)[info.AH2_current_image_number]
@@ -10117,10 +10117,10 @@ color_stereo_A = [255,100,100]
 color_AC2 = [255,100,100]
 color_c3 = [100,255,100]
 color_c2 = [0,100,0]
-color_BH1 = [150,150,255]
-color_AH1 = [255,100,100]
-color_BH2 = [150,150,255]
-color_AH2 = [255,100,100]
+color_BH1 = [0,255,255]
+color_AH1 = [255,165,0]
+color_BH2 = [224,225,255]
+color_AH2 = [255,255,0]
 
 color_cme_orange = [220,120,0]
 
