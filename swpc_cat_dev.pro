@@ -9331,8 +9331,24 @@ if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOK
 		info.clicked_C = 0
 		info.clicked_C2 = 1
 	endelse
-	info.clicked_R = 1
-   
+	case info.currently_showing_stereoA of 
+		'AC2':Begin	
+			info.clicked_R = 1
+   			info.clicked_RH1 = 0
+			info.clicked_RH2 = 0
+		end
+		'AH1':Begin
+			info.clicked_R = 0
+			info.clicked_RH1 = 1
+			info.clicked_RH2 = 0 
+		end
+		'AH2':Begin
+			info.clicked_R = 0
+			info.clicked_RH1 = 0 
+			info.clicked_RH2 = 1 
+		end
+	endcase
+	
 	if info.n_sat eq 3 then begin 
 	if info.BC2_number_of_images gt 0 and info.clicked_L eq 1 then begin
 
@@ -9544,7 +9560,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 	endif
 
-	if info.AH1_number_of_images gt 0 and info.clicked_R eq 1 then begin
+	if info.AH1_number_of_images gt 0 and info.clicked_RH1 eq 1 then begin
 
 		R_julian = (info.AH1_list_of_datetime_Julian).toarray()
 		R_index = (where(this_julian-R_julian lt 0.0))[0]
