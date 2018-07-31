@@ -7109,7 +7109,7 @@ if info.n_sat eq 3 then begin
   
 if info.BC2_number_of_images gt 0 then begin
 
-L_yvals = fltarr(n_elements(info.BC2_list_of_datetime_Julian)) + 0.2
+L_yvals = fltarr(n_elements(info.BC2_list_of_datetime_Julian)) + 0.35
 info.L_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
 info.L_plot->SetProperty, dataX = (info.BC2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = L_yvals
 info.L_plot->SetProperty, color=[100,100,255]
@@ -7140,7 +7140,7 @@ endif
 
 if info.C_number_of_images gt 0 then begin
 
-C_yvals = fltarr(n_elements(info.C_list_of_datetime_Julian)) + 0.65
+C_yvals = fltarr(n_elements(info.C_list_of_datetime_Julian)) + 0.55
 info.C_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
 info.C_plot->SetProperty, dataX = (info.C_list_of_datetime_Julian).toarray() - info.start_julian, dataY = C_yvals
 info.C_plot->SetProperty, color=[100,255,100]
@@ -7171,7 +7171,7 @@ info.C_Window->Draw, info.C_both_views
 
 if info.C2_number_of_images gt 0 then begin
 
-C2_yvals = fltarr(n_elements(info.C2_list_of_datetime_Julian)) + 0.4
+C2_yvals = fltarr(n_elements(info.C2_list_of_datetime_Julian)) + 0.45
 info.C2_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
 info.C2_plot->SetProperty, dataX = (info.C2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = C2_yvals
 info.C2_plot->SetProperty, color=[0,100,0]
@@ -7191,7 +7191,7 @@ endif
 
 if info.AC2_number_of_images gt 0 then begin
 
-R_yvals = fltarr(n_elements(info.AC2_list_of_datetime_Julian)) + 0.9
+R_yvals = fltarr(n_elements(info.AC2_list_of_datetime_Julian)) + 0.65
 info.R_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
 info.R_plot->SetProperty, dataX = (info.AC2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = R_yvals
 info.R_plot->SetProperty, color=[255,100,100]
@@ -10328,7 +10328,7 @@ draw_available_images_timeline = Widget_Draw(swpc_cat_base2, XSize=xsize_timelin
 
 x=[0.,1.]
 y=[0.,1.]
-position_timeline = [0.05, 0.3, 0.95, 0.9]
+position_timeline = [0.05, 0.15, 0.95, 0.95];I MADE A CHANGE HERE ####
 if compact eq 1 then position_timeline = [0.05, 0.36, 0.95, 0.98]
 xtitle_A = ''
 ytitle_A = ''
