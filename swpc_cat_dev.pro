@@ -7136,6 +7136,69 @@ widget_control, info.L_widget_image_sequence_slider,sensitive=0
 endelse
 info.L_Window->Draw, info.L_both_views
 
+;Put symbols in for the hi imagery as well. 
+
+if info.BH1_number_of_images gt 0 then begin
+
+LH1_yvals = fltarr(n_elements(info.BH1_list_of_datetime_Julian)) + 0.25
+info.LH1_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+info.LH1_plot->SetProperty, dataX = (info.BH1_list_of_datetime_Julian).toarray() - info.start_julian, dataY = LH1_yvals
+info.LH1_plot->SetProperty, color=[100,100,255]
+info.LH1_plot->GetProperty, symbol=L_thisSymbol
+
+LH1_points = n_elements(LH1_yvals)
+symarray = objarr(LH1_points)
+for i = 0 , LH1_points - 1 do begin
+num = 6
+filled = 0
+thisSymbol_LH1 = obj_new("IDLgrsymbol",data=num, Size=[info.xSymbolSize_timeline, info.ySymbolSize_timeline],filled = filled)
+symarray[i] = thisSymbol_LH1
+endfor
+info.LH1_plot->SetProperty, symbol=symarray
+
+swpc_cat_set_timeline_highlight_block, info.LH1_plot, info.BH1_number_of_images, info.BH1_current_image_number, info.color_stereo_B, info.cme_outline_color
+widget_control, info.L_widget_image_sequence_slider,set_slider_max = info.BH1_number_of_images
+widget_control,info.L_widget_image_sequence_slider,set_value = info.BH1_current_image_number + 1
+info.L_ut_string_object->SetProperty, strings = (info.BH1_list_of_full_time_strings)[info.BH1_current_image_number]
+endif else begin
+info.L_ut_string_object->SetProperty, strings = 'NO IMAGES'
+info.L_cme_outline -> setProperty, hide = 1
+widget_control, info.L_widget_image_sequence_slider,sensitive=0
+endelse
+info.L_Window->Draw, info.L_both_views
+
+if info.BH2_number_of_images gt 0 then begin
+
+LH2_yvals = fltarr(n_elements(info.BH2_list_of_datetime_Julian)) + 0.15
+info.LH2_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+info.LH2_plot->SetProperty, dataX = (info.BH2_list_of_datetime_Julian).toarray() - info.start_julian, dataY = LH2_yvals
+info.LH2_plot->SetProperty, color=[100,100,255]
+info.LH2_plot->GetProperty, symbol=L_thisSymbol
+
+LH2_points = n_elements(LH2_yvals)
+symarray = objarr(LH2_points)
+for i = 0 , LH2_points - 1 do begin
+num = 6
+filled = 0
+thisSymbol_LH2 = obj_new("IDLgrsymbol",data=num, Size=[info.xSymbolSize_timeline, info.ySymbolSize_timeline],filled = filled)
+symarray[i] = thisSymbol_LH2
+endfor
+info.LH2_plot->SetProperty, symbol=symarray
+
+swpc_cat_set_timeline_highlight_block, info.LH2_plot, info.BH2_number_of_images, info.BH2_current_image_number, info.color_stereo_B, info.cme_outline_color
+widget_control, info.L_widget_image_sequence_slider,set_slider_max = info.BH2_number_of_images
+widget_control,info.L_widget_image_sequence_slider,set_value = info.BH2_current_image_number + 1
+info.L_ut_string_object->SetProperty, strings = (info.BH2_list_of_full_time_strings)[info.BH2_current_image_number]
+endif else begin
+info.L_ut_string_object->SetProperty, strings = 'NO IMAGES'
+info.L_cme_outline -> setProperty, hide = 1
+widget_control, info.L_widget_image_sequence_slider,sensitive=0
+endelse
+info.L_Window->Draw, info.L_both_views
+
+
+
+
 endif
 
 if info.C_number_of_images gt 0 then begin
@@ -10401,17 +10464,18 @@ endif
 thisSymbol_C = obj_new("IDLgrsymbol",data=6)
 thisSymbol_C2 = obj_new("IDLgrsymbol",data=6)
 thisSymbol_R = obj_new("IDLgrsymbol",data=6)
-thisSymbol_RH1 = obj_new("IDLgrsymbol",data=6)
-thisSymbol_RH2 = obj_new("IDLgrsymbol",data=6)
+
 
 if n_sat eq 3 then begin
 L_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_L, Thick=1 , linestyle = 6)
+LH1_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_L, Thick=1, linestyle = 6)
+LH2_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_L, Thick=1, linestyle = 6) 
 endif
 C_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_C, Thick=1, linestyle = 6)
 R_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_R, Thick=1, linestyle = 6)
 C2_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_C2, Thick=1, linestyle = 6)
-RH1_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_RH1, Thick=1, linestyle = 6) 
-RH2_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_RH2, Thick=1, linestyle = 6) 
+RH1_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_R, Thick=1, linestyle = 6) 
+RH2_plot = Obj_New("IDLgrPLOT", x, y, Symbol=thisSymbol_R, Thick=1, linestyle = 6) 
 
 xaxis_images_timeline = Obj_New("IDLgrAxis", 0, Color=[35,35,35], Ticklen=0.01, Minor=0, $
                                 Location=[1000, position_timeline[1] ,0], Exact=exact[0],/use_text_color)
@@ -10435,7 +10499,11 @@ animation_current_time_marker = obj_new("idlgrpolyline",line_data,color=[255,255
 ;images_timeline_model->Add, animation_end_time_marker_handle
 images_timeline_model->Add, animation_current_time_marker
 
-if n_sat eq 3 then images_timeline_model->Add, L_plot
+if n_sat eq 3 then begin
+	images_timeline_model->Add, L_plot
+	images_timeline_model->Add, LH1_plot
+	images_timeline_model->Add, LH2_plot
+endif
 images_timeline_model->Add, C_plot
 images_timeline_model->Add, C2_plot
 images_timeline_model->Add, R_plot
@@ -11717,6 +11785,8 @@ info = $
          draw_available_images_timeline:draw_available_images_timeline, $
          position_timeline: position_timeline, $
          L_plot: L_plot, $
+	 LH1_plot: LH1_plot, $
+	 LH2_plot: LH2_plot, $
          C_plot: C_plot, $
          C2_plot: C2_plot, $
          R_plot: R_plot, $
