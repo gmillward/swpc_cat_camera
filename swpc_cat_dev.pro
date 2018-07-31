@@ -9345,9 +9345,6 @@ endelse ; not right-click context menu
 
    	case info.currently_showing_STEREO_B of
 		'BC2':Begin
-			;info.clicked_L = 1
-			;info.clicked_LH1 = 0
-			;info.clicked_LH2 = 0
 			B_list_of_datetime_Julian = info.BC2_list_of_datetime_Julian
 			B_number_of_images = info.BC2_number_of_images
 			B_current_image_number = info.BC2_current_image_number
@@ -9359,13 +9356,9 @@ endelse ; not right-click context menu
 			B_cme_MATCH_outline = info.BC2_cme_MATCH_outline
 			CME_matches_image_B_CME_outline = info.CME_matches_image_BC2_CME_outline
 			B_list_of_full_time_strings = info.BC2_list_of_full_time_strings
-			B_number_of_images = info.BC2_number_of_images
 			background_color_stereo_B = info.background_color_stereo_B
 		end
 		'BH1':Begin
-			;info.clicked_L = 1
-			;info.clicked_LH1 = 1
-			;info.clicked_LH2 = 0
 			B_list_of_datetime_Julian = info.BH1_list_of_datetime_Julian
 			B_number_of_images = info.BH1_number_of_images
 			B_current_image_number = info.BH1_current_image_number
@@ -9377,13 +9370,9 @@ endelse ; not right-click context menu
 			B_cme_MATCH_outline = info.BH1_cme_MATCH_outline
 			CME_matches_image_B_CME_outline = info.CME_matches_image_BH1_CME_outline
 			B_list_of_full_time_strings = info.BH1_list_of_full_time_strings
-			B_number_of_images = info.BH1_number_of_images
 			background_color_stereo_B = info.background_color_stereo_B
 		end
 		'BH2':Begin
-			;info.clicked_L = 1
-			;info.clicked_LH1 = 0
-			;info.clicked_LH2 = 1
 			B_list_of_datetime_Julian = info.BH2_list_of_datetime_Julian
 			B_number_of_images = info.BH2_number_of_images
 			B_current_image_number = info.BH2_current_image_number
@@ -9395,10 +9384,40 @@ endelse ; not right-click context menu
 			B_cme_MATCH_outline = info.BH2_cme_MATCH_outline
 			CME_matches_image_B_CME_outline = info.CME_matches_image_BH2_CME_outline
 			B_list_of_full_time_strings = info.BH2_list_of_full_time_strings
-			B_number_of_images = info.BH2_number_of_images
 			background_color_stereo_B = info.background_color_stereo_B
 		end
 	endcase
+;	case info.currently_showing_LASCO of
+;		'SC3':Begin
+;			C_list_of_datetime_Julian = info.C_list_of_datetime_Julian
+;			C_number_of_images = info.C_number_of_images
+;			C_current_image_number = info.C_current_image_number
+;			C_background_image_number = info.C_background_image_number
+;			C_difference_imaging = info.C_difference_imaging
+;			C_list_of_image_data = info.C_list_of_image_data
+;			CME_matches_image_C_Image_number = info.CME_matches_image_C_Image_number
+;			color_stereo_C = info.color_stereo_C
+;			C_cme_MATCH_outline = info.C_cme_MATCH_outline
+;			CME_matches_image_C_CME_outline = info.CME_matches_image_C_CME_outline
+;			C_list_of_full_time_strings = info.C_list_of_full_time_strings
+;			background_color_stereo_C = info.background_color_stereo_C	
+;		end
+;		'SC2':Begin
+;			C_list_of_datetime_Julian = info.C2_list_of_datetime_Julian
+;			C_number_of_images = info.C2_number_of_images
+;			C_current_image_number = info.C2_current_image_number
+;			C_background_image_number = info.C2_background_image_number
+;			C_difference_imaging = info.C2_difference_imaging
+;			C_list_of_image_data = info.C2_list_of_image_data
+;			CME_matches_image_C_Image_number = info.CME_matches_image_C2_Image_number
+;			color_stereo_C = info.color_stereo_C2
+;			C_cme_MATCH_outline = info.C2_cme_MATCH_outline
+;			CME_matches_image_C_CME_outline = info.CME_matches_image_C2_CME_outline
+;			C_list_of_full_time_strings = info.C2_list_of_full_time_strings
+;			background_color_stereo_C = info.background_color_stereo_C2	
+;		end
+;	endcase
+
 	if info.currently_showing_LASCO eq 'SC3' then begin 
 		info.clicked_C = 1
 		info.clicked_C2 = 0
@@ -9408,19 +9427,46 @@ endelse ; not right-click context menu
 	endelse
 	case info.currently_showing_STEREO_A of 
 		'AC2':Begin	
-			info.clicked_R = 1
-   			info.clicked_RH1 = 0
-			info.clicked_RH2 = 0
+			A_list_of_datetime_Julian = info.AC2_list_of_datetime_Julian
+			A_number_of_images = info.AC2_number_of_images
+			A_current_image_number = info.AC2_current_image_number
+			A_background_image_number = info.AC2_background_image_number
+			A_difference_imaging = info.AC2_difference_imaging
+			A_list_of_image_data = info.AC2_list_of_image_data
+			CME_matches_image_A_Image_number = info.CME_matches_image_AC2_Image_number
+			color_stereo_A = info.color_stereo_A
+			A_cme_MATCH_outline = info.AC2_cme_MATCH_outline
+			CME_matches_image_A_CME_outline = info.CME_matches_image_AC2_CME_outline
+			A_list_of_full_time_strings = info.AC2_list_of_full_time_strings
+			background_color_stereo_A = info.background_color_stereo_A
 		end
 		'AH1':Begin
-			info.clicked_R = 0
-			info.clicked_RH1 = 1
-			info.clicked_RH2 = 0 
+			A_list_of_datetime_Julian = info.AH1_list_of_datetime_Julian
+			A_number_of_images = info.AH1_number_of_images
+			A_current_image_number = info.AH1_current_image_number
+			A_background_image_number = info.AH1_background_image_number
+			A_difference_imaging = info.AH1_difference_imaging
+			A_list_of_image_data = info.AH1_list_of_image_data
+			CME_matches_image_A_Image_number = info.CME_matches_image_AH1_Image_number
+			color_stereo_A = info.color_stereo_A
+			A_cme_MATCH_outline = info.AH1_cme_MATCH_outline
+			CME_matches_image_A_CME_outline = info.CME_matches_image_AH1_CME_outline
+			A_list_of_full_time_strings = info.AH1_list_of_full_time_strings
+			background_color_stereo_A = info.background_color_stereo_A
 		end
 		'AH2':Begin
-			info.clicked_R = 0
-			info.clicked_RH1 = 0 
-			info.clicked_RH2 = 1 
+			A_list_of_datetime_Julian = info.AH2_list_of_datetime_Julian
+			A_number_of_images = info.AH2_number_of_images
+			A_current_image_number = info.AH2_current_image_number
+			A_background_image_number = info.AH2_background_image_number
+			A_difference_imaging = info.AH2_difference_imaging
+			A_list_of_image_data = info.AH2_list_of_image_data
+			CME_matches_image_A_Image_number = info.CME_matches_image_AH2_Image_number
+			color_stereo_A = info.color_stereo_A
+			A_cme_MATCH_outline = info.AH2_cme_MATCH_outline
+			CME_matches_image_A_CME_outline = info.CME_matches_image_AH2_CME_outline
+			A_list_of_full_time_strings = info.AH2_list_of_full_time_strings
+			background_color_stereo_A = info.background_color_stereo_A
 		end
 	endcase
 	
@@ -9465,8 +9511,6 @@ endelse ; not right-click context menu
 	
 	if info.C_number_of_images gt 0 and info.clicked_C eq 1 then begin
 		
-		print, 'Moving with timeline' 
-
 		info.C_cme_outline -> setProperty, hide = 1
 		info.C_cme_MATCH_outline-> setProperty, hide = 1
 		info.C2_cme_MATCH_outline-> setProperty, hide = 1
@@ -9602,9 +9646,9 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 
 
-	if info.AC2_number_of_images gt 0 and info.clicked_R eq 1 then begin
+	if info.AC2_number_of_images gt 0 then begin
 
-		R_julian = (info.AC2_list_of_datetime_Julian).toarray()
+		R_julian = (A_list_of_datetime_Julian).toarray()
 		R_index = (where(this_julian-R_julian lt 0.0))[0]
 		if R_index gt 0 then begin 
 			if abs(R_julian[R_index - 1] - this_julian) lt abs(R_julian[R_index] - this_julian) then R_index --
@@ -9612,97 +9656,97 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 		if abs(R_julian[R_index] - this_julian) lt (1./48.) then begin
 
-			if R_index eq -1 then R_index = info.AC2_number_of_images - 1
-			info.AC2_current_image_number = R_index
-			widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
+			if R_index eq -1 then R_index = A_number_of_images - 1
+			A_current_image_number = R_index
+			widget_control,info.R_widget_image_sequence_slider,set_value = A_current_image_number + 1
 
 			swpc_cat_REDRAW_THE_IMAGE, $
-    info.AC2_current_image_number,info.AC2_background_image_number,info.AC2_difference_imaging, $
-    info.AC2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
-    info.CME_matches_image_AC2_Image_number,info.R_current_background_color, $
-    info.background_color,info.R_current_text_color,info.color_stereo_A,info.R_cme_outline,info.AC2_cme_MATCH_outline, $
-    info.R_widget_outline_matches_image,info.CME_matches_image_AC2_CME_outline, $
-    info.R_ut_string_object,info.AC2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
+    A_current_image_number,A_background_image_number,A_difference_imaging, $
+    A_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
+    CME_matches_image_A_Image_number,info.R_current_background_color, $
+    info.background_color,info.R_current_text_color,color_stereo_A,info.R_cme_outline,A_cme_MATCH_outline, $
+    info.R_widget_outline_matches_image,CME_matches_image_A_CME_outline, $
+    info.R_ut_string_object,A_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
-			swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_a, info.cme_outline_color
+			;swpc_cat_set_timeline_highlight_block, info.R_plot, A_number_of_images, A_current_image_number, color_stereo_a, info.cme_outline_color
 
 
 		endif else begin
 
-			info.R_window->erase, color=info.background_color_stereo_A
-			info.R_plot->SetProperty, color=info.color_stereo_A
+			info.R_window->erase, color=background_color_stereo_A
+			info.R_plot->SetProperty, color=color_stereo_A
 	
 		endelse
 
 	endif
 
-	if info.AH1_number_of_images gt 0 and info.clicked_RH1 eq 1 then begin
+;	if info.AH1_number_of_images gt 0 and info.clicked_RH1 eq 1 then begin
 
-		R_julian = (info.AH1_list_of_datetime_Julian).toarray()
-		R_index = (where(this_julian-R_julian lt 0.0))[0]
-		if R_index gt 0 then begin 
-			if abs(R_julian[R_index - 1] - this_julian) lt abs(R_julian[R_index] - this_julian) then R_index --
-		endif
-
-		if abs(R_julian[R_index] - this_julian) lt (1./48.) then begin
-
-			if R_index eq -1 then R_index = info.AH1_number_of_images - 1
-			info.AH1_current_image_number = R_index
-			widget_control,info.R_widget_image_sequence_slider,set_value = info.AH1_current_image_number + 1
-
-			swpc_cat_REDRAW_THE_IMAGE, $
-    info.AH1_current_image_number,info.AH1_background_image_number,info.AH1_difference_imaging, $
-    info.AH1_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
-    info.CME_matches_image_AH1_Image_number,info.R_current_background_color, $
-    info.background_color,info.R_current_text_color,info.color_stereo_A,info.R_cme_outline,info.AH1_cme_MATCH_outline, $
-    info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
-    info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
+;		R_julian = (info.AH1_list_of_datetime_Julian).toarray()
+;		R_index = (where(this_julian-R_julian lt 0.0))[0]
+;		if R_index gt 0 then begin 
+;			if abs(R_julian[R_index - 1] - this_julian) lt abs(R_julian[R_index] - this_julian) then R_index --
+;		endif
+;
+;		if abs(R_julian[R_index] - this_julian) lt (1./48.) then begin
+;
+;			if R_index eq -1 then R_index = info.AH1_number_of_images - 1
+;			info.AH1_current_image_number = R_index
+;			widget_control,info.R_widget_image_sequence_slider,set_value = info.AH1_current_image_number + 1
+;
+;			swpc_cat_REDRAW_THE_IMAGE, $
+;    info.AH1_current_image_number,info.AH1_background_image_number,info.AH1_difference_imaging, $
+;    info.AH1_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
+;    info.CME_matches_image_AH1_Image_number,info.R_current_background_color, $
+;    info.background_color,info.R_current_text_color,info.color_stereo_A,info.R_cme_outline,info.AH1_cme_MATCH_outline, $
+;    info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
+;    info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
 			;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AH1_number_of_images, info.AH1_current_image_number, info.color_stereo_a, info.cme_outline_color
 
 
-		endif else begin
+;		endif else begin
 
-			info.R_window->erase, color=info.background_color_stereo_A
-			info.R_plot->SetProperty, color=info.color_stereo_A
+;			info.R_window->erase, color=info.background_color_stereo_A
+;			info.R_plot->SetProperty, color=info.color_stereo_A
 	
-		endelse
+;		endelse
 
-	endif
+;	endif
 
-	if info.AH2_number_of_images gt 0 and info.clicked_RH2 eq 1 then begin
-
-		R_julian = (info.AH2_list_of_datetime_Julian).toarray()
-		R_index = (where(this_julian-R_julian lt 0.0))[0]
-		if R_index gt 0 then begin 
-			if abs(R_julian[R_index - 1] - this_julian) lt abs(R_julian[R_index] - this_julian) then R_index --
-		endif
-
-		if abs(R_julian[R_index] - this_julian) lt (1./48.) then begin
-
-			if R_index eq -1 then R_index = info.AH2_number_of_images - 1
-			info.AH2_current_image_number = R_index
-			widget_control,info.R_widget_image_sequence_slider,set_value = info.AH2_current_image_number + 1
-
-			swpc_cat_REDRAW_THE_IMAGE, $
-    info.AH2_current_image_number,info.AH2_background_image_number,info.AH2_difference_imaging, $
-    info.AH2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
-    info.CME_matches_image_AH2_Image_number,info.R_current_background_color, $
-    info.background_color,info.R_current_text_color,info.color_stereo_A,info.R_cme_outline,info.AH2_cme_MATCH_outline, $
-    info.R_widget_outline_matches_image,info.CME_matches_image_AH2_CME_outline, $
-    info.R_ut_string_object,info.AH2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
+;	if info.AH2_number_of_images gt 0 and info.clicked_RH2 eq 1 then begin
+;
+;		R_julian = (info.AH2_list_of_datetime_Julian).toarray()
+;		R_index = (where(this_julian-R_julian lt 0.0))[0]
+;		if R_index gt 0 then begin 
+;			if abs(R_julian[R_index - 1] - this_julian) lt abs(R_julian[R_index] - this_julian) then R_index --
+;		endif
+;
+;		if abs(R_julian[R_index] - this_julian) lt (1./48.) then begin
+;
+;			if R_index eq -1 then R_index = info.AH2_number_of_images - 1
+;			info.AH2_current_image_number = R_index
+;			widget_control,info.R_widget_image_sequence_slider,set_value = info.AH2_current_image_number + 1
+;
+;			swpc_cat_REDRAW_THE_IMAGE, $
+;    info.AH2_current_image_number,info.AH2_background_image_number,info.AH2_difference_imaging, $
+;    info.AH2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
+;    info.CME_matches_image_AH2_Image_number,info.R_current_background_color, $
+;    info.background_color,info.R_current_text_color,info.color_stereo_A,info.R_cme_outline,info.AH2_cme_MATCH_outline, $
+;    info.R_widget_outline_matches_image,info.CME_matches_image_AH2_CME_outline, $
+;    info.R_ut_string_object,info.AH2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
 			;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AH2_number_of_images, info.AH2_current_image_number, info.color_stereo_a, info.cme_outline_color
 
 
-		endif else begin
+;		endif else begin
 
-			info.R_window->erase, color=info.background_color_stereo_A
-			info.R_plot->SetProperty, color=info.color_stereo_A
+;			info.R_window->erase, color=info.background_color_stereo_A
+;			info.R_plot->SetProperty, color=info.color_stereo_A
 	
-		endelse
+;		endelse
 
-	endif
+;	endif
 
 
 ;endif
