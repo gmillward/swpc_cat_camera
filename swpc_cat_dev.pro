@@ -9072,17 +9072,22 @@ info.timeline_left_mouse_button_being_pressed = 0
        endif else begin
    
     info.timeline_left_mouse_button_being_pressed = 0
-   print, 'info.n_sat ', info.n_sat
-   if info.n_sat eq 3 then info.clicked_L = 0 ;I CHANGED THIS TO 1 ####
+   
+   if info.n_sat eq 3 then info.clicked_L = 0 
    info.clicked_C = 0
    info.clicked_C2 = 0
    info.clicked_R = 0
-   
+   info.clicked_RH1 = 0
+   info.clicked_RH2 = 0
+
    if shift_click eq 1 then begin
    if info.n_sat eq 3 then info.clicked_L = 1
    info.clicked_C = 1
    info.clicked_C2 = 0
    info.clicked_R = 1
+   info.clicked_RH1 = 0
+   info.clicked_RH2 = 0
+
    endif else begin
    fraction_y = float(event.y)/float(info.ysize_timeline)
    if info.n_sat eq 3 then begin    
@@ -9091,7 +9096,11 @@ info.timeline_left_mouse_button_being_pressed = 0
    if fraction_y ge 0.453125 and fraction_y le 0.5625 then info.clicked_C2 = 1
    if fraction_y ge 0.559375 and fraction_y le 0.703125 then info.clicked_C = 1
    if fraction_y ge 0.734375 and fraction_y le 0.84375 then info.clicked_R = 1      
-   endelse
+   if fraction_y ge 0.84375 then begin
+	info.clicked_RH1 = 1
+	info.clicked_RH2 = 1
+   endif   
+endelse
    
 if info.n_sat eq 3 then begin 
 if info.BC2_number_of_images gt 0 and info.clicked_L eq 1 then begin
@@ -9331,7 +9340,7 @@ if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOK
 		info.clicked_C = 0
 		info.clicked_C2 = 1
 	endelse
-	case info.currently_showing_stereoA of 
+	case info.currently_showing_STEREO_A of 
 		'AC2':Begin	
 			info.clicked_R = 1
    			info.clicked_RH1 = 0
@@ -11466,6 +11475,8 @@ if n_sat eq 3 then clicked_L = 0
 clicked_C = 0
 clicked_R = 0
 clicked_C2 = 0
+clicked_RH1 = 0
+clicked_RH2 = 0
 
 currently_showing_LASCO = 'SC3'
 if n_sat eq 3 then currently_showing_STEREO_B = 'BC2'
@@ -11843,6 +11854,8 @@ info = $
          clicked_C:clicked_C, $
          clicked_C2:clicked_C2, $
          clicked_R:clicked_R, $
+	 clicked_RH1:clicked_RH1, $
+	 clicked_RH2:clicked_RH2, $
          currently_showing_LASCO:currently_showing_LASCO, $
          L_title_object:L_title_object, $
          C_title_object:C_title_object, $
@@ -12321,6 +12334,8 @@ date_array:date_array, $
 clicked_C:clicked_C, $
 clicked_C2:clicked_C2, $
 clicked_R:clicked_R, $
+clicked_RH1:clicked_RH1, $
+clicked_RH2:clicked_RH2, $
 currently_showing_LASCO:currently_showing_LASCO, $
 C_title_object:C_title_object, $
 R_title_object:R_title_object, $
