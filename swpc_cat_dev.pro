@@ -9331,7 +9331,7 @@ endelse ; not right-click context menu
    ;THIS COMES UP IF I CLICK AND DRAG. ####
 	;THIS WOULD MOVE THE TIMELINE BAR. DEPENDS ON WHERE YOU CLICK  
 
-if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
+;if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOKMARK. 
    
 	time_line_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
 	line_data=fltarr(2,2)
@@ -9735,7 +9735,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 	endif
 
 
-endif
+;endif
 
 ;endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOKMARK, THOUGH NOT ALWAYS. ####
 ;print, 'Entered case where event.y <= 10 '
