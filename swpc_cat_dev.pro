@@ -7219,11 +7219,11 @@ endelse
 info.R_Window->Draw, info.R_both_views
 
 ;Try and make blocks for hi1. 
-RH1_yvals = fltarr(n_elements(info.AH1_list_of_datetime_Julian)) + 0.9
-info.RH1_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
-info.RH1_plot->SetProperty, dataX = (info.AH1_list_of_datetime_Julian).toarray() - info.start_julian, dataY = RH1_yvals
-info.RH1_plot->SetProperty, color=[255,100,100]
-info.RH1_plot->GetProperty, symbol=R_thisSymbol
+;RH1_yvals = fltarr(n_elements(info.AH1_list_of_datetime_Julian)) + 0.9
+;info.RH1_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+;info.RH1_plot->SetProperty, dataX = (info.AH1_list_of_datetime_Julian).toarray() - info.start_julian, dataY = RH1_yvals
+;info.RH1_plot->SetProperty, color=[255,100,100]
+;info.RH1_plot->GetProperty, symbol=R_thisSymbol
 
 
 
@@ -10320,7 +10320,7 @@ R_widget_remove_this_image = Widget_Button(R_contextBase, Value='Remove This Ima
 ; Plot A is the 'available images timeline'.....
 
 xsize_timeline = (3.*Xsize)+20
-ysize_timeline = Ysize/8
+ysize_timeline = Ysize/4 ;I CHANGED THIS ####
 if compact eq 1 then ysize_timeline = Ysize/10
 
 draw_available_images_timeline = Widget_Draw(swpc_cat_base2, XSize=xsize_timeline, YSize=ysize_timeline, Graphics_Level=2, retain=retain, $
