@@ -9073,7 +9073,11 @@ info.timeline_left_mouse_button_being_pressed = 0
    
     info.timeline_left_mouse_button_being_pressed = 0
    
-   if info.n_sat eq 3 then info.clicked_L = 0 
+   if info.n_sat eq 3 then begin
+	info.clicked_L = 0 
+	info.clicked_LH1 = 0
+	info.clicked_LH2 = 0
+   endif
    info.clicked_C = 0
    info.clicked_C2 = 0
    info.clicked_R = 0
@@ -9081,7 +9085,11 @@ info.timeline_left_mouse_button_being_pressed = 0
    info.clicked_RH2 = 0
 
    if shift_click eq 1 then begin
-   if info.n_sat eq 3 then info.clicked_L = 1
+   if info.n_sat eq 3 then begin
+	info.clicked_L = 1
+	info.clicked_LH1 = 0
+	info.clicked_LH2 = 0 
+   endif 
    info.clicked_C = 1
    info.clicked_C2 = 0
    info.clicked_R = 1
@@ -9092,6 +9100,10 @@ info.timeline_left_mouse_button_being_pressed = 0
    fraction_y = float(event.y)/float(info.ysize_timeline)
    if info.n_sat eq 3 then begin    
 	if fraction_y ge 0.34375 and fraction_y le 0.4375 then info.clicked_L = 1
+	if fraction_y le 0.4375 then begin
+		info.clicked_LH1 = 1
+		info.clicked_LH2 = 1
+	endif
    endif   
    if fraction_y ge 0.453125 and fraction_y le 0.5625 then info.clicked_C2 = 1
    if fraction_y ge 0.559375 and fraction_y le 0.703125 then info.clicked_C = 1
@@ -9331,8 +9343,23 @@ if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOK
 	info.images_timeline_window->Draw, info.images_timeline_view
 
 
-   
-	if info.n_sat eq 3 then info.clicked_L = 1
+   	case info.currently_showing_STEREO_B of
+		'BC2':Begin
+			info.clicked_L = 1
+			info.clicked_LH1 = 0
+			info.clicked_LH2 = 0
+		end
+		'BH1':Begin
+			info.clicked_L = 0
+			info.clicked_LH1 = 1
+			info.clicked_LH2 = 0
+		end
+		'BH2':Begin
+			info.clicked_L = 0
+			info.clicked_LH1 = 0
+			info.clicked_LH2 = 1
+		end
+	endcase
 	if info.currently_showing_LASCO eq 'SC3' then begin 
 		info.clicked_C = 1
 		info.clicked_C2 = 0
@@ -9392,6 +9419,76 @@ if event.y gt 1 then begin ;YOU NEED TO CLICK BELOW EVENT.Y = 10 TO GET THE BOOK
 		endelse
 
 	endif
+	
+	if info.BH1_number_of_images gt 0 and info.clicked_LH1 eq 1 then begin
+
+		L_julian = (info.BH1_list_of_datetime_Julian).toarray()
+		L_index = (where(this_julian-L_julian lt 0.0))[0]
+		if L_index gt 0 then begin
+			if abs(L_julian[L_index - 1] - this_julian) lt abs(L_julian[L_index] - this_julian) then L_index --
+		endif
+
+		if abs(L_julian[L_index] - this_julian) lt (1./48.) then begin
+
+			if L_index eq -1 then L_index = info.BH1_number_of_images - 1
+
+			info.BH1_current_image_number = L_index
+			widget_control,info.L_widget_image_sequence_slider,set_value = info.BH1_current_image_number + 1
+
+			swpc_cat_REDRAW_THE_IMAGE, $
+    info.BH1_current_image_number,info.BH1_background_image_number,info.BH1_difference_imaging, $
+    info.BH1_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
+    info.CME_matches_image_BH1_Image_number,info.L_current_background_color, $
+    info.background_color,info.L_current_text_color,info.color_stereo_B,info.L_cme_outline,info.BH1_cme_MATCH_outline, $
+    info.L_widget_outline_matches_image,info.CME_matches_image_BH1_CME_outline, $
+    info.L_ut_string_object,info.BH1_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0,     info.i_log_scale
+
+			;swpc_cat_set_timeline_highlight_block, info.L_plot, info.BH1_number_of_images, info.BH1_current_image_number, info.color_stereo_B, info.cme_outline_color
+   
+		endif else begin
+
+			info.L_window->erase, color=info.background_color_stereo_B
+			info.L_plot->SetProperty, color=info.color_stereo_B
+
+		endelse
+
+	endif
+	
+	if info.BH2_number_of_images gt 0 and info.clicked_LH2 eq 1 then begin
+
+		L_julian = (info.BH2_list_of_datetime_Julian).toarray()
+		L_index = (where(this_julian-L_julian lt 0.0))[0]
+		if L_index gt 0 then begin
+			if abs(L_julian[L_index - 1] - this_julian) lt abs(L_julian[L_index] - this_julian) then L_index --
+		endif
+
+		if abs(L_julian[L_index] - this_julian) lt (1./48.) then begin
+
+			if L_index eq -1 then L_index = info.BH2_number_of_images - 1
+
+			info.BH2_current_image_number = L_index
+			widget_control,info.L_widget_image_sequence_slider,set_value = info.BH2_current_image_number + 1
+
+			swpc_cat_REDRAW_THE_IMAGE, $
+    info.BH2_current_image_number,info.BH2_background_image_number,info.BH2_difference_imaging, $
+    info.BH2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
+    info.CME_matches_image_BH2_Image_number,info.L_current_background_color, $
+    info.background_color,info.L_current_text_color,info.color_stereo_B,info.L_cme_outline,info.BH2_cme_MATCH_outline, $
+    info.L_widget_outline_matches_image,info.CME_matches_image_BH2_CME_outline, $
+    info.L_ut_string_object,info.BH2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0,     info.i_log_scale
+
+			;swpc_cat_set_timeline_highlight_block, info.L_plot, info.BH2_number_of_images, info.BH2_current_image_number, info.color_stereo_B, info.cme_outline_color
+   
+		endif else begin
+
+			info.L_window->erase, color=info.background_color_stereo_B
+			info.L_plot->SetProperty, color=info.color_stereo_B
+
+		endelse
+
+	endif
+
+
 	endif
 
 
@@ -9928,7 +10025,7 @@ PRO SWPC_CAT_DEV
 compile_opt idl2
 
 ; set n_sat to either 2 or 3
-n_sat = 2
+n_sat = 3
 
 show_cme_surface = 0
 
@@ -11503,7 +11600,11 @@ i_move = 1
 
 which_window_to_animate = 1
 
-if n_sat eq 3 then clicked_L = 0
+if n_sat eq 3 then begin
+	clicked_L = 0
+	clicked_LH1 = 0
+	clicked_LH2 = 0
+endif
 clicked_C = 0
 clicked_R = 0
 clicked_C2 = 0
@@ -11883,6 +11984,8 @@ info = $
          acceptID:acceptID, $
          date_array:date_array, $
          clicked_L:clicked_L, $
+	 clicked_LH1:clicked_LH1, $
+	 clicked_LH2:clicked_LH2, $
          clicked_C:clicked_C, $
          clicked_C2:clicked_C2, $
          clicked_R:clicked_R, $
