@@ -2449,7 +2449,14 @@ if info.AC2_number_of_images gt 0 then begin
 swpc_cat_sort_out_the_timeline_symbols, info.AC2_number_of_images, info.CME_matches_image_AC2_Image_number, $
                                   info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
 endif
-                  
+if info.AH1_number_of_images gt 0 then begin
+swpc_cat_sort_out_the_timeline_symbols, info.AH1_number_of_images, info.CME_matches_image_AH1_Image_number, $
+                                  info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+endif
+if info.AH2_number_of_images gt 0 then begin
+swpc_cat_sort_out_the_timeline_symbols, info.AH2_number_of_images, info.CME_matches_image_AH2_Image_number, $
+                                  info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
+endif                 
 info.images_timeline_window->Draw, info.images_timeline_view
 
 
@@ -7096,7 +7103,7 @@ info.xaxis_images_timeline->SetProperty, tickformat='label_date'
 symSize = 1.0
 plot_position_scaling_factor = (info.position_timeline[2] - info.position_timeline[0]) / (info.position_timeline[3] - info.position_timeline[1]) 
 info.xSymbolSize_timeline = (info.end_julian - info.start_julian) * 0.015 * symSize / 4.
-info.ySymbolSize_timeline = (1.0 - 0.0) * 0.015 * plot_position_scaling_factor * symSize * 4.
+info.ySymbolSize_timeline = (1.0 - 0.0) * 0.015 * plot_position_scaling_factor * symSize * 2. ;I CHANGED THIS TO 2. ####
 
 if info.n_sat eq 3 then begin
   
@@ -7210,6 +7217,21 @@ info.R_cme_outline -> setProperty, hide = 1
 widget_control, info.R_widget_image_sequence_slider,sensitive=0
 endelse
 info.R_Window->Draw, info.R_both_views
+
+;Try and make blocks for hi1. 
+RH1_yvals = fltarr(n_elements(info.AH1_list_of_datetime_Julian)) + 0.9
+info.RH1_plot->SetProperty, XCoord_Conv=xs, YCoord_Conv=ys
+info.RH1_plot->SetProperty, dataX = (info.AH1_list_of_datetime_Julian).toarray() - info.start_julian, dataY = RH1_yvals
+info.RH1_plot->SetProperty, color=[255,100,100]
+info.RH1_plot->GetProperty, symbol=R_thisSymbol
+
+
+
+
+
+
+
+
 
 ;line_data=fltarr(2,2)
 ;line_data[0,0] = 0. + 1./24.
