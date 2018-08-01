@@ -2600,7 +2600,7 @@ widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C3'
 
 ; make sure, as we switch from C3 to C2, that any C3 match (green line)
 ; is hidden.... 
-info.C_cme_MATCH_outline->SetProperty, hide = 1 ;I CHANGED C TO C3 ####
+info.C_cme_MATCH_outline->SetProperty, hide = 1 
 
 widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C2_list_of_datetime_Julian)
 
@@ -2621,6 +2621,7 @@ info.C2_telescope_FOV = (256. * ((info.C2_list_of_pixel_scales)[0] / (info.C2_li
 
 if info.debug_mode eq 1 then print, 'C2 ', info.C2_telescope_FOV, (info.C2_list_of_pixel_scales)[0], (info.C2_list_of_image_scaling_factors)[0], (info.C2_list_of_rsuns)[0]
 
+;Could this be the issue? 
 info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
 info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
 
@@ -2671,6 +2672,12 @@ i_day = i_day[0]
 
 info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
 info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+
+;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
+;info.C_cme_model->GetProperty, transform = transform
+;info.C_camera_transform = transform
+
+;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
@@ -9634,7 +9641,7 @@ endelse ; not right-click context menu
 	info.animation_current_time_marker->setproperty,data=line_data
 	info.images_timeline_window->Draw, info.images_timeline_view
 
-
+	if info.n_sat eq 3 then begin 
    	case info.currently_showing_STEREO_B of
 		'BC2':Begin
 			B_list_of_datetime_Julian = info.BC2_list_of_datetime_Julian
@@ -9679,6 +9686,7 @@ endelse ; not right-click context menu
 			L_plot = info.LH2_plot
 		end
 	endcase
+	endif
 
 	if info.currently_showing_LASCO eq 'SC3' then begin 
 		info.clicked_C = 1
@@ -10225,7 +10233,7 @@ PRO SWPC_CAT_DEV
 compile_opt idl2
 
 ; set n_sat to either 2 or 3
-n_sat = 3
+n_sat = 2
 
 show_cme_surface = 0
 
