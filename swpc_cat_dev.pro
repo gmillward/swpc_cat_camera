@@ -10244,22 +10244,23 @@ compact = 0
 compact_frame = 1
 if compact eq 1 then compact_frame = 0
 
-swpc_cat_1point0_production_build = 1
+swpc_cat_1point0_production_build = 0
 
 !except = 0
 retain = 2
 allow_Bernouli = 0
-allow_manual_data_point = 1
-show_image_line_plot = 1
-allow_show_3D_view = 1
-show_cone_Z_axis = 1
-calculate_individual_velocities_for_each_telescope = 1
+allow_manual_data_point = 0
+show_image_line_plot = 0
+allow_show_3D_view = 0
+show_cone_Z_axis = 0
+calculate_individual_velocities_for_each_telescope = 0
 debug_mode = 1
 output_matched_line_data_in_txt_file = 0
 
 if swpc_cat_1point0_production_build eq 1 then begin
-  allow_Bernouli = 0
-  allow_manual_data_point = 1
+print, 'This code should not run:'   
+allow_Bernouli = 0
+  allow_manual_data_point = 0
   show_image_line_plot = 0
   allow_show_3D_view = 0
   show_cone_Z_axis = 0
@@ -10939,6 +10940,7 @@ plot_Model->Add, yAxis2_B
 
 
 if allow_manual_data_point eq 1 then begin
+print, 'allow_manual_data_point ', allow_manual_data_point
 plot_window_contextBase = WIDGET_BASE(draw_plot_window, /CONTEXT_MENU, UNAME = 'plot_window_contextBase',sensitive=1)
 plot_window_manually_add_point = Widget_Button(plot_window_contextBase, Value='Manually Add Point',Event_Pro='swpc_cat_manually_add_or_remove_point')
 endif else begin
