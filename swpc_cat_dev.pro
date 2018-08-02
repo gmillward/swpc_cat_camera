@@ -2632,6 +2632,12 @@ i_day = i_day[0]
 info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
 info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
+;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
+;info.C_cme_model->GetProperty, transform = transform
+;info.C_camera_transform = transform
+
+;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
+
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
 
@@ -2677,7 +2683,7 @@ info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 ;info.C_cme_model->GetProperty, transform = transform
 ;info.C_camera_transform = transform
 
-;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
+;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
@@ -2715,9 +2721,7 @@ WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
     info.L_widget_outline_matches_image,info.CME_matches_image_BC2_CME_outline, $
     info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
     
-;  swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
-;  info.C2_HEEQ_coords[1] = B_angle_degrees
-  
+ 
   info.BC2_telescope_FOV = (256. * ((info.BC2_list_of_pixel_scales)[0] / (info.BC2_list_of_image_scaling_factors)[0])) / (info.BC2_list_of_rsuns)[0]
   
   if info.debug_mode eq 1 then print, 'BC2 ', info.BC2_telescope_FOV, (info.BC2_list_of_pixel_scales)[0], (info.BC2_list_of_image_scaling_factors)[0], (info.BC2_list_of_rsuns)[0]
@@ -2725,8 +2729,6 @@ WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
   info.L_camera->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
   info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
   
-;  info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-;  info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 ; get rid of current camera YAW.....
 
@@ -2785,10 +2787,7 @@ pro swpc_cat_show_B_hi1, event
     info.background_color,info.L_current_text_color,info.color_BH1,info.L_cme_outline,info.BH1_cme_MATCH_outline, $
     info.L_widget_outline_matches_image,info.CME_matches_image_BH1_CME_outline, $
     info.L_ut_string_object,info.BH1_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
-    
-;  swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
-;  info.C2_HEEQ_coords[1] = B_angle_degrees
-  
+      
   info.BH1_telescope_FOV = (256. * ((info.BH1_list_of_pixel_scales)[0] / (info.BH1_list_of_image_scaling_factors)[0])) / (info.BH1_list_of_rsuns)[0]
   
   if info.debug_mode eq 1 then print, 'BH1 ', info.BH1_telescope_FOV, (info.BH1_list_of_pixel_scales)[0], (info.BH1_list_of_image_scaling_factors)[0], (info.BH1_list_of_rsuns)[0]
@@ -2796,9 +2795,6 @@ pro swpc_cat_show_B_hi1, event
   info.L_camera->SetProperty, Viewplane_Rect=[0.-info.BH1_telescope_FOV,0.-info.BH1_telescope_FOV,2.0*info.BH1_telescope_FOV,2.0*info.BH1_telescope_FOV]
   info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.BH1_telescope_FOV,0.-info.BH1_telescope_FOV,2.0*info.BH1_telescope_FOV,2.0*info.BH1_telescope_FOV]
   
-;  info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-;  info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
-
 ; get rid of current camera YAW.....
 
 delta_pitch = 0.
@@ -2856,20 +2852,14 @@ pro swpc_cat_show_B_hi2, event
     info.background_color,info.L_current_text_color,info.color_BH2,info.L_cme_outline,info.BH2_cme_MATCH_outline, $
     info.L_widget_outline_matches_image,info.CME_matches_image_BH2_CME_outline, $
     info.L_ut_string_object,info.BH2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
-    
-  ;  swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
-  ;  info.C2_HEEQ_coords[1] = B_angle_degrees
-  
+      
   info.BH2_telescope_FOV = (256. * ((info.BH2_list_of_pixel_scales)[0] / (info.BH2_list_of_image_scaling_factors)[0])) / (info.BH2_list_of_rsuns)[0]
   
   if info.debug_mode eq 1 then print, 'BH2 ', info.BH2_telescope_FOV, (info.BH2_list_of_pixel_scales)[0], (info.BH2_list_of_image_scaling_factors)[0], (info.BH2_list_of_rsuns)[0]
   
   info.L_camera->SetProperty, Viewplane_Rect=[0.-info.BH2_telescope_FOV,0.-info.BH2_telescope_FOV,2.0*info.BH2_telescope_FOV,2.0*info.BH2_telescope_FOV]
   info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.BH2_telescope_FOV,0.-info.BH2_telescope_FOV,2.0*info.BH2_telescope_FOV,2.0*info.BH2_telescope_FOV]
-  
-  ;  info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-  ;  info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
-  
+   
   ; get rid of current camera YAW.....
   
   delta_pitch = 0.
@@ -2928,10 +2918,7 @@ WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
     info.background_color,info.R_current_text_color,info.color_AC2,info.R_cme_outline,info.AC2_cme_MATCH_outline, $
     info.R_widget_outline_matches_image,info.CME_matches_image_AC2_CME_outline, $
     info.R_ut_string_object,info.AC2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-    
-;  swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
-;  info.C2_HEEQ_coords[1] = B_angle_degrees
-  
+      
   info.AC2_telescope_FOV = (256. * ((info.AC2_list_of_pixel_scales)[0] / (info.AC2_list_of_image_scaling_factors)[0])) / (info.AC2_list_of_rsuns)[0]
   
   if info.debug_mode eq 1 then print, 'AC2 ', info.AC2_telescope_FOV, (info.AC2_list_of_pixel_scales)[0], (info.AC2_list_of_image_scaling_factors)[0], (info.AC2_list_of_rsuns)[0]
@@ -2939,9 +2926,6 @@ WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
   info.R_camera->SetProperty, Viewplane_Rect=[0.-info.AC2_telescope_FOV,0.-info.AC2_telescope_FOV,2.0*info.AC2_telescope_FOV,2.0*info.AC2_telescope_FOV]
   info.R_camera_copy->SetProperty, Viewplane_Rect=[0.-info.AC2_telescope_FOV,0.-info.AC2_telescope_FOV,2.0*info.AC2_telescope_FOV,2.0*info.AC2_telescope_FOV]
   
-;  info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-;  info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
-
 ; get rid of current camera YAW.....
 
 delta_pitch = 0.
@@ -3001,10 +2985,7 @@ info.current_selection = 'AH1'
     info.background_color,info.R_current_text_color,info.color_AH1,info.R_cme_outline,info.AH1_cme_MATCH_outline, $
     info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
     info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-    
-;  swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
-;  info.C2_HEEQ_coords[1] = B_angle_degrees
-  
+      
   info.AH1_telescope_FOV = (256. * ((info.AH1_list_of_pixel_scales)[0] / (info.AH1_list_of_image_scaling_factors)[0])) / (info.AH1_list_of_rsuns)[0]
   
   if info.debug_mode eq 1 then print, 'AH1 ', info.AH1_telescope_FOV, (info.AH1_list_of_pixel_scales)[0], (info.AH1_list_of_image_scaling_factors)[0], (info.AH1_list_of_rsuns)[0]
@@ -3012,9 +2993,6 @@ info.current_selection = 'AH1'
   info.R_camera->SetProperty, Viewplane_Rect=[0.-info.AH1_telescope_FOV,0.-info.AH1_telescope_FOV,2.0*info.AH1_telescope_FOV,2.0*info.AH1_telescope_FOV]
   info.R_camera_copy->SetProperty, Viewplane_Rect=[0.-info.AH1_telescope_FOV,0.-info.AH1_telescope_FOV,2.0*info.AH1_telescope_FOV,2.0*info.AH1_telescope_FOV]
   
-;  info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-;  info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
-
 ; get rid of current camera YAW.....
 
 delta_pitch = 0.
@@ -3070,10 +3048,7 @@ info.current_selection = 'AH2'
     info.background_color,info.R_current_text_color,info.color_AH2,info.R_cme_outline,info.AH2_cme_MATCH_outline, $
     info.R_widget_outline_matches_image,info.CME_matches_image_AH2_CME_outline, $
     info.R_ut_string_object,info.AH2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-    
-  ;  swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
-  ;  info.C2_HEEQ_coords[1] = B_angle_degrees
-  
+      
   info.AH2_telescope_FOV = (256. * ((info.AH2_list_of_pixel_scales)[0] / (info.AH2_list_of_image_scaling_factors)[0])) / (info.AH2_list_of_rsuns)[0]
   
   if info.debug_mode eq 1 then print, 'AH2 ', info.AH2_telescope_FOV, (info.AH2_list_of_pixel_scales)[0], (info.AH2_list_of_image_scaling_factors)[0], (info.AH2_list_of_rsuns)[0]
@@ -3081,9 +3056,6 @@ info.current_selection = 'AH2'
   info.R_camera->SetProperty, Viewplane_Rect=[0.-info.AH2_telescope_FOV,0.-info.AH2_telescope_FOV,2.0*info.AH2_telescope_FOV,2.0*info.AH2_telescope_FOV]
   info.R_camera_copy->SetProperty, Viewplane_Rect=[0.-info.AH2_telescope_FOV,0.-info.AH2_telescope_FOV,2.0*info.AH2_telescope_FOV,2.0*info.AH2_telescope_FOV]
   
-  ;  info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-  ;  info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
-
 
 ; get rid of current camera YAW.....
 
