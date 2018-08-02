@@ -2637,7 +2637,7 @@ info.C2_HEEQ_coords[1] = B_angle_degrees
 	;info.C_cme_model->GetProperty, transform = transform
 	;info.C_camera_transform = transform
 
-	;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
+	swpc_cat_actually_change_lemniscate_radial_distance,info,10.
 
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
@@ -2684,7 +2684,7 @@ endif else begin
 	;info.C_cme_model->GetProperty, transform = transform
 	;info.C_camera_transform = transform
 
-	;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
+	swpc_cat_actually_change_lemniscate_radial_distance,info,30.
 
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
