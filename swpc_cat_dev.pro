@@ -2663,22 +2663,22 @@ endif else begin
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-	;swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
-	;info.C_HEEQ_coords[1] = B_angle_degrees
+	swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
+	info.C_HEEQ_coords[1] = B_angle_degrees
 
-	;info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
+	info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 
-	;if info.debug_mode eq 1 then print, 'C3 ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C2_list_of_rsuns)[0]
+	if info.debug_mode eq 1 then print, 'C3 ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C2_list_of_rsuns)[0]
 
-	;info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
-	;info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+	info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+	info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 
-	;the_day = long((info.C_list_of_datetime_Julian)[0])
-	;i_day = where(the_day lt info.Julian_day_for_Earth_pos)
-	;i_day = i_day[0]
+	the_day = long((info.C_list_of_datetime_Julian)[0])
+	i_day = where(the_day lt info.Julian_day_for_Earth_pos)
+	i_day = i_day[0]
 
-	;info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-	;info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
+	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 	;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
 	;info.C_cme_model->GetProperty, transform = transform
@@ -2686,7 +2686,7 @@ endif else begin
 
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
 
-	;swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
+	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
 
 
@@ -4005,8 +4005,8 @@ if info.n_sat eq 3 then begin
 	info.L_Window->Draw, info.L_both_views
 endif ;n_sat = 3 ####
 
-info.C_cme_model->SetProperty, transform = info.initial_transform
-info.C_cme_model_copy->SetProperty, transform = info.initial_transform
+info.C_cme_model->SetProperty, transform = info.C_camera_transform
+info.C_cme_model_copy->SetProperty, transform = info.C_camera_transform
 info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
@@ -4129,8 +4129,8 @@ if info.n_sat eq 3 then begin
 	info.L_Window->Draw, info.L_both_views
 endif
 
-info.C_cme_model->SetProperty, transform = info.initial_transform
-info.C_cme_model_copy->SetProperty, transform = info.initial_transform
+info.C_cme_model->SetProperty, transform = info.C_camera_transform
+info.C_cme_model_copy->SetProperty, transform = info.C_camera_transform
 info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
