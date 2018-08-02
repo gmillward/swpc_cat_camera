@@ -2629,9 +2629,9 @@ info.C2_HEEQ_coords[1] = B_angle_degrees
 	i_day = where(the_day lt info.Julian_day_for_Earth_pos)
 	i_day = i_day[0]
 
-	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99 *2 
+	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99 
 	; 0.99 factor is for L1 as opposed to Earth.
-	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99*2
+	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 	;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
 	;info.C_cme_model->GetProperty, transform = transform
@@ -2677,7 +2677,8 @@ endif else begin
 	i_day = where(the_day lt info.Julian_day_for_Earth_pos)
 	i_day = i_day[0]
 
-	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
+	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+	; 0.99 factor is for L1 as opposed to Earth.
 	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 	;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
