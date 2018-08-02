@@ -9298,6 +9298,42 @@ if info.BC2_number_of_images gt 0 and info.clicked_L eq 1 then begin
 
 	endelse
 
+	;CHANGE THE LEMNISCATE
+  info.BC2_telescope_FOV = (256. * ((info.BC2_list_of_pixel_scales)[0] / (info.BC2_list_of_image_scaling_factors)[0])) / (info.BC2_list_of_rsuns)[0]
+  
+  if info.debug_mode eq 1 then print, 'BC2 ', info.BC2_telescope_FOV, (info.BC2_list_of_pixel_scales)[0], (info.BC2_list_of_image_scaling_factors)[0], (info.BC2_list_of_rsuns)[0]
+  
+  info.L_camera->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
+  info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
+ 
+; get rid of current camera YAW.....
+
+delta_pitch = 0.
+delta_yaw = (info.L_current_xycen)[0]
+info.L_camera -> Pan, delta_yaw, delta_pitch
+info.L_camera_copy -> Pan, delta_yaw, delta_pitch
+
+; apply new camera YAW....
+
+delta_pitch = 0.
+; not YAW for COR2 for now....
+;xycen = (info.BC2_list_of_XYCEN)[0]
+xycen = [0.,0.]
+
+delta_yaw = 0.0 - xycen[0]
+info.L_current_xycen = xycen
+
+print, 'delta_yaw ', delta_yaw
+info.L_camera -> Pan, delta_yaw, delta_pitch
+info.L_camera_copy -> Pan, delta_yaw, delta_pitch
+
+info.L_cme_model->GetProperty, transform = transform
+info.L_camera_transform = transform
+
+swpc_cat_actually_change_lemniscate_radial_distance,info,10.
+  
+  swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
+  info.L_Window->Draw, info.L_both_views
 endif
 
 if info.BH1_number_of_images gt 0 and info.clicked_LH1 eq 1 then begin
@@ -9337,6 +9373,43 @@ if info.BH1_number_of_images gt 0 and info.clicked_LH1 eq 1 then begin
 
 	endelse
 
+	;CHANGE THE LEMNISCATE
+  info.BH1_telescope_FOV = (256. * ((info.BH1_list_of_pixel_scales)[0] / (info.BH1_list_of_image_scaling_factors)[0])) / (info.BH1_list_of_rsuns)[0]
+  
+  if info.debug_mode eq 1 then print, 'BH1 ', info.BH1_telescope_FOV, (info.BH1_list_of_pixel_scales)[0], (info.BH1_list_of_image_scaling_factors)[0], (info.BH1_list_of_rsuns)[0]
+  
+  info.L_camera->SetProperty, Viewplane_Rect=[0.-info.BH1_telescope_FOV,0.-info.BH1_telescope_FOV,2.0*info.BH1_telescope_FOV,2.0*info.BH1_telescope_FOV]
+  info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.BH1_telescope_FOV,0.-info.BH1_telescope_FOV,2.0*info.BH1_telescope_FOV,2.0*info.BH1_telescope_FOV]
+  
+;  info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
+;  info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+
+; get rid of current camera YAW.....
+
+delta_pitch = 0.
+delta_yaw = (info.L_current_xycen)[0]
+info.L_camera -> Pan, delta_yaw, delta_pitch
+info.L_camera_copy -> Pan, delta_yaw, delta_pitch
+
+; apply new camera YAW....
+
+delta_pitch = 0.
+xycen = (info.BH1_list_of_XYCEN)[0]
+
+delta_yaw = 0.0 - xycen[0]
+info.L_current_xycen = xycen
+
+print, 'delta_yaw ', delta_yaw
+info.L_camera -> Pan, delta_yaw, delta_pitch
+info.L_camera_copy -> Pan, delta_yaw, delta_pitch
+
+info.L_cme_model->GetProperty, transform = transform
+info.L_camera_transform = transform
+
+swpc_cat_actually_change_lemniscate_radial_distance,info,30.
+  
+  swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
+  info.L_Window->Draw, info.L_both_views
 endif
 
 if info.BH2_number_of_images gt 0 and info.clicked_LH2 eq 1 then begin
@@ -9376,6 +9449,43 @@ if info.BH2_number_of_images gt 0 and info.clicked_LH2 eq 1 then begin
 
 	endelse
 
+	;CHANGE THE LEMNISCATE
+  info.BH2_telescope_FOV = (256. * ((info.BH2_list_of_pixel_scales)[0] / (info.BH2_list_of_image_scaling_factors)[0])) / (info.BH2_list_of_rsuns)[0]
+  
+  if info.debug_mode eq 1 then print, 'BH2 ', info.BH2_telescope_FOV, (info.BH2_list_of_pixel_scales)[0], (info.BH2_list_of_image_scaling_factors)[0], (info.BH2_list_of_rsuns)[0]
+  
+  info.L_camera->SetProperty, Viewplane_Rect=[0.-info.BH2_telescope_FOV,0.-info.BH2_telescope_FOV,2.0*info.BH2_telescope_FOV,2.0*info.BH2_telescope_FOV]
+  info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.BH2_telescope_FOV,0.-info.BH2_telescope_FOV,2.0*info.BH2_telescope_FOV,2.0*info.BH2_telescope_FOV]
+  
+  ;  info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
+  ;  info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+  
+  ; get rid of current camera YAW.....
+  
+  delta_pitch = 0.
+  delta_yaw = (info.L_current_xycen)[0]
+  info.L_camera -> Pan, delta_yaw, delta_pitch
+  info.L_camera_copy -> Pan, delta_yaw, delta_pitch
+  
+  ; apply new camera YAW....
+  
+  delta_pitch = 0.
+  xycen = (info.BH2_list_of_XYCEN)[0]
+  
+  delta_yaw = 0.0 - xycen[0]
+  info.L_current_xycen = xycen
+  
+  print, 'delta_yaw ', delta_yaw
+  info.L_camera -> Pan, delta_yaw, delta_pitch
+  info.L_camera_copy -> Pan, delta_yaw, delta_pitch
+  
+  info.L_cme_model->GetProperty, transform = transform
+  info.L_camera_transform = transform
+  
+swpc_cat_actually_change_lemniscate_radial_distance,info,100.
+  
+  swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
+  info.L_Window->Draw, info.L_both_views
 endif
 
 
@@ -10339,7 +10449,7 @@ PRO SWPC_CAT_DEV
 compile_opt idl2
 
 ; set n_sat to either 2 or 3
-n_sat = 2
+n_sat = 3
 
 show_cme_surface = 0
 
