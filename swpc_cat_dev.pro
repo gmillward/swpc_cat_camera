@@ -3081,8 +3081,9 @@ info.R_camera_copy -> Pan, delta_yaw, delta_pitch
 info.R_cme_model->GetProperty, transform = transform
 info.R_camera_transform = transform
 
-swpc_cat_actually_change_lemniscate_radial_distance,info,100.
- 
+;swpc_cat_actually_change_lemniscate_radial_distance,info,100.
+swpc_cat_just_rescale_lemniscate_radial_distance,info, 'R', 100.
+
   swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
   info.R_Window->Draw, info.R_both_views
   
@@ -4268,13 +4269,13 @@ pro swpc_cat_just_rescale_lemniscate_radial_distance, info, LCR, rescaled_lemnis
 ;rescaled_lemniscate_radial_distance 
 
 	cone_axis_data = fltarr(3,2)
-  	cone_axis_data[2,1] = radial_distance_lemniscate *3.
+  	cone_axis_data[2,1] = rescaled_lemniscate_radial_distance *3.
 
 	if LCR eq 'L' then begin 
 		info.L_cone_Z_axis-> SetProperty, data = cone_axis_data
 	
 		;Attempt to redefine the lemniscate
-		swpc_cat_define_cme_lemniscate, rescaled_radial_distance_lemniscate, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
+		swpc_cat_define_cme_lemniscate, rescaled_lemniscate_radial_distance, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
 
 		;The other bits 
 		info.L_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
@@ -4287,7 +4288,7 @@ pro swpc_cat_just_rescale_lemniscate_radial_distance, info, LCR, rescaled_lemnis
 		info.C_cone_Z_axis-> SetProperty, data = cone_axis_data
 		
 		;Attempt to redefine the lemniscate
-		swpc_cat_define_cme_lemniscate, rescaled_radial_distance_lemniscate, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
+		swpc_cat_define_cme_lemniscate, rescaled_lemniscate_radial_distance, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
 
 		;The other bits 
 		info.C_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
@@ -4300,7 +4301,7 @@ pro swpc_cat_just_rescale_lemniscate_radial_distance, info, LCR, rescaled_lemnis
 		info.R_cone_Z_axis-> SetProperty, data = cone_axis_data
 	
 		;Attempt to redefine the lemniscate
-		swpc_cat_define_cme_lemniscate, rescaled_radial_distance_lemniscate, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
+		swpc_cat_define_cme_lemniscate, rescaled_lemniscate_radial_distance, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
 
 		;The other bits 
 		info.R_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
