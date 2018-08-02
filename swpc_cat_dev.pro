@@ -4261,6 +4261,11 @@ endif
 
 end
 
+pro swpc_cat_just_rescale_lemniscate_radial_distance, event, LCR, rescaled_lemniscate_radial_distance 
+
+;LCR will tell us if we want to work on the left, centre or right window
+;rescaled_lemniscate_radial_distance 
+
 
 
 
@@ -5474,75 +5479,75 @@ END
 
 
 
-pro swpc_cat_set_xmin_and_xmax,Julian_start,Julian_end,xmin,xmax,xtickinterval
+;pro swpc_cat_set_xmin_and_xmax,Julian_start,Julian_end,xmin,xmax,xtickinterval
 
 ;help , X_values
 
 ;xmax=max(X_values,min=xmin)
 
-xmin = Julian_start
-xmax = Julian_end
+;xmin = Julian_start
+;xmax = Julian_end
 
-xmin_fix = long(xmin)
-xmax_fix = long(xmax)
+;xmin_fix = long(xmin)
+;xmax_fix = long(xmax)
 
-xmin_rem = xmin - xmin_fix
-xmax_rem = xmax - xmax_fix
+;xmin_rem = xmin - xmin_fix
+;xmax_rem = xmax - xmax_fix
 
-scale_to_nearest = 6
+;scale_to_nearest = 6
 
-if scale_to_nearest eq 6 then begin
+;if scale_to_nearest eq 6 then begin
 
-if xmin_rem lt 0.25 then begin
-xmin_rem = 0.0
-endif
-if xmin_rem ge 0.25 and xmin_rem lt 0.5 then begin
-xmin_rem = 0.25
-endif
-if xmin_rem ge 0.5 and xmin_rem lt 0.75 then begin
-xmin_rem = 0.5
-endif
-if xmin_rem ge 0.75 then begin
-xmin_rem = 0.75
-endif
+;if xmin_rem lt 0.25 then begin
+;xmin_rem = 0.0
+;endif
+;if xmin_rem ge 0.25 and xmin_rem lt 0.5 then begin
+;xmin_rem = 0.25
+;endif
+;if xmin_rem ge 0.5 and xmin_rem lt 0.75 then begin
+;xmin_rem = 0.5
+;endif
+;if xmin_rem ge 0.75 then begin
+;xmin_rem = 0.75
+;endif
 
-if xmax_rem ge 0.75 then begin
-xmax_rem = 1.0
-endif
-if xmax_rem ge 0.5 and xmax_rem lt 0.75 then begin
-xmax_rem = 0.75
-endif
-if xmax_rem ge 0.25 and xmax_rem lt 0.5 then begin
-xmax_rem = 0.5
-endif
-if xmax_rem lt 0.25 then begin
-xmax_rem = 0.25
-endif
+;if xmax_rem ge 0.75 then begin
+;xmax_rem = 1.0
+;endif
+;if xmax_rem ge 0.5 and xmax_rem lt 0.75 then begin
+;xmax_rem = 0.75
+;endif
+;if xmax_rem ge 0.25 and xmax_rem lt 0.5 then begin
+;xmax_rem = 0.5
+;endif
+;if xmax_rem lt 0.25 then begin
+;xmax_rem = 0.25
+;endif
 
-xtickinterval = 0.25
+;xtickinterval = 0.25
 
-endif
+;endif
 
-if scale_to_nearest eq 1 then begin
+;if scale_to_nearest eq 1 then begin
 
-xmin_rem = (float(fix(10. * xmin_rem)))/10.d
+;xmin_rem = (float(fix(10. * xmin_rem)))/10.d
 
-xmax_rem = (float(fix(10. * xmax_rem) + 1))/10.d
+;xmax_rem = (float(fix(10. * xmax_rem) + 1))/10.d
 
-xtickinterval = 1./24.
-
-
-
-endif
+;xtickinterval = 1./24.
 
 
 
+;endif
 
-xmin = double(xmin_fix) + double(xmin_rem) - 0.0001
 
-xmax = double(xmax_fix) + double(xmax_rem) + 0.0001
 
-end
+
+;xmin = double(xmin_fix) + double(xmin_rem) - 0.0001
+
+;xmax = double(xmax_fix) + double(xmax_rem) + 0.0001
+
+;end
 
 
 
