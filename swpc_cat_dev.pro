@@ -2629,16 +2629,16 @@ info.C2_HEEQ_coords[1] = B_angle_degrees
 	i_day = where(the_day lt info.Julian_day_for_Earth_pos)
 	i_day = i_day[0]
 
-	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  
+	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99 *2 
 	; 0.99 factor is for L1 as opposed to Earth.
-	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99*2
 
 	;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
-	info.C_cme_model->GetProperty, transform = transform
-	info.C_camera_transform = transform
+	;info.C_cme_model->GetProperty, transform = transform
+	;info.C_camera_transform = transform
 
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
-	swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 10.;I PUT THIS HERE ####
+	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 10.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
 
@@ -2681,11 +2681,11 @@ endif else begin
 	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 	;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
-	info.C_cme_model->GetProperty, transform = transform
-	info.C_camera_transform = transform
+	;info.C_cme_model->GetProperty, transform = transform
+	;info.C_camera_transform = transform
 
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
-	swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
+	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
 
