@@ -2634,11 +2634,11 @@ info.C2_HEEQ_coords[1] = B_angle_degrees
 	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 	;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
-	;info.C_cme_model->GetProperty, transform = transform
-	;info.C_camera_transform = transform
+	info.C_cme_model->GetProperty, transform = transform
+	info.C_camera_transform = transform
 
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
-	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 10.;I PUT THIS HERE ####
+	swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 10.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
 
@@ -2681,11 +2681,11 @@ endif else begin
 	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 	;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
-	;info.C_cme_model->GetProperty, transform = transform
-	;info.C_camera_transform = transform
+	info.C_cme_model->GetProperty, transform = transform
+	info.C_camera_transform = transform
 
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
-	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
+	swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
 
@@ -11227,8 +11227,7 @@ start_date = intarr(5)
 end_date = intarr(5)
 start_julian = -1.0D
 end_julian = -1.0D
-;animation_start_julian = -1.0D
-;animation_end_julian = -1.0D
+
 
 rotation = 0.
 rsun = 950.   ;set initial value, solar radius from L1 in arcseconds
@@ -11452,11 +11451,6 @@ timeline_left_mouse_button_being_pressed = 0
 background_color_lasco = [175,175,175]
 background_color_stereo_A = [175,175,175]
 background_color_stereo_B = [175,175,175]
-
-;animation_frames = 0
-;animate_L = 0
-;animate_C = 1
-;animate_R = 0
 
 timeline_normalized_x = 0.
 
@@ -11855,13 +11849,7 @@ info = $
          background_color_lasco:background_color_lasco, $
          background_color_stereo_A:background_color_stereo_A, $
          background_color_stereo_B:background_color_stereo_B, $
-         animation_frames:animation_frames, $
-         animate_L:animate_L, $
-         animate_C:animate_C, $
-         animate_R:animate_R, $
          animation_current_time_marker:animation_current_time_marker, $
-         animation_start_julian:animation_start_julian, $
-         animation_end_julian:animation_end_julian, $
          timeline_normalized_x:timeline_normalized_x, $
          L_widget_remove_this_image:L_widget_remove_this_image, $
          C_widget_remove_this_image:C_widget_remove_this_image, $
@@ -12317,12 +12305,7 @@ enlil_info_base:enlil_info_base, $
 timeline_left_mouse_button_being_pressed:timeline_left_mouse_button_being_pressed, $
 background_color_lasco:background_color_lasco, $
 background_color_stereo_A:background_color_stereo_A, $
-animation_frames:animation_frames, $
-animate_C:animate_C, $
-animate_R:animate_R, $
 animation_current_time_marker:animation_current_time_marker, $
-animation_start_julian:animation_start_julian, $
-animation_end_julian:animation_end_julian, $
 timeline_normalized_x:timeline_normalized_x, $
 C_widget_remove_this_image:C_widget_remove_this_image, $
 R_widget_remove_this_image:R_widget_remove_this_image, $
