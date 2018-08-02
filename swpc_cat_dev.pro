@@ -9277,45 +9277,21 @@ info.timeline_left_mouse_button_being_pressed = 0
 	   fraction_y = float(event.y)/float(info.ysize_timeline)
 	   hw = info.ySymbolSize_timeline/2.0 
    if info.n_sat eq 3 then begin    
-	if fraction_y ge 0.405-hw and fraction_y lt 0.405 +hw then begin 
-		info.clicked_L = 1
-		info.currently_showing_STEREO_B = 'BC2'
-	endif
-	if fraction_y ge 0.3275-hw and fraction_y lt 0.3275 +hw then begin
-		info.clicked_LH1 = 1
-		info.currently_showing_STEREO_B = 'BH1'
-	endif
-	if fraction_y ge 0.25-hw and fraction_y lt 0.25+hw then begin
-		info.clicked_LH2 = 1
-		info.currently_showing_STEREO_B = 'BH2'
-	endif
+	if fraction_y ge 0.405-hw and fraction_y lt 0.405 +hw then info.currently_showing_STEREO_B = 'BC2'
+	if fraction_y ge 0.3275-hw and fraction_y lt 0.3275 +hw then info.currently_showing_STEREO_B = 'BH1'
+	if fraction_y ge 0.25-hw and fraction_y lt 0.25+hw then info.currently_showing_STEREO_B = 'BH2'
 	 
    endif   
-   if fraction_y ge 0.4825-hw and fraction_y lt 0.4825 +hw then begin
-	info.clicked_C2 = 1
-	info.currently_showing_LASCO = 'SC2'
-   endif
-   if fraction_y ge 0.56-hw and fraction_y lt 0.56 +hw then begin
-	info.clicked_C = 1
-	info.currently_showing_LASCO = 'SC3'
-   endif
-   if fraction_y ge 0.6375-hw and fraction_y lt 0.6375+hw then begin
-	info.clicked_R = 1      
-	info.currently_showing_STEREO_A = 'AC2'
-   endif
-   if fraction_y ge 0.715-hw and fraction_y lt 0.715+hw then begin
-	info.clicked_RH1 = 1
-	info.currently_showing_STEREO_A = 'AH1'
-   endif
-   if fraction_Y ge 0.7925-hw and fraction_y lt 0.7925+hw then begin
-	info.clicked_RH2 = 1
-	info.currently_showing_STEREO_A = 'AH2'
-   endif 
+   if fraction_y ge 0.4825-hw and fraction_y lt 0.4825 +hw then info.currently_showing_LASCO = 'SC2'
+   if fraction_y ge 0.56-hw and fraction_y lt 0.56 +hw then info.currently_showing_LASCO = 'SC3'
+   if fraction_y ge 0.6375-hw and fraction_y lt 0.6375+hw then info.currently_showing_STEREO_A = 'AC2'
+   if fraction_y ge 0.715-hw and fraction_y lt 0.715+hw then info.currently_showing_STEREO_A = 'AH1'
+   if fraction_Y ge 0.7925-hw and fraction_y lt 0.7925+hw then info.currently_showing_STEREO_A = 'AH2'
    
 endelse
    
 if info.n_sat eq 3 then begin 
-if info.BC2_number_of_images gt 0 and info.clicked_L eq 1 then begin
+if info.BC2_number_of_images gt 0 and info.currently_showing_STEREO_B eq 'BC2' then begin
 
 	info.L_title_object -> setproperty, strings = 'STEREO B COR2'
 
@@ -9391,7 +9367,7 @@ swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 10.
   info.L_Window->Draw, info.L_both_views
 endif
 
-if info.BH1_number_of_images gt 0 and info.clicked_LH1 eq 1 then begin
+if info.BH1_number_of_images gt 0 and info.currently_showing_STEREO_B eq 'BH1' then begin
 
 	info.L_title_object -> setproperty, strings = 'STEREO B HI1'
 
@@ -9468,7 +9444,7 @@ swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 30.
   info.L_Window->Draw, info.L_both_views
 endif
 
-if info.BH2_number_of_images gt 0 and info.clicked_LH2 eq 1 then begin
+if info.BH2_number_of_images gt 0 and info.currently_showing_STEREO_B eq 'BH2' then begin
 
 	info.L_title_object -> setproperty, strings = 'STEREO B HI2'
 
@@ -9548,7 +9524,7 @@ endif
 
 endif
 
-if info.C_number_of_images gt 0 and info.clicked_C eq 1 then begin
+if info.C_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC3' then begin
 
 	info.C_cme_outline -> setProperty, hide = 1
 	info.C_cme_MATCH_outline-> setProperty, hide = 1
@@ -9613,7 +9589,7 @@ if info.C_number_of_images gt 0 and info.clicked_C eq 1 then begin
 
 endif
 
-if info.C2_number_of_images gt 0 and info.clicked_C2 eq 1 then begin
+if info.C2_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC2' then begin
 
 	info.C_cme_outline -> setProperty, hide = 1
 	info.C_cme_MATCH_outline-> setProperty, hide = 1
@@ -9677,7 +9653,7 @@ info.C_Window->Draw, info.C_both_views
 endif
 
 
-if info.AC2_number_of_images gt 0 and info.clicked_R eq 1 then begin
+if info.AC2_number_of_images gt 0 and info.currently_showing_STEREO_A eq 'AC2' then begin
 
 	info.R_title_object -> setproperty, strings = 'STEREO A COR2'
 
@@ -9750,7 +9726,7 @@ swpc_cat_just_rescale_lemniscate_radial_distance,info, 'R', 10.
   info.R_Window->Draw, info.R_both_views
 endif
 
-if info.AH1_number_of_images gt 0 and info.clicked_RH1 eq 1 then begin
+if info.AH1_number_of_images gt 0 and info.currently_showing_STEREO_A eq 'AH1' then begin
 
 	info.R_title_object -> setproperty, strings = 'STEREO A HI1'
 
@@ -9823,7 +9799,7 @@ endif
 
 
 
-if info.AH2_number_of_images gt 0 and info.clicked_RH2 eq 1 then begin
+if info.AH2_number_of_images gt 0 and info.currently_showing_STEREO_A eq 'AH2' then begin
 
 	info.R_title_object -> setproperty, strings = 'STEREO A HI2'
 
