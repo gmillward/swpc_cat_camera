@@ -2600,7 +2600,7 @@ if the_text eq 'Show LASCO C2' then begin
 
 	; make sure, as we switch from C3 to C2, that any C3 match (green line)
 	; is hidden.... 
-	info.C_cme_MATCH_outline->SetProperty, hide = 1 
+	info.C2_cme_MATCH_outline->SetProperty, hide = 1 
 
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C2_list_of_datetime_Julian)
 
@@ -2615,7 +2615,7 @@ if the_text eq 'Show LASCO C2' then begin
     info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
 	swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
-info.C2_HEEQ_coords[1] = B_angle_degrees
+	info.C2_HEEQ_coords[1] = B_angle_degrees
 
 	info.C2_telescope_FOV = (256. * ((info.C2_list_of_pixel_scales)[0] / (info.C2_list_of_image_scaling_factors)[0])) / (info.C2_list_of_rsuns)[0]
 
@@ -2652,7 +2652,7 @@ endif else begin
 
 	; make sure, as we switch from C2 to C3, that any C2 match (green line)
 	; is hidden.... 
-	info.C2_cme_MATCH_outline->SetProperty, hide = 1
+	info.C_cme_MATCH_outline->SetProperty, hide = 1
 
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C_list_of_datetime_Julian)
 
@@ -2671,7 +2671,7 @@ endif else begin
 
 	info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 
-	if info.debug_mode eq 1 then print, 'C3 ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C2_list_of_rsuns)[0]
+	if info.debug_mode eq 1 then print, 'C3 ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C_list_of_rsuns)[0]
 
 	info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 	info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
@@ -2698,7 +2698,8 @@ endif else begin
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
 	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-	info.C_Window->Draw, info.C_both_views
+	
+info.C_Window->Draw, info.C_both_views
 
 
 endelse
