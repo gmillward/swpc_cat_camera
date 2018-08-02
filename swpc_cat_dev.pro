@@ -9544,6 +9544,42 @@ if info.AC2_number_of_images gt 0 and info.clicked_R eq 1 then begin
 
 	endelse
 
+	;CHANGE THE LEMNISCATE
+  info.AC2_telescope_FOV = (256. * ((info.AC2_list_of_pixel_scales)[0] / (info.AC2_list_of_image_scaling_factors)[0])) / (info.AC2_list_of_rsuns)[0]
+  
+  if info.debug_mode eq 1 then print, 'AC2 ', info.AC2_telescope_FOV, (info.AC2_list_of_pixel_scales)[0], (info.AC2_list_of_image_scaling_factors)[0], (info.AC2_list_of_rsuns)[0]
+  
+  info.R_camera->SetProperty, Viewplane_Rect=[0.-info.AC2_telescope_FOV,0.-info.AC2_telescope_FOV,2.0*info.AC2_telescope_FOV,2.0*info.AC2_telescope_FOV]
+  info.R_camera_copy->SetProperty, Viewplane_Rect=[0.-info.AC2_telescope_FOV,0.-info.AC2_telescope_FOV,2.0*info.AC2_telescope_FOV,2.0*info.AC2_telescope_FOV]
+  
+; get rid of current camera YAW.....
+
+delta_pitch = 0.
+delta_yaw = (info.R_current_xycen)[0]
+info.R_camera -> Pan, delta_yaw, delta_pitch
+info.R_camera_copy -> Pan, delta_yaw, delta_pitch
+
+; apply new camera YAW....
+
+delta_pitch = 0.
+; not YAW for COR2 for now....
+;xycen = (info.AC2_list_of_XYCEN)[0]
+xycen = [0.,0.]
+
+delta_yaw = 0.0 - xycen[0]
+info.R_current_xycen = xycen
+
+print, 'delta_yaw ', delta_yaw
+info.R_camera -> Pan, delta_yaw, delta_pitch
+info.R_camera_copy -> Pan, delta_yaw, delta_pitch
+
+info.R_cme_model->GetProperty, transform = transform
+info.R_camera_transform = transform
+
+swpc_cat_actually_change_lemniscate_radial_distance,info,10.
+  
+  swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
+  info.R_Window->Draw, info.R_both_views
 endif
 
 if info.AH1_number_of_images gt 0 and info.clicked_RH1 eq 1 then begin
@@ -9580,7 +9616,7 @@ if info.AH1_number_of_images gt 0 and info.clicked_RH1 eq 1 then begin
 
 	endelse
 
-	;THERE IS NO CODE IN HERE TO CHANGE THE LEMNISCATE ####
+	;CHANGE THE LEMNISCATE
 	  info.AH1_telescope_FOV = (256. * ((info.AH1_list_of_pixel_scales)[0] / (info.AH1_list_of_image_scaling_factors)[0])) / (info.AH1_list_of_rsuns)[0]
   
   if info.debug_mode eq 1 then print, 'AH1 ', info.AH1_telescope_FOV, (info.AH1_list_of_pixel_scales)[0], (info.AH1_list_of_image_scaling_factors)[0], (info.AH1_list_of_rsuns)[0]
@@ -9652,6 +9688,40 @@ if info.AH2_number_of_images gt 0 and info.clicked_RH2 eq 1 then begin
 
 	endelse
 
+	;CHANGE THE LEMNISCATE 
+	  info.AH2_telescope_FOV = (256. * ((info.AH2_list_of_pixel_scales)[0] / (info.AH2_list_of_image_scaling_factors)[0])) / (info.AH2_list_of_rsuns)[0]
+  
+  if info.debug_mode eq 1 then print, 'AH2 ', info.AH2_telescope_FOV, (info.AH2_list_of_pixel_scales)[0], (info.AH2_list_of_image_scaling_factors)[0], (info.AH2_list_of_rsuns)[0]
+  
+  info.R_camera->SetProperty, Viewplane_Rect=[0.-info.AH2_telescope_FOV,0.-info.AH2_telescope_FOV,2.0*info.AH2_telescope_FOV,2.0*info.AH2_telescope_FOV]
+  info.R_camera_copy->SetProperty, Viewplane_Rect=[0.-info.AH2_telescope_FOV,0.-info.AH2_telescope_FOV,2.0*info.AH2_telescope_FOV,2.0*info.AH2_telescope_FOV]
+  
+; get rid of current camera YAW.....
+
+delta_pitch = 0.
+delta_yaw = (info.R_current_xycen)[0]
+info.R_camera -> Pan, delta_yaw, delta_pitch
+info.R_camera_copy -> Pan, delta_yaw, delta_pitch
+
+; apply new camera YAW....
+
+delta_pitch = 0.
+xycen = (info.AH2_list_of_XYCEN)[0]
+
+delta_yaw = 0.0 - xycen[0]
+info.R_current_xycen = xycen
+
+print, 'delta_yaw ', delta_yaw
+info.R_camera -> Pan, delta_yaw, delta_pitch
+info.R_camera_copy -> Pan, delta_yaw, delta_pitch
+
+info.R_cme_model->GetProperty, transform = transform
+info.R_camera_transform = transform
+
+swpc_cat_actually_change_lemniscate_radial_distance,info,100.
+ 
+  swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
+  info.R_Window->Draw, info.R_both_views
 endif
 endelse ; not right-click context menu
 
