@@ -2756,7 +2756,8 @@ info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 info.L_cme_model->GetProperty, transform = transform
 info.L_camera_transform = transform
 
-swpc_cat_actually_change_lemniscate_radial_distance,info,10.
+;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
+swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 10.
   
   swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
   info.L_Window->Draw, info.L_both_views
@@ -2819,8 +2820,9 @@ info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 info.L_cme_model->GetProperty, transform = transform
 info.L_camera_transform = transform
 
-swpc_cat_actually_change_lemniscate_radial_distance,info,30.
-  
+;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
+swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 30.
+ 
   swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
   info.L_Window->Draw, info.L_both_views
     
@@ -2884,7 +2886,8 @@ pro swpc_cat_show_B_hi2, event
   info.L_cme_model->GetProperty, transform = transform
   info.L_camera_transform = transform
   
-swpc_cat_actually_change_lemniscate_radial_distance,info,100.
+;swpc_cat_actually_change_lemniscate_radial_distance,info,100.
+swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 100.  
   
   swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
   info.L_Window->Draw, info.L_both_views
