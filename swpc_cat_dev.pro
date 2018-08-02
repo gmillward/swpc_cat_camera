@@ -4204,9 +4204,9 @@ if info.n_sat eq 3 then info.L_cone_Z_axis-> SetProperty, data = cone_axis_data
   info.R_cone_Z_axis-> SetProperty, data = cone_axis_data
   if info.debug_mode eq 1 then print,' cone_axis_data ',cone_axis_data
   
-  info.C_cone_Z_axis-> GetProperty, XCOORD_CONV = xconv
-  info.C_cone_Z_axis-> GetProperty, YCOORD_CONV = yconv
-  info.C_cone_Z_axis-> GetProperty, ZCOORD_CONV = zconv
+  ;info.C_cone_Z_axis-> GetProperty, XCOORD_CONV = xconv
+  ;info.C_cone_Z_axis-> GetProperty, YCOORD_CONV = yconv
+  ;info.C_cone_Z_axis-> GetProperty, ZCOORD_CONV = zconv
   
   
   info.radial_distance_lemniscate = radial_distance_lemniscate
@@ -4261,12 +4261,25 @@ endif
 
 end
 
-pro swpc_cat_just_rescale_lemniscate_radial_distance, event, LCR, rescaled_lemniscate_radial_distance 
+pro swpc_cat_just_rescale_lemniscate_radial_distance, info, LCR, rescaled_lemniscate_radial_distance 
 
 ;LCR will tell us if we want to work on the left, centre or right window
 ;rescaled_lemniscate_radial_distance 
 
+	cone_axis_data = fltarr(3,2)
+  	cone_axis_data[2,1] = radial_distance_lemniscate *3.
 
+	if LCR eq 'L' then begin 
+
+	endif 
+	if LCR eq 'C' then begin 
+	
+	endif
+	if LCR eq 'R' then begin 
+	
+	endif 
+
+end 
 
 
 
