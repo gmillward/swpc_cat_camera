@@ -9277,15 +9277,40 @@ info.timeline_left_mouse_button_being_pressed = 0
 	   fraction_y = float(event.y)/float(info.ysize_timeline)
 	   hw = info.ySymbolSize_timeline/2.0 
    if info.n_sat eq 3 then begin    
-	if fraction_y ge 0.405-hw and fraction_y lt 0.405 +hw then info.clicked_L = 1
-	if fraction_y ge 0.3275-hw and fraction_y lt 0.3275 +hw then info.clicked_LH1 = 1
-	if fraction_y ge 0.25-hw and fraction_y lt 0.25+hw then info.clicked_LH2 = 1 
+	if fraction_y ge 0.405-hw and fraction_y lt 0.405 +hw then begin 
+		info.clicked_L = 1
+		info.currently_showing_STEREO_B = 'BC2'
+	endif
+	if fraction_y ge 0.3275-hw and fraction_y lt 0.3275 +hw then begin
+		info.clicked_LH1 = 1
+		info.currently_showing_STEREO_B = 'BH1'
+	endif
+	if fraction_y ge 0.25-hw and fraction_y lt 0.25+hw then begin
+		info.clicked_LH2 = 1
+		info.currently_showing_STEREO_B = 'BH2'
+	endif
+	 
    endif   
-   if fraction_y ge 0.4825-hw and fraction_y lt 0.4825 +hw then info.clicked_C2 = 1
-   if fraction_y ge 0.56-hw and fraction_y lt 0.56 +hw then info.clicked_C = 1
-   if fraction_y ge 0.6375-hw and fraction_y lt 0.6375+hw then info.clicked_R = 1      
-   if fraction_y ge 0.715-hw and fraction_y lt 0.715+hw then info.clicked_RH1 = 1
-   if fraction_Y ge 0.7925-hw and fraction_y lt 0.7925+hw then info.clicked_RH2 = 1
+   if fraction_y ge 0.4825-hw and fraction_y lt 0.4825 +hw then begin
+	info.clicked_C2 = 1
+	info.currently_showing_LASCO = 'SC2'
+   endif
+   if fraction_y ge 0.56-hw and fraction_y lt 0.56 +hw then begin
+	info.clicked_C = 1
+	info.currently_showing_LASCO = 'SC3'
+   endif
+   if fraction_y ge 0.6375-hw and fraction_y lt 0.6375+hw then begin
+	info.clicked_R = 1      
+	info.currently_showing_STEREO_A = 'AC2'
+   endif
+   if fraction_y ge 0.715-hw and fraction_y lt 0.715+hw then begin
+	info.clicked_RH1 = 1
+	info.currently_showing_STEREO_A = 'AH1'
+   endif
+   if fraction_Y ge 0.7925-hw and fraction_y lt 0.7925+hw then begin
+	info.clicked_RH2 = 1
+	info.currently_showing_STEREO_A = 'AH2'
+   endif 
    
 endelse
    
@@ -9890,6 +9915,7 @@ endelse ; not right-click context menu
 	line_data[1,1] = 1.
 	info.animation_current_time_marker->setproperty,data=line_data
 	info.images_timeline_window->Draw, info.images_timeline_view
+	print, 'info.currently_showing_STEREO_B ',info.currently_showing_STEREO_B
 
 	if info.n_sat eq 3 then begin 
    	case info.currently_showing_STEREO_B of
