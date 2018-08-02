@@ -4129,8 +4129,8 @@ if info.n_sat eq 3 then begin
 	info.L_Window->Draw, info.L_both_views
 endif
 
-info.C_cme_model->SetProperty, transform = info.C_camera_transform
-info.C_cme_model_copy->SetProperty, transform = info.C_camera_transform
+info.C_cme_model->SetProperty, transform = info.initial_transform
+info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
