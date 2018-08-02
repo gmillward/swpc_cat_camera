@@ -4204,6 +4204,7 @@ if info.n_sat eq 3 then info.L_cone_Z_axis-> SetProperty, data = cone_axis_data
   info.R_cone_Z_axis-> SetProperty, data = cone_axis_data
   if info.debug_mode eq 1 then print,' cone_axis_data ',cone_axis_data
   
+;I HAVE COMMENTED THIS OUT. XCONV DOES NOT EXIST ANYWHERE ELSE SO... ####
   ;info.C_cone_Z_axis-> GetProperty, XCOORD_CONV = xconv
   ;info.C_cone_Z_axis-> GetProperty, YCOORD_CONV = yconv
   ;info.C_cone_Z_axis-> GetProperty, ZCOORD_CONV = zconv
@@ -4270,13 +4271,43 @@ pro swpc_cat_just_rescale_lemniscate_radial_distance, info, LCR, rescaled_lemnis
   	cone_axis_data[2,1] = radial_distance_lemniscate *3.
 
 	if LCR eq 'L' then begin 
+		info.L_cone_Z_axis-> SetProperty, data = cone_axis_data
+	
+		;Attempt to redefine the lemniscate
+		swpc_cat_define_cme_lemniscate, rescaled_radial_distance_lemniscate, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
 
+		;The other bits 
+		info.L_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
+  		info.L_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
+  		info.L_Window_copy->Draw, info.L_camera_copy
+  		swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
+		info.L_Window->Draw, info.L_both_views
 	endif 
 	if LCR eq 'C' then begin 
-	
+		info.C_cone_Z_axis-> SetProperty, data = cone_axis_data
+		
+		;Attempt to redefine the lemniscate
+		swpc_cat_define_cme_lemniscate, rescaled_radial_distance_lemniscate, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
+
+		;The other bits 
+		info.C_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
+  		info.C_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
+  		info.C_Window_copy->Draw, info.C_camera_copy
+  		swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
+		info.C_Window->Draw, info.C_both_views
 	endif
 	if LCR eq 'R' then begin 
+		info.R_cone_Z_axis-> SetProperty, data = cone_axis_data
 	
+		;Attempt to redefine the lemniscate
+		swpc_cat_define_cme_lemniscate, rescaled_radial_distance_lemniscate, info.angular_width_lemniscate, info.lemniscate_style, fitted_cme_info
+
+		;The other bits 
+		info.R_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
+  		info.R_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
+  		info.R_Window_copy->Draw, info.R_camera_copy
+  		swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
+		info.R_Window->Draw, info.R_both_views
 	endif 
 
 end 
