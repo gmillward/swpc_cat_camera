@@ -1947,7 +1947,7 @@ pro swpc_cat_C_remove_this_image, event
 end
 
 
-
+#CURRENTLY, THESE FUNCTIONS CAN'T OPERATE BECAUSE SENSITIVE = 0 ON THE WIDGET_BUTTON. 
 pro swpc_cat_R_remove_this_image, event
 
   WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
@@ -2136,7 +2136,7 @@ end
 pro swpc_cat_reset_cme_analysis, event
 WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
-       reset_for_new_images_as_well_as_the_cme_analysis = 0
+       reset_for_new_images_as_well_as_the_cme_analysis = 0 ;LEAVE AS ONE, DOESN'T WORK PROPERLY WHEN SET. ####
        swpc_cat_full_reset, info, reset_for_new_images_as_well_as_the_cme_analysis
        
 ; Resetting the analysis also means greying out the velocity and export buttons....
@@ -2631,7 +2631,10 @@ info.C2_HEEQ_coords[1] = B_angle_degrees
 
 	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99 
 	; 0.99 factor is for L1 as opposed to Earth.
-	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99 
+
+	info.C_cme_model->SetProperty, transform = info.initial_transform
+	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 
 	;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
 	;info.C_cme_model->GetProperty, transform = transform
@@ -2640,7 +2643,7 @@ info.C2_HEEQ_coords[1] = B_angle_degrees
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
 	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 10.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-info.C_Window->Draw, info.C_both_views
+	info.C_Window->Draw, info.C_both_views
 
 endif else begin
 
@@ -2681,6 +2684,13 @@ endif else begin
 	; 0.99 factor is for L1 as opposed to Earth.
 	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
+	info.C_cme_model->SetProperty, transform = info.initial_transform
+	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
+;	info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+;	info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+;	info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+;	info.C_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+
 	;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
 	;info.C_cme_model->GetProperty, transform = transform
 	;info.C_camera_transform = transform
@@ -2688,7 +2698,7 @@ endif else begin
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
 	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-info.C_Window->Draw, info.C_both_views
+	info.C_Window->Draw, info.C_both_views
 
 
 endelse
