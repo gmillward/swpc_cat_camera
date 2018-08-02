@@ -2600,7 +2600,7 @@ if the_text eq 'Show LASCO C2' then begin
 
 	; make sure, as we switch from C3 to C2, that any C3 match (green line)
 	; is hidden.... 
-	info.C2_cme_MATCH_outline->SetProperty, hide = 1 
+	info.C_cme_MATCH_outline->SetProperty, hide = 1 
 
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C2_list_of_datetime_Julian)
 
@@ -2652,7 +2652,7 @@ endif else begin
 
 	; make sure, as we switch from C2 to C3, that any C2 match (green line)
 	; is hidden.... 
-	info.C_cme_MATCH_outline->SetProperty, hide = 1
+	info.C2_cme_MATCH_outline->SetProperty, hide = 1
 
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C_list_of_datetime_Julian)
 
