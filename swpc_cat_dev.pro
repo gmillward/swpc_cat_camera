@@ -2662,22 +2662,22 @@ swpc_cat_REDRAW_THE_IMAGE, $
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
-info.C_HEEQ_coords[1] = B_angle_degrees
+;swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
+;info.C_HEEQ_coords[1] = B_angle_degrees
 
-info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
+;info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 
-if info.debug_mode eq 1 then print, 'C3 ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C2_list_of_rsuns)[0]
+;if info.debug_mode eq 1 then print, 'C3 ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C2_list_of_rsuns)[0]
 
-info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
-info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+;info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+;info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 
-the_day = long((info.C_list_of_datetime_Julian)[0])
-i_day = where(the_day lt info.Julian_day_for_Earth_pos)
-i_day = i_day[0]
+;the_day = long((info.C_list_of_datetime_Julian)[0])
+;i_day = where(the_day lt info.Julian_day_for_Earth_pos)
+;i_day = i_day[0]
 
-info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+;info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
+;info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 ;THESE LINES ARE IN THE STEREO SHOW FUNCTIONS BUT NOT THE LASCO. ####
 ;info.C_cme_model->GetProperty, transform = transform
@@ -2685,9 +2685,45 @@ info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
 
-swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
+;swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
 
+  info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
+  
+  if info.debug_mode eq 1 then print, 'C ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C_list_of_rsuns)[0]
+  
+  info.L_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+  info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+  
+
+; get rid of current camera YAW.....
+
+delta_pitch = 0.
+delta_yaw = (info.c_current_xycen)[0]
+info.C_camera -> Pan, delta_yaw, delta_pitch
+info.C_camera_copy -> Pan, delta_yaw, delta_pitch
+
+; apply new camera YAW....
+
+delta_pitch = 0.
+; not YAW for COR2 for now....
+;xycen = (info.BC2_list_of_XYCEN)[0]
+xycen = [0.,0.]
+
+delta_yaw = 0.0 - xycen[0]
+info.C_current_xycen = xycen
+
+print, 'delta_yaw ', delta_yaw
+info.C_camera -> Pan, delta_yaw, delta_pitch
+info.C_camera_copy -> Pan, delta_yaw, delta_pitch
+
+info.C_cme_model->GetProperty, transform = transform
+info.C_camera_transform = transform
+
+swpc_cat_actually_change_lemniscate_radial_distance,info,30.
+  
+  swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
+  info.C_Window->Draw, info.C_both_views
 endelse
 
 WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
@@ -4183,7 +4219,7 @@ pro swpc_cat_change_lemniscate_radial_distance, event
 
 Widget_Control, event.top, Get_UValue=info, /No_Copy
 
-;WHY ARE WE DIVIDING BY TEN HERE? WHAT UNITS ARE BEING USED? SOLAR RADII? ####
+;THIS IS JUST MAKING A CONVERSION NEEDED WHEN USING THE SLIDER.  ####
 radial_distance_lemniscate = float(event.value) / 10.
 
 swpc_cat_actually_change_lemniscate_radial_distance,info,radial_distance_lemniscate
