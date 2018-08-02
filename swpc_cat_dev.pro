@@ -3186,517 +3186,6 @@ END
 
 
 
-;function swpc_cat_which_window_to_animate, event
-
-;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
-
-;print, 'L3160 event.value ',event.value 
-
-;CASE event.value OF
-
-;   0 : BEGIN
-
-;   info.which_window_to_animate = 0
-;   array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
-
-;   ENDCASE
-;   1 : BEGIN
-
-;   info.which_window_to_animate = 1
-;   array_of_julians = info.C_list_of_datetime_Julian->toarray()
-
-;   ENDCASE
-;   2 : BEGIN
-
-;   info.which_window_to_animate = 2
-;   array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
-
-;   ENDCASE
-   
-;ENDCASE
-
-;l = where(array_of_julians gt info.anim_start_julian)
-;info.anim_start_frame = l[0]
-;info.thisFrame = info.anim_start_frame
-;l = where(array_of_julians lt info.anim_end_julian)
-;info.anim_end_frame = l[-1]
-
-;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-
-;Return, 1
-;End
-
-
-
-
-
-;pro swpc_cat_set_animation_start, event
-;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
-
-;this_julian = (((info.timeline_normalized_x - info.position_timeline[0]) / (info.position_timeline[2] - ;info.position_timeline[0])) * (info.end_julian - info.start_julian)) + info.start_julian
-
-;animation_start_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
-;line_data=fltarr(2,2)
-;line_data[0,0] = animation_start_position
-;line_data[1,0] = 0.
-;line_data[0,1] = animation_start_position
-;line_data[1,1] = 1.
-;info.animation_start_time_marker->setproperty,data=line_data
-
-;xpos = animation_start_position
-;info.animation_start_time_marker_handle_data=[[xpos,0.],[xpos+0.005,0.],[xpos+0.005,0.08],[xpos,0.08]]
-;info.animation_start_time_marker_handle->setproperty,data=info.animation_start_time_marker_handle_data
-
-;info.images_timeline_window->Draw, info.images_timeline_view
-
-;CASE info.which_window_to_animate OF
-;   0 : BEGIN
-;array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
-;   ENDCASE
-;   1 : BEGIN
-;array_of_julians = info.C_list_of_datetime_Julian->toarray()
-;   ENDCASE
-;   2 : BEGIN
-;array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
-;   ENDCASE
-   
-;ENDCASE
-
-
-
-;l = where(array_of_julians gt this_julian)
-;info.anim_start_frame = l[0]
-;info.anim_start_julian = this_julian
-;info.thisFrame = info.anim_start_frame
-
-;if info.debug_mode eq 1 then print, this_julian, format='(f20.10)'
-;CALDAT, this_julian, Month, Day, Year, Hour, Minute
-;if info.debug_mode eq 1 then print, year, month, day, hour, minute
-;if info.debug_mode eq 1 then print, array_of_julians, format='(3f20.10)'
-;if info.debug_mode eq 1 then print, l[0]
-;if info.debug_mode eq 1 then print, array_of_julians[l[0]],format='(f20.10)'
-
-;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-;END
-
-
-;pro swpc_cat_set_animation_end, event
-;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
-
-;this_julian = (((info.timeline_normalized_x - info.position_timeline[0]) / (info.position_timeline[2] - ;info.position_timeline[0])) * (info.end_julian - info.start_julian)) + info.start_julian
-
-;animation_end_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
-;line_data=fltarr(2,2)
-;line_data[0,0] = animation_end_position
-;line_data[1,0] = 0.
-;line_data[0,1] = animation_end_position
-;line_data[1,1] = 1.
-;info.animation_end_time_marker->setproperty,data=line_data
-
-;xpos = animation_end_position
-;info.animation_end_time_marker_handle_data=[[xpos,0.],[xpos-0.005,0.],[xpos-0.005,0.08],[xpos,0.08]]
-;info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_marker_handle_data
-
-;info.images_timeline_window->Draw, info.images_timeline_view
-
-;CASE info.which_window_to_animate OF
-
-;   0 : BEGIN
-;array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
-;   ENDCASE
-;   1 : BEGIN
-;array_of_julians = info.C_list_of_datetime_Julian->toarray()
-;   ENDCASE
-;   2 : BEGIN
-;array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
-;   ENDCASE
-   
-;ENDCASE
-
-;l = where(array_of_julians lt this_julian)
-;info.anim_end_frame = l[-1]
-;info.anim_end_julian = this_julian
-
-;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-;END
-
-
-
-;------------------------------------------------------------------------------
-;function swpc_cat_xmovie_back_and_forth, event
-;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
-;if info.i_anim_back_and_forth eq 0 then begin
-;info.i_anim_back_and_forth = 1
-;endif else begin
-;info.i_anim_back_and_forth = 0
-;endelse
-;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-;return,1
-;END
-;------------------------------------------------------------------------------
-;pro swpc_cat_XMOVIE_DELAY_EVENTS, event
-
-   ; Get the INFO structure.
-
-;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
-
-   ; Set the delay.
-
-;info.delay = float((100 - event.value)) / 200.0 ; Max delay 0.5 seconds.
-
-      ; Put INFO structure back.
-
-;WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-
-
-;END ; ************************ of XMOVIE_DELAY_EVENTS ***********************
-;------------------------------------------------------------------------------
-
-
-;pro swpc_cat_XMOVIE_EVENT, event
-
-   ; Get the INFO structure.
-
-;WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
-
-   ; What kind of event is this?
-
-;eventName = TAG_NAMES(event, /STRUCTURE_NAME)
-
-   ; Code for BUTTON events.
-
-;IF eventName EQ 'WIDGET_BUTTON' THEN BEGIN
-
-;widget_control,info.play_pause_button,get_value = play_or_pause_text
-
-;   CASE play_or_pause_text OF
-
-;      'Play ' : BEGIN
-;widget_control,info.play_pause_button,set_value = 'Pause'
-
-            ; If stop flag is 0, then display next frame.
-
-;         IF info.stopflag EQ 0 THEN BEGIN
-
-;p = info.thisFrame
-
-
-;CASE info.which_window_to_animate OF
-
-;   0 : BEGIN
-   
-;info.BC2_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, ;info.BC2_background_image_number, info.BC2_difference_imaging, $
-;                 info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, ;info.L_border_image_object, info.i_log_scale
-                                
-;info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings);[info.BC2_current_image_number]                           
-;info.L_Window->Draw, info.L_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
-
-;widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
-
-;   ENDCASE
-;   1 : BEGIN
-   
-;if info.currently_showing_LASCO eq 'SC3' then begin
-   
-;info.C_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
-;                 info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-                                
-;info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
-;info.C_Window->Draw, info.C_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
-
-;widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
-
-;endif else begin
-
-;info.C2_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
-;                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-                                
-;info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
-;info.C_Window->Draw, info.C_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
-
-;widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
-
-;endelse
-
-;   ENDCASE
-;   2 : BEGIN
-   
-;info.AC2_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
- ;                info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-                                
-;info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
-;info.R_Window->Draw, info.R_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
-
-;widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
-
-;   ENDCASE
-   
-;ENDCASE
-
-
-;info.images_timeline_window -> draw, info.images_timeline_view
-
-;         ENDIF
-
-            ; Update frame number.
-;         if info.i_anim_back_and_forth eq 0 then begin
-         
-;         info.thisFrame = info.thisFrame + 1
-
-;         IF info.thisFrame GT (info.anim_end_frame) THEN info.thisFrame = info.anim_start_frame
-         
-;         endif else begin
-         
-;         info.thisFrame = info.thisFrame + info.i_move
-         
-;         IF info.thisFrame GT (info.anim_end_frame) THEN begin
-;         info.thisFrame = info.thisFrame -1
-;         info.i_move = -1        
-;         endif
-;         IF info.thisFrame LT (info.anim_start_frame) THEN begin
-;         info.thisFrame = info.thisFrame +1
-;         info.i_move = 1
-;         endif
-         
-;         endelse
-
-;            ; Set a timer event to get back into this event handler.
-
-;         WIDGET_CONTROL, event.ID, TIMER=0
-
-            ; Update stop flag.
-
-;         info.stopflag = 0
-;      END ; of Play button CASE.
-
-;      'Pause' : BEGIN
-      
-;widget_control,info.play_pause_button,set_value = 'Play '
-
-;         info.stopflag = 1
-;         info.thisFrame = info.thisFrame - 1  ; Subtract a frame.
-; make sure that when we stop the animation the current image number
-; matches the image shown....
-;p = info.thisFrame
-
-;CASE info.which_window_to_animate OF
-
-;   0 : BEGIN
-   
-;info.BC2_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
-;                 info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
-                                
-;info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]                           
-;info.L_Window->Draw, info.L_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
-
-;   ENDCASE
-;   1 : BEGIN
-   
-;if info.currently_showing_LASCO eq 'SC3' then begin
-   
-;info.C_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
- ;                info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-                                
-;info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
-;info.C_Window->Draw, info.C_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
-
-;widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
-
-;endif else begin
-
-;info.C2_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
- ;                info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-                                
-;info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
-;info.C_Window->Draw, info.C_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
-
-;widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
-
-;endelse
-
-;   ENDCASE
-;   2 : BEGIN
-   
-;info.AC2_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
- ;                info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-                                
-;info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
-;info.R_Window->Draw, info.R_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
-
-;   ENDCASE
-   
-;ENDCASE
-;info.images_timeline_window -> draw, info.images_timeline_view
-
-;         END
-
-;   ENDCASE
-
-      ; Put INFO structure back.
-
-;   IF WIDGET_INFO(event.top, /VALID_ID) THEN $
-;      WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-;   RETURN
-;ENDIF ; of BUTTON code
-
-   ; Code for TIMER events.
-
-;IF eventName EQ 'WIDGET_TIMER' THEN BEGIN
-
-;   IF info.stopflag EQ 0 THEN BEGIN
-
-         ; Delay for a moment.
-
-;      Wait, info.delay
-
-;p = info.thisFrame
-
-;CASE info.which_window_to_animate OF
-
-;   0 : BEGIN
-   
-;info.BC2_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
- ;                info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
-                                
-;info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]                           
-;info.L_Window->Draw, info.L_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
-
-;widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
-
-;   ENDCASE
-;   1 : BEGIN
-   
-;if info.currently_showing_LASCO eq 'SC3' then begin
-   
-;info.C_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
- ;                info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-                                
-;info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]                           
-;info.C_Window->Draw, info.C_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
-
-;widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
-
-;endif else begin
-
-;info.C2_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.C2_current_image_number, info.C2_background_image_number, info.C2_difference_imaging, $
-;                 info.C2_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
-                                
-;info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]                           
-;info.C_Window->Draw, info.C_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
-
-;widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
-
-;endelse
-
-
-;   ENDCASE
-;   2 : BEGIN
-   
-;info.AC2_current_image_number = p
-
-;swpc_cat_image_difference_and_scaling, info.background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
-;                 info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
-;                                
-;info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]                           
-;info.R_Window->Draw, info.R_both_views
-
-;swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
-
-;widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
-
-;   ENDCASE
-   
-;ENDCASE
-;info.images_timeline_window -> draw, info.images_timeline_view
-
-            ; Update frame number.
-;         if info.i_anim_back_and_forth eq 0 then begin
-         
-;         info.thisFrame = info.thisFrame + 1
-;         IF info.thisFrame GT (info.anim_end_frame) THEN info.thisFrame = info.anim_start_frame
-         
-;         endif else begin
-         
-;         info.thisFrame = info.thisFrame + info.i_move
-         
-;         IF info.thisFrame GT (info.anim_end_frame) THEN begin
-;         info.thisFrame = info.thisFrame -2
-;         info.i_move = -1        
-;         endif
-;         IF info.thisFrame LT (info.anim_start_frame) THEN begin
-;         info.thisFrame = info.thisFrame +2
-;         info.i_move = 1
-;         endif
-         
-;         endelse
-
-         ; Set a timer event to get back into this event handler.
-
-;      IF info.stopflag EQ 0 THEN WIDGET_CONTROL, event.ID, TIMER=0
-;   ENDIF
-
-      ; Put INFO structure back.
-
-;   WIDGET_CONTROL, event.top, SET_UVALUE=info, /NO_COPY
-;ENDIF ; of TIMER code
-
-;END ; ******************************** of XMOVIE_EVENT ***********************
-
-
-
-
-
-
-
-
-
-
-
-
 pro swpc_cat_change_image_tab, event
 
 ; process comes here when changing the image adjust TAB -
@@ -10171,123 +9660,6 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 	endif
 
-
-
-
-
-;endif else begin  ; if event.y lt 10 ;IN THIS CASE, YOU COULD BE MOVING THE BOOKMARK, THOUGH NOT ALWAYS. ####
-;print, 'Entered case where event.y <= 10 '
-; determine whether we are moving the start or end markers
- 
-;       myLoc = [event.x, event.y]    
-	 
-;       oObjArr = info.images_timeline_window->Select(info.images_timeline_view, myLoc, dimensions=[100,20])
-;       nSel = N_ELEMENTS(oObjArr)
-	
-;       if nsel gt 1 then begin
-;       iobject = intarr(nSel)
-       
-;       FOR i=0, nSel-1 DO BEGIN
-;          oObjArr[i]->GetProperty, NAME=name
-;          if name eq 'animation_start_time_marker' then begin
-		 
-	;THIS SECTION REPRESENTS THE FIRST BOOKMARK, THE GREEN ONE ####
-;animation_start_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
-;line_data=fltarr(2,2)
-;line_data[0,0] = animation_start_position
-;line_data[1,0] = 0.
-;line_data[0,1] = animation_start_position
-;line_data[1,1] = 1.
-;info.animation_start_time_marker->setproperty,data=line_data
-
-;xpos = animation_start_position
-;info.animation_start_time_marker_handle_data=[[xpos,0.],[xpos+0.005,0.],[xpos+0.005,0.08],[xpos,0.08]]
-;info.animation_start_time_marker_handle->setproperty,data=info.animation_start_time_marker_handle_data
-
-;info.images_timeline_window->Draw, info.images_timeline_view
-
-;print, 'L9240 info.which_window_to_animate ', info.which_window_to_animate
-
-;CASE info.which_window_to_animate OF
-;   0 : BEGIN
-;array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
-;   ENDCASE
-;   1 : BEGIN
-;array_of_julians = info.C_list_of_datetime_Julian->toarray()
-;   ENDCASE
-;   2 : BEGIN
-;array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
-;   ENDCASE
-   
-;ENDCASE
-
-;l = where(array_of_julians gt this_julian)
-;info.anim_start_frame = l[0]
-;info.anim_start_julian = this_julian
-
-;CODE WILL NOT GET TO HERE IF GREEN BOOKMARK IS BREAKING. THIS SHOULD NOT BE NEEDED IF STATEMENTS ARE WRITTEN PROPERLY ####
-;SHOULD THIS NOT BE A BREAK STATEMENT? IF THEY EXIST IN IDL!
-;print, 'Before jumphere '
-;goto, jumphere
-;print, 'After jumphere' 
-;          endif
-;          if name eq 'animation_end_time_marker' then begin
-	
-	;THIS SECTION REPRESENTS THE END BOOKMARK, THE RED ONE ####
-;animation_end_position = ((this_julian - info.start_julian)/(info.end_julian - info.start_julian) * 0.9) + 0.05
-;line_data=fltarr(2,2)
-;line_data[0,0] = animation_end_position
-;line_data[1,0] = 0.
-;line_data[0,1] = animation_end_position
-;line_data[1,1] = 1.
-;info.animation_end_time_marker->setproperty,data=line_data
-
-;xpos = animation_end_position
-;info.animation_end_time_marker_handle_data=[[xpos,0.],[xpos-0.005,0.],[xpos-0.005,0.08],[xpos,0.08]]
-;info.animation_end_time_marker_handle->setproperty,data=info.animation_end_time_marker_handle_data
-
-;info.images_timeline_window->Draw, info.images_timeline_view
-
-;print, 'info.which_window_to_animate ',info.which_window_to_animate ;THIS IS UNDEFINED. I BET IT RELATES TO STEREO B ####
-;print, 'info.BC2_list_of_datetime_Julian ',info.BC2_list_of_datetime_Julian
-;print, 'info.C_list_of_datetime_Julian ',info.C_list_of_datetime_Julian
-;print, 'info.AC2_list_of_datetime_Julian ',info.AC2_list_of_datetime_Julian
-
-;CASE info.which_window_to_animate OF
-
-;   0 : BEGIN
-;array_of_julians = info.BC2_list_of_datetime_Julian->toarray()
-;   ENDCASE
-;   1 : BEGIN
-;array_of_julians = info.C_list_of_datetime_Julian->toarray()
-;   ENDCASE
-;   2 : BEGIN
-;array_of_julians = info.AC2_list_of_datetime_Julian->toarray()
-;   ENDCASE
-   
-;ENDCASE
-
-;l = where(array_of_julians lt this_julian)
-;info.anim_end_frame = l[-1]
-;info.anim_end_julian = this_julian
-
-;goto, jumphere
-
-;          endif
-;       ENDFOR
-       
-;jumphere :
-
-;       endif
-
-
-
-;endelse ;FOR WHEN EVENT.Y < 10 ####
-
-
-   
-;   print, ' MOTION ', info.timeline_left_mouse_button_being_pressed ;event.x, event.y
-
 endif   ; if left mouse button currently clicked
    
 
@@ -10881,18 +10253,9 @@ xAxisText->SetProperty, Font=helvetica10pt
 xAxisText->SetProperty, color=[255,255,255]
 
 line_data = fltarr(2,2)
-;animation_start_time_marker = obj_new("idlgrpolyline",line_data,color=[0,255,0],name='animation_start_time_marker')
-;animation_end_time_marker = obj_new("idlgrpolyline",line_data,color=[255,0,0],name='animation_end_time_marker')
-;animation_start_time_marker_handle_data = fltarr(2,4)
-;animation_start_time_marker_handle = obj_new("idlgrpolygon",animation_start_time_marker_handle_data,color=;[0,255,0],name='animation_start_time_marker_handle');
-;animation_end_time_marker_handle_data = fltarr(2,4)
-;animation_end_time_marker_handle = obj_new("idlgrpolygon",animation_end_time_marker_handle_data,color=[255,0,0],name='animation_end_time_marker_handle')
+
 animation_current_time_marker = obj_new("idlgrpolyline",line_data,color=[255,255,0],name='animation_current_time_marker')
 
-;images_timeline_model->Add, animation_start_time_marker
-;images_timeline_model->Add, animation_end_time_marker
-;images_timeline_model->Add, animation_start_time_marker_handle
-;images_timeline_model->Add, animation_end_time_marker_handle
 images_timeline_model->Add, animation_current_time_marker
 
 if n_sat eq 3 then begin
@@ -10908,8 +10271,6 @@ images_timeline_model->Add, RH2_plot
 images_timeline_model->Add, xaxis_images_timeline
 
 timeline_contextBase = WIDGET_BASE(draw_available_images_timeline, /CONTEXT_MENU, UNAME = 'timeline_contextBase',sensitive=0)
-;timeline_set_animation_start = Widget_Button(timeline_contextBase, Value='Set Start',Event_Pro='swpc_cat_set_animation_start')
-;timeline_set_animation_end = Widget_Button(timeline_contextBase, Value='Set End',Event_Pro='swpc_cat_set_animation_end')
 
 ; figure out the current time so we can provide some decent defaults for the coming
 ; date/time text boxes.............
@@ -10970,27 +10331,6 @@ acceptID = Widget_Button(buttonBase, Value='Load Images',event_pro = 'swpc_cat_s
 date_array = [current_year_starting,current_month_starting,current_day_starting,current_hour_starting,current_minute_starting, $
               current_year_ending,current_month_ending,current_day_ending,current_hour_ending,current_minute_ending]       
 
-
-;animation_controls_outer_base = widget_base(horizontal_base2,column=1,frame=compact_frame,sensitive=0)
-;if compact eq 0 then Result = WIDGET_LABEL(animation_controls_outer_base, /ALIGN_CENTER, value = ' ANIMATION CONTROLS ',frame=2)
-;
-;values = ['L', 'C', 'R'] 
-;select_anims_base = WIDGET_BASE(animation_controls_outer_base,/ROW,/align_center) 
-;widget_which_window_to_animate = CW_BGROUP(select_anims_base, values, /row, /EXCLUSIVE, /FRAME, SET_VALUE=1, event_funct='swpc_cat_which_window_to_animate')
-;
-;
-;animation_controls_base=widget_base(animation_controls_outer_base,column=1)
-;playbuttonBase = Widget_Base(animation_controls_base, Row=1, /align_center)
-;play_pause_button = Widget_Button(playbuttonBase, Value='Play ',Event_Pro='swpc_cat_xmovie_event')
-;animation_controls_base2=widget_base(animation_controls_base,row=1)
-;widget_animation_delay = WIDGET_SLIDER(animation_controls_base2, Max=100, Min=0, /Suppress_Value, $
-;   Title='Speed', Value=50, Event_Pro='swpc_cat_XMovie_Delay_Events')
-;
-;widget_anim_back_and_forth = cw_bgroup(animation_controls_base2, 'Altern8',/nonexclusive,Event_Funct='swpc_cat_xmovie_back_and_forth')
-;
-;animation_set_start_end_base=widget_base(animation_controls_outer_base,row=1,/align_center)
-;set_anim_start = Widget_Button(animation_set_start_end_base, Value='Set Start',Event_Pro='set_animation_start')
-;set_anim_end = Widget_Button(animation_set_start_end_base, Value='Set End',Event_Pro='set_animation_end')
 
 
 slider_size = 200
@@ -11887,8 +11227,8 @@ start_date = intarr(5)
 end_date = intarr(5)
 start_julian = -1.0D
 end_julian = -1.0D
-animation_start_julian = -1.0D
-animation_end_julian = -1.0D
+;animation_start_julian = -1.0D
+;animation_end_julian = -1.0D
 
 rotation = 0.
 rsun = 950.   ;set initial value, solar radius from L1 in arcseconds
@@ -12113,10 +11453,10 @@ background_color_lasco = [175,175,175]
 background_color_stereo_A = [175,175,175]
 background_color_stereo_B = [175,175,175]
 
-animation_frames = 0
-animate_L = 0
-animate_C = 1
-animate_R = 0
+;animation_frames = 0
+;animate_L = 0
+;animate_C = 1
+;animate_R = 0
 
 timeline_normalized_x = 0.
 
@@ -12448,15 +11788,6 @@ info = $
          Earth_pos_AU:Earth_pos_AU, $
          Earth_pos_HG_LAT_deg:Earth_pos_HG_LAT_deg, $
          source_path:source_path, $
-;         play_pause_button:play_pause_button, $
-;         delay:0.25, $
-;         stopflag:0, $
-;         thisFrame:0, $
-;         anim_start_frame:anim_start_frame, $
-;         anim_end_frame:anim_end_frame, $
-;         i_anim_back_and_forth:i_anim_back_and_forth, $
-;         i_move:i_move, $
-;         which_window_to_animate:which_window_to_animate, $
          enlil_info_View:enlil_info_View, $
          enlil_info_window:enlil_info_window, $
          start_yearID:start_yearID, $
@@ -12516,7 +11847,6 @@ info = $
          representative_image_has_been_defined:representative_image_has_been_defined, $
          OPS_or_VnV:OPS_or_VnV, $
          images_are_loaded:images_are_loaded, $
-;         animation_controls_outer_base:animation_controls_outer_base, $
          image_controls_base:image_controls_base, $
          cme_controls_base:cme_controls_base, $
          plot_window_base:plot_window_base, $
@@ -12529,21 +11859,10 @@ info = $
          animate_L:animate_L, $
          animate_C:animate_C, $
          animate_R:animate_R, $
-;         animation_start_time_marker:animation_start_time_marker, $
-;         animation_end_time_marker:animation_end_time_marker, $
-;         animation_start_time_marker_handle:animation_start_time_marker_handle, $
-;         animation_end_time_marker_handle:animation_end_time_marker_handle, $
-;         animation_start_time_marker_handle_data:animation_start_time_marker_handle_data, $
-;         animation_end_time_marker_handle_data:animation_end_time_marker_handle_data, $
          animation_current_time_marker:animation_current_time_marker, $
          animation_start_julian:animation_start_julian, $
          animation_end_julian:animation_end_julian, $
          timeline_normalized_x:timeline_normalized_x, $
-;         anim_start_julian:anim_start_julian, $
-;         anim_end_julian:anim_end_julian, $
-;         widget_animation_delay:widget_animation_delay, $
-;         widget_which_window_to_animate:widget_which_window_to_animate, $
-;         widget_anim_back_and_forth:widget_anim_back_and_forth, $
          L_widget_remove_this_image:L_widget_remove_this_image, $
          C_widget_remove_this_image:C_widget_remove_this_image, $
          R_widget_remove_this_image:R_widget_remove_this_image, $
@@ -12991,7 +12310,6 @@ representative_image_data:representative_image_data, $
 representative_image_has_been_defined:representative_image_has_been_defined, $
 OPS_or_VnV:OPS_or_VnV, $
 images_are_loaded:images_are_loaded, $
-;         animation_controls_outer_base:animation_controls_outer_base, $
 image_controls_base:image_controls_base, $
 cme_controls_base:cme_controls_base, $
 plot_window_base:plot_window_base, $
@@ -13002,21 +12320,10 @@ background_color_stereo_A:background_color_stereo_A, $
 animation_frames:animation_frames, $
 animate_C:animate_C, $
 animate_R:animate_R, $
-;animation_start_time_marker:animation_start_time_marker, $
-;animation_end_time_marker:animation_end_time_marker, $
-;animation_start_time_marker_handle:animation_start_time_marker_handle, $
-;animation_end_time_marker_handle:animation_end_time_marker_handle, $
-;animation_start_time_marker_handle_data:animation_start_time_marker_handle_data, $
-;animation_end_time_marker_handle_data:animation_end_time_marker_handle_data, $
 animation_current_time_marker:animation_current_time_marker, $
 animation_start_julian:animation_start_julian, $
 animation_end_julian:animation_end_julian, $
 timeline_normalized_x:timeline_normalized_x, $
-;         anim_start_julian:anim_start_julian, $
-;         anim_end_julian:anim_end_julian, $
-;         widget_animation_delay:widget_animation_delay, $
-;         widget_which_window_to_animate:widget_which_window_to_animate, $
-;         widget_anim_back_and_forth:widget_anim_back_and_forth, $
 C_widget_remove_this_image:C_widget_remove_this_image, $
 R_widget_remove_this_image:R_widget_remove_this_image, $
 widget_plus_12h_button:widget_plus_12h_button, $
