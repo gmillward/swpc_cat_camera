@@ -9250,45 +9250,29 @@ info.timeline_left_mouse_button_being_pressed = 0
    
     info.timeline_left_mouse_button_being_pressed = 0
    
-   if info.n_sat eq 3 then begin
-	info.clicked_L = 0 
-	info.clicked_LH1 = 0
-	info.clicked_LH2 = 0
-   endif
-   info.clicked_C = 0
-   info.clicked_C2 = 0
-   info.clicked_R = 0
-   info.clicked_RH1 = 0
-   info.clicked_RH2 = 0
+
 
    if shift_click eq 1 then begin
-   	if info.n_sat eq 3 then begin
-		info.clicked_L = 1
-		info.clicked_LH1 = 0
-		info.clicked_LH2 = 0 
-	   endif 
-	   info.clicked_C = 1
-	   info.clicked_C2 = 0
-	   info.clicked_R = 1
-	   info.clicked_RH1 = 0
-	   info.clicked_RH2 = 0
-
+   	if info.n_sat eq 3 then info.currently_showing_STEREO_B = 'BC2'		
+ 	info.currently_showing_LASCO = 'SC3'
+	info.currently_showing_STEREO_A = 'AC2'
+	  
    endif else begin
-	   fraction_y = float(event.y)/float(info.ysize_timeline)
-	   hw = info.ySymbolSize_timeline/2.0 
-   if info.n_sat eq 3 then begin    
-	if fraction_y ge 0.405-hw and fraction_y lt 0.405 +hw then info.currently_showing_STEREO_B = 'BC2'
-	if fraction_y ge 0.3275-hw and fraction_y lt 0.3275 +hw then info.currently_showing_STEREO_B = 'BH1'
-	if fraction_y ge 0.25-hw and fraction_y lt 0.25+hw then info.currently_showing_STEREO_B = 'BH2'
-	 
-   endif   
-   if fraction_y ge 0.4825-hw and fraction_y lt 0.4825 +hw then info.currently_showing_LASCO = 'SC2'
-   if fraction_y ge 0.56-hw and fraction_y lt 0.56 +hw then info.currently_showing_LASCO = 'SC3'
-   if fraction_y ge 0.6375-hw and fraction_y lt 0.6375+hw then info.currently_showing_STEREO_A = 'AC2'
-   if fraction_y ge 0.715-hw and fraction_y lt 0.715+hw then info.currently_showing_STEREO_A = 'AH1'
-   if fraction_Y ge 0.7925-hw and fraction_y lt 0.7925+hw then info.currently_showing_STEREO_A = 'AH2'
+	
+	fraction_y = float(event.y)/float(info.ysize_timeline)
+	hw = info.ySymbolSize_timeline/2.0 
+   	if info.n_sat eq 3 then begin    
+		if fraction_y ge 0.405-hw and fraction_y lt 0.405 +hw then info.currently_showing_STEREO_B = 'BC2'
+		if fraction_y ge 0.3275-hw and fraction_y lt 0.3275 +hw then info.currently_showing_STEREO_B = 'BH1'
+		if fraction_y ge 0.25-hw and fraction_y lt 0.25+hw then info.currently_showing_STEREO_B = 'BH2' 
+   	endif   
+   	if fraction_y ge 0.4825-hw and fraction_y lt 0.4825 +hw then info.currently_showing_LASCO = 'SC2'
+   	if fraction_y ge 0.56-hw and fraction_y lt 0.56 +hw then info.currently_showing_LASCO = 'SC3'
+   	if fraction_y ge 0.6375-hw and fraction_y lt 0.6375+hw then info.currently_showing_STEREO_A = 'AC2'
+   	if fraction_y ge 0.715-hw and fraction_y lt 0.715+hw then info.currently_showing_STEREO_A = 'AH1'
+   	if fraction_Y ge 0.7925-hw and fraction_y lt 0.7925+hw then info.currently_showing_STEREO_A = 'AH2'
    
-endelse
+   endelse
    
 if info.n_sat eq 3 then begin 
 if info.BC2_number_of_images gt 0 and info.currently_showing_STEREO_B eq 'BC2' then begin
@@ -9353,7 +9337,6 @@ xycen = [0.,0.]
 delta_yaw = 0.0 - xycen[0]
 info.L_current_xycen = xycen
 
-print, 'delta_yaw ', delta_yaw
 info.L_camera -> Pan, delta_yaw, delta_pitch
 info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 
@@ -9430,7 +9413,6 @@ xycen = (info.BH1_list_of_XYCEN)[0]
 delta_yaw = 0.0 - xycen[0]
 info.L_current_xycen = xycen
 
-print, 'delta_yaw ', delta_yaw
 info.L_camera -> Pan, delta_yaw, delta_pitch
 info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 
@@ -9507,7 +9489,6 @@ if info.BH2_number_of_images gt 0 and info.currently_showing_STEREO_B eq 'BH2' t
   delta_yaw = 0.0 - xycen[0]
   info.L_current_xycen = xycen
   
-  print, 'delta_yaw ', delta_yaw
   info.L_camera -> Pan, delta_yaw, delta_pitch
   info.L_camera_copy -> Pan, delta_yaw, delta_pitch
   
@@ -9712,7 +9693,6 @@ xycen = [0.,0.]
 delta_yaw = 0.0 - xycen[0]
 info.R_current_xycen = xycen
 
-print, 'delta_yaw ', delta_yaw
 info.R_camera -> Pan, delta_yaw, delta_pitch
 info.R_camera_copy -> Pan, delta_yaw, delta_pitch
 
@@ -9783,7 +9763,6 @@ xycen = (info.AH1_list_of_XYCEN)[0]
 delta_yaw = 0.0 - xycen[0]
 info.R_current_xycen = xycen
 
-print, 'delta_yaw ', delta_yaw
 info.R_camera -> Pan, delta_yaw, delta_pitch
 info.R_camera_copy -> Pan, delta_yaw, delta_pitch
 
@@ -9856,7 +9835,6 @@ xycen = (info.AH2_list_of_XYCEN)[0]
 delta_yaw = 0.0 - xycen[0]
 info.R_current_xycen = xycen
 
-print, 'delta_yaw ', delta_yaw
 info.R_camera -> Pan, delta_yaw, delta_pitch
 info.R_camera_copy -> Pan, delta_yaw, delta_pitch
 
