@@ -3462,10 +3462,10 @@ if info.n_sat eq 3 then begin
 
 	
 	swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
-	if info.show_image_line_plot eq 1 then begin
-		swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
-                            info.position_image_lineplot, info.L_cme_outline                           
-	endif
+;	if info.show_image_line_plot eq 1 then begin
+;		swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
+;                            info.position_image_lineplot, info.L_cme_outline                           
+;	endif
 	case info.currently_showing_STEREO_B of
 	  'BC2' : begin
 
@@ -3509,10 +3509,10 @@ info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 info.C_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-if info.show_image_line_plot eq 1 then begin
-swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
-                            info.position_image_lineplot, info.C_cme_outline                           
-endif
+;if info.show_image_line_plot eq 1 then begin
+;swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
+;                            info.position_image_lineplot, info.C_cme_outline                           
+;endif
 info.C_Window->Draw, info.C_both_views
 
 info.R_cme_model->SetProperty, transform = info.R_camera_transform
@@ -3525,10 +3525,10 @@ info.R_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
 
 swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
-if info.show_image_line_plot eq 1 then begin
-swpc_cat_replot_image_line_plot, info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
-                            info.position_image_lineplot, info.R_cme_outline                           
-endif
+;if info.show_image_line_plot eq 1 then begin
+;swpc_cat_replot_image_line_plot, info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
+;                            info.position_image_lineplot, info.R_cme_outline                           
+;endif
 case info.currently_showing_STEREO_A of
   'AC2' : begin
 
@@ -3618,10 +3618,10 @@ if info.n_sat eq 3 then begin
 	info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
 	swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
-	if info.show_image_line_plot eq 1 then begin
-		swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
-                            info.position_image_lineplot, info.L_cme_outline                           
-	endif
+;	if info.show_image_line_plot eq 1 then begin
+;swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
+;                            info.position_image_lineplot, info.L_cme_outline                         
+;	endif
 	info.L_Window->Draw, info.L_both_views
 endif
 
@@ -3633,10 +3633,10 @@ info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 info.C_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-if info.show_image_line_plot eq 1 then begin
-swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
-                            info.position_image_lineplot, info.C_cme_outline                           
-endif
+;if info.show_image_line_plot eq 1 then begin
+;swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
+;                            info.position_image_lineplot, info.C_cme_outline                           
+;endif
 info.C_Window->Draw, info.C_both_views
 
 info.R_cme_model->SetProperty, transform = info.R_camera_transform
@@ -3647,10 +3647,10 @@ info.R_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 info.R_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
 swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
-if info.show_image_line_plot eq 1 then begin
-swpc_cat_replot_image_line_plot, info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
-                            info.position_image_lineplot, info.R_cme_outline                           
-endif
+;if info.show_image_line_plot eq 1 then begin
+;swpc_cat_replot_image_line_plot, info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
+;                            info.position_image_lineplot, info.R_cme_outline                           
+;endif
 info.R_Window->Draw, info.R_both_views
 
 
@@ -3701,9 +3701,9 @@ if info.n_sat eq 3 then info.L_cone_Z_axis-> SetProperty, data = cone_axis_data
   if info.debug_mode eq 1 then print,' cone_axis_data ',cone_axis_data
   
 ;I HAVE COMMENTED THIS OUT. XCONV DOES NOT EXIST ANYWHERE ELSE SO... ####
-  ;info.C_cone_Z_axis-> GetProperty, XCOORD_CONV = xconv
-  ;info.C_cone_Z_axis-> GetProperty, YCOORD_CONV = yconv
-  ;info.C_cone_Z_axis-> GetProperty, ZCOORD_CONV = zconv
+  info.C_cone_Z_axis-> GetProperty, XCOORD_CONV = xconv
+  info.C_cone_Z_axis-> GetProperty, YCOORD_CONV = yconv
+  info.C_cone_Z_axis-> GetProperty, ZCOORD_CONV = zconv
   
   
   info.radial_distance_lemniscate = radial_distance_lemniscate
@@ -3717,10 +3717,10 @@ if info.n_sat eq 3 then begin
   swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
   
   
-  if info.show_image_line_plot eq 1 then begin
-    swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
-      info.position_image_lineplot, info.L_cme_outline
-  endif
+;  if info.show_image_line_plot eq 1 then begin
+;    swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
+;      info.position_image_lineplot, info.L_cme_outline
+;  endif
   info.L_Window->Draw, info.L_both_views
 endif 
   
@@ -3729,10 +3729,10 @@ endif
   info.C_Window_copy->Draw, info.C_camera_copy
   swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
   
-  if info.show_image_line_plot eq 1 then begin
-    swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
-      info.position_image_lineplot, info.C_cme_outline
-  endif
+;  if info.show_image_line_plot eq 1 then begin
+;    swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
+;      info.position_image_lineplot, info.C_cme_outline
+;  endif
   info.C_Window->Draw, info.C_both_views
   
   info.R_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
@@ -3740,10 +3740,10 @@ endif
   info.R_Window_copy->Draw, info.R_camera_copy
   swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
   
-  if info.show_image_line_plot eq 1 then begin
-    swpc_cat_replot_image_line_plot, info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
-      info.position_image_lineplot, info.R_cme_outline
-  endif
+;  if info.show_image_line_plot eq 1 then begin
+;    swpc_cat_replot_image_line_plot, info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
+;      info.position_image_lineplot, info.R_cme_outline
+;  endif
   info.R_Window->Draw, info.R_both_views
   
   
@@ -3825,10 +3825,10 @@ if info.n_sat eq 3 then begin
 	info.L_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
 	info.L_Window_copy->Draw, info.L_camera_copy
 	swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
-	if info.show_image_line_plot eq 1 then begin
-		swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
-                            info.position_image_lineplot, info.L_cme_outline                           
-	endif
+;	if info.show_image_line_plot eq 1 then begin
+;		swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
+;                            info.position_image_lineplot, info.L_cme_outline                           
+;	endif
 	info.L_Window->Draw, info.L_both_views
 endif
 
@@ -3838,10 +3838,10 @@ info.C_Window_copy->Draw, info.C_camera_copy
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 
 
-if info.show_image_line_plot eq 1 then begin
-swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
-                            info.position_image_lineplot, info.C_cme_outline                           
-endif
+;if info.show_image_line_plot eq 1 then begin
+;swpc_cat_replot_image_line_plot, info.C_clock_angle_degrees, info.C_coronagraph_image_object, info.C_image_lineplot, $
+;                            info.position_image_lineplot, info.C_cme_outline                           
+;endif
 info.C_Window->Draw, info.C_both_views
 
 info.R_cme_fitted_surf->SetProperty, data = fitted_cme_info.vertices
@@ -3849,10 +3849,10 @@ info.R_cme_fitted_surf_copy->SetProperty, data = fitted_cme_info.vertices
 info.R_Window_copy->Draw, info.R_camera_copy
 swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_outline
 
-if info.show_image_line_plot eq 1 then begin
-swpc_cat_replot_image_line_plot, info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
-                            info.position_image_lineplot, info.R_cme_outline                           
-endif
+;if info.show_image_line_plot eq 1 then begin
+;swpc_cat_replot_image_line_plot, info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
+;                            info.position_image_lineplot, info.R_cme_outline                           
+;endif
 
 info.R_Window->Draw, info.R_both_views
 
