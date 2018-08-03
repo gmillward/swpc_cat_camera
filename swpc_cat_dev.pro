@@ -7555,6 +7555,9 @@ info.lon_string_object -> setproperty, strings = 'lon  :' + info.lon_string
 info.cme_info_model->SetProperty, hide = 0
 info.cme_info_Window->Draw, info.cme_info_view
 
+;I added this. 
+info.enlil_info_model->SetProperty, hide = 0
+info.enlil_info_Window->Draw, info.enlil_info_view
 
 endelse
 
@@ -11767,6 +11770,7 @@ info = $
          AC2_list_of_image_offsets:AC2_list_of_image_offsets, $
          AC2_list_of_image_scaling_factors:AC2_list_of_image_scaling_factors, $
          cme_info_model:cme_info_model, $
+	 enlil_info_model:enlil_info_model, $
 ;         widget_set_start_and_end_time:widget_set_start_and_end_time, $
          master_list:master_list, $
          L_indexes:L_indexes, $
@@ -12247,6 +12251,7 @@ if n_sat eq 2 then begin
   AC2_list_of_image_offsets:AC2_list_of_image_offsets, $
   AC2_list_of_image_scaling_factors:AC2_list_of_image_scaling_factors, $
   cme_info_model:cme_info_model, $
+  enlil_info_model:enlil_info_model, $
   ;         widget_set_start_and_end_time:widget_set_start_and_end_time, $
   master_list:master_list, $
   C_indexes:C_indexes, $
