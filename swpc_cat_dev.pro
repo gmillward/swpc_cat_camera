@@ -2224,6 +2224,7 @@ lon = 0.*!dtor
 lat = 90.*!dtor
 tilt = 0.
 
+;NOT ALL THESE PARAMETERS ARE ACTUALLY NEEDED ####
 polysurf_params = [lon,lat,tilt,c1,c2,c3]
 polysurf_const = polysurf_params[3:5] ; [c1,c2,c3]
 polysurf_dirs  = polysurf_params[0:2] ; [lon,lat,tilt]
@@ -2574,7 +2575,7 @@ plot->SetProperty, vert_colors=vert_colors
 end
 
 
-;I DON'T KNOW WHAT THIS IS DOING ####
+;THIS UPDATES THE CME OUTLINE WITH NEW DATA. 
 pro swpc_cat_update_cme_outline,Window_copy,camera_copy,cme_outline
 Window_copy->Draw, camera_copy
 Window_copy->GetProperty, Image_Data=snapshot
@@ -2601,6 +2602,7 @@ if the_text eq 'Show LASCO C2' then begin
 	; make sure, as we switch from C3 to C2, that any C3 match (green line)
 	; is hidden.... 
 	info.C_cme_MATCH_outline->SetProperty, hide = 1 
+	
 
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C2_list_of_datetime_Julian)
 
@@ -2656,6 +2658,7 @@ endif else begin
 	; make sure, as we switch from C2 to C3, that any C2 match (green line)
 	; is hidden.... 
 	info.C2_cme_MATCH_outline->SetProperty, hide = 1
+	
 
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C_list_of_datetime_Julian)
 
@@ -9020,12 +9023,12 @@ endif
 
 if info.C_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC3' then begin
 
-	;info.C_cme_outline -> setProperty, hide = 1
-	;info.C_cme_MATCH_outline-> setProperty, hide = 1
-	;info.C2_cme_MATCH_outline-> setProperty, hide = 1
-	print, 'info.C_cme_outline ',info.C_cme_outline
-	print, 'info.C_cme_MATCH_outline ',info.C_cme_MATCH_outline
-	print, 'info.C2_cme_MATCH_outline ',info.C_cme_MATCH_outline
+	info.C_cme_outline -> setProperty, hide = 1
+	info.C_cme_MATCH_outline-> setProperty, hide = 1
+	info.C2_cme_MATCH_outline-> setProperty, hide = 1
+	info.C_cme_outline -> getProperty, data = data	
+
+	print, 'C_cme_outline - data ', data
 
 	info.currently_showing_LASCO = 'SC3'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C2'
@@ -9089,12 +9092,11 @@ endif
 
 if info.C2_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC2' then begin
 
-	;info.C_cme_outline -> setProperty, hide = 1
-	;info.C_cme_MATCH_outline-> setProperty, hide = 1
-	;info.C2_cme_MATCH_outline-> setProperty, hide = 1
-	print, 'info.C_cme_outline ',info.C_cme_outline
-	print, 'info.C_cme_MATCH_outline ',info.C_cme_MATCH_outline
-	print, 'info.C2_cme_MATCH_outline ',info.C_cme_MATCH_outline
+	info.C_cme_outline -> setProperty, hide = 1
+	info.C_cme_MATCH_outline-> setProperty, hide = 1
+	info.C2_cme_MATCH_outline-> setProperty, hide = 1
+	info.C_cme_outline -> getProperty, data = data
+	print, 'C_cme_outline data ', data
 
 	info.currently_showing_LASCO = 'SC2'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C3'
@@ -10786,23 +10788,23 @@ xtickinterval = 0.25
 
 
 latitude_text = obj_new("idlgrtext", strings = 'Lat :', $
-                color=[255,255,255], locations = [0.5,0.76],hide=0)
+                color=[255,255,255], locations = [0.05,0.76],hide=0)
 latitude_text -> setproperty, font = courier12pt
 
 longitude_text = obj_new("idlgrtext", strings = 'Lon :', $
-                color=[255,255,255], locations = [0.5,0.66],hide=0)
+                color=[255,255,255], locations = [0.05,0.66],hide=0)
 longitude_text -> setproperty, font = courier12pt
                 
 cone_angle_text = obj_new("idlgrtext", strings = '1/2 Angle :', $
-                color=[255,255,255], locations = [0.5,0.56],hide=0)
+                color=[255,255,255], locations = [0.05,0.56],hide=0)
 cone_angle_text -> setproperty, font = courier12pt                
                
 velocity_text = obj_new("idlgrtext", strings = 'Velocity  :', $
-                color=[255,255,255], locations = [0.5,0.46],hide=0)
+                color=[255,255,255], locations = [0.05,0.46],hide=0)
 velocity_text -> setproperty, font = courier12pt                
              
 T21_5_text = obj_new("idlgrtext", strings = 'T21.5 :', $
-                color=[255,255,255], locations = [0.5,0.86],hide=0)
+                color=[255,255,255], locations = [0.05,0.86],hide=0)
 T21_5_text -> setproperty, font = courier12pt                 
                 
 T21_5_string = ''
@@ -10830,13 +10832,13 @@ enlil_info_Model = OBJ_NEW('IDLgrModel')
 enlil_info_View -> Add, enlil_info_Model
 enlil_info_model -> setproperty, hide = 0 
 
-enlil_title = 'Enlil' 
-enlil_title_object = OBJ_NEW('IDLgrText',enlil_title)
-enlil_title_object -> setproperty, location = [0.5,0.95]
-enlil_title_object -> setproperty, alignment = 0.5
-enlil_title_object -> setproperty, color = color_cme_orange
-enlil_title_object -> setproperty, font = courier12pt
-enlil_info_model -> Add, enlil_title_object 
+;enlil_title = 'Enlil' 
+;enlil_title_object = OBJ_NEW('IDLgrText',enlil_title)
+;enlil_title_object -> setproperty, location = [0.5,0.95]
+;enlil_title_object -> setproperty, alignment = 0.5
+;enlil_title_object -> setproperty, color = color_cme_orange
+;enlil_title_object -> setproperty, font = courier12pt
+;enlil_info_model -> Add, enlil_title_object 
 
 enlil_info_model -> add, latitude_text
 enlil_info_model -> add, longitude_text
@@ -11230,6 +11232,7 @@ endif else begin
 	R_cone_Z_axis-> SetProperty, hide = 1
 endelse
 
+;WHAT IS LEM_DATA? 
 lem_data = fltarr(2,3)
 lem_data[0,0] = 200
 lem_data[0,1] = 250
