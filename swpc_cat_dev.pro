@@ -10579,10 +10579,7 @@ endif else begin
   
 endelse
 
-;COULD THIS BE THE PROBLEM WITH THE ENLIL WINDOW? ####
-enlil_info_View = OBJ_NEW('IDLgrView', Color=background_color, Viewplane_Rect=[0.0,0.0,1.0,1.05])
-enlil_info_Model = OBJ_NEW('IDLgrModel') 
-enlil_info_View -> Add, enlil_info_Model
+
 
 if n_sat eq 3 then begin
 L_widget_image_sequence_slider = widget_slider(L_view_base, Value=1, $
@@ -10786,27 +10783,49 @@ xtickinterval = 0.25
 
 
 latitude_text = obj_new("idlgrtext", strings = 'Lat :', $
-                color=[255,255,255], locations = [0.05,0.76],hide=0)
+                color=[255,255,255], locations = [0.5,0.76],hide=0)
 latitude_text -> setproperty, font = courier12pt
 
 longitude_text = obj_new("idlgrtext", strings = 'Lon :', $
-                color=[255,255,255], locations = [0.05,0.66],hide=0)
+                color=[255,255,255], locations = [0.5,0.66],hide=0)
 longitude_text -> setproperty, font = courier12pt
                 
 cone_angle_text = obj_new("idlgrtext", strings = '1/2 Angle :', $
-                color=[255,255,255], locations = [0.05,0.56],hide=0)
+                color=[255,255,255], locations = [0.5,0.56],hide=0)
 cone_angle_text -> setproperty, font = courier12pt                
                
 velocity_text = obj_new("idlgrtext", strings = 'Velocity  :', $
-                color=[255,255,255], locations = [0.05,0.46],hide=0)
+                color=[255,255,255], locations = [0.5,0.46],hide=0)
 velocity_text -> setproperty, font = courier12pt                
              
 T21_5_text = obj_new("idlgrtext", strings = 'T21.5 :', $
-                color=[255,255,255], locations = [0.05,0.86],hide=0)
+                color=[255,255,255], locations = [0.5,0.86],hide=0)
 T21_5_text -> setproperty, font = courier12pt                 
                 
 T21_5_string = ''
 cone_tool_version = 'CME Analysis Tool (CAT) v1.0'
+
+;cme_info_view = OBJ_NEW('IDLgrView', Color=background_color, Viewplane_Rect=[0.0,0.0,200,110])
+
+;cme_info_model = OBJ_NEW('IDLgrModel') 
+
+;cme_info_view -> Add, cme_info_model
+;cme_info_model->setProperty, Hide = 0
+
+;info_title = 'CME Params'
+
+;info_title_object = OBJ_NEW('IDLgrText',info_title)
+;info_title_object -> setproperty, location = [100, 90]
+;info_title_object -> setproperty, alignment = 0.5
+;info_title_object -> setproperty, color = color_cme_orange
+;info_title_object -> setproperty, font = courier12pt
+;cme_info_model -> Add, info_title_object
+
+;COULD THIS BE THE PROBLEM WITH THE ENLIL WINDOW? ####
+enlil_info_View = OBJ_NEW('IDLgrView', Color=background_color, Viewplane_Rect=[0.0,0.0,1.0,1.05])
+enlil_info_Model = OBJ_NEW('IDLgrModel') 
+enlil_info_View -> Add, enlil_info_Model
+enlil_info_model -> setproperty, hide = 0 
 
 enlil_info_model -> add, latitude_text
 enlil_info_model -> add, longitude_text
