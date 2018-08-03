@@ -2596,6 +2596,8 @@ widget_control,info.widget_show_C2_or_C3,get_value=the_text
 
 if the_text eq 'Show LASCO C2' then begin
 
+	info.current_selection = 'SC2'
+
 	info.currently_showing_LASCO = 'SC2'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C3'
 
@@ -2662,6 +2664,8 @@ swpc_cat_REDRAW_THE_IMAGE, $
 info.C_Window->Draw, info.C_both_views
 
 endif else begin
+
+	info.current_selection = 'SC3'
 
 	info.currently_showing_LASCO = 'SC3'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C2'
@@ -2832,8 +2836,8 @@ pro swpc_cat_show_B_hi1, event
   
   info.BC2_cme_MATCH_outline->SetProperty, hide = 1
   
-	info.B_cme_outline -> getProperty, data = data	
-	print, 'B_cme_outline - data ' 
+	info.BC2_cme_outline -> getProperty, data = data	
+	print, 'BC2_cme_outline - data ' 
 	help, data
 	print, data[0,0:10]
 
