@@ -1947,7 +1947,7 @@ pro swpc_cat_C_remove_this_image, event
 end
 
 
-#CURRENTLY, THESE FUNCTIONS CAN'T OPERATE BECAUSE SENSITIVE = 0 ON THE WIDGET_BUTTON. 
+;CURRENTLY, THESE FUNCTIONS CAN'T OPERATE BECAUSE SENSITIVE = 0 ON THE WIDGET_BUTTON. 
 pro swpc_cat_R_remove_this_image, event
 
   WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
@@ -5009,21 +5009,21 @@ END
 
 
 
-pro swpc_cat_change_lemniscate_transparency, event
+;pro swpc_cat_change_lemniscate_transparency, event
 
-compile_opt idl2
+;compile_opt idl2
 
-Widget_Control, event.top, Get_UValue=info, /No_Copy
+;Widget_Control, event.top, Get_UValue=info, /No_Copy
 
-ellipse_alpha = float(event.value) / 100. 
+;ellipse_alpha = float(event.value) / 100. 
 
-info.cme_fitted_surf -> setProperty, alpha_channel= ellipse_alpha
+;info.cme_fitted_surf -> setProperty, alpha_channel= ellipse_alpha
 
-info.C_Window->Draw, info.C_both_views                                
+;info.C_Window->Draw, info.C_both_views                                
 
-Widget_Control, event.top, Set_UValue=info, /No_Copy
+;Widget_Control, event.top, Set_UValue=info, /No_Copy
 
-END
+;END
 
 
 
