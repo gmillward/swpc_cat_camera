@@ -10830,6 +10830,14 @@ enlil_info_Model = OBJ_NEW('IDLgrModel')
 enlil_info_View -> Add, enlil_info_Model
 enlil_info_model -> setproperty, hide = 0 
 
+enlil_title = 'Enlil' 
+enlil_title_object = OBJ_NEW('IDLgrText',enlil_title)
+enlil_title_object -> setproperty, location = [0.5,0.95]
+enlil_title_object -> setproperty, alignment = 0.5
+enlil_title_object -> setproperty, color = color_cme_orange
+enlil_title_object -> setproperty, font = courier12pt
+enlil_info_model -> Add, enlil_title_object 
+
 enlil_info_model -> add, latitude_text
 enlil_info_model -> add, longitude_text
 enlil_info_model -> add, cone_angle_text
