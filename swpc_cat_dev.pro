@@ -2756,12 +2756,12 @@ WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
   
   info.BC2_cme_MATCH_outline->SetProperty, hide = 1
   
-	info.B_cme_outline -> getProperty, data = data	
-	print, 'B_cme_outline - data ' 
+	info.L_cme_outline -> getProperty, data = data	
+	print, 'L_cme_outline - data ' 
 	help, data
 	print, data[0,0:10]
 
-	info.B_cme_MATCH_outline -> getProperty, data = b1_data
+	info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
 	info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
 	info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
 
@@ -2836,12 +2836,12 @@ pro swpc_cat_show_B_hi1, event
   
   info.BC2_cme_MATCH_outline->SetProperty, hide = 1
   
-	info.BC2_cme_outline -> getProperty, data = data	
-	print, 'BC2_cme_outline - data ' 
+	info.L_cme_outline -> getProperty, data = data	
+	print, 'L_cme_outline - data ' 
 	help, data
 	print, data[0,0:10]
 
-	info.B_cme_MATCH_outline -> getProperty, data = b1_data
+	info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
 	info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
 	info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
 
@@ -2914,12 +2914,12 @@ pro swpc_cat_show_B_hi2, event
   
   info.BC2_cme_MATCH_outline->SetProperty, hide = 1
   
-	info.B_cme_outline -> getProperty, data = data	
-	print, 'B_cme_outline - data ' 
+	info.L_cme_outline -> getProperty, data = data	
+	print, 'L_cme_outline - data ' 
 	help, data
 	print, data[0,0:10]
 
-	info.B_cme_MATCH_outline -> getProperty, data = b1_data
+	info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
 	info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
 	info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
 
