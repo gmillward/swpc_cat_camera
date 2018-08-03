@@ -2650,7 +2650,7 @@ if the_text eq 'Show LASCO C2' then begin
 	;info.C_camera_transform = transform
 
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
-	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 10.;I PUT THIS HERE ####
+	swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 10.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 	
 swpc_cat_REDRAW_THE_IMAGE, $
@@ -2710,7 +2710,7 @@ endif else begin
 	; 0.99 factor is for L1 as opposed to Earth.
 	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
-	info.C_cme_model->SetProperty, transform = info.initial_transform
+	info.C_cme_model->SetProperty, transform = info.initial_transform ;ASK ABOUT THIS!!! ####
 	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 ;	info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 ;	info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
@@ -2722,7 +2722,7 @@ endif else begin
 	;info.C_camera_transform = transform
 
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
-	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
+	swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 	
 swpc_cat_REDRAW_THE_IMAGE, $
