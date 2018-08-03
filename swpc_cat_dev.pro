@@ -9027,8 +9027,14 @@ if info.C_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC3' then b
 	info.C_cme_MATCH_outline-> setProperty, hide = 1
 	info.C2_cme_MATCH_outline-> setProperty, hide = 1
 	info.C_cme_outline -> getProperty, data = data	
+	print, 'C_cme_outline - data ' 
+	help, data
+	print, data[0,0:10]
 
-	print, 'C_cme_outline - data ', data
+	info.C_cme_MATCH_outline -> getProperty, c1_data = data
+	info.C2_cme_MATCH_outline -> getProperty, c2_data = data
+	help, c1_data
+	help, c2_data 
 
 	info.currently_showing_LASCO = 'SC3'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C2'
@@ -9096,7 +9102,14 @@ if info.C2_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC2' then 
 	info.C_cme_MATCH_outline-> setProperty, hide = 1
 	info.C2_cme_MATCH_outline-> setProperty, hide = 1
 	info.C_cme_outline -> getProperty, data = data
-	print, 'C_cme_outline data ', data
+	print, 'C_cme_outline data '
+	help, data
+	print, data[0,0:10]
+	info.C_cme_MATCH_outline -> getProperty, c1_data = data
+	info.C2_cme_MATCH_outline -> getProperty, c2_data = data
+	help, c1_data
+	help, c2_data 	
+
 
 	info.currently_showing_LASCO = 'SC2'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C3'
