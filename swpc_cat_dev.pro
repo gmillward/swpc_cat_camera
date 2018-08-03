@@ -10562,8 +10562,8 @@ if compact eq 0 then Result = WIDGET_LABEL(enlil_info_base, /ALIGN_CENTER, value
 y_enlil_info = 200
 if compact eq 1 then y_enlil_info = 170
 
-draw_enlil_info_window = Widget_Draw(enlil_info_base, XSize=Xsize * 0.4, YSize=y_enlil_info, Graphics_Level=2, retain=retain)
-
+draw_enlil_info_window = Widget_Draw(enlil_info_base, XSize=Xsize * 0.4, YSize=y_enlil_info, Graphics_Level=2, retain=retain, render = 0)
+;Graphics_Level=2, retain=retain, render = 0
 if compact eq 0 then begin
 
 widget_calculate_velocity = Widget_Button(enlil_info_base, Value='Calculate Velocity',Event_Pro='swpc_cat_calculate_velocity',sensitive=0)
