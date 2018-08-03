@@ -9046,33 +9046,34 @@ if info.C_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC3' then b
 
 		swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
 
-		swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
-		info.C_HEEQ_coords[1] = B_angle_degrees
-
-		info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
-
-		info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-		info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
-		info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
-
-		the_day = long((info.C_list_of_datetime_Julian)[0])
-		i_day = where(the_day lt info.Julian_day_for_Earth_pos)
-		i_day = i_day[0]
-
-		info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-		info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
-
-		swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-
-		info.C_Window->Draw, info.C_both_views
-
-		;set_timeline_highlight_block, info.C_plot, info.C_number_of_images, C_index, info.color_C3, info.cme_outline_color
-
+		
 	endif else begin
 
 	info.C_window->erase, color=info.background_color_lasco
 	info.C_plot->SetProperty, color = info.color_C3
 
 	endelse
+
+	swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
+	info.C_HEEQ_coords[1] = B_angle_degrees
+
+	info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
+
+	info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-		info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+	info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+
+	the_day = long((info.C_list_of_datetime_Julian)[0])
+	i_day = where(the_day lt info.Julian_day_for_Earth_pos)
+	i_day = i_day[0]
+
+	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
+	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+
+	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
+
+		
+
+	info.C_Window->Draw, info.C_both_views
 
 endif
 
@@ -9110,25 +9111,9 @@ if info.C2_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC2' then 
 
 		swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
 
-		swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
-info.C2_HEEQ_coords[1] = B_angle_degrees
+		
 
-		info.C2_telescope_FOV = (256. * ((info.C2_list_of_pixel_scales)[0] / (info.C2_list_of_image_scaling_factors)[0])) / (info.C2_list_of_rsuns)[0]
-
-		info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
-		info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
-
-		the_day = long((info.C2_list_of_datetime_Julian)[0])
-		i_day = where(the_day lt info.Julian_day_for_Earth_pos)
-		i_day = i_day[0]
-
-		info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-		info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
-
-		swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-info.C_Window->Draw, info.C_both_views
-
-		;set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, C2_index, info.color_C2, info.cme_outline_color
+		
 
 	endif else begin
 
@@ -9136,6 +9121,28 @@ info.C_Window->Draw, info.C_both_views
 	info.C2_plot->SetProperty, color = info.color_C2
 
 	endelse
+
+	swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
+	info.C2_HEEQ_coords[1] = B_angle_degrees
+
+	info.C2_telescope_FOV = (256. * ((info.C2_list_of_pixel_scales)[0] / (info.C2_list_of_image_scaling_factors)[0])) / (info.C2_list_of_rsuns)[0]
+
+	info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
+	info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
+
+	the_day = long((info.C2_list_of_datetime_Julian)[0])
+	i_day = where(the_day lt info.Julian_day_for_Earth_pos)
+	i_day = i_day[0]
+
+	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
+	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+
+	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
+info.C_Window->Draw, info.C_both_views
+
+		
+
+	info.C_Window->Draw, info.C_both_views
 
 endif
 
