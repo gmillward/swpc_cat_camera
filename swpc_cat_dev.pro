@@ -2606,13 +2606,7 @@ if the_text eq 'Show LASCO C2' then begin
 
 	info.C_title_object -> setproperty, strings = 'SOHO LASCO C2'
 
-	swpc_cat_REDRAW_THE_IMAGE, $
-    info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
-    info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
-    info.CME_matches_image_C2_Image_number,info.C_current_background_color, $
-    info.background_color,info.C_current_text_color,info.color_c2,info.C_cme_outline,info.C2_cme_MATCH_outline, $
-    info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
-    info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+	
 
 	swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
 	info.C2_HEEQ_coords[1] = B_angle_degrees
@@ -2643,7 +2637,16 @@ if the_text eq 'Show LASCO C2' then begin
 	;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
 	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 10.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-	info.C_Window->Draw, info.C_both_views
+	
+swpc_cat_REDRAW_THE_IMAGE, $
+    info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
+    info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
+    info.CME_matches_image_C2_Image_number,info.C_current_background_color, $
+    info.background_color,info.C_current_text_color,info.color_c2,info.C_cme_outline,info.C2_cme_MATCH_outline, $
+    info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
+    info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+
+info.C_Window->Draw, info.C_both_views
 
 endif else begin
 
@@ -2658,13 +2661,7 @@ endif else begin
 
 	info.C_title_object -> setproperty, strings = 'SOHO LASCO C3'
 
-	swpc_cat_REDRAW_THE_IMAGE, $
-    info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
-    info.C_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
-    info.CME_matches_image_C_Image_number,info.C_current_background_color, $
-    info.background_color,info.C_current_text_color,info.color_c3,info.C_cme_outline,info.C_cme_MATCH_outline, $
-    info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
-    info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+	
 
 	swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
 	info.C_HEEQ_coords[1] = B_angle_degrees
@@ -2699,6 +2696,14 @@ endif else begin
 	;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 	
+swpc_cat_REDRAW_THE_IMAGE, $
+    info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
+    info.C_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
+    info.CME_matches_image_C_Image_number,info.C_current_background_color, $
+    info.background_color,info.C_current_text_color,info.color_c3,info.C_cme_outline,info.C_cme_MATCH_outline, $
+    info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
+    info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
+
 info.C_Window->Draw, info.C_both_views
 
 
