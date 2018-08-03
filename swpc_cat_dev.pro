@@ -1221,7 +1221,7 @@ End
 ;
 
 
-
+;THIS FUNCTION NEVER RUNS BECAUSE ALLOW_BERNOULLI IS ALWAYS 0. 
 function swpc_cat_which_style_lemniscate, event
 WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
 
@@ -7299,6 +7299,10 @@ i_day = i_day[0]
 info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
 info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
+;I PUT THIS HERE ####
+info.C_cme_model->GetProperty, transform = this_transform
+info.C_camera_transform = this_transform
+
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
 
@@ -9013,9 +9017,12 @@ endif
 
 if info.C_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC3' then begin
 
-	info.C_cme_outline -> setProperty, hide = 1
-	info.C_cme_MATCH_outline-> setProperty, hide = 1
-	info.C2_cme_MATCH_outline-> setProperty, hide = 1
+	;info.C_cme_outline -> setProperty, hide = 1
+	;info.C_cme_MATCH_outline-> setProperty, hide = 1
+	;info.C2_cme_MATCH_outline-> setProperty, hide = 1
+	print, 'info.C_cme_outline ',info.C_cme_outline
+	print, 'info.C_cme_MATCH_outline ',info.C_cme_MATCH_outline
+	print, 'info.C2_cme_MATCH_outline ',info.C_cme_MATCH_outline
 
 	info.currently_showing_LASCO = 'SC3'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C2'
@@ -9079,10 +9086,13 @@ endif
 
 if info.C2_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC2' then begin
 
-	info.C_cme_outline -> setProperty, hide = 1
-	info.C_cme_MATCH_outline-> setProperty, hide = 1
-	info.C2_cme_MATCH_outline-> setProperty, hide = 1
-	
+	;info.C_cme_outline -> setProperty, hide = 1
+	;info.C_cme_MATCH_outline-> setProperty, hide = 1
+	;info.C2_cme_MATCH_outline-> setProperty, hide = 1
+	print, 'info.C_cme_outline ',info.C_cme_outline
+	print, 'info.C_cme_MATCH_outline ',info.C_cme_MATCH_outline
+	print, 'info.C2_cme_MATCH_outline ',info.C_cme_MATCH_outline
+
 	info.currently_showing_LASCO = 'SC2'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C3'
 
@@ -11165,8 +11175,8 @@ R_CME_model-> Add, R_cone_Y_axis
 cone_Z_axis_data = fltarr(3,2)
 cone_Z_axis_data[2,1] = radial_distance_lemniscate * 3.
 if n_sat eq 3 then begin
-L_cone_Z_axis = OBJ_NEW('IDLgrpolyline',data = cone_Z_axis_data,color=[100,100,255])
-L_CME_model-> Add, L_cone_Z_axis
+	L_cone_Z_axis = OBJ_NEW('IDLgrpolyline',data = cone_Z_axis_data,color=[100,100,255])
+	L_CME_model-> Add, L_cone_Z_axis
 endif
 C_cone_Z_axis = OBJ_NEW('IDLgrpolyline',data = cone_Z_axis_data,color=[100,100,255])
 C_CME_model-> Add, C_cone_Z_axis
@@ -11179,14 +11189,15 @@ R_cone_X_axis-> SetProperty, hide = 1
 if n_sat eq 3 then L_cone_Y_axis-> SetProperty, hide = 1
 C_cone_Y_axis-> SetProperty, hide = 1
 R_cone_Y_axis-> SetProperty, hide = 1
+
 if show_cone_Z_axis eq 1 then begin
-if n_sat eq 3 then L_cone_Z_axis-> SetProperty, hide = 0
-C_cone_Z_axis-> SetProperty, hide = 0
-R_cone_Z_axis-> SetProperty, hide = 0
+	if n_sat eq 3 then L_cone_Z_axis-> SetProperty, hide = 0
+	C_cone_Z_axis-> SetProperty, hide = 0
+	R_cone_Z_axis-> SetProperty, hide = 0
 endif else begin
-if n_sat eq 3 then L_cone_Z_axis-> SetProperty, hide = 1
-C_cone_Z_axis-> SetProperty, hide = 1
-R_cone_Z_axis-> SetProperty, hide = 1
+	if n_sat eq 3 then L_cone_Z_axis-> SetProperty, hide = 1
+	C_cone_Z_axis-> SetProperty, hide = 1
+	R_cone_Z_axis-> SetProperty, hide = 1
 endelse
 
 lem_data = fltarr(2,3)
