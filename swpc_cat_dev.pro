@@ -6285,7 +6285,7 @@ case info.currently_showing_STEREO_B of
 	'BC2' : begin
 	info.BC2_current_image_number = which_image
 	widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(info.BC2_list_of_datetime_Julian)
-	print, 'n_elements(info.BC2_list_of_datetime_Julian) ',n_elements(info.BC2_list_of_datetime_Julian) 
+	 
 	swpc_cat_REDRAW_THE_IMAGE, $
             info.BC2_current_image_number,info.BC2_background_image_number,info.BC2_difference_imaging, $
             info.BC2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
@@ -6369,7 +6369,8 @@ pro swpc_cat_change_C_image_with_slider, event
         'SC3' : begin
         
           info.C_current_image_number = which_image
-          
+          widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C_list_of_datetime_Julian)
+	
           swpc_cat_REDRAW_THE_IMAGE, $
             info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
             info.C_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
@@ -6396,7 +6397,8 @@ pro swpc_cat_change_C_image_with_slider, event
         'SC2' : begin
         
           info.C2_current_image_number = which_image
-          
+          widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C2_list_of_datetime_Julian)
+	
           swpc_cat_REDRAW_THE_IMAGE, $
             info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
             info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
@@ -6409,18 +6411,18 @@ pro swpc_cat_change_C_image_with_slider, event
             swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number,    info.color_C2, info.cme_outline_color
           endif
           
-          C_xp = 255 - (255*sin(info.C_clock_angle_degrees * !dtor))
-          C_yp = 255 + (255*cos(info.C_clock_angle_degrees * !dtor))
-          info.C_coronagraph_image_object -> getproperty, data = image_data
-          xvals = round(((findgen(255)/254.) * (C_xp - 255.)) + 255.)
-          yvals = round(((findgen(255)/254.) * (C_yp - 255.)) + 255.)
-          line_Y = image_data[xvals,yvals]
-          info.C_image_lineplot->SetProperty, datax = findgen(255) , datay = line_Y
-          maxy = max(line_Y,min=minY)
-          yrange = [minY,maxY]
-          C_image_xs = swpc_cat_FSC_Normalize([0.,254.], Position=[info.position_image_lineplot[0], info.position_image_lineplot[2]])
-          C_image_ys = swpc_cat_FSC_Normalize(yrange, Position=[info.position_image_lineplot[1], info.position_image_lineplot[3]])
-          info.C_image_lineplot->SetProperty, XCoord_Conv=C_image_xs, YCoord_Conv=C_image_ys
+          ;C_xp = 255 - (255*sin(info.C_clock_angle_degrees * !dtor))
+          ;C_yp = 255 + (255*cos(info.C_clock_angle_degrees * !dtor))
+          ;info.C_coronagraph_image_object -> getproperty, data = image_data
+          ;xvals = round(((findgen(255)/254.) * (C_xp - 255.)) + 255.)
+          ;yvals = round(((findgen(255)/254.) * (C_yp - 255.)) + 255.)
+          ;line_Y = image_data[xvals,yvals]
+          ;info.C_image_lineplot->SetProperty, datax = findgen(255) , datay = line_Y
+          ;maxy = max(line_Y,min=minY)
+          ;yrange = [minY,maxY]
+          ;C_image_xs = swpc_cat_FSC_Normalize([0.,254.], Position=[info.position_image_lineplot[0], info.position_image_lineplot[2]])
+          ;C_image_ys = swpc_cat_FSC_Normalize(yrange, Position=[info.position_image_lineplot[1], info.position_image_lineplot[3]])
+          ;info.C_image_lineplot->SetProperty, XCoord_Conv=C_image_xs, YCoord_Conv=C_image_ys
           
         endcase
         
