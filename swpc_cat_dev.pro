@@ -2623,6 +2623,7 @@ if the_text eq 'Show LASCO C2' then begin
 	;This bit is the same. 
 	info.C2_telescope_FOV = (256. * ((info.C2_list_of_pixel_scales)[0] / (info.C2_list_of_image_scaling_factors)[0])) / (info.C2_list_of_rsuns)[0]
 
+	;debug mode print statement agrees with old version. 
 	if info.debug_mode eq 1 then print, 'C2 ', info.C2_telescope_FOV, (info.C2_list_of_pixel_scales)[0], (info.C2_list_of_image_scaling_factors)[0], (info.C2_list_of_rsuns)[0]
 
 	;Could this be the issue? 
@@ -2680,6 +2681,7 @@ endif else begin
 	;This bit is the same. 
 	info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 
+	;debug mode print statement agrees with the old version. 
 	if info.debug_mode eq 1 then print, 'C3 ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C_list_of_rsuns)[0]
 
 	info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
