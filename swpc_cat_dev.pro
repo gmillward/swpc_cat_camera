@@ -6314,7 +6314,7 @@ case info.currently_showing_STEREO_B of
 	
         
 	if info.BH1_number_of_images gt 0 then begin ;MY ADDITION ####
-		swpc_cat_set_timeline_highlight_block, info.L_plot, info.BH1_number_of_images, info.BH1_current_image_number, $
+		swpc_cat_set_timeline_highlight_block, info.LH1_plot, info.BH1_number_of_images, info.BH1_current_image_number, $
 	info.color_BH1, info.cme_outline_color
 	endif 
         
@@ -6334,7 +6334,7 @@ case info.currently_showing_STEREO_B of
 	
         
 	if info.BH2_number_of_images gt 0 then begin ;MY ADDITION ####
-		swpc_cat_set_timeline_highlight_block, info.L_plot, info.BH2_number_of_images, info.BH2_current_image_number, $
+		swpc_cat_set_timeline_highlight_block, info.LH2_plot, info.BH2_number_of_images, info.BH2_current_image_number, $
 	info.color_BH2, info.cme_outline_color
 	endif
           
