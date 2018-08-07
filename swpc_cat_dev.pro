@@ -6451,41 +6451,66 @@ pro swpc_cat_change_R_image_with_slider, event
       case info.currently_showing_STEREO_A of
         'AC2' : begin
           info.AC2_current_image_number = which_image
-          swpc_cat_REDRAW_THE_IMAGE, $
+	widget_control, info.R_widget_image_sequence_slider,set_slider_max = n_elements(info.AC2_list_of_datetime_Julian)
+	          
+
+	swpc_cat_REDRAW_THE_IMAGE, $
             info.AC2_current_image_number,info.AC2_background_image_number,info.AC2_difference_imaging, $
             info.AC2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
             info.CME_matches_image_AC2_Image_number,info.R_current_background_color, $
             info.background_color,info.R_current_text_color,info.color_stereo_A,info.R_cme_outline,info.AC2_cme_MATCH_outline, $
             info.R_widget_outline_matches_image,info.CME_matches_image_AC2_CME_outline, $
             info.R_ut_string_object,info.AC2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-        end
+        
+if info.AC2_number_of_images gt 0 then begin ;MY ADDITION ####
+      
+        swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number,   info.color_stereo_a, info.cme_outline_color
+        
+      endif
+end
         'AH1' : begin
           info.AH1_current_image_number = which_image
-          swpc_cat_REDRAW_THE_IMAGE, $
+	widget_control, info.R_widget_image_sequence_slider,set_slider_max = n_elements(info.AH1_list_of_datetime_Julian)
+	          
+
+	swpc_cat_REDRAW_THE_IMAGE, $
             info.AH1_current_image_number,info.AH1_background_image_number,info.AH1_difference_imaging, $
             info.AH1_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
             info.CME_matches_image_AH1_Image_number,info.R_current_background_color, $
             info.background_color,info.R_current_text_color,info.color_AH1,info.R_cme_outline,info.AH1_cme_MATCH_outline, $
             info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
             info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
+
+if info.AH1_number_of_images gt 0 then begin ;MY ADDITION ####
+      
+        swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number,   info.color_AH1, info.cme_outline_color
+        
+      endif
+
         end
         'AH2' :  begin
           info.AH2_current_image_number = which_image
-          swpc_cat_REDRAW_THE_IMAGE, $
+	widget_control, info.R_widget_image_sequence_slider,set_slider_max = n_elements(info.AH2_list_of_datetime_Julian)
+	          
+
+	swpc_cat_REDRAW_THE_IMAGE, $
             info.AH2_current_image_number,info.AH2_background_image_number,info.AH2_difference_imaging, $
             info.AH2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
             info.CME_matches_image_AH2_Image_number,info.R_current_background_color, $
             info.background_color,info.R_current_text_color,info.color_AH2,info.R_cme_outline,info.AH2_cme_MATCH_outline, $
             info.R_widget_outline_matches_image,info.CME_matches_image_AH2_CME_outline, $
             info.R_ut_string_object,info.AH2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-        end
-      end
+ 
+if info.AH2_number_of_images gt 0 then begin ;MY ADDITION ####
       
-      if info.AC2_number_of_images gt 0 then begin ;MY ADDITION ####
-      
-        swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number,   info.color_stereo_a, info.cme_outline_color
+        swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number,   info.color_AH2, info.cme_outline_color
         
       endif
+
+       end
+      end
+      
+     
   
   info.images_timeline_window->Draw, info.images_timeline_view
   
