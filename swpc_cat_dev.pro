@@ -2596,8 +2596,6 @@ widget_control,info.widget_show_C2_or_C3,get_value=the_text
 
 if the_text eq 'Show LASCO C2' then begin
 
-	info.current_selection = 'SC2'
-
 	info.currently_showing_LASCO = 'SC2'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C3'
 
@@ -2605,23 +2603,11 @@ if the_text eq 'Show LASCO C2' then begin
 	; is hidden.... 
 	info.C_cme_MATCH_outline->SetProperty, hide = 1 
 	
-	info.C_cme_outline -> getProperty, data = data	
-	print, 'C_cme_outline - data ' 
-	help, data
-	print, data[0,0:10]
-
-	info.C_cme_MATCH_outline -> getProperty, data = c1_data
-	info.C2_cme_MATCH_outline -> getProperty, data = c2_data
-	help, c1_data
-	help, c2_data 
-	print, c1_data
-	print, c2_data
-
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C2_list_of_datetime_Julian)
 
 	info.C_title_object -> setproperty, strings = 'SOHO LASCO C2'
 
-	
+	;Same as original swpc_cat down to here. 
 
 	swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
 	info.C2_HEEQ_coords[1] = B_angle_degrees
@@ -2665,8 +2651,6 @@ info.C_Window->Draw, info.C_both_views
 
 endif else begin
 
-	info.current_selection = 'SC3'
-
 	info.currently_showing_LASCO = 'SC3'
 	widget_control,info.widget_show_C2_or_C3,set_value='Show LASCO C2'
 
@@ -2674,23 +2658,11 @@ endif else begin
 	; is hidden.... 
 	info.C2_cme_MATCH_outline->SetProperty, hide = 1
 
-	info.C_cme_outline -> getProperty, data = data	
-	print, 'C_cme_outline - data ' 
-	help, data
-	print, data[0,0:10]
-
-	info.C_cme_MATCH_outline -> getProperty, data = c1_data
-	info.C2_cme_MATCH_outline -> getProperty, data = c2_data
-	help, c1_data
-	help, c2_data 
-	print, c1_data
-	print, c2_data	
-
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C_list_of_datetime_Julian)
 
 	info.C_title_object -> setproperty, strings = 'SOHO LASCO C3'
 
-	
+	;Same as original swpc_cat down to here. 
 
 	swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
 	info.C_HEEQ_coords[1] = B_angle_degrees
