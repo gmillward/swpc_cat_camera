@@ -4977,6 +4977,7 @@ CASE event.id OF
  
    info.L_widget_saturationSlider : BEGIN
    info.L_image_saturation_value = event.value
+
 swpc_cat_image_difference_and_scaling, info.L_current_background_color,  info.BC2_current_image_number, info.BC2_background_image_number, info.BC2_difference_imaging, $
                  info.BC2_list_of_image_data, info.L_image_saturation_value, info.L_coronagraph_image_object, info.L_border_image_object, info.i_log_scale
 info.L_ut_string_object->setProperty, color = info.L_current_text_color
@@ -5054,11 +5055,28 @@ endcase
       
    info.R_widget_saturationSlider : BEGIN
    info.R_image_saturation_value = event.value
-swpc_cat_image_difference_and_scaling, info.R_current_background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
+
+	case info.currently_showing_STEREO_A of 
+	'AC2':BEGIN
+	swpc_cat_image_difference_and_scaling, info.R_current_background_color,  info.AC2_current_image_number, info.AC2_background_image_number, info.AC2_difference_imaging, $
                  info.AC2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
 info.R_ut_string_object->setProperty, color = info.R_current_text_color
 info.R_title_object->setProperty, color = info.R_current_text_color 
-   info.R_Window->Draw, info.R_both_views
+	ENDCASE	
+	'AH1':BEGIN
+	swpc_cat_image_difference_and_scaling, info.R_current_background_color,  info.AH1_current_image_number, info.AH1_background_image_number, info.AH1_difference_imaging, $
+                 info.AH1_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+info.R_ut_string_object->setProperty, color = info.R_current_text_color
+info.R_title_object->setProperty, color = info.R_current_text_color
+	ENDCASE
+	'AH2':BEGIN
+	swpc_cat_image_difference_and_scaling, info.R_current_background_color,  info.AH2_current_image_number, info.AH2_background_image_number, info.AH2_difference_imaging, $
+                 info.AH2_list_of_image_data, info.R_image_saturation_value, info.R_coronagraph_image_object, info.R_border_image_object, info.i_log_scale
+info.R_ut_string_object->setProperty, color = info.R_current_text_color
+info.R_title_object->setProperty, color = info.R_current_text_color	
+	ENDCASE
+	ENDCASE   
+info.R_Window->Draw, info.R_both_views
    ENDCASE
    
 ENDCASE
@@ -9524,8 +9542,7 @@ endelse ; not right-click context menu
 	line_data[1,1] = 1.
 	info.animation_current_time_marker->setproperty,data=line_data
 	info.images_timeline_window->Draw, info.images_timeline_view
-	print, 'info.currently_showing_STEREO_B ',info.currently_showing_STEREO_B
-
+	
 	if info.n_sat eq 3 then begin 
    	case info.currently_showing_STEREO_B of
 		'BC2':Begin
@@ -10004,7 +10021,7 @@ PRO SWPC_CAT_DEV
 compile_opt idl2
 
 ; set n_sat to either 2 or 3
-n_sat = 3
+n_sat = 2
 
 show_cme_surface = 0
 
