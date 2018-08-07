@@ -2643,11 +2643,9 @@ if the_text eq 'Show LASCO C2' then begin
 	;info.C_cme_model->GetProperty, transform = transform
 	;info.C_camera_transform = transform
 
-	;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
-	swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 10.;I PUT THIS HERE ####
-	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 	
-
+;Below here, it is also the same. 
+swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 
 info.C_Window->Draw, info.C_both_views
 
@@ -2703,11 +2701,9 @@ endif else begin
 	;info.C_cme_model->GetProperty, transform = transform
 	;info.C_camera_transform = transform
 
-	;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
-	swpc_cat_just_rescale_lemniscate_radial_distance,info, 'C', 30.;I PUT THIS HERE ####
-	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 	
-
+;Below here, it is also the same. 
+swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 
 info.C_Window->Draw, info.C_both_views
 
