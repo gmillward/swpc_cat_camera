@@ -10054,7 +10054,7 @@ color_c3 = [100,255,100]
 color_c2 = [0,100,0]
 color_BH1 = [70,130,180]
 color_AH1 = [255,65,0]
-color_BH2 = [224,225,255]
+color_BH2 = [224,180,225]
 color_AH2 = [255,105,180]
 
 color_cme_orange = [220,120,0]
