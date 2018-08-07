@@ -2646,7 +2646,8 @@ if the_text eq 'Show LASCO C2' then begin
 	;info.C_cme_model->GetProperty, transform = transform
 	;info.C_camera_transform = transform
 
-	
+info.C_cme_outline -> GetProperty, data=data
+print, 'info.C_cme_outline data ',data		
 ;Below here, it is also the same. 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 
@@ -2707,7 +2708,9 @@ endif else begin
 	;info.C_cme_model->GetProperty, transform = transform
 	;info.C_camera_transform = transform
 
-	
+;THE DATA IN C_CME_OUTLINE IS NOT THE SAME AS IN THE OLD VERSION. 
+info.C_cme_outline -> GetProperty, data=data
+print, 'info.C_cme_outline data ',data	
 ;Below here, it is also the same. 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 
