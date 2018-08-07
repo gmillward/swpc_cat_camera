@@ -1833,7 +1833,7 @@ pro swpc_cat_L_remove_this_image, event
   swpc_cat_sort_out_the_timeline_symbols, info.BC2_number_of_images, info.CME_matches_image_BC2_Image_number, $
     info.L_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
     
-  swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
+  swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.highlight_color
   
   info.images_timeline_window -> draw, info.images_timeline_view
     
@@ -1888,7 +1888,7 @@ pro swpc_cat_C_remove_this_image, event
       swpc_cat_sort_out_the_timeline_symbols, info.C_number_of_images, info.CME_matches_image_C_Image_number, $
         info.C_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
         
-      swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+      swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.highlight_color
       
       info.images_timeline_window -> draw, info.images_timeline_view
       
@@ -1932,7 +1932,7 @@ pro swpc_cat_C_remove_this_image, event
       swpc_cat_sort_out_the_timeline_symbols, info.C2_number_of_images, info.CME_matches_image_C2_Image_number, $
         info.C2_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
         
-      swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+      swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.highlight_color
       
       info.images_timeline_window -> draw, info.images_timeline_view
       
@@ -1988,7 +1988,7 @@ pro swpc_cat_R_remove_this_image, event
   swpc_cat_sort_out_the_timeline_symbols, info.AC2_number_of_images, info.CME_matches_image_AC2_Image_number, $
     info.R_plot, info.xSymbolSize_timeline, info.ySymbolSize_timeline
     
-  swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
+  swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.highlight_color
   
   info.images_timeline_window -> draw, info.images_timeline_view
   
@@ -6296,7 +6296,7 @@ case info.currently_showing_STEREO_B of
 	
 	
 	if info.BC2_number_of_images gt 0 then begin ;MY ADDITION ####
-            swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number,     info.color_stereo_B, info.cme_outline_color
+            swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number,     info.color_stereo_B, info.highlight_color
           endif 
 
 	end   
@@ -6315,7 +6315,7 @@ case info.currently_showing_STEREO_B of
         
 	if info.BH1_number_of_images gt 0 then begin ;MY ADDITION ####
 		swpc_cat_set_timeline_highlight_block, info.LH1_plot, info.BH1_number_of_images, info.BH1_current_image_number, $
-	info.color_BH1, info.cme_outline_color
+	info.color_BH1, info.highlight_color
 	endif 
         
 	end   
@@ -6335,7 +6335,7 @@ case info.currently_showing_STEREO_B of
         
 	if info.BH2_number_of_images gt 0 then begin ;MY ADDITION ####
 		swpc_cat_set_timeline_highlight_block, info.LH2_plot, info.BH2_number_of_images, info.BH2_current_image_number, $
-	info.color_BH2, info.cme_outline_color
+	info.color_BH2, info.highlight_color
 	endif
           
 	end  
@@ -6380,7 +6380,7 @@ pro swpc_cat_change_C_image_with_slider, event
             info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
             
           if info.C_number_of_images gt 0 then begin ;MY ADDITION ####
-            swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number,     info.color_C3, info.cme_outline_color
+            swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number,     info.color_C3, info.highlight_color
           endif
           
           if info.show_image_line_plot eq 1 then begin
@@ -6408,7 +6408,7 @@ pro swpc_cat_change_C_image_with_slider, event
             info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
             
           if info.C2_number_of_images gt 0 then begin ; MY ADDITION ####
-            swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number,    info.color_C2, info.cme_outline_color
+            swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number,    info.color_C2, info.highlight_color
           endif
           
           ;C_xp = 255 - (255*sin(info.C_clock_angle_degrees * !dtor))
@@ -6464,7 +6464,7 @@ pro swpc_cat_change_R_image_with_slider, event
         
 if info.AC2_number_of_images gt 0 then begin ;MY ADDITION ####
       
-        swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number,   info.color_stereo_a, info.cme_outline_color
+        swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number,   info.color_stereo_a, info.highlight_color
         
       endif
 end
@@ -6483,7 +6483,7 @@ end
 
 if info.AH1_number_of_images gt 0 then begin ;MY ADDITION ####
       
-        swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number,   info.color_AH1, info.cme_outline_color
+        swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number,   info.color_AH1, info.highlight_color
         
       endif
 
@@ -6503,7 +6503,7 @@ if info.AH1_number_of_images gt 0 then begin ;MY ADDITION ####
  
 if info.AH2_number_of_images gt 0 then begin ;MY ADDITION ####
       
-        swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number,   info.color_AH2, info.cme_outline_color
+        swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number,   info.color_AH2, info.highlight_color
         
       endif
 
@@ -6781,7 +6781,7 @@ symarray[i] = thisSymbol_L
 endfor
 info.L_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.highlight_color
 widget_control, info.L_widget_image_sequence_slider,set_slider_max = info.BC2_number_of_images
 widget_control,info.L_widget_image_sequence_slider,set_value = info.BC2_current_image_number + 1
 info.L_ut_string_object->SetProperty, strings = (info.BC2_list_of_full_time_strings)[info.BC2_current_image_number]
@@ -6812,7 +6812,7 @@ symarray[i] = thisSymbol_LH1
 endfor
 info.LH1_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.LH1_plot, info.BH1_number_of_images, info.BH1_current_image_number, info.color_BH1, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.LH1_plot, info.BH1_number_of_images, info.BH1_current_image_number, info.color_BH1, info.highlight_color
 widget_control, info.L_widget_image_sequence_slider,set_slider_max = info.BH1_number_of_images
 widget_control,info.L_widget_image_sequence_slider,set_value = info.BH1_current_image_number + 1
 info.L_ut_string_object->SetProperty, strings = (info.BH1_list_of_full_time_strings)[info.BH1_current_image_number]
@@ -6841,7 +6841,7 @@ symarray[i] = thisSymbol_LH2
 endfor
 info.LH2_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.LH2_plot, info.BH2_number_of_images, info.BH2_current_image_number, info.color_BH2, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.LH2_plot, info.BH2_number_of_images, info.BH2_current_image_number, info.color_BH2, info.highlight_color
 widget_control, info.L_widget_image_sequence_slider,set_slider_max = info.BH2_number_of_images
 widget_control,info.L_widget_image_sequence_slider,set_value = info.BH2_current_image_number + 1
 info.L_ut_string_object->SetProperty, strings = (info.BH2_list_of_full_time_strings)[info.BH2_current_image_number]
@@ -6877,7 +6877,7 @@ info.C_plot->SetProperty, symbol=symarray
 
 
 
-swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.highlight_color
 widget_control, info.C_widget_image_sequence_slider,set_slider_max = info.C_number_of_images
 widget_control,info.C_widget_image_sequence_slider,set_value = info.C_current_image_number + 1
 info.C_ut_string_object->SetProperty, strings = (info.C_list_of_full_time_strings)[info.C_current_image_number]
@@ -6906,7 +6906,7 @@ symarray[i] = thisSymbol_C2
 endfor
 info.C2_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.highlight_color
 widget_control, info.C_widget_image_sequence_slider,set_slider_max = info.C2_number_of_images
 widget_control,info.C_widget_image_sequence_slider,set_value = info.C2_current_image_number + 1
 info.C_ut_string_object->SetProperty, strings = (info.C2_list_of_full_time_strings)[info.C2_current_image_number]
@@ -6935,7 +6935,7 @@ symarray[i] = thisSymbol_R
 endfor
 info.R_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_A, info.highlight_color
 widget_control, info.R_widget_image_sequence_slider,set_slider_max = info.AC2_number_of_images
 widget_control,info.R_widget_image_sequence_slider,set_value = info.AC2_current_image_number + 1
 info.R_ut_string_object->SetProperty, strings = (info.AC2_list_of_full_time_strings)[info.AC2_current_image_number]
@@ -6965,7 +6965,7 @@ symarray[i] = thisSymbol_RH1
 endfor
 info.RH1_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number, info.color_AH1, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number, info.color_AH1, info.highlight_color
 widget_control, info.R_widget_image_sequence_slider,set_slider_max = info.AH1_number_of_images
 widget_control,info.R_widget_image_sequence_slider,set_value = info.AH1_current_image_number + 1
 info.R_ut_string_object->SetProperty, strings = (info.AH1_list_of_full_time_strings)[info.AH1_current_image_number]
@@ -6995,7 +6995,7 @@ symarray[i] = thisSymbol_RH2
 endfor
 info.RH2_plot->SetProperty, symbol=symarray
 
-swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number, info.color_AH2, info.cme_outline_color
+swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number, info.color_AH2, info.highlight_color
 widget_control, info.R_widget_image_sequence_slider,set_slider_max = info.AH2_number_of_images
 widget_control,info.R_widget_image_sequence_slider,set_value = info.AH2_current_image_number + 1
 info.R_ut_string_object->SetProperty, strings = (info.AH2_list_of_full_time_strings)[info.AH2_current_image_number]
@@ -8928,7 +8928,7 @@ if info.BC2_number_of_images gt 0 and info.currently_showing_STEREO_B eq 'BC2' t
     info.L_widget_outline_matches_image,info.CME_matches_image_BC2_CME_outline, $
     info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
 
-		swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.cme_outline_color
+		swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, info.color_stereo_B, info.highlight_color
 
 
 
@@ -9003,7 +9003,7 @@ if info.BH1_number_of_images gt 0 and info.currently_showing_STEREO_B eq 'BH1' t
     info.L_widget_outline_matches_image,info.CME_matches_image_BH1_CME_outline, $
     info.L_ut_string_object,info.BH1_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
 
-		swpc_cat_set_timeline_highlight_block, info.LH1_plot, info.BH1_number_of_images, info.BH1_current_image_number, info.color_BH1, info.cme_outline_color
+		swpc_cat_set_timeline_highlight_block, info.LH1_plot, info.BH1_number_of_images, info.BH1_current_image_number, info.color_BH1, info.highlight_color
 
 
 
@@ -9079,7 +9079,7 @@ if info.BH2_number_of_images gt 0 and info.currently_showing_STEREO_B eq 'BH2' t
     info.L_widget_outline_matches_image,info.CME_matches_image_BH2_CME_outline, $
     info.L_ut_string_object,info.BH2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
 
-		swpc_cat_set_timeline_highlight_block, info.LH2_plot, info.BH2_number_of_images, info.BH2_current_image_number, info.color_BH2, info.cme_outline_color
+		swpc_cat_set_timeline_highlight_block, info.LH2_plot, info.BH2_number_of_images, info.BH2_current_image_number, info.color_BH2, info.highlight_color
 
 
 
@@ -9176,7 +9176,7 @@ if info.C_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC3' then b
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-		swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+		swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.highlight_color
 
 		
 	endif else begin
@@ -9251,7 +9251,7 @@ if info.C2_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC2' then 
     info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
     info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-		swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+		swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.highlight_color
 
 		
 
@@ -9313,7 +9313,7 @@ if info.AC2_number_of_images gt 0 and info.currently_showing_STEREO_A eq 'AC2' t
     info.R_widget_outline_matches_image,info.CME_matches_image_AC2_CME_outline, $
     info.R_ut_string_object,info.AC2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
-		swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_a, info.cme_outline_color
+		swpc_cat_set_timeline_highlight_block, info.R_plot, info.AC2_number_of_images, info.AC2_current_image_number, info.color_stereo_a, info.highlight_color
 
 
 	endif else begin
@@ -9385,7 +9385,7 @@ if info.AH1_number_of_images gt 0 and info.currently_showing_STEREO_A eq 'AH1' t
     info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
     info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
-		swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number, info.color_AH1, info.cme_outline_color
+		swpc_cat_set_timeline_highlight_block, info.RH1_plot, info.AH1_number_of_images, info.AH1_current_image_number, info.color_AH1, info.highlight_color
 
 
 	endif else begin
@@ -9457,7 +9457,7 @@ if info.AH2_number_of_images gt 0 and info.currently_showing_STEREO_A eq 'AH2' t
     info.R_widget_outline_matches_image,info.CME_matches_image_AH2_CME_outline, $
     info.R_ut_string_object,info.AH2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
-		swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number, info.color_AH2, info.cme_outline_color
+		swpc_cat_set_timeline_highlight_block, info.RH2_plot, info.AH2_number_of_images, info.AH2_current_image_number, info.color_AH2, info.highlight_color
 
 
 	endif else begin
@@ -9649,7 +9649,7 @@ endelse ; not right-click context menu
     info.L_widget_outline_matches_image,CME_matches_image_B_CME_outline, $
     info.L_ut_string_object,B_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0,     info.i_log_scale
 
-			swpc_cat_set_timeline_highlight_block, L_plot, B_number_of_images, B_current_image_number, color_stereo_B, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, L_plot, B_number_of_images, B_current_image_number, color_stereo_B, info.highlight_color
    
 		endif else begin
 
@@ -9693,7 +9693,7 @@ endelse ; not right-click context menu
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-			swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.chighlight_color
 
 			swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
 info.C_HEEQ_coords[1] = B_angle_degrees
@@ -9714,7 +9714,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 			info.C_Window->Draw, info.C_both_views
 
-			swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, C_index, info.color_C3, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, C_index, info.color_C3, info.highlight_color
 
 		endif else begin
 
@@ -9760,7 +9760,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-			swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, info.C2_current_image_number, info.color_C2, info.highlight_color
 
 			swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
 info.C_HEEQ_coords[1] = B_angle_degrees
@@ -9781,7 +9781,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 			info.C_Window->Draw, info.C_both_views
 
-			swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, C_index, info.color_C2, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, info.C2_plot, info.C2_number_of_images, C_index, info.color_C2, info.highlight_color
 
 		endif else begin
 
@@ -9814,7 +9814,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
     info.R_widget_outline_matches_image,CME_matches_image_A_CME_outline, $
     info.R_ut_string_object,A_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
 
-			swpc_cat_set_timeline_highlight_block, R_plot, A_number_of_images, A_current_image_number, color_stereo_a, info.cme_outline_color
+			swpc_cat_set_timeline_highlight_block, R_plot, A_number_of_images, A_current_image_number, color_stereo_a, info.highlight_color
 
 
 		endif else begin
@@ -12010,6 +12010,7 @@ info = $
          color_c3:color_c3, $
          color_c2:color_c2, $
          cme_outline_color:cme_outline_color, $
+	 highlight_color:highlight_color, $
          background_color:background_color, $
          xsize_timeline:xsize_timeline, $
          ysize_timeline:ysize_timeline, $
@@ -12473,6 +12474,7 @@ color_stereo_A:color_stereo_A, $
 color_c3:color_c3, $
 color_c2:color_c2, $
 cme_outline_color:cme_outline_color, $
+highlight_color:highlight_color, $
 background_color:background_color, $
 xsize_timeline:xsize_timeline, $
 ysize_timeline:ysize_timeline, $
