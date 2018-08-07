@@ -2620,6 +2620,7 @@ if the_text eq 'Show LASCO C2' then begin
 
 	;Same as original swpc_cat down to here. 
 
+	;This bit is the same. 
 	info.C2_telescope_FOV = (256. * ((info.C2_list_of_pixel_scales)[0] / (info.C2_list_of_image_scaling_factors)[0])) / (info.C2_list_of_rsuns)[0]
 
 	if info.debug_mode eq 1 then print, 'C2 ', info.C2_telescope_FOV, (info.C2_list_of_pixel_scales)[0], (info.C2_list_of_image_scaling_factors)[0], (info.C2_list_of_rsuns)[0]
@@ -2628,6 +2629,7 @@ if the_text eq 'Show LASCO C2' then begin
 	info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
 	info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
 
+	;This bit is the same. 
 	the_day = long((info.C2_list_of_datetime_Julian)[0])
 	i_day = where(the_day lt info.Julian_day_for_Earth_pos)
 	i_day = i_day[0]
@@ -2675,6 +2677,7 @@ endif else begin
 
 	;Same as original swpc_cat down to here. 
 
+	;This bit is the same. 
 	info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 
 	if info.debug_mode eq 1 then print, 'C3 ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C_list_of_rsuns)[0]
@@ -2682,6 +2685,7 @@ endif else begin
 	info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 	info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 
+	;This bit is the same. 
 	the_day = long((info.C_list_of_datetime_Julian)[0])
 	i_day = where(the_day lt info.Julian_day_for_Earth_pos)
 	i_day = i_day[0]
