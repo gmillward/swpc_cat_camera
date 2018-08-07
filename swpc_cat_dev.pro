@@ -6509,8 +6509,6 @@ if info.AH2_number_of_images gt 0 then begin ;MY ADDITION ####
 
        end
       end
-      
-     
   
   info.images_timeline_window->Draw, info.images_timeline_view
   
@@ -10044,6 +10042,7 @@ endif
 background_color = [35,35,35]
 text_color = [153,153,153]
 cme_outline_color = [255,255,0]
+highlight_color = [255,255,255]
 color_BC2 = [150,150,255]
 color_stereo_B = [150,150,255]
 color_stereo_A = [255,100,100]
