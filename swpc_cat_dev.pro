@@ -6284,7 +6284,7 @@ which_image = event.value - 1
 case info.currently_showing_STEREO_B of
 	'BC2' : begin
 	info.BC2_current_image_number = which_image
-	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.BC2_list_of_datetime_Julian)
+	widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(info.BC2_list_of_datetime_Julian)
 	print, 'n_elements(info.BC2_list_of_datetime_Julian) ',n_elements(info.BC2_list_of_datetime_Julian) 
 	swpc_cat_REDRAW_THE_IMAGE, $
             info.BC2_current_image_number,info.BC2_background_image_number,info.BC2_difference_imaging, $
@@ -6302,7 +6302,7 @@ case info.currently_showing_STEREO_B of
 	end   
 	'BH1' : begin
 	info.BH1_current_image_number = which_image
-	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.BH1_list_of_datetime_Julian)
+	widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(info.BH1_list_of_datetime_Julian)
 	
 	swpc_cat_REDRAW_THE_IMAGE, $
             info.BH1_current_image_number,info.BH1_background_image_number,info.BH1_difference_imaging, $
@@ -6322,7 +6322,7 @@ case info.currently_showing_STEREO_B of
                 
 	'BH2' :  begin
 	info.BH2_current_image_number = which_image
-	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.BH2_list_of_datetime_Julian)               
+	widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(info.BH2_list_of_datetime_Julian)               
 	
 	swpc_cat_REDRAW_THE_IMAGE, $
             info.BH2_current_image_number,info.BH2_background_image_number,info.BH2_difference_imaging, $
