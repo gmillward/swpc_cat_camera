@@ -9639,6 +9639,8 @@ endelse ; not right-click context menu
 			if L_index eq -1 then L_index = B_number_of_images - 1
 
 			B_current_image_number = L_index
+			widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(B_list_of_datetime_Julian)
+				
 			widget_control,info.L_widget_image_sequence_slider,set_value = B_current_image_number + 1
 
 			swpc_cat_REDRAW_THE_IMAGE, $
@@ -9693,7 +9695,7 @@ endelse ; not right-click context menu
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-			swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.chighlight_color
+			swpc_cat_set_timeline_highlight_block, info.C_plot, info.C_number_of_images, info.C_current_image_number, info.color_C3, info.highlight_color
 
 			swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
 info.C_HEEQ_coords[1] = B_angle_degrees
@@ -9804,6 +9806,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 
 			if R_index eq -1 then R_index = A_number_of_images - 1
 			A_current_image_number = R_index
+			widget_control, info.R_widget_image_sequence_slider,set_slider_max = n_elements(A_list_of_datetime_Julian)			
 			widget_control,info.R_widget_image_sequence_slider,set_value = A_current_image_number + 1
 
 			swpc_cat_REDRAW_THE_IMAGE, $
