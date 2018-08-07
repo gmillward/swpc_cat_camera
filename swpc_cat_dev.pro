@@ -2615,10 +2615,10 @@ if the_text eq 'Show LASCO C2' then begin
     info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
     info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-	;Same as original swpc_cat down to here. 
-
 	swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
 	info.C2_HEEQ_coords[1] = B_angle_degrees
+
+	;Same as original swpc_cat down to here. 
 
 	info.C2_telescope_FOV = (256. * ((info.C2_list_of_pixel_scales)[0] / (info.C2_list_of_image_scaling_factors)[0])) / (info.C2_list_of_rsuns)[0]
 
@@ -2672,10 +2672,10 @@ endif else begin
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
 
-	;Same as original swpc_cat down to here. 
-
 	swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
 	info.C_HEEQ_coords[1] = B_angle_degrees
+
+	;Same as original swpc_cat down to here. 
 
 	info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 
