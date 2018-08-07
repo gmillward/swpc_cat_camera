@@ -6282,43 +6282,67 @@ which_image = event.value - 1
 
 	
 case info.currently_showing_STEREO_B of
-                'BC2' : begin
-                  info.BC2_current_image_number = which_image
-                  swpc_cat_REDRAW_THE_IMAGE, $
-                    info.BC2_current_image_number,info.BC2_background_image_number,info.BC2_difference_imaging, $
-                    info.BC2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
-                    info.CME_matches_image_BC2_Image_number,info.L_current_background_color, $
-                    info.background_color,info.L_current_text_color,info.color_stereo_B,info.L_cme_outline,info.BC2_cme_MATCH_outline, $
-                    info.L_widget_outline_matches_image,info.CME_matches_image_BC2_CME_outline, $
-                    info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
-                 end   
-                'BH1' : begin
-                  info.BH1_current_image_number = which_image
-                  swpc_cat_REDRAW_THE_IMAGE, $
-                    info.BH1_current_image_number,info.BH1_background_image_number,info.BH1_difference_imaging, $
-                    info.BH1_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
-                    info.CME_matches_image_BH1_Image_number,info.L_current_background_color, $
-                    info.background_color,info.L_current_text_color,info.color_BH1,info.L_cme_outline,info.BH1_cme_MATCH_outline, $
-                    info.L_widget_outline_matches_image,info.CME_matches_image_BH1_CME_outline, $
-                    info.L_ut_string_object,info.BH1_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
-                 end   
-                'BH2' :  begin
-                  info.BH2_current_image_number = which_image
-                  swpc_cat_REDRAW_THE_IMAGE, $
-                    info.BH2_current_image_number,info.BH2_background_image_number,info.BH2_difference_imaging, $
-                    info.BH2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
-                    info.CME_matches_image_BH2_Image_number,info.L_current_background_color, $
-                    info.background_color,info.L_current_text_color,info.color_BH2,info.L_cme_outline,info.BH2_cme_MATCH_outline, $
-                    info.L_widget_outline_matches_image,info.CME_matches_image_BH2_CME_outline, $
-                    info.L_ut_string_object,info.BH2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
-                  end  
+	'BC2' : begin
+	info.BC2_current_image_number = which_image
+	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.BC2_list_of_datetime_Julian)
+	print, 'n_elements(info.BC2_list_of_datetime_Julian) ',n_elements(info.BC2_list_of_datetime_Julian) 
+	swpc_cat_REDRAW_THE_IMAGE, $
+            info.BC2_current_image_number,info.BC2_background_image_number,info.BC2_difference_imaging, $
+            info.BC2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
+            info.CME_matches_image_BC2_Image_number,info.L_current_background_color, $
+            info.background_color,info.L_current_text_color,info.color_stereo_B,info.L_cme_outline,info.BC2_cme_MATCH_outline, $
+            info.L_widget_outline_matches_image,info.CME_matches_image_BC2_CME_outline, $
+            info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
+	
+	
+	if info.BC2_number_of_images gt 0 then begin ;MY ADDITION ####
+            swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number,     info.color_stereo_B, info.cme_outline_color
+          endif 
+
+	end   
+	'BH1' : begin
+	info.BH1_current_image_number = which_image
+	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.BH1_list_of_datetime_Julian)
+	
+	swpc_cat_REDRAW_THE_IMAGE, $
+            info.BH1_current_image_number,info.BH1_background_image_number,info.BH1_difference_imaging, $
+            info.BH1_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
+            info.CME_matches_image_BH1_Image_number,info.L_current_background_color, $
+            info.background_color,info.L_current_text_color,info.color_BH1,info.L_cme_outline,info.BH1_cme_MATCH_outline, $
+            info.L_widget_outline_matches_image,info.CME_matches_image_BH1_CME_outline, $
+            info.L_ut_string_object,info.BH1_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
+	
+        
+	if info.BH1_number_of_images gt 0 then begin ;MY ADDITION ####
+		swpc_cat_set_timeline_highlight_block, info.L_plot, info.BH1_number_of_images, info.BH1_current_image_number, $
+	info.color_BH1, info.cme_outline_color
+	endif 
+        
+	end   
+                
+	'BH2' :  begin
+	info.BH2_current_image_number = which_image
+	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.BH2_list_of_datetime_Julian)               
+	
+	swpc_cat_REDRAW_THE_IMAGE, $
+            info.BH2_current_image_number,info.BH2_background_image_number,info.BH2_difference_imaging, $
+            info.BH2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
+            info.CME_matches_image_BH2_Image_number,info.L_current_background_color, $
+            info.background_color,info.L_current_text_color,info.color_BH2,info.L_cme_outline,info.BH2_cme_MATCH_outline, $
+            info.L_widget_outline_matches_image,info.CME_matches_image_BH2_CME_outline, $
+            info.L_ut_string_object,info.BH2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
+	
+        
+	if info.BH2_number_of_images gt 0 then begin ;MY ADDITION ####
+		swpc_cat_set_timeline_highlight_block, info.L_plot, info.BH2_number_of_images, info.BH2_current_image_number, $
+	info.color_BH2, info.cme_outline_color
+	endif
+          
+	end  
 end
 
 
-if info.BC2_number_of_images gt 0 then begin ;MY ADDITION ####
-	swpc_cat_set_timeline_highlight_block, info.L_plot, info.BC2_number_of_images, info.BC2_current_image_number, $
-	info.color_stereo_B, info.cme_outline_color
-endif 
+
 
 
 info.images_timeline_window->Draw, info.images_timeline_view
