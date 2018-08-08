@@ -3504,8 +3504,8 @@ Widget_Control, event.top, Get_UValue=info, /No_Copy
 info.latitude_degrees = float(event.value) / 10.
 
 if info.n_sat eq 3 then begin 
-	info.L_cme_model->SetProperty, transform = info.L_camera_transform
-	info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
+	info.L_cme_model->SetProperty, transform = info.initial_transform
+	info.L_cme_model_copy->SetProperty, transform = info.initial_transform
 	info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
@@ -3518,43 +3518,12 @@ if info.n_sat eq 3 then begin
 ;		swpc_cat_replot_image_line_plot, info.L_clock_angle_degrees, info.L_coronagraph_image_object, info.L_image_lineplot, $
 ;                            info.position_image_lineplot, info.L_cme_outline                           
 ;	endif
-;	case info.currently_showing_STEREO_B of
-;	  'BC2' : begin
 
-;	    swpc_cat_REDRAW_THE_IMAGE, $
-;      info.BC2_current_image_number,info.BC2_background_image_number,info.BC2_difference_imaging, $
-;      info.BC2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
-;      info.CME_matches_image_BC2_Image_number,info.L_current_background_color, $
-;      info.background_color,info.L_current_text_color,info.color_stereo_B,info.L_cme_outline,info.BC2_cme_MATCH_outline, $
-;      info.L_widget_outline_matches_image,info.CME_matches_image_BC2_CME_outline, $
-;      info.L_ut_string_object,info.BC2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
-;	  end
-;	  'BH1' : begin
-
-;	    swpc_cat_REDRAW_THE_IMAGE, $
-;      info.BH1_current_image_number,info.BH1_background_image_number,info.BH1_difference_imaging, $
-;      info.BH1_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
-;      info.CME_matches_image_BH1_Image_number,info.L_current_background_color, $
-;      info.background_color,info.L_current_text_color,info.color_BH1,info.L_cme_outline,info.BH1_cme_MATCH_outline, $
-;      info.L_widget_outline_matches_image,info.CME_matches_image_BH1_CME_outline, $
-;      info.L_ut_string_object,info.BH1_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
-;	  end
-;	  'BH2' :  begin
-
-;	    swpc_cat_REDRAW_THE_IMAGE, $
-;      info.BH2_current_image_number,info.BH2_background_image_number,info.BH2_difference_imaging, $
-;      info.BH2_list_of_image_data,info.L_image_saturation_value,info.L_coronagraph_image_object,info.L_border_image_object, $
-;      info.CME_matches_image_BH2_Image_number,info.L_current_background_color, $
-;      info.background_color,info.L_current_text_color,info.color_BH2,info.L_cme_outline,info.BH2_cme_MATCH_outline, $
-;      info.L_widget_outline_matches_image,info.CME_matches_image_BH2_CME_outline, $
-;      info.L_ut_string_object,info.BH2_list_of_full_time_strings,info.L_title_object,info.L_Window,info.L_both_views,0,0, info.i_log_scale
-;	  end
-;	end
 	info.L_Window->Draw, info.L_both_views
 endif ;n_sat = 3 ####
 
-info.C_cme_model->SetProperty, transform = info.C_camera_transform
-info.C_cme_model_copy->SetProperty, transform = info.C_camera_transform
+info.C_cme_model->SetProperty, transform = info.initial_transform
+info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
@@ -3567,9 +3536,8 @@ swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_out
 ;endif
 info.C_Window->Draw, info.C_both_views
 
-info.R_cme_model->SetProperty, transform = info.R_camera_transform
-info.R_cme_model_copy->SetProperty, transform = info.R_camera_transform
-
+info.R_cme_model->SetProperty, transform = info.initial_transform
+info.R_cme_model_copy->SetProperty, transform = info.initial_transform
 info.R_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.R_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.R_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
@@ -3581,40 +3549,6 @@ swpc_cat_update_cme_outline,info.R_Window_copy,info.R_camera_copy,info.R_cme_out
 ;swpc_cat_replot_image_line_plot, info.R_clock_angle_degrees, info.R_coronagraph_image_object, info.R_image_lineplot, $
 ;                            info.position_image_lineplot, info.R_cme_outline                           
 ;endif
-;case info.currently_showing_STEREO_A of
-;  'AC2' : begin
-
-;    swpc_cat_REDRAW_THE_IMAGE, $
-;      info.AC2_current_image_number,info.AC2_background_image_number,info.AC2_difference_imaging, $
-;      info.AC2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
-;      info.CME_matches_image_AC2_Image_number,info.R_current_background_color, $
-;      info.background_color,info.R_current_text_color,info.color_stereo_A,info.R_cme_outline,info.AC2_cme_MATCH_outline, $
-;      info.R_widget_outline_matches_image,info.CME_matches_image_AC2_CME_outline, $
-;      info.R_ut_string_object,info.AC2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-;  end
-;  'AH1' : begin
-
-;    swpc_cat_REDRAW_THE_IMAGE, $
-;      info.AH1_current_image_number,info.AH1_background_image_number,info.AH1_difference_imaging, $
-;      info.AH1_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
-;      info.CME_matches_image_AH1_Image_number,info.R_current_background_color, $
-;      info.background_color,info.R_current_text_color,info.color_AH1,info.R_cme_outline,info.AH1_cme_MATCH_outline, $
-;      info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
-;      info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-;  end
-;  'AH2' :  begin
-
-;    swpc_cat_REDRAW_THE_IMAGE, $
-;      info.AH2_current_image_number,info.AH2_background_image_number,info.AH2_difference_imaging, $
-;      info.AH2_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
-;      info.CME_matches_image_AH2_Image_number,info.R_current_background_color, $
-;      info.background_color,info.R_current_text_color,info.color_AH2,info.R_cme_outline,info.AH2_cme_MATCH_outline, $
-;      info.R_widget_outline_matches_image,info.CME_matches_image_AH2_CME_outline, $
-;      info.R_ut_string_object,info.AH2_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,0,0, info.i_log_scale
-;  end
-;end
-
-
 
 info.R_Window->Draw, info.R_both_views
 
