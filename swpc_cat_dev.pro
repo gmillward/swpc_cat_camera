@@ -7384,8 +7384,10 @@ info.L_camera_transform = this_transform
 
 info.BC2_telescope_FOV = (256. * ((info.BC2_list_of_pixel_scales)[0] / (info.BC2_list_of_image_scaling_factors)[0])) / (info.BC2_list_of_rsuns)[0]
 print, 'info.BC2_telescope_FOV ',info.BC2_telescope_FOV
+
+;PUTS THINGS IN THE WRONG PLACE IF I DO IT FOR THIS ONE. 
 info.L_camera->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
-info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
+info.L_camera_copy->SetProperty, Viewplane_Rect=[0,0,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
 info.L_camera -> setproperty, eye = (info.L_list_of_Sun_satellite_distances)[0]
 info.L_camera_copy -> setproperty, eye = (info.L_list_of_Sun_satellite_distances)[0]
 
@@ -7442,6 +7444,7 @@ info.C_camera_transform = this_transform
 info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 print, 'info.C_telescope_FOV ',info.C_telescope_FOV
 
+;THESE TWO LINES HAVE BEEN CHANGED. THE LEMNISCATE CAME OUT THE RIGHT SIZE WHEN I MADE THESE THE SAME AS SWPC_CAT. ####
 info.C_camera->SetProperty, Viewplane_Rect=[0,0,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 info.C_camera_copy->SetProperty, Viewplane_Rect=[0,0,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 
