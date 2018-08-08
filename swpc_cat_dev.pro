@@ -6652,7 +6652,7 @@ info.date_array = [2011,11,26,0,0,2011,11,26,23,59]
        info.end_julian = end_julian
 
        ;get input images automatically after user selects telescope and datetime range:
-       
+       ;THIS BIT, WHERE GET_IMAGES IS RUN, IS THE SAME AS IN SWPC_CAT.PRO ####
           info.which_telescope = 'LASCO C3'
           info.C_telescope_code = 'SC3'
           info.C_telescope_FOV = 30.
@@ -7451,7 +7451,7 @@ i_day = i_day[0]
 info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
 info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 ;NO LEMNISCATE DRAWN YET ####
-
+info.C_cme_outline -> setProperty, hide = 0 ;I ADDED THIS BECAUSE IT WAS IN SWPC_CAT####
 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 ;NO LEMNISCATE DRAWN YET ####
@@ -9320,10 +9320,7 @@ if info.C2_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC2' then 
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 	info.C_Window->Draw, info.C_both_views
 
-		
-
-	#info.C_Window->Draw, info.C_both_views
-
+	
 endif
 
 
