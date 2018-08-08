@@ -7442,8 +7442,8 @@ info.C_camera_transform = this_transform
 info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 print, 'info.C_telescope_FOV ',info.C_telescope_FOV
 
-info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
-info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+info.C_camera->SetProperty, Viewplane_Rect=[0,0,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+info.C_camera_copy->SetProperty, Viewplane_Rect=[0,0,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 
 ;NO LEMNISCATE DRAWN YET, PLUS CORRECT FOV ####
 the_day = long((info.C_list_of_datetime_Julian)[0])
