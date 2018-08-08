@@ -2606,11 +2606,9 @@ if the_text eq 'Show LASCO C2' then begin
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C2_list_of_datetime_Julian)
 
 	info.C_title_object -> setproperty, strings = 'SOHO LASCO C2'
-
-	;I HAVE JUST MOVED THIS UP BEFORE REDRAWING THE IMAGE TO SEE IF IT HELPS. 
-	info.C_cme_model->SetProperty, transform = info.initial_transform
-	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
-
+	
+	print, 'info.latitude ',info.latitude
+	print, 'info.longitude ', info.longitude
 	swpc_cat_REDRAW_THE_IMAGE, $
     info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
     info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
@@ -2643,8 +2641,8 @@ if the_text eq 'Show LASCO C2' then begin
 	; 0.99 factor is for L1 as opposed to Earth.
 	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99 
 
-	;info.C_cme_model->SetProperty, transform = info.initial_transform
-	;info.C_cme_model_copy->SetProperty, transform = info.initial_transform
+	info.C_cme_model->SetProperty, transform = info.initial_transform
+	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 
 	;Below here, it is also the same. 
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
@@ -2663,10 +2661,9 @@ endif else begin
 	widget_control, info.C_widget_image_sequence_slider,set_slider_max = n_elements(info.C_list_of_datetime_Julian)
 
 	info.C_title_object -> setproperty, strings = 'SOHO LASCO C3'
-
-	;I HAVE JUST MOVED THIS UP BEFORE REDRAWING THE IMAGE TO SEE IF IT HELPS. 
-	info.C_cme_model->SetProperty, transform = info.initial_transform
-	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
+	
+	print, 'info.latitude ',info.latitude
+	print, 'info.longitude ', info.longitude
 
 	swpc_cat_REDRAW_THE_IMAGE, $
     info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
@@ -2699,8 +2696,8 @@ endif else begin
 	; 0.99 factor is for L1 as opposed to Earth.
 	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
-	;info.C_cme_model->SetProperty, transform = info.initial_transform ;ASK ABOUT THIS!!! ####
-	;info.C_cme_model_copy->SetProperty, transform = info.initial_transform
+	info.C_cme_model->SetProperty, transform = info.initial_transform ;ASK ABOUT THIS!!! ####
+	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 	
 	;THE DATA IN C_CME_OUTLINE IS NOT THE SAME AS IN THE OLD VERSION. 
 	;info.C_cme_outline -> GetProperty, data=data
