@@ -2647,7 +2647,7 @@ if the_text eq 'Show LASCO C2' then begin
 	info.C_cme_model->SetProperty, transform = info.initial_transform
 	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 
-	;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. 
+	;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
 	info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
@@ -2714,7 +2714,7 @@ endif else begin
 	info.C_cme_model->SetProperty, transform = info.initial_transform ;ASK ABOUT THIS!!! ####
 	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 	
-	;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. 
+	;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
 	info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
@@ -9158,6 +9158,13 @@ if info.C_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC3' then b
 
 	info.C_cme_model->SetProperty, transform = info.initial_transform ;ASK ABOUT THIS!!! ####
 	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
+
+	;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
+	info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+	info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+	info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+	info.C_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+
 	
 	;THE DATA IN C_CME_OUTLINE IS NOT THE SAME AS IN THE OLD VERSION. 
 	info.C_cme_outline -> GetProperty, data=data
@@ -9252,6 +9259,13 @@ if info.C2_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC2' then 
 
 	info.C_cme_model->SetProperty, transform = info.initial_transform
 	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
+
+	;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
+	info.C_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+	info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+	info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+	info.C_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+
 
 	info.C_cme_outline -> GetProperty, data=data
 	;print, 'info.C_cme_outline data ',data		
