@@ -7345,48 +7345,42 @@ endif
 swpc_cat_image_difference_and_scaling, info.background_color,  info.C_current_image_number, info.C_background_image_number, info.C_difference_imaging, $
                  info.C_list_of_image_data, info.C_image_saturation_value, info.C_coronagraph_image_object, info.C_border_image_object, info.i_log_scale
 
-heeq_coords = list_of_HEEQ_coords[0]
-info.C_HEEQ_coords[0] = heeq_coords[0]
-swpc_cat_Calculate_Earth_B_Angle,list_of_datetime_Julian[0],B_angle_degrees
-info.C_HEEQ_coords[1] = B_angle_degrees
+	;COPIED FROM SHOW_C2_OR_C3
+	swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
+	info.C_HEEQ_coords[1] = B_angle_degrees
 
+	;Same as original swpc_cat down to here. 
 
-;print, 'pixel scale C ', (info.C_list_of_pixel_scales)[0]
-;print, ' C rsun ',(info.C_list_of_rsuns)[0]
-;print, 'Field of view C', (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
+	;This bit is the same. 
+	info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 
-;I PUT THIS HERE ####
-;info.C_cme_model->GetProperty, transform = this_transform
-;info.C_camera_transform = this_transform
+	;debug mode print statement agrees with the old version. 
+	if info.debug_mode eq 1 then print, 'C3 ', info.C_telescope_FOV, (info.C_list_of_pixel_scales)[0], (info.C_list_of_image_scaling_factors)[0], (info.C_list_of_rsuns)[0]
 
+	info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+	info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 
-info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
-print, 'info.C_telescope_FOV ',info.C_telescope_FOV
+	;This bit is the same. 
+	the_day = long((info.C_list_of_datetime_Julian)[0])
+	i_day = where(the_day lt info.Julian_day_for_Earth_pos)
+	i_day = i_day[0]
 
-;THESE TWO LINES HAVE BEEN CHANGED. THE LEMNISCATE CAME OUT THE RIGHT SIZE WHEN I MADE THESE THE SAME AS SWPC_CAT. ####
-;info.C_camera->SetProperty, Viewplane_Rect=[0,0,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
-;info.C_camera_copy->SetProperty, Viewplane_Rect=[0,0,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
-info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
-info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
+	info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+	; 0.99 factor is for L1 as opposed to Earth.
+	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
+	info.C_cme_model->SetProperty, transform = info.initial_transform ;ASK ABOUT THIS!!! ####
+	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
+	
+	;THE DATA IN C_CME_OUTLINE IS NOT THE SAME AS IN THE OLD VERSION. 
+	;info.C_cme_outline -> GetProperty, data=data
+	;print, 'info.C_cme_outline data ',data	
 
-the_day = long((info.C_list_of_datetime_Julian)[0])
-i_day = where(the_day lt info.Julian_day_for_Earth_pos)
-i_day = i_day[0]
-;print,  info.Earth_pos_AU[i_day] , info.Earth_pos_HG_LAT_deg[i_day]
+	;Below here, it is also the same. 
+	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 
-info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
-info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
-info.C_cme_outline -> setProperty, hide = 0 ;I ADDED THIS BECAUSE IT WAS IN SWPC_CAT####
+	info.C_Window->Draw, info.C_both_views
 
-
-
-swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-;NO LEMNISCATE DRAWN YET ####
-
-info.C_Window->Draw, info.C_both_views
-;LEMNISCATE IS ONLY DRAWN AT THIS LINE ####
- 
   End  
 
    2      : Begin
@@ -11312,7 +11306,7 @@ L_camera->Lookat,[0,0,0]
 L_cme_model->GetProperty, transform = L_camera_transform
 endif
 
-C_cme_model -> GetProperty, transform = C_camera_transform 
+;C_cme_model -> GetProperty, transform = C_camera_transform 
 
 R_camera->SetProperty, camera_location = [+200,0,0]
 R_camera->Lookat,[0,0,0]
@@ -12150,7 +12144,7 @@ info = $
          swpc_cat_preferences_file:swpc_cat_preferences_file, $
          output_matched_line_data_in_txt_file:output_matched_line_data_in_txt_file, $
          L_camera_transform:L_camera_transform, $
-         C_camera_transform:C_camera_transform, $
+         ;C_camera_transform:C_camera_transform, $
          R_camera_transform:R_camera_transform, $
          AH1_list_of_image_names:AH1_list_of_image_names, $
          AH1_list_of_image_data:AH1_list_of_image_data, $
@@ -12594,7 +12588,7 @@ calculate_individual_velocities_for_each_telescope:calculate_individual_velociti
 debug_mode:debug_mode, $
 swpc_cat_preferences_file:swpc_cat_preferences_file, $
 output_matched_line_data_in_txt_file:output_matched_line_data_in_txt_file, $
-C_camera_transform:C_camera_transform, $
+;C_camera_transform:C_camera_transform, $
 R_camera_transform:R_camera_transform, $
 AH1_list_of_image_names:AH1_list_of_image_names, $
 AH1_list_of_image_data:AH1_list_of_image_data, $
