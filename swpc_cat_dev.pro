@@ -2642,7 +2642,7 @@ if the_text eq 'Show LASCO C2' then begin
 	info.C_cme_model->SetProperty, transform = info.initial_transform
 	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 
-	info.C_cme_outline -> GetProperty, data=data
+	;info.C_cme_outline -> GetProperty, data=data
 	;print, 'info.C_cme_outline data ',data		
 
 	;Below here, it is also the same. 
@@ -2698,7 +2698,7 @@ endif else begin
 	info.C_cme_model_copy->SetProperty, transform = info.initial_transform
 	
 	;THE DATA IN C_CME_OUTLINE IS NOT THE SAME AS IN THE OLD VERSION. 
-	info.C_cme_outline -> GetProperty, data=data
+	;info.C_cme_outline -> GetProperty, data=data
 	;print, 'info.C_cme_outline data ',data	
 
 	;Below here, it is also the same. 
@@ -2721,7 +2721,7 @@ WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
   
   print, 'B COR2'
   
-  info.current_selection = 'BC2'
+  ;info.current_selection = 'BC2'
   
   info.currently_showing_STEREO_B = 'BC2'
   
@@ -2801,7 +2801,7 @@ pro swpc_cat_show_B_hi1, event
   
   print, 'B HI1'
   
-  info.current_selection = 'BH1'
+  ;info.current_selection = 'BH1'
   
   info.currently_showing_STEREO_B = 'BH1'
   
@@ -2879,7 +2879,7 @@ pro swpc_cat_show_B_hi2, event
   
   print, 'B HI2'
   
-  info.current_selection = 'BH2'
+  ;info.current_selection = 'BH2'
   
   info.currently_showing_STEREO_B = 'BH2'
   
@@ -2958,7 +2958,7 @@ WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
   
   print, 'A COR2'
   
-  info.current_selection = 'AC2'
+  ;info.current_selection = 'AC2'
   
   info.currently_showing_STEREO_A = 'AC2'
   
@@ -3026,7 +3026,7 @@ pro swpc_cat_show_A_hi1, event
   
   print, 'A HI1'
   
-info.current_selection = 'AH1'
+;info.current_selection = 'AH1'
   
   info.currently_showing_STEREO_A = 'AH1'
   
@@ -3090,7 +3090,7 @@ pro swpc_cat_show_A_hi2, event
   
   print, 'A HI2'
   
-info.current_selection = 'AH2'
+;info.current_selection = 'AH2'
   
   info.currently_showing_STEREO_A = 'AH2'
   
@@ -11724,7 +11724,7 @@ pressed_the_right_button = 0
 
 position_image_lineplot = [29, 29, 482, 100]
 
-current_selection = 'nowt_yet'
+;current_selection = 'nowt_yet'
 
 if n_sat eq 3 then L_current_xycen = [0.,0.]
 R_current_xycen = [0.,0.]
@@ -12232,7 +12232,7 @@ info = $
          AH1_telescope_FOV:AH1_telescope_FOV, $
          BH2_telescope_FOV:BH2_telescope_FOV, $
          AH2_telescope_FOV:AH2_telescope_FOV, $
-         current_selection:current_selection, $
+         ;current_selection:current_selection, $
          color_BC2:color_BC2, $
          color_AC2:color_AC2, $
          BC2_list_of_XYCEN:BC2_list_of_XYCEN, $
@@ -12633,7 +12633,7 @@ CME_matches_image_AH1_CME_outline:CME_matches_image_AH1_CME_outline, $
 CME_matches_image_AH2_CME_outline:CME_matches_image_AH2_CME_outline, $
 AH1_telescope_FOV:AH1_telescope_FOV, $
 AH2_telescope_FOV:AH2_telescope_FOV, $
-current_selection:current_selection, $
+;current_selection:current_selection, $
 color_AC2:color_AC2, $
 AC2_list_of_XYCEN:AC2_list_of_XYCEN, $
 AH1_list_of_XYCEN:AH1_list_of_XYCEN, $
