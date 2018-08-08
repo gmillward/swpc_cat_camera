@@ -2782,8 +2782,8 @@ print, 'delta_yaw ', delta_yaw
 info.L_camera -> Pan, delta_yaw, delta_pitch
 info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 
-info.L_cme_model->GetProperty, transform = info.initial_transform
-info.L_camera_transform = info.initial_transform
+info.L_cme_model->GetProperty, transform = transform
+info.L_camera_transform = transform
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
 swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 10.
@@ -2807,18 +2807,18 @@ pro swpc_cat_show_B_hi1, event
   
   info.BC2_cme_MATCH_outline->SetProperty, hide = 1
   
-	info.L_cme_outline -> getProperty, data = data	
-	print, 'L_cme_outline - data ' 
-	help, data
-	print, data[0,0:10]
+	;info.L_cme_outline -> getProperty, data = data	
+	;print, 'L_cme_outline - data ' 
+	;help, data
+	;print, data[0,0:10]
 
-	info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
-	info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
-	info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
+	;info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
+	;info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
+	;info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
 
-	print, b1_data
-	print, b2_data	
-	print, b3_data
+	;print, b1_data
+	;print, b2_data	
+	;print, b3_data
   widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(info.BH1_list_of_datetime_Julian)
   widget_control, info.L_widget_image_sequence_slider,set_value = 0
   
@@ -2885,18 +2885,18 @@ pro swpc_cat_show_B_hi2, event
   
   info.BC2_cme_MATCH_outline->SetProperty, hide = 1
   
-	info.L_cme_outline -> getProperty, data = data	
-	print, 'L_cme_outline - data ' 
-	help, data
-	print, data[0,0:10]
+	;info.L_cme_outline -> getProperty, data = data	
+	;print, 'L_cme_outline - data ' 
+	;help, data
+	;print, data[0,0:10]
 
-	info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
-	info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
-	info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
+	;info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
+	;info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
+	;info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
 
-	print, b1_data
-	print, b2_data	
-	print, b3_data
+	;print, b1_data
+	;print, b2_data	
+	;print, b3_data
   widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(info.BH2_list_of_datetime_Julian)
   widget_control, info.L_widget_image_sequence_slider,set_value = 0
   
