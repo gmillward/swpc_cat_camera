@@ -7431,11 +7431,18 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 ;print, ' C rsun ',(info.C_list_of_rsuns)[0]
 ;print, 'Field of view C', (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 
+;I PUT THIS HERE ####
+info.C_cme_model->GetProperty, transform = this_transform
+info.C_camera_transform = this_transform
+
+;NO LEMNISCATE DRAWN YET ####
 info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
+print, 'info.C_telescope_FOV ',info.C_telescope_FOV
 
 info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C_telescope_FOV,0.-info.C_telescope_FOV,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 
+;NO LEMNISCATE DRAWN YET, PLUS CORRECT FOV ####
 the_day = long((info.C_list_of_datetime_Julian)[0])
 i_day = where(the_day lt info.Julian_day_for_Earth_pos)
 i_day = i_day[0]
@@ -7443,14 +7450,13 @@ i_day = i_day[0]
 
 info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
 info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
+;NO LEMNISCATE DRAWN YET ####
 
-;I PUT THIS HERE ####
-;info.C_cme_model->GetProperty, transform = this_transform
-;info.C_camera_transform = this_transform
 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
+;NO LEMNISCATE DRAWN YET ####
 info.C_Window->Draw, info.C_both_views
-
+;LEMNISCATE IS ONLY DRAWN AT THIS LINE ####
    End  
    2      : Begin
    
@@ -7682,6 +7688,7 @@ endif
    End
    
 ENDCASE
+
 
 ; now we have moved the initial ellipse into view - also show the default cone parameters
 ; in the info window.....
@@ -9311,11 +9318,11 @@ if info.C2_number_of_images gt 0 and info.currently_showing_LASCO eq 'SC2' then 
 	info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
-info.C_Window->Draw, info.C_both_views
+	info.C_Window->Draw, info.C_both_views
 
 		
 
-	info.C_Window->Draw, info.C_both_views
+	#info.C_Window->Draw, info.C_both_views
 
 endif
 
