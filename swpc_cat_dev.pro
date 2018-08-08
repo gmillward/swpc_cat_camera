@@ -2774,19 +2774,20 @@ info.L_camera -> Pan, delta_yaw, delta_pitch
 info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 
 ;PUT THESE SIX LINES IN BECAUSE IT WORKED FOR LASCO 
-info.L_cme_model->SetProperty, transform = info.L_camera_transform ;ASK ABOUT THIS!!! ####
-info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
+;info.L_cme_model->SetProperty, transform = info.L_camera_transform ;ASK ABOUT THIS!!! ####
+;info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
 	
+
+
+
+info.L_cme_model->GetProperty, transform = transform 
+info.L_camera_transform = transform
+
 ;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
 info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
-
-
-;info.L_cme_model->GetProperty, transform = transform
-;info.L_cme_model_copy -> SetProperty, transform = info.initial_transform 
-;info.initial_transform = transform
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
 ;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 10.
@@ -2848,21 +2849,20 @@ info.L_camera -> Pan, delta_yaw, delta_pitch
 info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 
 ;PUT THESE SIX LINES IN BECAUSE IT WORKED FOR LASCO 
-info.L_cme_model->SetProperty, transform = info.L_camera_transform ;ASK ABOUT THIS!!! ####
-info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
-	
+;info.L_cme_model->SetProperty, transform = info.L_camera_transform ;ASK ABOUT THIS!!! ####
+;info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
+
+info.L_cme_model->GetProperty, transform = transform
+info.L_camera_transform = transform
+
 ;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
 info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
-;info.L_cme_model->GetProperty, transform = transform
-;info.L_cme_model_copy -> SetProperty, transform = info.initial_transform 
-;info.L_camera_transform = transform
-
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
-swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 30.
+;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 30.
  
   swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
   info.L_Window->Draw, info.L_both_views
@@ -2925,23 +2925,21 @@ pro swpc_cat_show_B_hi2, event
   info.L_camera_copy -> Pan, delta_yaw, delta_pitch
   
 ;PUT THESE SIX LINES IN BECAUSE IT WORKED FOR LASCO 
-info.L_cme_model->SetProperty, transform = info.L_camera_transform ;ASK ABOUT THIS!!! ####
-info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
-	
+;info.L_cme_model->SetProperty, transform = info.L_camera_transform ;ASK ABOUT THIS!!! ####
+;info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
+ 
+ 
+info.L_cme_model->GetProperty, transform = transform 
+info.L_camera_transform = transform 
+
 ;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
 info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
- 
- ;info.L_cme_model->GetProperty, transform = transform
-  ;info.L_camera_transform = transform
-;info.L_cme_model->GetProperty, transform = transform
-;info.L_cme_model_copy -> SetProperty, transform = info.initial_transform 
-;info.L_camera_transform = transform 
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,100.
-swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 100.  
+;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 100.  
   
   swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
   info.L_Window->Draw, info.L_both_views
