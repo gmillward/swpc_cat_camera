@@ -3463,8 +3463,8 @@ Widget_Control, event.top, Get_UValue=info, /No_Copy
 info.latitude_degrees = float(event.value) / 10.
 
 if info.n_sat eq 3 then begin 
-	info.L_cme_model->SetProperty, transform = info.initial_transform
-	info.L_cme_model_copy->SetProperty, transform = info.initial_transform
+	info.L_cme_model->SetProperty, transform = info.L_camera_transform
+	info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
 	info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
@@ -3495,8 +3495,8 @@ swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_out
 ;endif
 info.C_Window->Draw, info.C_both_views
 
-info.R_cme_model->SetProperty, transform = info.initial_transform
-info.R_cme_model_copy->SetProperty, transform = info.initial_transform
+info.R_cme_model->SetProperty, transform = info.R_camera_transform
+info.R_cme_model_copy->SetProperty, transform = info.R_camera_transform
 info.R_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.R_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.R_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
@@ -3555,8 +3555,8 @@ info.longitude_degrees = float(event.value) / 10.
 ;print,'longitude_degrees ', info.longitude_degrees
 
 if info.n_sat eq 3 then begin 
-	info.L_cme_model->SetProperty, transform = info.initial_transform
-	info.L_cme_model_copy->SetProperty, transform = info.initial_transform
+	info.L_cme_model->SetProperty, transform = info.L_camera_transform
+	info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
 	info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
@@ -3584,8 +3584,8 @@ swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_out
 ;endif
 info.C_Window->Draw, info.C_both_views
 
-info.R_cme_model->SetProperty, transform = info.initial_transform
-info.R_cme_model_copy->SetProperty, transform = info.initial_transform
+info.R_cme_model->SetProperty, transform = info.R_camera_transform
+info.R_cme_model_copy->SetProperty, transform = info.R_camera_transform
 info.R_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.R_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 info.R_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
