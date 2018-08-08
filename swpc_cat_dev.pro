@@ -2784,10 +2784,10 @@ info.L_cme_model->GetProperty, transform = transform
 info.L_camera_transform = transform
 
 ;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
-;info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
-;info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
-;info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
-;info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
 swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 10.
@@ -2856,10 +2856,10 @@ info.L_cme_model->GetProperty, transform = transform
 info.L_camera_transform = transform
 
 ;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
-;info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
-;info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
-;info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
-;info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
 swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 30.
@@ -2933,10 +2933,10 @@ info.L_cme_model->GetProperty, transform = transform
 info.L_camera_transform = transform 
 
 ;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
-;info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
-;info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
-;info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
-;info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,100.
 swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 100.  
