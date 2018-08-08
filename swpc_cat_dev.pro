@@ -2721,24 +2721,10 @@ WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
   
   print, 'B COR2'
   
-  ;info.current_selection = 'BC2'
-  
   info.currently_showing_STEREO_B = 'BC2'
   
   info.BC2_cme_MATCH_outline->SetProperty, hide = 1
-  
-	;info.L_cme_outline -> getProperty, data = data	
-	;print, 'L_cme_outline - data ' 
-	;help, data
-	;print, data[0,0:10]
-
-	;info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
-	;info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
-	;info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
-
-	;print, b1_data
-	;print, b2_data	
-	;print, b3_data
+ 
   widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(info.BC2_list_of_datetime_Julian)
   widget_control, info.L_widget_image_sequence_slider,set_value = 0
   
@@ -2783,10 +2769,11 @@ info.L_camera -> Pan, delta_yaw, delta_pitch
 info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 
 info.L_cme_model->GetProperty, transform = transform
-info.L_camera_transform = transform
+;info.L_cme_model_copy -> SetProperty, transform = info.initial_transform 
+info.initial_transform = transform
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
-swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 10.
+;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 10.
   
   swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
   info.L_Window->Draw, info.L_both_views
@@ -2801,24 +2788,10 @@ pro swpc_cat_show_B_hi1, event
   
   print, 'B HI1'
   
-  ;info.current_selection = 'BH1'
-  
   info.currently_showing_STEREO_B = 'BH1'
   
   info.BC2_cme_MATCH_outline->SetProperty, hide = 1
   
-	;info.L_cme_outline -> getProperty, data = data	
-	;print, 'L_cme_outline - data ' 
-	;help, data
-	;print, data[0,0:10]
-
-	;info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
-	;info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
-	;info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
-
-	;print, b1_data
-	;print, b2_data	
-	;print, b3_data
   widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(info.BH1_list_of_datetime_Julian)
   widget_control, info.L_widget_image_sequence_slider,set_value = 0
   
@@ -2859,6 +2832,7 @@ info.L_camera -> Pan, delta_yaw, delta_pitch
 info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 
 info.L_cme_model->GetProperty, transform = transform
+;info.L_cme_model_copy -> SetProperty, transform = info.initial_transform 
 info.L_camera_transform = transform
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
@@ -2885,18 +2859,6 @@ pro swpc_cat_show_B_hi2, event
   
   info.BC2_cme_MATCH_outline->SetProperty, hide = 1
   
-	;info.L_cme_outline -> getProperty, data = data	
-	;print, 'L_cme_outline - data ' 
-	;help, data
-	;print, data[0,0:10]
-
-	;info.BC2_cme_MATCH_outline -> getProperty, data = b1_data
-	;info.BH1_cme_MATCH_outline -> getProperty, data = b2_data
-	;info.BH2_cme_MATCH_outline -> getProperty, data = b3_data
-
-	;print, b1_data
-	;print, b2_data	
-	;print, b3_data
   widget_control, info.L_widget_image_sequence_slider,set_slider_max = n_elements(info.BH2_list_of_datetime_Julian)
   widget_control, info.L_widget_image_sequence_slider,set_value = 0
   
@@ -2936,9 +2898,12 @@ pro swpc_cat_show_B_hi2, event
   info.L_camera -> Pan, delta_yaw, delta_pitch
   info.L_camera_copy -> Pan, delta_yaw, delta_pitch
   
-  info.L_cme_model->GetProperty, transform = transform
-  info.L_camera_transform = transform
-  
+  ;info.L_cme_model->GetProperty, transform = transform
+  ;info.L_camera_transform = transform
+info.L_cme_model->GetProperty, transform = transform
+;info.L_cme_model_copy -> SetProperty, transform = info.initial_transform 
+info.L_camera_transform = transform 
+
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,100.
 swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 100.  
   
@@ -2957,8 +2922,6 @@ pro swpc_cat_show_A_cor2, event
 WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
   
   print, 'A COR2'
-  
-  ;info.current_selection = 'AC2'
   
   info.currently_showing_STEREO_A = 'AC2'
   
@@ -3026,8 +2989,6 @@ pro swpc_cat_show_A_hi1, event
   
   print, 'A HI1'
   
-;info.current_selection = 'AH1'
-  
   info.currently_showing_STEREO_A = 'AH1'
   
   info.AC2_cme_MATCH_outline->SetProperty, hide = 1
@@ -3089,8 +3050,6 @@ pro swpc_cat_show_A_hi2, event
   WIDGET_CONTROL, event.top, GET_UVALUE=info, /NO_COPY
   
   print, 'A HI2'
-  
-;info.current_selection = 'AH2'
   
   info.currently_showing_STEREO_A = 'AH2'
   
@@ -11253,8 +11212,8 @@ sun_radius = 1.
 if n_sat eq 3 then begin
 L_cme_model = obj_new("idlgrmodel")
 
-L_cme_model->GetProperty, transform = L_camera_transform
-print, ' L_camera_transform ',L_camera_transform
+;L_cme_model->GetProperty, transform = L_camera_transform
+;print, ' L_camera_transform ',L_camera_transform
 
 L_cme_model_copy = obj_new("idlgrmodel")
 L_cme_fitted_surf = obj_new("idlgrpolygon",sun_radius*fitted_cme_info.vertices $
@@ -11305,8 +11264,6 @@ L_camera->SetProperty, camera_location = [-200,0,0]
 L_camera->Lookat,[0,0,0]
 L_cme_model->GetProperty, transform = L_camera_transform
 endif
-
-;C_cme_model -> GetProperty, transform = C_camera_transform 
 
 R_camera->SetProperty, camera_location = [+200,0,0]
 R_camera->Lookat,[0,0,0]
@@ -11723,8 +11680,6 @@ R_rotate_y = 0
 pressed_the_right_button = 0
 
 position_image_lineplot = [29, 29, 482, 100]
-
-;current_selection = 'nowt_yet'
 
 if n_sat eq 3 then L_current_xycen = [0.,0.]
 R_current_xycen = [0.,0.]
@@ -12232,7 +12187,6 @@ info = $
          AH1_telescope_FOV:AH1_telescope_FOV, $
          BH2_telescope_FOV:BH2_telescope_FOV, $
          AH2_telescope_FOV:AH2_telescope_FOV, $
-         ;current_selection:current_selection, $
          color_BC2:color_BC2, $
          color_AC2:color_AC2, $
          BC2_list_of_XYCEN:BC2_list_of_XYCEN, $
@@ -12633,7 +12587,6 @@ CME_matches_image_AH1_CME_outline:CME_matches_image_AH1_CME_outline, $
 CME_matches_image_AH2_CME_outline:CME_matches_image_AH2_CME_outline, $
 AH1_telescope_FOV:AH1_telescope_FOV, $
 AH2_telescope_FOV:AH2_telescope_FOV, $
-;current_selection:current_selection, $
 color_AC2:color_AC2, $
 AC2_list_of_XYCEN:AC2_list_of_XYCEN, $
 AH1_list_of_XYCEN:AH1_list_of_XYCEN, $
