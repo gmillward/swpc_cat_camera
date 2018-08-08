@@ -2626,7 +2626,7 @@ if the_text eq 'Show LASCO C2' then begin
 	;debug mode print statement agrees with old version. 
 	if info.debug_mode eq 1 then print, 'C2 ', info.C2_telescope_FOV, (info.C2_list_of_pixel_scales)[0], (info.C2_list_of_image_scaling_factors)[0], (info.C2_list_of_rsuns)[0]
 
-	;Could this be the issue? 
+	;Could this be the issue? I have not changed viewplane rect here even though I did in get_images. ####
 	info.C_camera->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
 	info.C_camera_copy->SetProperty, Viewplane_Rect=[0.-info.C2_telescope_FOV,0.-info.C2_telescope_FOV,2.0*info.C2_telescope_FOV,2.0*info.C2_telescope_FOV]
 
@@ -7376,8 +7376,6 @@ info.L_camera_transform = this_transform
 ;ovect = info.L_camera_copy -> GetDirectionVector()
 ;print, 'direction vector ', ovect
 
-
-
 ;print, 'pixel scale L ', (info.BC2_list_of_pixel_scales)[0]
 ;print, ' L rsun ',(info.BC2_list_of_rsuns)[0]
 ;print, 'Field of view L', (256. * ((info.BC2_list_of_pixel_scales)[0] / (info.BC2_list_of_image_scaling_factors)[0])) / (info.BC2_list_of_rsuns)[0]
@@ -7387,12 +7385,9 @@ print, 'info.BC2_telescope_FOV ',info.BC2_telescope_FOV
 
 ;PUTS THINGS IN THE WRONG PLACE IF I DO IT FOR THIS ONE. 
 info.L_camera->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
-info.L_camera_copy->SetProperty, Viewplane_Rect=[0,0,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
+info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
 info.L_camera -> setproperty, eye = (info.L_list_of_Sun_satellite_distances)[0]
 info.L_camera_copy -> setproperty, eye = (info.L_list_of_Sun_satellite_distances)[0]
-
-info.L_cme_outline -> getProperty, data=data
-print, 'info.L_cme_outline data ',data
 
 swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
 info.L_Window->Draw, info.L_both_views
@@ -7440,7 +7435,7 @@ info.C_HEEQ_coords[1] = B_angle_degrees
 info.C_cme_model->GetProperty, transform = this_transform
 info.C_camera_transform = this_transform
 
-;NO LEMNISCATE DRAWN YET ####
+
 info.C_telescope_FOV = (256. * ((info.C_list_of_pixel_scales)[0] / (info.C_list_of_image_scaling_factors)[0])) / (info.C_list_of_rsuns)[0]
 print, 'info.C_telescope_FOV ',info.C_telescope_FOV
 
@@ -7448,7 +7443,7 @@ print, 'info.C_telescope_FOV ',info.C_telescope_FOV
 info.C_camera->SetProperty, Viewplane_Rect=[0,0,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 info.C_camera_copy->SetProperty, Viewplane_Rect=[0,0,2.0*info.C_telescope_FOV,2.0*info.C_telescope_FOV]
 
-;NO LEMNISCATE DRAWN YET, PLUS CORRECT FOV ####
+
 the_day = long((info.C_list_of_datetime_Julian)[0])
 i_day = where(the_day lt info.Julian_day_for_Earth_pos)
 i_day = i_day[0]
@@ -7456,11 +7451,9 @@ i_day = i_day[0]
 
 info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.99 factor is for L1 as opposed to Earth.
 info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
-;NO LEMNISCATE DRAWN YET ####
 info.C_cme_outline -> setProperty, hide = 0 ;I ADDED THIS BECAUSE IT WAS IN SWPC_CAT####
 
-info.C_cme_outline -> getProperty, data=data
-print, 'C_cme_outline data ',data
+
 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 ;NO LEMNISCATE DRAWN YET ####
