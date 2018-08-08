@@ -7383,11 +7383,14 @@ info.L_camera_transform = this_transform
 ;print, 'Field of view L', (256. * ((info.BC2_list_of_pixel_scales)[0] / (info.BC2_list_of_image_scaling_factors)[0])) / (info.BC2_list_of_rsuns)[0]
 
 info.BC2_telescope_FOV = (256. * ((info.BC2_list_of_pixel_scales)[0] / (info.BC2_list_of_image_scaling_factors)[0])) / (info.BC2_list_of_rsuns)[0]
-
+print, 'info.BC2_telescope_FOV ',info.BC2_telescope_FOV
 info.L_camera->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
 info.L_camera_copy->SetProperty, Viewplane_Rect=[0.-info.BC2_telescope_FOV,0.-info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV,2.0*info.BC2_telescope_FOV]
 info.L_camera -> setproperty, eye = (info.L_list_of_Sun_satellite_distances)[0]
 info.L_camera_copy -> setproperty, eye = (info.L_list_of_Sun_satellite_distances)[0]
+
+info.L_cme_outline -> getProperty, data=data
+print, 'info.L_cme_outline data ',data
 
 swpc_cat_update_cme_outline,info.L_Window_copy,info.L_camera_copy,info.L_cme_outline
 info.L_Window->Draw, info.L_both_views
