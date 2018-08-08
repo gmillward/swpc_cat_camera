@@ -7445,8 +7445,8 @@ info.C_camera -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99  ; 0.
 info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 
 ;I PUT THIS HERE ####
-info.C_cme_model->GetProperty, transform = this_transform
-info.C_camera_transform = this_transform
+;info.C_cme_model->GetProperty, transform = this_transform
+;info.C_camera_transform = this_transform
 
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 info.C_Window->Draw, info.C_both_views
