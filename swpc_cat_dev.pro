@@ -2607,8 +2607,6 @@ if the_text eq 'Show LASCO C2' then begin
 
 	info.C_title_object -> setproperty, strings = 'SOHO LASCO C2'
 	
-	print, 'info.latitude_degrees ',info.latitude_degrees
-	print, 'info.longitude_degrees ', info.longitude_degrees
 	swpc_cat_REDRAW_THE_IMAGE, $
     info.C2_current_image_number,info.C2_background_image_number,info.C2_difference_imaging, $
     info.C2_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
@@ -2616,9 +2614,6 @@ if the_text eq 'Show LASCO C2' then begin
     info.background_color,info.C_current_text_color,info.color_c2,info.C_cme_outline,info.C2_cme_MATCH_outline, $
     info.C_widget_outline_matches_image,info.CME_matches_image_C2_CME_outline, $
     info.C_ut_string_object,info.C2_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
-
-	print, 'info.latitude_degrees ',info.latitude_degrees
-	print, 'info.longitude_degrees ', info.longitude_degrees
 
 	swpc_cat_Calculate_Earth_B_Angle,(info.C2_list_of_datetime_Julian)[0],B_angle_degrees
 	info.C2_HEEQ_coords[1] = B_angle_degrees
@@ -2653,9 +2648,6 @@ if the_text eq 'Show LASCO C2' then begin
 	info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 	info.C_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 
-	print, 'info.latitude_degrees ',info.latitude_degrees
-	print, 'info.longitude_degrees ', info.longitude_degrees
-
 	;Below here, it is also the same. 
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 
@@ -2674,9 +2666,6 @@ endif else begin
 
 	info.C_title_object -> setproperty, strings = 'SOHO LASCO C3'
 	
-	print, 'info.latitude_degrees ',info.latitude_degrees
-	print, 'info.longitude_degrees ', info.longitude_degrees
-
 	swpc_cat_REDRAW_THE_IMAGE, $
     info.C_current_image_number,info.C_background_image_number,info.C_difference_imaging, $
     info.C_list_of_image_data,info.C_image_saturation_value,info.C_coronagraph_image_object,info.C_border_image_object, $
@@ -2684,9 +2673,6 @@ endif else begin
     info.background_color,info.C_current_text_color,info.color_c3,info.C_cme_outline,info.C_cme_MATCH_outline, $
     info.C_widget_outline_matches_image,info.CME_matches_image_C_CME_outline, $
     info.C_ut_string_object,info.C_list_of_full_time_strings,info.C_title_object,info.C_Window,info.C_both_views,0,0, info.i_log_scale
-
-	print, 'info.latitude_degrees ',info.latitude_degrees
-	print, 'info.longitude_degrees ', info.longitude_degrees
 
 	swpc_cat_Calculate_Earth_B_Angle,(info.C_list_of_datetime_Julian)[0],B_angle_degrees
 	info.C_HEEQ_coords[1] = B_angle_degrees
@@ -2719,13 +2705,6 @@ endif else begin
 	info.C_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
 	info.C_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
 	info.C_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
-
-	;THE DATA IN C_CME_OUTLINE IS NOT THE SAME AS IN THE OLD VERSION. 
-	;info.C_cme_outline -> GetProperty, data=data
-	;print, 'info.C_cme_outline data ',data	
-
-	print, 'info.latitude_degrees ',info.latitude_degrees
-	print, 'info.longitude_degrees ', info.longitude_degrees
 
 	;Below here, it is also the same. 
 	swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
@@ -2794,9 +2773,20 @@ print, 'delta_yaw ', delta_yaw
 info.L_camera -> Pan, delta_yaw, delta_pitch
 info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 
-info.L_cme_model->GetProperty, transform = transform
+;PUT THESE SIX LINES IN BECAUSE IT WORKED FOR LASCO 
+info.L_cme_model->SetProperty, transform = info.L_camera_transform ;ASK ABOUT THIS!!! ####
+info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
+	
+;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
+info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+
+
+;info.L_cme_model->GetProperty, transform = transform
 ;info.L_cme_model_copy -> SetProperty, transform = info.initial_transform 
-info.initial_transform = transform
+;info.initial_transform = transform
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,10.
 ;swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 10.
@@ -2857,9 +2847,19 @@ print, 'delta_yaw ', delta_yaw
 info.L_camera -> Pan, delta_yaw, delta_pitch
 info.L_camera_copy -> Pan, delta_yaw, delta_pitch
 
-info.L_cme_model->GetProperty, transform = transform
+;PUT THESE SIX LINES IN BECAUSE IT WORKED FOR LASCO 
+info.L_cme_model->SetProperty, transform = info.L_camera_transform ;ASK ABOUT THIS!!! ####
+info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
+	
+;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
+info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+
+;info.L_cme_model->GetProperty, transform = transform
 ;info.L_cme_model_copy -> SetProperty, transform = info.initial_transform 
-info.L_camera_transform = transform
+;info.L_camera_transform = transform
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,30.
 swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 30.
@@ -2924,11 +2924,21 @@ pro swpc_cat_show_B_hi2, event
   info.L_camera -> Pan, delta_yaw, delta_pitch
   info.L_camera_copy -> Pan, delta_yaw, delta_pitch
   
-  ;info.L_cme_model->GetProperty, transform = transform
+;PUT THESE SIX LINES IN BECAUSE IT WORKED FOR LASCO 
+info.L_cme_model->SetProperty, transform = info.L_camera_transform ;ASK ABOUT THIS!!! ####
+info.L_cme_model_copy->SetProperty, transform = info.L_camera_transform
+	
+;COPIED IN FROM CHANGE_LATITUDE/LONGITUDE. IT SEEMS TO HAVE WORKED!!!
+info.L_cme_model->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[0,1,0], info.longitude_degrees, /premultiply
+info.L_cme_model->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+info.L_cme_model_copy->rotate,[1,0,0], 0.0 - info.latitude_degrees, /premultiply
+ 
+ ;info.L_cme_model->GetProperty, transform = transform
   ;info.L_camera_transform = transform
-info.L_cme_model->GetProperty, transform = transform
+;info.L_cme_model->GetProperty, transform = transform
 ;info.L_cme_model_copy -> SetProperty, transform = info.initial_transform 
-info.L_camera_transform = transform 
+;info.L_camera_transform = transform 
 
 ;swpc_cat_actually_change_lemniscate_radial_distance,info,100.
 swpc_cat_just_rescale_lemniscate_radial_distance,info, 'L', 100.  
