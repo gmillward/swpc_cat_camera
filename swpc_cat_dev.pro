@@ -7453,11 +7453,17 @@ info.C_camera_copy -> setproperty, eye = 215. * info.Earth_pos_AU[i_day] * 0.99
 ;NO LEMNISCATE DRAWN YET ####
 info.C_cme_outline -> setProperty, hide = 0 ;I ADDED THIS BECAUSE IT WAS IN SWPC_CAT####
 
+info.C_cme_outline -> getProperty, data=data
+print, 'C_cme_outline data ',data
+
 swpc_cat_update_cme_outline,info.C_Window_copy,info.C_camera_copy,info.C_cme_outline
 ;NO LEMNISCATE DRAWN YET ####
+
 info.C_Window->Draw, info.C_both_views
 ;LEMNISCATE IS ONLY DRAWN AT THIS LINE ####
-   End  
+ 
+  End  
+
    2      : Begin
    
 info.AC2_number_of_images = number_of_images
