@@ -5726,7 +5726,7 @@ jul_max = jul_max + 1.d/24.d
 
 ; loop over all images and save as pngs................
 
-if n_sat eq 3 then begin 
+if info.n_sat eq 3 then begin 
 L_png_directory = export_directory + info.sep + 'images_STEREO_B'
 file_mkdir, L_png_directory
 for i = 0, info.BC2_number_of_images - 1 do begin
@@ -10125,7 +10125,7 @@ PRO SWPC_CAT_DEV
 compile_opt idl2
 
 ; set n_sat to either 2 or 3
-n_sat = 3
+n_sat = 2
 
 show_cme_surface = 0
 
