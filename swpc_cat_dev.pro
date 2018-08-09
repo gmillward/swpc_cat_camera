@@ -10385,9 +10385,9 @@ images_timeline_model = OBJ_NEW('IDLgrModel')
 images_timeline_view -> Add, images_timeline_model
 
 ;app_data_path = getenv('APPDATA')
-;app_data_path = 'C:\Users\george.millward.SWPC\IDL_projects\swpc_cat_camera'
+app_data_path = 'C:\Users\george.millward.SWPC\IDL_projects\swpc_cat_camera'
 ;app_data_path = '/Users/georgemillward/IDL_projects/swpc_cat_camera'
-app_data_path = '/home/h01/swharton/swpc_cat_camera'
+;app_data_path = '/home/h01/swharton/swpc_cat_camera'
 swpc_cat_preferences_file = app_data_path + sep + 'swpc_cat_prefs'
 
 openr,lun,swpc_cat_preferences_file, error = err, /get_lun
@@ -10793,7 +10793,7 @@ plot_Model->Add, thisPlot_B2
 plot_Model->Add, thisPlot2_c3
 plot_Model->Add, thisPlot2_c2
 plot_Model->Add, thisPlot2_stereo_a
-plot_Model->Add, thisPlot2_stereo_b
+if n_sat eq 3 then plot_Model->Add, thisPlot2_stereo_b
 plot_Model->Add, xAxis1_B
 plot_Model->Add, xAxis2_B
 plot_Model->Add, yAxis1_B
