@@ -5844,6 +5844,36 @@ endif
     
 endfor
 
+RH1_png_directory = export_directory + info.sep + 'images_STEREO_A_HI1'
+file_mkdir, RH1_png_directory
+for i = 0 , info.AH1_number_of_images - 1 do begin
+
+if (info.AH1_list_of_datetime_Julian)[i] ge jul_min and (info.AH1_list_of_datetime_Julian)[i] le jul_max then begin
+
+info.AH1_current_image_number = i
+  
+swpc_cat_REDRAW_THE_IMAGE, $
+    info.AH1_current_image_number,info.AH1_background_image_number,info.AH1_difference_imaging, $
+    info.AH1_list_of_image_data,info.R_image_saturation_value,info.R_coronagraph_image_object,info.R_border_image_object, $
+    info.CME_matches_image_AH1_Image_number,info.R_current_background_color, $
+    info.background_color,info.R_current_text_color,info.color_AH1,info.R_cme_outline,info.AH1_cme_MATCH_outline, $
+    info.R_widget_outline_matches_image,info.CME_matches_image_AH1_CME_outline, $
+    info.R_ut_string_object,info.AH1_list_of_full_time_strings,info.R_title_object,info.R_Window,info.R_both_views,1,0, info.i_log_scale
+    
+t_str = (info.AH1_list_of_full_time_strings)[info.AH1_current_image_number]
+image_name = strmid(t_str,0,4) + strmid(t_str,5,2) + strmid(t_str,8,2) + '_' + strmid(t_str,11,2) + strmid(t_str,14,2)
+info.R_Window -> getproperty, image_data = image_data
+filename = RH1_png_directory + info.sep + image_name + '.png'
+WRITE_PNG, Filename, Image_data
+
+endif
+    
+endfor
+
+
+
+
+
 ; end of image loop.
 
 
