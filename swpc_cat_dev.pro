@@ -10783,7 +10783,7 @@ if compact eq 0 then Result = WIDGET_LABEL(plot_window_base, /ALIGN_CENTER, valu
 
 ysize_line_plot = 284.444
 if compact eq 1 then ysize_line_plot = 234.444
-draw_plot_window = Widget_Draw(plot_window_base, XSize=Xsize * 0.8, YSize=ysize_line_plot, Graphics_Level=2, retain=retain, $
+draw_plot_window = Widget_Draw(plot_window_base, XSize=Xsize * 1.1, YSize=ysize_line_plot, Graphics_Level=2, retain=retain, $
    Expose_Events=1, Event_Pro='swpc_cat_plot_window_button_click_events', Button_Events=1,motion_events=0,render = 0)
 
 x=[0.,1.]
