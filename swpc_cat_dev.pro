@@ -6659,7 +6659,7 @@ Widget_Control, event.top, Get_UValue=info, /No_Copy
 
 ;pre-defined time range (for testing)
 ;info.date_array = [2018,7,23,0,0,2018,7,23,12,0]
-info.date_array = [2011,11,26,0,0,2011,11,26,23,59]
+;info.date_array = [2011,11,26,0,0,2011,11,26,23,59]
 ;info.date_array = [2010,2,7,0,0,2010,2,7,12,59]
 ;info.date_array = [2008,12,12,0,0,2008,12,14,23,59]
 
@@ -7854,6 +7854,7 @@ endelse
 
 ;assemble the location to look for files:
 image_location = info.image_in_root + info.sep + date_folder + info.sep + telescope_folder
+print, "image_location = ", image_location
 
 result = file_test(image_location,/directory)
 if result eq 0 then begin
@@ -10782,7 +10783,7 @@ if compact eq 0 then Result = WIDGET_LABEL(plot_window_base, /ALIGN_CENTER, valu
 
 ysize_line_plot = 284.444
 if compact eq 1 then ysize_line_plot = 234.444
-draw_plot_window = Widget_Draw(plot_window_base, XSize=Xsize * 1.1, YSize=ysize_line_plot, Graphics_Level=2, retain=retain, $
+draw_plot_window = Widget_Draw(plot_window_base, XSize=Xsize * 0.8, YSize=ysize_line_plot, Graphics_Level=2, retain=retain, $
    Expose_Events=1, Event_Pro='swpc_cat_plot_window_button_click_events', Button_Events=1,motion_events=0,render = 0)
 
 x=[0.,1.]
