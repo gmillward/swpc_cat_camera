@@ -6758,6 +6758,8 @@ if info.n_sat eq 3 then          print, 'BH2_number_of_images ',info.BH2_number_
 if info.n_sat eq 3 then master_list = info.BC2_list_of_datetime_strings + info.C_list_of_datetime_strings + info.AC2_list_of_datetime_strings
 if info.n_sat eq 2 then master_list = info.C_list_of_datetime_strings + info.AC2_list_of_datetime_strings
 
+print, master_list
+
 if n_elements(master_list) eq 0 then begin
   
   msg1 = 'There are no images for those dates. Try again!!'
@@ -7836,6 +7838,7 @@ date_folder = year + month + day
 ;info.telescope_array as in info.image_in_folder_array
 res = STRCMP(info.which_telescope,info.telescope_array)
 ele = where(res,count)
+;print, res, info.which_telescope, info.telescope_array 
 
 if count eq 1 then begin
   telescope_folder = info.image_in_folder_array[ele] 
@@ -10390,16 +10393,16 @@ images_timeline_view -> Add, images_timeline_model
 ;app_data_path = '/home/h01/swharton/swpc_cat_camera'
 ;get configuration info from input file
 input_file = source_path + sep + 'swpc_cat.in'
-openr,lun,input_file,/GET_LUN
-WHILE NOT EOF(lun) DO BEGIN
-  READF, lun, line
-  pos = STRPOS(line,'=')
-  if STRCMP( line,'preferences_folder', pos, /FOLD_CASE ) then app_data_path = STRMID(line,pos+1)
-  
+;openr,lun,input_file,/GET_LUN
+;WHILE NOT EOF(lun) DO BEGIN
+;  READF, lun, line
+;  pos = STRPOS(line,'=')
+;  if STRCMP( line,'preferences_folder', pos, /FOLD_CASE ) then app_data_path = STRMID(line,pos+1)
+app_data_path = '/home/s/sjw136/CAT_MET_Office/swpc_cat_camera'  
      
-ENDWHILE
-close,lun
-free_lun, lun
+;ENDWHILE
+;close,lun
+;free_lun, lun
 
 
 swpc_cat_preferences_file = app_data_path + sep + 'swpc_cat_prefs'
@@ -10413,7 +10416,7 @@ endif else begin
 endelse
 tlb_position = [x_pos,y_pos]
 
-tlb = Widget_Base(Title='CAT (CME Analysis Tool)', row=1, xoffset = x_pos , yoffset = y_pos, /tlb_move_events)
+tlb = Widget_Base(Title='CAT-HI (CME Analysis Tool with Heliospheric Imagery)', row=1, xoffset = x_pos , yoffset = y_pos, /tlb_move_events)
 
 horizontal_base=widget_base(tlb,row=1)
 vertical_base=widget_base(horizontal_base,column=1)
@@ -12246,7 +12249,8 @@ info = $
          velocity_text_c2:velocity_text_c2, $
          velocity_text_stereo_a:velocity_text_stereo_a, $
          velocity_text_stereo_b:velocity_text_stereo_b, $
-         calculate_individual_velocities_for_each_telescope:calculate_individual_velocities_for_each_telescope, $
+         input_file:input_file, $ 
+		calculate_individual_velocities_for_each_telescope:calculate_individual_velocities_for_each_telescope, $
          debug_mode:debug_mode, $
          swpc_cat_preferences_file:swpc_cat_preferences_file, $
          output_matched_line_data_in_txt_file:output_matched_line_data_in_txt_file, $
@@ -12690,6 +12694,7 @@ Three_D_view_event_widget:Three_D_view_event_widget, $
 velocity_text_c3:velocity_text_c3, $
 velocity_text_c2:velocity_text_c2, $
 velocity_text_stereo_a:velocity_text_stereo_a, $
+input_file:input_file, $
 calculate_individual_velocities_for_each_telescope:calculate_individual_velocities_for_each_telescope, $
 debug_mode:debug_mode, $
 swpc_cat_preferences_file:swpc_cat_preferences_file, $
