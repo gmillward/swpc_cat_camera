@@ -6662,7 +6662,8 @@ Widget_Control, event.top, Get_UValue=info, /No_Copy
 ;info.date_array = [2011,11,26,0,0,2011,11,26,23,59]
 ;info.date_array = [2010,2,7,0,0,2010,2,7,12,59]
 ;info.date_array = [2008,12,12,0,0,2008,12,14,23,59]
-info.date_array = [2017,10,18,0,0,2017,10,18,12,0]
+;info.date_array = [2017,10,18,0,0,2017,10,18,12,0]
+info.date_array = [2017,9,6,0,0,2017,9,6,12,0]
        reset_for_new_images_as_well_as_the_cme_analysis = 1
        swpc_cat_full_reset, info, reset_for_new_images_as_well_as_the_cme_analysis 
 
@@ -7354,17 +7355,15 @@ endif else begin
 
 image_time_Julian = dblarr(number_of_images)
 full_time_string = strarr(number_of_images)
-print, list_of_datetime_strings
+
 for it = 0 , number_of_images - 1 do begin
   datetime_string = list_of_datetime_strings[it]
-print, it, datetime_string
   year_string = strmid(datetime_string,0,4)
   month_string = strmid(datetime_string,5,2)
   day_string = strmid(datetime_string,8,2)
   hour_string = strmid(datetime_string,11,2)
   min_string = strmid(datetime_string,14,2)
   sec_string = strmid(datetime_string,17,2)
-;print, it, year_string, month_string, day_string, hour_string, min_string, sec_string
   year = fix(year_string)
   month = fix(month_string)
   day = fix(day_string)
@@ -7856,7 +7855,7 @@ endelse
 
 ;assemble the location to look for files:
 image_location = info.image_in_root + info.sep + date_folder + info.sep + telescope_folder
-print, "image_location = ", image_location
+;print, "image_location = ", image_location
 
 result = file_test(image_location,/directory)
 if result eq 0 then begin
@@ -7893,7 +7892,7 @@ endif else begin
    
 ;   help,names_of_all_files_in_folder
    datetime_strings = STRMID(FILE_BASENAME(names_of_all_files_in_folder,'.fts'),0,15)
-   
+   ;print, datetime_strings
    
 ;   print, 'number_of_files_in_folder ',number_of_files_in_folder
 ;   help, datetime_strings
@@ -7921,7 +7920,7 @@ endif else begin
                                                 scaling_factor, rotation, center_of_sunX, center_of_sunY, $
                                                 rsun, pixel_scale, exposure_time, offset, datetime_string, $ 
                                                 HEEQ_coords, Sun_satellite_distance, image_data,xcen,ycen)         
-         print,'good_image=',good_image
+         ;print,'good_image=',good_image, datetime_string, datetime_strings
          if good_image then begin
             list_of_image_names.Add,names_of_all_files_in_folder[i],/NO_COPY
             list_of_image_data.Add,image_data,/NO_COPY
@@ -8331,8 +8330,8 @@ function swpc_cat_check_image_and_load_data, which_telescope, telescope_folder, 
       center_of_sunX, center_of_sunY, rsun, pixel_scale, exposure_time, offset, $
       datetime_string, HEEQ_coords, Sun_satellite_distance, OBS_ID_divide_by_2_factor,corrupt_file,xcen,ycen
       ;print, n_elements(im_data)
-      ;image_data = rebin(im_data,512,512)
-		image_data = rebin(im_data,480,480)      
+      image_data = rebin(im_data,512,512)
+		;image_data = rebin(im_data,480,480)      
 		image_data = float(image_data)
       swpc_cat_rotate_image_to_solar_north,center_of_sunX,center_of_sunY,rotation,scaling_factor,image_data
       image_data = image_data/OBS_ID_divide_by_2_factor - offset
