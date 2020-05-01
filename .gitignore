@@ -18,3 +18,8 @@ quaternion__define.pro
 swpc_cat_dev.pro~
 .project
 quaternion__define.pro
+build_swpc_cat2.pro
+build_swpc_cat3.pro
+compile_all.pro
+swpc_cat.sav
+swpc_cat/ 

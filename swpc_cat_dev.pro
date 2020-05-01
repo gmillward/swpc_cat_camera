@@ -6662,8 +6662,8 @@ Widget_Control, event.top, Get_UValue=info, /No_Copy
 ;info.date_array = [2011,11,26,0,0,2011,11,26,23,59]
 ;info.date_array = [2010,2,7,0,0,2010,2,7,12,59]
 ;info.date_array = [2008,12,12,0,0,2008,12,14,23,59]
-;info.date_array = [2017,10,18,0,0,2017,10,18,12,0]
-info.date_array = [2017,9,6,0,0,2017,9,6,12,0]
+info.date_array = [2017,10,18,0,0,2017,10,18,23,0]
+;info.date_array = [2017,9,6,0,0,2017,9,6,12,0]
        reset_for_new_images_as_well_as_the_cme_analysis = 1
        swpc_cat_full_reset, info, reset_for_new_images_as_well_as_the_cme_analysis 
 
@@ -6781,6 +6781,7 @@ master_array = master_array2[uniq(master_array2)]
 (info.master_list).add, master_array,/extract
 
 info.master_list_size = n_elements(master_array)
+print, info.master_list_size
 if info.n_sat eq 3 then count_L = 0
 count_C = 0
 count_R = 0
@@ -6789,6 +6790,7 @@ if info.n_sat eq 3 then begin
 Result_L = (info.BC2_list_of_datetime_strings).Count(master_array[i])
 count_L = count_L + Result_L
 endif
+print, master_array[i]
 Result_C = (info.C_list_of_datetime_strings).Count(master_array[i])
 count_C = count_C + Result_C
 Result_R = (info.AC2_list_of_datetime_strings).Count(master_array[i])
